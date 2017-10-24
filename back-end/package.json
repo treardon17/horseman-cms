@@ -1,0 +1,31 @@
+{
+  "name": "lofty-cms",
+  "version": "1.0.0",
+  "description": "A headless CMS for single page app frameworks",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "mongod --dbpath /data/db --fork --logpath /dev/null",
+    "start": "node server.js",
+    "poststart": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
+    "dev": "./node_modules/.bin/nodemon server.js"
+  },
+  "author": "Tyler Reardon",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "child_process": "^1.0.2",
+    "express": "^4.15.4",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.3",
+    "graphql-compose": "^2.9.0",
+    "graphql-compose-connection": "^2.3.0",
+    "graphql-compose-mongoose": "^1.9.0",
+    "graphql-compose-pagination": "^1.1.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
