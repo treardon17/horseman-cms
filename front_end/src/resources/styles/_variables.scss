@@ -14,9 +14,38 @@ $brand-primary:   #000000;
 $brand-light:     lighten($brand-primary, 10%);
 $brand-dark:      darken($brand-primary, 10%);
 
+$white:           #F1F6F8;
+$dark-white:      #D8E9F0;
+$grey:            #7F8488;
+$transparentGrey: rgba($grey, 0.3);
+$dark-gray:       #2F313E;
+$orange:          #e27056;
+$blue:            #164b5d;
+
 // Layout
 $grid-small-phone-only:          450px;
 $grid-phone-only:                600px;
 $grid-tablet-portrait-down:      900px;
 $grid-tablet-landscape-down:    1200px;
 $grid-desktop-down:             1600px;
+
+// TRANSITIONS
+$bezier: cubic-bezier(.55,.09,.45,.93);
+
+// MEASUREMENTS
+$small-spacing: 10px;
+$medium-spacing: 20px;
+$large-spacing: 40px;
+$extra-large-spacing: 60px;
+$closed-menu-icon-size: 45px;
+$header-height: 80px;
+
+// Z-INDEX
+$zBottom: -1;
+$zLower: 100;
+$zMiddle: 200;
+$zUpper: 300;
+$zTop: 400;
+
+// BORDERS
+$border-radius: 4px;

@@ -1,24 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppState from '../state/AppState.jsx';
 import Page from './Page.jsx';
+import AppState from '../state/AppState.jsx';
 // import modules here
-import TitleSection from '../modules/TitleSection/TitleSection.jsx';
 
-export default class Home extends React.Component {
+export default class Modules extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <Page id="Home" title="Home">
+      <Page id="Modules" title="Modules">
         <div />
       </Page>
     );
   }
 }
 
-Home.propTypes = {
+Modules.propTypes = {
   state: PropTypes.instanceOf(AppState),
 };

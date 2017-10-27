@@ -4,13 +4,79 @@
 html, body{
   margin: 0;
   padding: 0;
+  background-color: $blue;
 }
 
 body {
-  background-color: #f2f2f2;
   font-family: 'Lato';
   text-align: center;
 }
+
+.test{
+  background-color: black;
+  margin: $large-spacing;
+  height: $medium-spacing;
+
+  &:first-of-type{
+    margin-top: 0;
+  }
+}
+
+#root{
+  min-height: 100vh;
+  .app-wrapper{
+    display: flex;
+    width: 100%;
+    .page-container{
+      flex: auto;
+      .page-wrapper{
+        .page{
+          .page-body{
+            height: 100%;
+            width: 100%;
+            background-color: $blue;
+            margin-top: $header-height;
+          }
+        }
+      }
+    }
+  }
+}
+
+// PAGE TRANSITION
+@mixin pageExit(){
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+}
+@mixin pageEnter(){
+  opacity: 1;
+  transform: translate3d(0, 0px, 0);
+}
+
+
+// PAGE TRANSITIONS
+.page{
+  opacity: 1;
+
+  &.page-transition-enter {
+    opacity: 0.01;
+  }
+
+  &.page-transition-enter.page-transition-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+
+  &.page-transition-exit {
+    opacity: 1;
+  }
+
+  &.page-transition-exit.page-transition-exit-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+}
+
 
 // breakpoints template - order matters - ** use these in module specific scss files. **
 // http://patorjk.com/software/taag/#p=display&f=Rectangles&t=400%20MAX%0A
