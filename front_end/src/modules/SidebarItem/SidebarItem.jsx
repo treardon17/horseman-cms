@@ -14,11 +14,19 @@ export default class SidebarItem extends React.Component {
 
     this.state = {
       hovering: false,
+      currentPage: History.history.location.pathname === this.props.url
     };
 
     this.animationDuration = 200;
     this.easing = 'ease-in-out';
     this.clicked = false;
+    History.listen(this.historyChanged.bind(this));
+  }
+
+  historyChanged(location, action) {
+    this.setState({
+      currentPage: (location.pathname === this.props.url)
+    });
   }
 
   handleClicked() {
@@ -32,8 +40,7 @@ export default class SidebarItem extends React.Component {
 
   render() {
     // Should the item be highlighted?
-    const onCurrentPage = History.history.location.pathname === this.props.url;
-    const isActive = (this.props.active || onCurrentPage || this.clicked);
+    const isActive = (this.props.active || this.state.currentPage || this.clicked);
     // Reset the click state after it's been rendered
     this.clicked = false;
     const classes = `sidebar-item ${this.props.bigIcon ? 'big-icon' : 'regular-icon'} ${isActive ? 'active' : 'inactive'}`;
