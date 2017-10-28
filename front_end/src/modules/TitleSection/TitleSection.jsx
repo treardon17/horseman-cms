@@ -15,10 +15,12 @@ export default class TitleSection extends React.Component {
   render() {
     return (
       <div style={this.props.style} className="title-section">
-        <h2 className="title">
-          <span className="secondary">{this.props.titleSecondary}</span>
-          <span className="primary">{this.props.title}</span>
-        </h2>
+        <div className="title-container">
+          <h2 className="title">
+            <span className="secondary">{this.props.titleSecondary}</span>
+            <span className="primary">{this.props.title}</span>
+          </h2>
+        </div>
       </div>
     );
   }

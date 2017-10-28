@@ -36,8 +36,8 @@ body {
 
       .page-transition{
         height: 100%;
+        .route{ width: 100%; }
         .page-container{
-          flex: auto;
           .page-wrapper{
             .page{
               .page-body{

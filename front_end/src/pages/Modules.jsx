@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Page from './Page.jsx';
 import AppState from '../state/AppState.jsx';
 // import modules here
+import ConstructType from '../modules/ConstructType/ConstructType';
 
 export default class Modules extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class Modules extends React.Component {
   render() {
     return (
       <Page id="Modules" title="Modules">
-        <div />
+        <ConstructType />
       </Page>
     );
   }

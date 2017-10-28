@@ -1,0 +1,11 @@
+@import "_variables";
+
+// MaterialUI buttons
+button[class^='MuiButtonBase'], div[class*=' MuiButtonBase']{
+  background-color: $orange;
+  color: $white;
+
+  &:hover{
+    background-color: $dark-orange;
+  }
+}

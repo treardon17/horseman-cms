@@ -37,14 +37,14 @@ export default class Routes extends React.Component {
 
   render() {
     const animationObject = {
-      load: { animation: { opacity: [1, 0], translateY: ['0px', '50px'] }, duration: 1000 },
+      load: { animation: { opacity: [1, 0], top: ['0px', '50px'] }, duration: 1000 },
       pop: {
-        enter: { animation: { translateX: ['0%', '100%'] }, duration: 500 },
-        exit: { animation: { translateX: ['-100%', '0%'] }, duration: 500 },
+        enter: { animation: { left: ['0vw', '100vw'] }, duration: 500 },
+        exit: { animation: { left: ['-100vw', '0vw'] }, duration: 500 },
       },
       push: {
-        enter: { animation: { translateX: ['0%', '-100%'] }, duration: 500 },
-        exit: { animation: { translateX: ['100%', '0%'] }, duration: 500 },
+        enter: { animation: { left: ['0vw', '-100vw'] }, duration: 500 },
+        exit: { animation: { left: ['100vw', '0vw'] }, duration: 500 },
       },
     };
     return (

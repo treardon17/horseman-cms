@@ -5,6 +5,7 @@ import { VelocityComponent } from 'velocity-react';
 import SidebarItem from '../SidebarItem/SidebarItem.jsx';
 import API from '../../resources/scripts/API';
 
+
 // scss
 import './Sidebar.scss';
 
