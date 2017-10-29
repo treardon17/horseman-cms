@@ -14,14 +14,20 @@ $brand-primary:   #000000;
 $brand-light:     lighten($brand-primary, 10%);
 $brand-dark:      darken($brand-primary, 10%);
 
-$white:           #F1F6F8;
-$dark-white:      #D8E9F0;
-$grey:            #7F8488;
-$transparentGrey: rgba($grey, 0.3);
-$dark-gray:       #2F313E;
-$orange:          #e27056;
-$dark-orange:     darken($orange, 10%);
-$blue:            #164b5d;
+// $white:           #F1F6F8;
+// $dark-white:      #D8E9F0;
+// $grey:            #7F8488;
+// $transparentGrey: rgba($grey, 0.3);
+// $dark-gray:       #2F313E;
+// $orange:          #e27056;
+// $dark-orange:     darken($orange, 10%);
+// $blue:            #164b5d;
+
+$dark:            #17252A;
+$greenDark:       #2B7A78;
+$greenLight:      #3AAFA9;
+$whiteDark:       #DEF2F1;
+$white:           #FEFFFF;
 
 // Layout
 $grid-small-phone-only:          450px;
@@ -39,7 +45,7 @@ $medium-spacing: 20px;
 $large-spacing: 40px;
 $extra-large-spacing: 60px;
 $closed-menu-icon-size: 45px;
-$header-height: 80px;
+$header-height: 70px;
 
 // Z-INDEX
 $zBottom: -1;

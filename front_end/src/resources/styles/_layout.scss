@@ -4,7 +4,8 @@
 html, body{
   margin: 0;
   padding: 0;
-  background-color: $blue;
+  background-color: $white;
+  // background-color: $blue;
 }
 
 body {
@@ -43,7 +44,6 @@ body {
               .page-body{
                 height: 100%;
                 width: 100%;
-                background-color: $blue;
                 margin-top: $header-height;
               }
             }
@@ -87,7 +87,6 @@ body {
     transition: opacity 300ms ease-in;
   }
 }
-
 
 // breakpoints template - order matters - ** use these in module specific scss files. **
 // http://patorjk.com/software/taag/#p=display&f=Rectangles&t=400%20MAX%0A

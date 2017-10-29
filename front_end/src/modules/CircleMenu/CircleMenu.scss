@@ -1,0 +1,49 @@
+@import '../../resources/styles/_variables.scss';
+@import '../../resources/styles/_mixins.scss';
+
+.circle-menu{
+  position: fixed;
+  bottom: $small-spacing;
+  right: $small-spacing;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .action-button{
+    position: relative;
+    z-index: $zUpper;
+    -webkit-perspective: 1000;
+    transform: translate3d(0,0,0);
+    backface-visibility: hidden;
+  }
+
+  .button-anchor{
+    position: absolute;
+    z-index: $zMiddle;
+    top: 0; bottom: 0; right: 0; left: 0;
+    margin: auto;
+    width: 1px;
+    height: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .button-extent{
+      transform-origin: bottom center;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      .button-container{
+        // We've gotta offset it by 1px
+        // because that's the bottom-anchor size
+        transform: translateY(calc(-50% - 1px));
+        .action-button{
+          transform-origin: center center;
+        }
+      }
+
+    }
+  }
+}

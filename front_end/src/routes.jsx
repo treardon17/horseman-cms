@@ -2,6 +2,7 @@ import React from 'react';
 import { PageTransition, Route } from 'react-transition-router';
 import Sidebar from './modules/Sidebar/Sidebar';
 import AppState from './state/AppState';
+import CircleMenu from './modules/CircleMenu/CircleMenu';
 // import styles
 import './resources/styles/base.scss';
 // import pages
@@ -54,9 +55,9 @@ export default class Routes extends React.Component {
           <PageTransition
             animations={animationObject}
             routes={this.state.routes}
-            loadAnimationName="load"
             serialize={false}
           />
+          <CircleMenu />
         </div>
       </div>
     );
