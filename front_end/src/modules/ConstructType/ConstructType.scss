@@ -2,5 +2,41 @@
 @import '../../resources/styles/_mixins.scss';
 
 .construct-type{
+  .module-title{
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    margin: $medium-spacing;
+    outline: none;
+    border-bottom: $border-style;
+  }
+  .constructor-container{
+    .field{
+      background-color: $whiteDark;
+      padding: 7px 5px;
+      margin: 0 $medium-spacing $medium-spacing $medium-spacing;
+      display: flex;
+      align-items: center;
+      border-radius: $border-radius;
 
+      .field-name, .slug-name, .Select{
+        width: 150px;
+        max-width: 90%;
+        text-align: left;
+        margin-right: $medium-spacing;
+      }
+
+      .field-name{
+        border-bottom: $border-style;
+      }
+
+      .slug-name{
+
+      }
+
+      .Select{
+
+      }
+    }
+  }
 }

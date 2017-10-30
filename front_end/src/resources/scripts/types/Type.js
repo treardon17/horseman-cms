@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+let ID_COUNT = 0;
+
 export default class Type {
   /**
    * constructor
@@ -61,39 +63,42 @@ export default class Type {
    */
   add({ name = 'New field', primary = Type.empty, secondary = null, description = 'Field description' } = {}) {
     const slug = this.findUniqueSlug({ slug: name });
-    // Seconary types should only be specified for object types
+    // Secondary types should only be specified for object types
     // or for list types that require additional information
     let skip = false;
     if (secondary && (primary !== Type.object && primary !== Type.list)) {
       skip = true;
-      console.warn(`Seconary type not permitted when the Primary type is not of type ${Type.object} or ${Type.list}`);
+      console.warn(`Secondary type not permitted when the Primary type is not of type ${Type.object} or ${Type.list}`);
     }
     this.parts[slug] = {
       name,
       primary: primary || Type.empty,
-      seconary: !skip ? (secondary || Type.empty) : Type.empty,
+      secondary: !skip ? (secondary || Type.empty) : Type.empty,
       description: description || '',
+      id: ID_COUNT++,
     };
   }
 
   edit(arg = { }) {
     const { slug = '', name, primary, secondary, description } = arg || {};
     // If we changed the name, we change the slug
-    const newSlug = this.findUniqueSlug({ slug: name });
     const part = this.parts[slug];
-    if (newSlug !== slug) {
-      this.parts[newSlug] = part;
-      delete this.parts[slug];
-    }
     // Set the new values if they exist
     if (part) {
       const keys = Object.keys(arg);
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        part[key] = arg[key];
+        if (key !== 'slug') {
+          part[key] = arg[key];
+        }
       }
+
       // Change the part location to be at the new slug
+      const newSlug = this.findUniqueSlug({ slug: name });
       this.parts[newSlug] = part;
+      if (newSlug !== slug) {
+        delete this.parts[slug];
+      }
     } else {
       console.error('Cannot edit null object');
     }

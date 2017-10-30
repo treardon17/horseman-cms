@@ -1,4 +1,5 @@
 import 'whatwg-fetch'; // Fetch polyfill
+import './resources/scripts/polyfill/ObjectAssign'; // Object.assign polyfill
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './routes';

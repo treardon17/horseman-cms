@@ -1,8 +1,10 @@
 import React from 'react';
 import Proptypes from 'prop-types';
+// import _ from 'lodash';
 import Type from '../../resources/scripts/types/Type';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
+import ContentEditable from 'react-simple-contenteditable';
 
 // scss
 import './ConstructType.scss';
@@ -21,37 +23,73 @@ export default class ConstructType extends React.Component {
     };
   }
 
-
   getFields() {
     // Get all of the slugs from the type.parts
     const parts = this.state.type.parts;
     const slugs = Object.keys(parts);
     const fields = [];
-    console.log('getting fields');
-    for (let i = 0; i < slugs.length; i++) {
-      const slug = slugs[i];
-      const part = parts[slug];
+    const arr = Object.keys(parts).map(key => [key, parts[key]]);
+    arr.sort((a, b) => a[1].id - b[1].id);
+
+    console.log(arr);
+
+    for (let i = 0; i < arr.length; i++) {
+      const slug = arr[i][0];
+      const part = arr[i][1];
       fields.push(
         <div className="field" key={`field-${i}`}>
-          <input
-            type="text"
-            value={part.name}
-            onChange={(e) => { this.handleChangePart(e, 'name', slug); }}
+          <ContentEditable
+            key={`field-name-${i}`}
+            html={part.name}
+            className={`field-name input-field`}
+            onClick={this.highlightAll.bind(this)}
+            onChange={(e, val) => { this.handleChangePart(e, val, 'name', slug); }}
+            contentEditable="plaintext-only"
           />
-          <Select />
+          <div className="slug-name">{slug}</div>
+          <Select
+            options={[{ value: i, label: i }]}
+          />
         </div>
       );
     }
+
+    // for (let i = 0; i < slugs.length; i++) {
+    //   const slug = slugs[i];
+    //   const part = parts[slug];
+    //   if (part) {
+    //     fields.push(
+    //       <div className="field" key={`field-${i}`}>
+    //         <ContentEditable
+    //           key={`field-name-${i}`}
+    //           html={part.name}
+    //           className={`field-name input-field`}
+    //           onClick={this.highlightAll.bind(this)}
+    //           onChange={(e, val) => { this.handleChangePart(e, val, 'name', slug); }}
+    //           contentEditable="plaintext-only"
+    //         />
+    //         <div className="slug-name">{slug}</div>
+    //         <Select
+    //           options={[{ value: i, label: i }]}
+    //         />
+    //       </div>
+    //     );
+    //   }
+    // }
     return fields;
   }
 
-  handleChangePart(e, partID, slug) {
+  highlightAll() {
+    document.execCommand('selectAll', false, null);
+  }
+
+  handleChangePart(event, val, partID, slug) {
+    console.log('changing slug:', slug);
     const type = this.state.type;
     const editObject = {};
-    editObject[partID] = e.target.value;
+    editObject[partID] = val || event.target.value;
     editObject.slug = slug;
     type.edit(editObject);
-    console.log('type is:', type.parts);
     this.setState({ type });
   }
 
@@ -59,29 +97,23 @@ export default class ConstructType extends React.Component {
     const type = this.state.type;
     type.add();
     this.setState({ type });
-    console.log(this.state.type);
   }
 
-  handleNameChange(e) {
+  handleNameChange(val) {
     const type = this.state.type;
-    type.name = e.target.value;
+    type.name = val;
     this.setState({ type });
-  }
-
-  fieldTemplate() {
-    // Gotta figure out a good way to add a new field
-    // and listen for the changes on that new field
-    // to dynamically update this.state.type, but also be
-    // able to edit previous fields
   }
 
   render() {
     return (
       <div className="construct-type">
-        <input
-          type="text"
-          value={this.state.type.name}
-          onChange={this.handleNameChange.bind(this)}
+        <ContentEditable
+          html={this.state.type.name}
+          className="module-title input-field"
+          onClick={this.highlightAll.bind(this)}
+          onChange={(e, val) => { this.handleNameChange(val); }}
+          contentEditable="plaintext-only"
         />
         <div className="constructor-container">
           {this.getFields()}

@@ -1,0 +1,17 @@
+@import "_variables";
+@import "_mixins";
+
+%base-input-styles{
+  height: 34px;
+}
+
+.input-field{
+  @extend %base-input-styles;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.Select{
+  @extend %base-input-styles;
+}

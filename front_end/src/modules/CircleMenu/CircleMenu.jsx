@@ -21,7 +21,7 @@ export default class CircleMenu extends React.Component {
 
 
   getButtons() {
-    const numButtons = 3;
+    const numButtons = 4;
 
     const divideBy = (numButtons > 1 ? (numButtons - 1) : 2);
     const degreesBetweenButtons = (this.angle / divideBy);

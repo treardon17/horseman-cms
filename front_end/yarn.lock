@@ -6059,6 +6059,12 @@ react-select@^1.0.0-rc.10:
     prop-types "^15.5.8"
     react-input-autosize "^2.0.1"
 
+react-simple-contenteditable@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-simple-contenteditable/-/react-simple-contenteditable-0.0.1.tgz#967065fbfcf6d72ebdd80276458181739c37e599"
+  dependencies:
+    react "^15.4.2"
+
 react-style-proptype@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.1.0.tgz#c8912fc13460f5b0c1ec1114c729d535b52b8073"
@@ -6102,7 +6108,7 @@ react-transition-router@^1.1.1:
     react "^15.5.4"
     velocity-react "^1.3.3"
 
-react@^15.5.4, react@^15.6.1:
+react@^15.4.2, react@^15.5.4, react@^15.6.1:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
   dependencies:
