@@ -5,6 +5,7 @@ import Type from '../../resources/scripts/types/Type';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
+import TypeState from '../../state/TypeState';
 
 // scss
 import './ConstructType.scss';
@@ -23,19 +24,55 @@ export default class ConstructType extends React.Component {
     };
   }
 
+  getFormattedTypeList(type) {
+    let validTypes = [];
+    if (type === 'primary') {
+      validTypes = TypeState.genericTypes;
+    } else if (type === Type.types.object) {
+      validTypes = TypeState.userMadeTypes;
+    } else if (type === Type.types.list) {
+      validTypes = TypeState.secondaryTypes;
+    }
+    const optionsList = [];
+    for (let i = 0; i < validTypes.length; i++) {
+      const value = validTypes[i];
+      optionsList.push({ value, label: value });
+    }
+    return optionsList;
+  }
+
   getFields() {
     // Get all of the slugs from the type.parts
     const parts = this.state.type.parts;
     const slugs = Object.keys(parts);
     const fields = [];
-    const arr = Object.keys(parts).map(key => [key, parts[key]]);
-    arr.sort((a, b) => a[1].id - b[1].id);
 
-    console.log(arr);
+    // If we don't have an ordered array, React gets its references
+    // all messed up. So we keep an orderBy property on each part so
+    // it works like it's supposed to.
+    // DO NOT REMOVE THIS OR EVERYTHING GOES TO HELL
+    const arr = Object.keys(parts).map(key => [key, parts[key]]);
+    arr.sort((a, b) => a[1].orderBy - b[1].orderBy);
+    // You may proceed.
 
     for (let i = 0; i < arr.length; i++) {
       const slug = arr[i][0];
       const part = arr[i][1];
+
+      // Only give the option to edit the secondary type if the primary
+      // type is a list or an object
+      let secondaryType = null;
+      if (part.primary === Type.types.object || part.primary === Type.types.list) {
+        secondaryType = (
+          <Select
+            value={part.secondary}
+            className={'secondary-type'}
+            options={this.getFormattedTypeList(part.primary)}
+            onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'secondary', slug }); }}
+          />
+        );
+      }
+
       fields.push(
         <div className="field" key={`field-${i}`}>
           <ContentEditable
@@ -43,39 +80,21 @@ export default class ConstructType extends React.Component {
             html={part.name}
             className={`field-name input-field`}
             onClick={this.highlightAll.bind(this)}
-            onChange={(e, val) => { this.handleChangePart(e, val, 'name', slug); }}
+            onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'name', slug }); }}
             contentEditable="plaintext-only"
           />
           <div className="slug-name">{slug}</div>
           <Select
-            options={[{ value: i, label: i }]}
+            value={part.primary}
+            className={'primary-type'}
+            options={this.getFormattedTypeList('primary')}
+            onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'primary', slug }); }}
           />
+          {secondaryType}
+          <p>{part.description}</p>
         </div>
       );
     }
-
-    // for (let i = 0; i < slugs.length; i++) {
-    //   const slug = slugs[i];
-    //   const part = parts[slug];
-    //   if (part) {
-    //     fields.push(
-    //       <div className="field" key={`field-${i}`}>
-    //         <ContentEditable
-    //           key={`field-name-${i}`}
-    //           html={part.name}
-    //           className={`field-name input-field`}
-    //           onClick={this.highlightAll.bind(this)}
-    //           onChange={(e, val) => { this.handleChangePart(e, val, 'name', slug); }}
-    //           contentEditable="plaintext-only"
-    //         />
-    //         <div className="slug-name">{slug}</div>
-    //         <Select
-    //           options={[{ value: i, label: i }]}
-    //         />
-    //       </div>
-    //     );
-    //   }
-    // }
     return fields;
   }
 
@@ -83,11 +102,10 @@ export default class ConstructType extends React.Component {
     document.execCommand('selectAll', false, null);
   }
 
-  handleChangePart(event, val, partID, slug) {
-    console.log('changing slug:', slug);
+  handleChangePart({ event, val, partID, slug }) {
     const type = this.state.type;
     const editObject = {};
-    editObject[partID] = val || event.target.value;
+    editObject[partID] = val;
     editObject.slug = slug;
     type.edit(editObject);
     this.setState({ type });
