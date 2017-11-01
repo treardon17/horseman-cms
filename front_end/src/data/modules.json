@@ -1,0 +1,27 @@
+{
+  "title": "test",
+  "items":[
+    {
+      "name": "Title",
+      "description": "The title of the test module",
+      "type": {
+        "primary": "string",
+        "secondary": "none"
+      }
+    },{
+      "name": "Locations",
+      "description": "A list of coordinates",
+      "type": {
+        "primary": "list",
+        "seconary": "string"
+      }
+    },{
+      "name": "Locations",
+      "description": "A list of coordinates",
+      "type": {
+        "primary": "list",
+        "seconary": "string"
+      }
+    }
+  ]
+}

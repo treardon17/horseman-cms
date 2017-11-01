@@ -1,29 +1,37 @@
-import { observable, computed, asStructure } from 'mobx';
+import { observable, computed, action } from 'mobx';
 import Type from '../resources/scripts/types/Type';
+import Util from '../resources/scripts/util/util';
 
 class TypeState {
-  @observable _userMadeTypes = [];
-  @observable _genericTypes = [];
+  @observable userMadeTypes = {};
 
-  constructor() {
-    this._genericTypes = Object.keys(Type.types).map(value => value) || [];
+  // constructor() {
+  // }
+
+  // GETTERS FOR TYPE NAMES
+  @computed get validTypeNames() {
+    return Object.keys(Type.types).concat(Object.keys(this.userMadeTypes));
   }
 
-  @computed get validTypes() {
-    return this._genericTypes.concat(this._userMadeTypes);
+  @computed get secondaryTypeNames() {
+    const validGeneric = Object.keys(Type.types).filter(val => val !== Type.types.object && val !== Type.types.list);
+    return validGeneric.concat(Object.keys(this.userMadeTypeNames));
   }
 
-  @computed get secondaryTypes() {
-    const validGeneric = this.genericTypes.filter(val => val !== Type.types.object && val !== Type.types.list);
-    return validGeneric.concat(this.userMadeTypes);
+  @computed get genericTypeNames() {
+    return Object.keys(Type.types);
   }
 
-  @computed get genericTypes() {
-    return this._genericTypes;
+  @computed get userMadeTypeNames() {
+    return Object.keys(this.userMadeTypes);
   }
 
-  @computed get userMadeTypes() {
-    return this._userMadeTypes;
+  // ACTIONS
+  @action addType(type) {
+    // TODO: this should be able to update types as well?
+    const ID = Util.findUniqueSlug({ slug: type.name, object: this.userMadeTypes });
+    this.userMadeTypes[ID] = type;
+    return ID;
   }
 }
 

@@ -25,17 +25,17 @@ export default class ConstructType extends React.Component {
   }
 
   getFormattedTypeList(type) {
-    let validTypes = [];
+    let validTypeNames = [];
     if (type === 'primary') {
-      validTypes = TypeState.genericTypes;
+      validTypeNames = TypeState.genericTypeNames;
     } else if (type === Type.types.object) {
-      validTypes = TypeState.userMadeTypes;
+      validTypeNames = TypeState.userMadeTypeNames;
     } else if (type === Type.types.list) {
-      validTypes = TypeState.secondaryTypes;
+      validTypeNames = TypeState.secondaryTypeNames;
     }
     const optionsList = [];
-    for (let i = 0; i < validTypes.length; i++) {
-      const value = validTypes[i];
+    for (let i = 0; i < validTypeNames.length; i++) {
+      const value = validTypeNames[i];
       optionsList.push({ value, label: value });
     }
     return optionsList;
@@ -117,6 +117,10 @@ export default class ConstructType extends React.Component {
     this.setState({ type });
   }
 
+  save() {
+    TypeState.addType(this.state.type);
+  }
+
   handleNameChange(val) {
     const type = this.state.type;
     type.name = val;
@@ -136,7 +140,8 @@ export default class ConstructType extends React.Component {
         <div className="constructor-container">
           {this.getFields()}
         </div>
-        <Button onClick={this.addField.bind(this)}>Add</Button>
+        <Button onClick={this.addField.bind(this)}>Add Field</Button>
+        <Button onClick={this.save.bind(this)}>Save</Button>
       </div>
     );
   }
