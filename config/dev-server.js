@@ -15,8 +15,12 @@ const compiler = webpack(require('./webpack.dev.js'));
 // create express instance
 const app = express();
 
+// use body parser for api requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // Use router for API calls
-app.use('/api', function(req, res, next) {
+app.use('/api', (req, res, next) => {
   require(path.resolve('api/router'))(req, res, next);
 });
 
@@ -57,9 +61,6 @@ app.use(devMiddleware);
 
 // enable hot-reload and state-preserving
 app.use(hotMiddleware);
-
-// use body parser for api requests
-app.use(bodyParser.json());
 
 // server static files
 app.use('/assets', express.static('src/resources/assets'))

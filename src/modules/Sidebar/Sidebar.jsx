@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VelocityComponent } from 'velocity-react';
 import SidebarItem from '../SidebarItem/SidebarItem.jsx';
-import API from '../../resources/scripts/API';
+// import API from '../../resources/scripts/API';
 
 
 // scss

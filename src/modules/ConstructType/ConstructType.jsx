@@ -144,9 +144,10 @@ export default class ConstructType extends React.Component {
   }
 
   save() {
-    TypeState.addOrUpdateType(this.state.type);
-    this.setState({
-      needSave: false,
+    TypeState.addOrUpdateType(this.state.type).then(() => {
+      this.setState({
+        needSave: false,
+      });
     });
   }
 
