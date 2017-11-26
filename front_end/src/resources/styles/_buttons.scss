@@ -2,11 +2,11 @@
 
 // MaterialUI buttons
 button[class^='MuiButtonBase'], div[class*=' MuiButtonBase']{
-  background-color: $shade1;
+  background-color: $shade2;
   color: $white;
 
   &:hover{
-    background-color: $base;
+    background-color: $shade1;
   }
 }
 

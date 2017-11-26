@@ -2,7 +2,10 @@
 @import '../../resources/styles/_mixins.scss';
 
 .construct-type{
+  margin: $small-spacing;
+
   .module-title-container{
+    padding: $small-spacing/2 $small-spacing;
     background-color: $shade1;
     display: flex;
     align-items: center;
@@ -14,20 +17,28 @@
         stroke: $shade3;
       }
     }
-    .module-title{
-      display: block;
-      font-size: 30px;
-      font-weight: bold;
+
+    .module-title-data{
       margin: $medium-spacing;
-      outline: none;
-      text-align: left;
-      color: $shade3;
+
+      .module-title{
+        display: block;
+        font-size: 30px;
+        font-weight: bold;
+        outline: none;
+        text-align: left;
+        color: $shade3;
+      }
+      .module-slug{
+        text-align: left;
+      }
     }
   }
   .constructor-container{
     .field{
+      position: relative;
       background-color: $shade3;
-      padding: 10px 5px;
+      padding: $small-spacing;
       border-top: 1px solid rgba($base, 0.2);
       display: flex;
       align-items: center;
@@ -39,15 +50,51 @@
         margin-right: $medium-spacing;
       }
 
-      .field-name{
-      }
-
-      .slug-name{
-
+      .name-container{
+        .field-name{
+        }
+  
+        .slug-name{
+        }
       }
 
       .Select{
+      }
 
+      .field-description{
+        max-width: 200px;
+        overflow: auto;
+      }
+
+      .remove-button{
+        cursor: pointer;
+        margin: auto;
+        position: absolute;
+        top: 0; bottom: 0; right: $small-spacing;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .remove-icon{
+          svg{
+            $dim: 20px;
+            width: $dim;
+            height: $dim;
+            stroke: $base;
+          }
+        }
+      }
+    }
+  }
+
+  .button-container{
+    display: flex;
+    button{
+      margin: 0;
+      flex: 1;
+
+      &:first-of-type{
+        border-right: 1px solid $white;
       }
     }
   }

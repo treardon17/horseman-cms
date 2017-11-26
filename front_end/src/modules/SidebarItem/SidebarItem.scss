@@ -14,7 +14,7 @@
   background-color: $shade1;
   backface-visibility: hidden;
 
-  &:hover, &.active{ background-color: $shade1; }
+  &:hover, &.active{ background-color: $base; }
 
   &.big-icon{
     // justify-content: center;

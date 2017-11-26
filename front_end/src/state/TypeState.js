@@ -27,11 +27,9 @@ class TypeState {
   }
 
   // ACTIONS
-  @action addType(type) {
-    // TODO: this should be able to update types as well?
-    const ID = Util.findUniqueSlug({ slug: type.name, object: this.userMadeTypes });
-    this.userMadeTypes[ID] = type;
-    return ID;
+  @action addOrUpdateType(type) {
+    this.userMadeTypes[type.slug] = type;
+    console.log(type);
   }
 }
 

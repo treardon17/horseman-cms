@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import Util from '../util/util';
-
-let ORDER_COUNT = 0;
+import TypeState from '../../../state/TypeState.js';
 
 export default class Type {
   /**
@@ -10,7 +9,9 @@ export default class Type {
    * @param  {type} { name } description   The name of the type being created
    */
   constructor({ name = '' } = {}) {
-    this.name = name;
+    this.name = '';
+    this.slug = '';
+    this.setTypeName({ name });
     this.parts = { };
     this.id = Util.guid();
   }
@@ -38,7 +39,7 @@ export default class Type {
       primary: primary || Type.types.empty,
       secondary: !skip ? (secondary || Type.types.empty) : Type.types.empty,
       description: description || '',
-      orderBy: ORDER_COUNT++,
+      orderBy: Object.keys(this.parts).length,
     };
   }
 
@@ -86,8 +87,31 @@ export default class Type {
     }
   }
 
+  setTypeName({ name }) {
+    this.name = name;
+    this.slug = Util.findUniqueSlug({ slug: name, object: TypeState.userMadeTypes });
+  }
+
+  getOrderedList() {
+    const arr = Object.keys(this.parts).map(key => [key, this.parts[key]]);
+    arr.sort((a, b) => a[1].orderBy - b[1].orderBy);
+    return arr;
+  }
+
   remove({ name }) {
+    // Remember which index we removed
+    const removedIndex = this.parts[name].orderBy;
+    // Get rid of the item from the parts object
     delete this.parts[name];
+    // Reorder all the other objects to reflect the change in index
+    const orderedParts = this.getOrderedList();
+    for (let i = 0; i < orderedParts.length; i++) {
+      const partName = orderedParts[i][0];
+      const part = orderedParts[i][1];
+      if (part.orderBy > removedIndex) {
+        this.parts[partName].orderBy -= 1;
+      }
+    }
   }
 
   getJSON() {
