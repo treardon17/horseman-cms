@@ -2,23 +2,35 @@
 @import '../../resources/styles/_mixins.scss';
 
 .construct-type{
-  .module-title{
-    display: block;
-    font-size: 30px;
-    font-weight: bold;
-    margin: $medium-spacing;
-    outline: none;
-    border-bottom: $border-style;
-    text-align: left;
+  .module-title-container{
+    background-color: $shade1;
+    display: flex;
+    align-items: center;
+
+    .module-icon{
+      svg{
+        width: 50px;
+        height: 50px;
+        stroke: $shade3;
+      }
+    }
+    .module-title{
+      display: block;
+      font-size: 30px;
+      font-weight: bold;
+      margin: $medium-spacing;
+      outline: none;
+      text-align: left;
+      color: $shade3;
+    }
   }
   .constructor-container{
     .field{
-      background-color: $whiteDark;
-      padding: 7px 5px;
-      margin: 0 $medium-spacing $medium-spacing $medium-spacing;
+      background-color: $shade3;
+      padding: 10px 5px;
+      border-top: 1px solid rgba($base, 0.2);
       display: flex;
       align-items: center;
-      border-radius: $border-radius;
 
       .field-name, .slug-name, .Select{
         width: 150px;
@@ -28,7 +40,6 @@
       }
 
       .field-name{
-        border-bottom: $border-style;
       }
 
       .slug-name{

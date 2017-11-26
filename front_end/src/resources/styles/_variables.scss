@@ -15,19 +15,24 @@ $brand-light:     lighten($brand-primary, 10%);
 $brand-dark:      darken($brand-primary, 10%);
 
 // $white:           #F1F6F8;
-// $dark-white:      #D8E9F0;
+// $base-white:      #D8E9F0;
 // $grey:            #7F8488;
 // $transparentGrey: rgba($grey, 0.3);
-// $dark-gray:       #2F313E;
+// $base-gray:       #2F313E;
 // $orange:          #e27056;
-// $dark-orange:     darken($orange, 10%);
+// $base-orange:     darken($orange, 10%);
 // $blue:            #164b5d;
 
-$dark:            #17252A;
-$greenDark:       #2B7A78;
-$greenLight:      #3AAFA9;
-$whiteDark:       #DEF2F1;
+$base:             #122235;
+$shade1:           #44637F;
+$shade2:           #A4BAD1;
+$shade3:           #DBE4ED;
 $white:           #FEFFFF;
+
+// $dark:            #17252A;
+// $darkGreen:       #2B7A78;
+// $lightGreen:      #3AAFA9;
+// $whiteDark:       #DEF2F1;
 
 // Layout
 $grid-small-phone-only:          450px;
@@ -56,4 +61,4 @@ $zTop: 400;
 
 // BORDERS
 $border-radius: 4px;
-$border-style: 2px solid $dark;
+$border-style: 2px solid $base;

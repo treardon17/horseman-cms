@@ -11,10 +11,10 @@
   outline: none;
   position: relative;
   cursor: pointer;
-  background-color: $greenLight;
+  background-color: $shade1;
   backface-visibility: hidden;
 
-  &:hover, &.active{ background-color: $greenDark; }
+  &:hover, &.active{ background-color: $shade1; }
 
   &.big-icon{
     // justify-content: center;
@@ -27,7 +27,7 @@
     margin: auto;
 
     svg{
-      stroke: $whiteDark;
+      stroke: $shade3;
       width: inherit;
       height: 100%;
     }
@@ -36,7 +36,7 @@
   .item-title{
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: $whiteDark;
+    color: $shade3;
     margin-left: 40px;
   }
 }

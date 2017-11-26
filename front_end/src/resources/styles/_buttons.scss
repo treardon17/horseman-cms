@@ -2,10 +2,14 @@
 
 // MaterialUI buttons
 button[class^='MuiButtonBase'], div[class*=' MuiButtonBase']{
-  background-color: $greenLight;
+  background-color: $shade1;
   color: $white;
 
   &:hover{
-    background-color: $greenDark;
+    background-color: $base;
   }
+}
+
+.square-button{
+  margin: $small-spacing $small-spacing/2;
 }

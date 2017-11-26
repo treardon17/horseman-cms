@@ -15,7 +15,7 @@ export default class Page extends React.Component {
         className="page"
         {...this.props}
       >
-        <TitleSection title={this.props.title} titleSecondary="Horseman" />
+        {/* <TitleSection title={this.props.title} titleSecondary="Horseman" /> */}
         <div className="page-body">
           {this.props.children}
         </div>

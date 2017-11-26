@@ -5,6 +5,7 @@ import Type from '../../resources/scripts/types/Type';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
+import ISVG from 'react-inlinesvg';
 import TypeState from '../../state/TypeState';
 
 // scss
@@ -62,7 +63,7 @@ export default class ConstructType extends React.Component {
       // Only give the option to edit the secondary type if the primary
       // type is a list or an object
       let secondaryType = null;
-      if (part.primary === Type.types.object || part.primary === Type.types.list) {
+      if (part.primary === Type.types.module || part.primary === Type.types.list) {
         secondaryType = (
           <Select
             value={part.secondary}
@@ -91,7 +92,14 @@ export default class ConstructType extends React.Component {
             onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'primary', slug }); }}
           />
           {secondaryType}
-          <p>{part.description}</p>
+          <ContentEditable
+            key={`field-description-${i}`}
+            html={part.description}
+            className={`field-description input-field`}
+            onClick={this.highlightAll.bind(this)}
+            onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'description', slug }); }}
+            contentEditable="plaintext-only"
+          />
         </div>
       );
     }
@@ -130,18 +138,23 @@ export default class ConstructType extends React.Component {
   render() {
     return (
       <div className="construct-type">
-        <ContentEditable
-          html={this.state.type.name}
-          className="module-title input-field"
-          onClick={this.highlightAll.bind(this)}
-          onChange={(e, val) => { this.handleNameChange(val); }}
-          contentEditable="plaintext-only"
-        />
+        <div className="module-title-container">
+          <ISVG className="module-icon" src="/assets/img/icons/layout.svg" />
+          <ContentEditable
+            html={this.state.type.name}
+            className="module-title input-field"
+            onClick={this.highlightAll.bind(this)}
+            onChange={(e, val) => { this.handleNameChange(val); }}
+            contentEditable="plaintext-only"
+          />
+        </div>
         <div className="constructor-container">
           {this.getFields()}
         </div>
-        <Button onClick={this.addField.bind(this)}>Add Field</Button>
-        <Button onClick={this.save.bind(this)}>Save</Button>
+        <div className="buttonContainer">
+          <Button className="square-button" onClick={this.addField.bind(this)}>Add Field</Button>
+          <Button className="square-button" onClick={this.save.bind(this)}>Save</Button>
+        </div>
       </div>
     );
   }
