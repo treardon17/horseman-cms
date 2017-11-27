@@ -1,0 +1,16 @@
+@import '../../resources/styles/_variables.scss';
+@import '../../resources/styles/_mixins.scss';
+
+.empty-page{
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $base;
+
+  .content-container{
+    display: block;
+    text-align: center;
+  }
+}

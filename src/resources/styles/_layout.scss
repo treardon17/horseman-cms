@@ -65,6 +65,14 @@ body {
 }
 
 
+.page{
+  .page-body{
+    min-height: 100vh;
+    position: relative;
+    min-height: inherit;
+  }
+}
+
 // PAGE TRANSITIONS
 .page{
   opacity: 1;

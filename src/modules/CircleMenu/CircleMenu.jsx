@@ -21,13 +21,14 @@ export default class CircleMenu extends React.Component {
 
 
   getButtons() {
-    const numButtons = 4;
+    const numButtons = this.props.menuItems.length;
 
     const divideBy = (numButtons > 1 ? (numButtons - 1) : 2);
     const degreesBetweenButtons = (this.angle / divideBy);
     const rotateDuration = this.state.open ? this.animationDuration : this.animationDuration / 3;
     const buttons = [];
     for (let i = 0; i < numButtons; i++) {
+      const button = this.props.menuItems[i];
       const rotateBy = -(i*degreesBetweenButtons);
       const rotateDelay = this.state.open ? ((i * this.rotateDelay) + (this.animationDuration / 1.5)) : 0;
 
@@ -53,7 +54,7 @@ export default class CircleMenu extends React.Component {
                     duration={rotateDuration}
                     delay={rotateDelay}
                   >
-                    <ActionButton type="add" />
+                    <ActionButton icon={button.icon} onClick={button.onClick} />
                   </VelocityComponent>
                 </div>
               </div>
@@ -66,7 +67,6 @@ export default class CircleMenu extends React.Component {
   }
 
   toggleMenu() {
-    console.log('opening menu');
     this.setState({
       open: !this.state.open,
     });
@@ -80,7 +80,7 @@ export default class CircleMenu extends React.Component {
           duration={this.animationDuration}
           easing={[50, 8]}
         >
-          <ActionButton type="add" onClick={this.toggleMenu.bind(this)} />
+          <ActionButton icon="/assets/img/icons/plus.svg" onClick={this.toggleMenu.bind(this)} />
         </VelocityComponent>
         {this.getButtons()}
       </div>
@@ -89,5 +89,5 @@ export default class CircleMenu extends React.Component {
 }
 
 CircleMenu.propTypes = {
-  menuItems: PropTypes.array,
+  menuItems: PropTypes.array.isRequired,
 };

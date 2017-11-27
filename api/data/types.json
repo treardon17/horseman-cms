@@ -1,20 +1,57 @@
 {
-  "Module title": {
-    "name": "Module title",
-    "slug": "moduleTitle",
-    "parts": {},
-    "id": "a0a83d57-dc078e52"
+  "newModule": {
+    "name": "New module",
+    "slug": "newModule",
+    "id": "298c6081-a90f2c27",
+    "parts": {
+      "title": {
+        "name": "title",
+        "primary": "string",
+        "secondary": "empty",
+        "description": "this is a description",
+        "orderBy": 0
+      },
+      "image": {
+        "name": "image",
+        "primary": "image",
+        "secondary": "empty",
+        "description": "hero image",
+        "orderBy": 1
+      }
+    }
   },
-  "Hero": {
-    "name": "Hero",
-    "slug": "hero",
-    "parts": {},
-    "id": "98942825-25fd5842"
+  "newModule1": {
+    "name": "New module",
+    "slug": "newModule1",
+    "id": "522025c7-0bea96df",
+    "parts": {
+      "newField": {
+        "name": "New field",
+        "primary": "empty",
+        "secondary": "empty",
+        "description": "Field description",
+        "orderBy": 0
+      }
+    }
   },
-  "hello world": {
-    "name": "hello world",
-    "slug": "helloWorld",
-    "parts": {},
-    "id": "a3da5b26-824e8756"
+  "newModule2": {
+    "name": "New module",
+    "slug": "newModule2",
+    "id": "ab47ff01-53f66abc",
+    "parts": {
+      "newField": {
+        "name": "New field",
+        "primary": "empty",
+        "secondary": "empty",
+        "description": "Field description",
+        "orderBy": 0
+      }
+    }
+  },
+  "newModule3": {
+    "name": "New module",
+    "slug": "newModule3",
+    "id": "7d0297aa-a0b941b7",
+    "parts": {}
   }
 }

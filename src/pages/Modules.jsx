@@ -7,6 +7,7 @@ import TypeState from '../state/TypeState.js';
 import Type from '../resources/scripts/types/Type.js';
 // import modules here
 import ConstructType from '../modules/ConstructType/ConstructType';
+import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 
 @observer export default class Modules extends React.Component {
   constructor(props) {
@@ -27,9 +28,16 @@ import ConstructType from '../modules/ConstructType/ConstructType';
   }
 
   render() {
+    const moduleTypes = this.getModuleTypes();
+    let child = null;
+    if (moduleTypes.length > 0) {
+      child = moduleTypes;
+    } else {
+      child = (<EmptyPage title="No Modules" message="Press the + button in the bottom right to add a module" />);
+    }
     return (
       <Page id="Modules" title="Modules">
-        {this.getModuleTypes()}
+        {child}
       </Page>
     );
   }

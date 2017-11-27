@@ -8,18 +8,19 @@ export default class Type {
    *
    * @param  {type} { name } description   The name of the type being created
    */
-  constructor(arg = { name: '' }) {
-    this.name = '';
-    this.slug = '';
-
+  constructor(arg = { }) {
     const keys = Object.keys(arg);
     for (let i = 0; i < keys.length; i++) {
-      this[keys[i]] = arg[keys[i]];
+      const key = keys[i];
+      if (key === 'name') {
+        this.setTypeName({ name: arg[key] });
+      } else {
+        this[key] = arg[key];
+      }
     }
 
     if (!this.id) { this.id = Util.guid(); }
     if (!this.parts) { this.parts = { }; }
-    if (!this.slug) { this.setTypeName({ name }); }
   }
 
   /**

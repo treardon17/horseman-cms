@@ -36,8 +36,9 @@ class TypeState {
         method: 'post',
         query: `/api/type`,
         body: type
-      }).then(() => {
-        resolve();
+      }).then((types) => {
+        this.updateUserMadeTypes();
+        resolve(types);
       }).catch((error) => {
         console.log(error);
         reject(error);
@@ -55,6 +56,18 @@ class TypeState {
         resolve(types);
       }).catch((error) => {
         console.log(error);
+        reject(error);
+      });
+    });
+  }
+
+  // FUNCTIONS
+  @action addEmptyType() {
+    return new Promise((resolve, reject) => {
+      const type = new Type({ name: 'New module' });
+      this.addOrUpdateType(type).then(() => {
+        resolve();
+      }).catch((error) => {
         reject(error);
       });
     });

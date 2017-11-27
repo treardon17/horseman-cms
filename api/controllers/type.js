@@ -15,9 +15,9 @@ class TypeController {
     return new Promise((resolve, reject) => {
       this.getTypes().then((types) => {
         const newTypes = types;
-        newTypes[type.name] = type;
+        newTypes[type.slug] = type;
         FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(newTypes, null, 2) }).then(() => {
-          resolve({ success: true, type });
+          resolve({ type });
         }).catch((err) => {
           reject(err);
         });
@@ -35,8 +35,8 @@ module.exports = {
     const type = req.body;
   
     if (type.name) {
-      typeController.addOrUpdateType({ type }).then((params) => {
-        res.header('Content-Type', 'application/json').status(200).send(params);
+      typeController.addOrUpdateType({ type }).then((myType) => {
+        res.header('Content-Type', 'application/json').status(200).send(myType);
       }).catch((error) => {
         res.header('Content-Type', 'application/json').status(400).send({ error });
       });

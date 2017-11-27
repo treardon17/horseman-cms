@@ -11,25 +11,7 @@ export default class Users extends React.Component {
 
   render() {
     return (
-      <Page id="Users" title="Users">
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-        <div className="test" />
-      </Page>
+      <Page id="Users" title="Users" />
     );
   }
 }

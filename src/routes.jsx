@@ -3,6 +3,7 @@ import { PageTransition, Route } from 'react-transition-router';
 import Sidebar from './modules/Sidebar/Sidebar';
 import AppState from './state/AppState';
 import CircleMenu from './modules/CircleMenu/CircleMenu';
+import TypeState from './state/TypeState.js';
 // import styles
 import './resources/styles/base.scss';
 // import pages
@@ -57,7 +58,7 @@ export default class Routes extends React.Component {
             routes={this.state.routes}
             serialize={false}
           />
-          <CircleMenu />
+          <CircleMenu menuItems={[{ icon: '/assets/img/icons/layout.svg', onClick: TypeState.addEmptyType.bind(TypeState) }]} />
         </div>
       </div>
     );
