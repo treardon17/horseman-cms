@@ -73,7 +73,6 @@ class TypeState {
 
   // FUNCTIONS
   @action addEmptyType() {
-    console.log('adding empty type');
     return new Promise((resolve, reject) => {
       const type = new Type({ name: 'New module' });
       this.addOrUpdateType(type).then(() => {

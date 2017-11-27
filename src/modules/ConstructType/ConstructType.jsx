@@ -1,12 +1,13 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-// import _ from 'lodash';
+import _ from 'lodash';
 import Type from '../../resources/scripts/types/Type';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
 import ISVG from 'react-inlinesvg';
 import TypeState from '../../state/TypeState';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 // scss
 import './ConstructType.scss';
@@ -21,8 +22,10 @@ export default class ConstructType extends React.Component {
     // console.log('type is:', type.getJSON());
 
     this.state = {
+      prevType: null,
       type: this.props.type || new Type({ name: 'Module title' }),
-      needSave: false
+      needSave: false,
+      revert: false,
     };
   }
 
@@ -114,6 +117,7 @@ export default class ConstructType extends React.Component {
     buttons.push(<Button key="add-field" className="square-button" onClick={this.addField.bind(this)}>Add Field</Button>);
     if (this.state.needSave) {
       buttons.push(<Button key="save-type" className="square-button" onClick={this.save.bind(this)}>Save</Button>);
+      buttons.push(<Button key="cancel-type" className="square-button" onClick={this.cancel.bind(this)}>Cancel</Button>);
     }
     return buttons;
   }
@@ -122,76 +126,126 @@ export default class ConstructType extends React.Component {
     document.execCommand('selectAll', false, null);
   }
 
+  // ---------------------------------
+  // EDIT OPERATIONS
+  // ---------------------------------
+
+  editTypeState(type) {
+    this.setState({
+      type,
+      needSave: true,
+    });
+  }
+
   handleChangePart({ event, val, partID, slug }) {
+    this.saveStateIfNeeded();
     const type = this.state.type;
     const editObject = {};
     editObject[partID] = val;
     editObject.slug = slug;
     type.edit(editObject);
-    this.setState({
-      type,
-      needSave: true,
-    });
+    this.editTypeState(type);
   }
 
   addField() {
+    this.saveStateIfNeeded();
     const type = this.state.type;
     type.add();
-    this.setState({
-      type,
-      needSave: true,
-    });
+    this.editTypeState(type);
+  }
+
+  removeField(slug) {
+    this.saveStateIfNeeded();
+    const type = this.state.type;
+    type.remove({ name: slug });
+    this.editTypeState(type);
+  }
+
+  handleNameChange(val) {
+    this.saveStateIfNeeded();
+    const type = this.state.type;
+    type.setTypeName({ name: val });
+    this.editTypeState(type);
+  }
+
+  // ---------------------------------
+  // SAVE AND CANCEL OPERATIONS
+  // ---------------------------------
+
+  saveStateIfNeeded() {
+    // We have the current, unedited version of state
+    if (!this.state.needSave) {
+      this.setState({
+        prevType: _.cloneDeep(this.state.type),
+        needSave: true,
+      });
+    }
   }
 
   save() {
+    // Save the current type to the server
     TypeState.addOrUpdateType(this.state.type).then(() => {
       this.setState({
+        prevType: null,
         needSave: false,
       });
     });
   }
 
-  removeField(slug) {
-    const type = this.state.type;
-    type.remove({ name: slug });
-    this.setState({
-      type,
-      needSave: true,
-    });
-  }
+  cancel() {
+    // Grab our last state and keep that as the current type
+    const type = this.state.prevType;
 
-  handleNameChange(val) {
-    const type = this.state.type;
-    type.setTypeName({ name: val });
+    // There are issues with how ContentEditable renders
+    // because it uses dangerouslySetInnerHtml, which needs a unique key
+    // to rerender correctly, but the npm package we're using doesn't do that.
     this.setState({
-      type,
-      needSave: true,
+      revert: true,
+    }, () => {
+      this.setState({
+        type,
+        prevType: null,
+        needSave: false,
+      });
     });
   }
 
   render() {
-    return (
-      <div className="construct-type">
-        <div className="module-title-container">
-          <ISVG className="module-icon" src="/assets/img/icons/layout.svg" />
-          <div className="module-title-data">
-            <ContentEditable
-              html={this.state.type.name}
-              className="module-title input-field"
-              onClick={this.highlightAll.bind(this)}
-              onChange={(e, val) => { this.handleNameChange(val); }}
-              contentEditable="plaintext-only"
-            />
-            <h3 className="module-slug sub-text">{this.state.type.slug}</h3>
+    const content = this.state.revert
+      ? null
+      : (
+        <div className="construct-type">
+          <div className="module-title-container">
+            <ISVG className="module-icon" src="/assets/img/icons/layout.svg" />
+            <div className="module-title-data">
+              <ContentEditable
+                key="module-title"
+                html={this.state.type.name}
+                className="module-title input-field"
+                onClick={this.highlightAll.bind(this)}
+                onChange={(e, val) => { this.handleNameChange(val); }}
+                contentEditable="plaintext-only"
+              />
+              <h3 className="module-slug sub-text">{this.state.type.slug}</h3>
+            </div>
+          </div>
+          <div className="constructor-container">
+            {this.getFields()}
+          </div>
+          <div className="button-container">
+            {this.getButtons()}
           </div>
         </div>
-        <div className="constructor-container">
-          {this.getFields()}
-        </div>
-        <div className="button-container">
-          {this.getButtons()}
-        </div>
-      </div>
+      );
+
+    return (
+      <VelocityTransitionGroup
+        leave={{ animation: { opacity: 0, translateY: -15 }, duration: 300, complete: () => { this.setState({ revert: false }); } }}
+        enter={{ animation: { opacity: 1, translateY: 0 }, duration: 300 }}
+        runOnMount
+      >
+        {content}
+      </VelocityTransitionGroup>
     );
   }
 }
