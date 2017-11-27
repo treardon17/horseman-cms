@@ -1,15 +1,29 @@
 {
-  "b95046fd-a383daea": {
-    "name": "testing",
-    "slug": "testing",
-    "id": "b95046fd-a383daea",
+  "049faad9-56c40dd1": {
+    "name": "New module",
+    "slug": "newModule",
+    "id": "049faad9-56c40dd1",
     "parts": {
-      "newField1": {
+      "newField": {
         "name": "New field",
         "primary": "empty",
         "secondary": "empty",
         "description": "Field description",
         "orderBy": 0
+      },
+      "newField1": {
+        "name": "New field",
+        "primary": "empty",
+        "secondary": "empty",
+        "description": "other description",
+        "orderBy": 1
+      },
+      "fieldName": {
+        "name": "fieldName",
+        "primary": "empty",
+        "secondary": "empty",
+        "description": "testing",
+        "orderBy": 2
       }
     }
   }

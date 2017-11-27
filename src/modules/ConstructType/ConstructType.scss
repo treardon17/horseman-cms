@@ -70,6 +70,7 @@
       .field-description{
         max-width: 200px;
         overflow: auto;
+        user-select: all;
       }
 
       .remove-button{

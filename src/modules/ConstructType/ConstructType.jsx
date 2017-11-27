@@ -83,6 +83,7 @@ export default class ConstructType extends React.Component {
               html={part.name}
               className={`field-name input-field`}
               onClick={this.highlightAll.bind(this)}
+              onFocus={this.highlightAll.bind(this)}
               onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'name', slug }); }}
               contentEditable="plaintext-only"
             />
@@ -100,6 +101,7 @@ export default class ConstructType extends React.Component {
             html={part.description}
             className={`field-description input-field`}
             onClick={this.highlightAll.bind(this)}
+            onFocus={this.highlightAll.bind(this)}
             onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'description', slug }); }}
             contentEditable="plaintext-only"
           />
@@ -123,7 +125,11 @@ export default class ConstructType extends React.Component {
   }
 
   highlightAll() {
-    document.execCommand('selectAll', false, null);
+    if (document.activeElement) {
+      setTimeout(() => {
+        document.execCommand('selectAll', false, null);
+      }, 0);
+    }
   }
 
   // ---------------------------------
@@ -223,6 +229,7 @@ export default class ConstructType extends React.Component {
                 html={this.state.type.name}
                 className="module-title input-field"
                 onClick={this.highlightAll.bind(this)}
+                onFocus={this.highlightAll.bind(this)}
                 onChange={(e, val) => { this.handleNameChange(val); }}
                 contentEditable="plaintext-only"
               />
