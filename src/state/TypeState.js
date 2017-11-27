@@ -31,14 +31,14 @@ class TypeState {
   // ACTIONS
   @action addOrUpdateType(type) {
     return new Promise((resolve, reject) => {
-      this.userMadeTypes[type.slug] = type;
       API.makeQuery({
         method: 'post',
         query: `/api/type`,
         body: type
       }).then((types) => {
-        this.updateUserMadeTypes();
-        resolve(types);
+        this.updateUserMadeTypes().then((updatedTypes) => {
+          resolve(updatedTypes);
+        });
       }).catch((error) => {
         console.log(error);
         reject(error);
@@ -46,14 +46,24 @@ class TypeState {
     });
   }
 
+  // Grabs all the types in the types.json file on the server
+  // and updates the types in the application to reflect what's saved
   @action updateUserMadeTypes() {
     return new Promise((resolve, reject) => {
       API.makeQuery({
         method: 'get',
         query: `/api/type`,
       }).then((types) => {
-        this.userMadeTypes = types;
-        resolve(types);
+        // We need to make a bunch of type objects,
+        // so we construct those here
+        const newTypes = { };
+        const keys = Object.keys(types);
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          newTypes[key] = new Type(types[key]);
+        }
+        this.userMadeTypes = newTypes;
+        resolve(this.userMadeTypes);
       }).catch((error) => {
         console.log(error);
         reject(error);
@@ -63,6 +73,7 @@ class TypeState {
 
   // FUNCTIONS
   @action addEmptyType() {
+    console.log('adding empty type');
     return new Promise((resolve, reject) => {
       const type = new Type({ name: 'New module' });
       this.addOrUpdateType(type).then(() => {

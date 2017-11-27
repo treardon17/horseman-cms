@@ -19,7 +19,7 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
     const types = TypeState.userMadeTypes;
     const keys = Object.keys(types);
     for (let i = 0; i < keys.length; i++) {
-      const type = new Type(types[keys[i]]);
+      const type = types[keys[i]];
       moduleTypes.push(
         <ConstructType key={`construct-type-${i}`} type={type} />
       );

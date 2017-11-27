@@ -1,1 +1,36 @@
-{ }
+{
+  "edfc0b10-e6190391": {
+    "name": "hello world",
+    "slug": "helloWorld",
+    "id": "edfc0b10-e6190391",
+    "parts": {
+      "testing123": {
+        "name": "testing123",
+        "primary": "list",
+        "secondary": "module",
+        "description": "Field description",
+        "orderBy": 0
+      }
+    }
+  },
+  "14895d50-e7f351ed": {
+    "name": "pages",
+    "slug": "pages",
+    "id": "14895d50-e7f351ed",
+    "parts": {
+      "title": {
+        "name": "title",
+        "primary": "string",
+        "secondary": "empty",
+        "description": "this is a description of the item",
+        "orderBy": 0
+      }
+    }
+  },
+  "9589cabf-269d237f": {
+    "name": "New module",
+    "slug": "newModule",
+    "id": "9589cabf-269d237f",
+    "parts": {}
+  }
+}

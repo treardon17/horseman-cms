@@ -15,7 +15,7 @@ class TypeController {
     return new Promise((resolve, reject) => {
       this.getTypes().then((types) => {
         const newTypes = types;
-        newTypes[type.slug] = type;
+        newTypes[type.id] = type;
         FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(newTypes, null, 2) }).then(() => {
           resolve({ type });
         }).catch((err) => {
