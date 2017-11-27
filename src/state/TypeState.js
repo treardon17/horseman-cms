@@ -4,10 +4,11 @@ import Util from '../resources/scripts/util/util';
 import API from '../resources/scripts/util/API.js';
 
 class TypeState {
-  @observable userMadeTypes = {};
+  @observable userMadeTypes = { };
 
-  // constructor() {
-  // }
+  constructor() {
+    this.updateUserMadeTypes();
+  }
 
   // GETTERS FOR TYPE NAMES
   @computed get validTypeNames() {
@@ -37,6 +38,21 @@ class TypeState {
         body: type
       }).then(() => {
         resolve();
+      }).catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
+  @action updateUserMadeTypes() {
+    return new Promise((resolve, reject) => {
+      API.makeQuery({
+        method: 'get',
+        query: `/api/type`,
+      }).then((types) => {
+        this.userMadeTypes = types;
+        resolve(types);
       }).catch((error) => {
         console.log(error);
         reject(error);

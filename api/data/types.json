@@ -2,15 +2,19 @@
   "Module title": {
     "name": "Module title",
     "slug": "moduleTitle",
-    "parts": {
-      "newField3": {
-        "name": "New field",
-        "primary": "empty",
-        "secondary": "empty",
-        "description": "Field description",
-        "orderBy": 0
-      }
-    },
+    "parts": {},
     "id": "a0a83d57-dc078e52"
+  },
+  "Hero": {
+    "name": "Hero",
+    "slug": "hero",
+    "parts": {},
+    "id": "98942825-25fd5842"
+  },
+  "hello world": {
+    "name": "hello world",
+    "slug": "helloWorld",
+    "parts": {},
+    "id": "a3da5b26-824e8756"
   }
 }

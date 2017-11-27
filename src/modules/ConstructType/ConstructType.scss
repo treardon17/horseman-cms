@@ -28,6 +28,10 @@
         outline: none;
         text-align: left;
         color: $shade3;
+        min-width: 100px;
+        border-bottom: $border-style;
+        margin-bottom: $small-spacing;
+        padding-bottom: $small-spacing;
       }
       .module-slug{
         text-align: left;
@@ -52,6 +56,8 @@
 
       .name-container{
         .field-name{
+          border-bottom: $border-style;
+          margin-bottom: $small-spacing/2;
         }
   
         .slug-name{
