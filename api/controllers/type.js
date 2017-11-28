@@ -16,7 +16,7 @@ class TypeController {
       this.getTypes().then((types) => {
         const newTypes = types;
         // newTypes[type.id] = type;
-        
+
         // find the Slug of the item that we changed
         let slug = '';
         const keys = Object.keys(newTypes);
@@ -42,6 +42,23 @@ class TypeController {
       });
     });
   }
+
+  deleteType({ slug }) {
+    return new Promise((resolve, reject) => {
+      this.getTypes().then((types) => {
+        const newTypes = types;
+        // remove the type completely
+        delete newTypes[slug];
+        FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(newTypes, null, 2) }).then(() => {
+          resolve();
+        }).catch((err) => {
+          reject(err);
+        });
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  }
 }
 
 const typeController = new TypeController();
@@ -49,7 +66,6 @@ const typeController = new TypeController();
 module.exports = {
   handleType: (req, res) => {
     const type = req.body;
-  
     if (type.name) {
       typeController.addOrUpdateType({ type }).then((myType) => {
         res.header('Content-Type', 'application/json').status(200).send(myType);
@@ -63,6 +79,14 @@ module.exports = {
   getTypes: (req, res) => {
     typeController.getTypes().then((types) => {
       res.header('Content-Type', 'application/json').status(200).send(types);
+    }).catch((err) => {
+      res.header('Content-Type', 'application/json').status(500).send({ error: err });
+    });
+  },
+  deleteType: (req, res) => {
+    const slug = req.params.slug;
+    typeController.deleteType({ slug }).then(() => {
+      res.header('Content-Type', 'application/json').status(200).send({ success: true });
     }).catch((err) => {
       res.header('Content-Type', 'application/json').status(500).send({ error: err });
     });

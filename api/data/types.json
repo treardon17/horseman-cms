@@ -1,1 +1,25 @@
-{ }
+{
+  "newModule": {
+    "name": "New module",
+    "slug": "newModule",
+    "id": "00daf92e-f5369057",
+    "parts": {},
+    "orderBy": 3
+  },
+  "pages": {
+    "name": "pages",
+    "slug": "pages",
+    "id": "6142edc0-642cfa2d",
+    "parts": {
+      "newField": {
+        "name": "New field",
+        "primary": "empty",
+        "secondary": "empty",
+        "description": "Field description",
+        "orderBy": 0,
+        "id": "fd99d967-fccfb741"
+      }
+    },
+    "orderBy": 1
+  }
+}

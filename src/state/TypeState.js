@@ -28,6 +28,12 @@ class TypeState {
     return Object.keys(this.userMadeTypes);
   }
 
+  @computed get orderedUserMadeTypeList() {
+    const arr = Object.keys(this.userMadeTypes).map(key => [key, this.userMadeTypes[key]]);
+    arr.sort((a, b) => a[1].orderBy - b[1].orderBy);
+    return arr;
+  }
+
   // ACTIONS
   @action addOrUpdateType(type) {
     return new Promise((resolve, reject) => {
@@ -35,6 +41,22 @@ class TypeState {
         method: 'post',
         query: `/api/type`,
         body: type
+      }).then((types) => {
+        this.updateUserMadeTypes().then((updatedTypes) => {
+          resolve(updatedTypes);
+        });
+      }).catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
+  @action removeType(slug) {
+    return new Promise((resolve, reject) => {
+      API.makeQuery({
+        method: 'delete',
+        query: `/api/type/${slug}`
       }).then((types) => {
         this.updateUserMadeTypes().then((updatedTypes) => {
           resolve(updatedTypes);

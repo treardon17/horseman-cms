@@ -21,6 +21,7 @@ export default class Type {
 
     if (!this.id) { this.id = Util.guid(); }
     if (!this.parts) { this.parts = { }; }
+    if (!this.orderBy) { this.orderBy = TypeState.userMadeTypeNames.length + 1; }
   }
 
   /**
@@ -47,6 +48,7 @@ export default class Type {
       secondary: !skip ? (secondary || Type.types.empty) : Type.types.empty,
       description: description || '',
       orderBy: Object.keys(this.parts).length,
+      id: Util.guid(),
     };
   }
 

@@ -21,5 +21,6 @@ const types = require('./controllers/type');
 // types
 router.post('/type', (req, res) => { types.handleType(req, res); });
 router.get('/type', (req, res) => { types.getTypes(req, res); });
+router.delete('/type/:slug', (req, res) => { types.deleteType(req, res); });
 
 module.exports = router;

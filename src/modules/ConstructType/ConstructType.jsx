@@ -84,10 +84,10 @@ export default class ConstructType extends React.Component {
       }
 
       fields.push(
-        <div className="field" key={`field-${i}`}>
+        <div className="field" key={`module-field-${part.id}`}>
           <div className="name-container">
             <ContentEditable
-              key={`field-name-${i}`}
+              key={`field-name-${part.id}`}
               html={part.name}
               className={`field-name input-field`}
               onClick={this.highlightAll.bind(this)}
@@ -105,7 +105,7 @@ export default class ConstructType extends React.Component {
           />
           {secondaryType}
           <ContentEditable
-            key={`field-description-${i}`}
+            key={`field-description-${part.id}`}
             html={part.description}
             className={`field-description input-field`}
             onClick={this.highlightAll.bind(this)}
@@ -297,6 +297,16 @@ export default class ConstructType extends React.Component {
     });
   }
 
+  removeModule() {
+    let slug = '';
+    if (this.state.type.prevType) {
+      slug = this.state.prevType.slug;
+    } else {
+      slug = this.state.type.slug;
+    }
+    TypeState.removeType(slug);
+  }
+
   render() {
     // We need this ternary here because of the content editable fields.
     // If we cancel the operation, the content editable fields do
@@ -319,9 +329,20 @@ export default class ConstructType extends React.Component {
               />
               <h3 className="module-slug sub-text">{this.state.type.slug}</h3>
             </div>
+            <div className="module-settings-container">
+              <div className="remove-module" onClick={() => { this.removeModule(); }}>
+                <ISVG className="remove-icon" src="/assets/img/icons/trash.svg" />
+              </div>
+            </div>
           </div>
           <div className="constructor-container">
-            {this.getFields()}
+            <VelocityTransitionGroup
+              leave={{ animation: { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0 }, duration: 300 }}
+              enter={{ animation: { opacity: 1, height: 77, paddingTop: 10, paddingBottom: 10 }, duration: 300 }}
+              runOnMount
+            >
+              {this.getFields()}
+            </VelocityTransitionGroup>
           </div>
           <div className="button-container">
             {this.getButtons()}

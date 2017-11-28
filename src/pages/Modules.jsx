@@ -16,12 +16,19 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 
   getModuleTypes() {
     const moduleTypes = [];
-    const types = TypeState.userMadeTypes;
-    const keys = Object.keys(types);
-    for (let i = 0; i < keys.length; i++) {
-      const type = types[keys[i]];
+    // const types = TypeState.userMadeTypes;
+    // const keys = Object.keys(types);
+    // for (let i = 0; i < keys.length; i++) {
+    //   const type = types[keys[i]];
+    //   moduleTypes.push(
+    //     <ConstructType key={`construct-type-${type.id}`} type={type} />
+    //   );
+    // }
+    const types = TypeState.orderedUserMadeTypeList;
+    for (let i = 0; i < types.length; i++) {
+      const type = types[i][1];
       moduleTypes.push(
-        <ConstructType key={`construct-type-${i}`} type={type} />
+        <ConstructType key={`construct-type-${type.id}`} type={type} />
       );
     }
     return moduleTypes;
