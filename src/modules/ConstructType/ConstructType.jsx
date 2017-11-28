@@ -1,7 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import _ from 'lodash';
-import Type from '../../resources/scripts/object_definitions/Type.js';
+import Type from '../../resources/scripts/definitions/Type.js';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
@@ -16,11 +16,6 @@ export default class ConstructType extends React.Component {
   constructor(props) {
     super(props);
 
-    // const type = new Type();
-    // type.add({ name: 'title', primary: Type.string });
-    // type.add({ name: 'locations', primary: Type.list, secondary: Type.number });
-    // console.log('type is:', type.getJSON());
-
     this.state = {
       prevType: null,
       type: this.props.type || new Type({ name: 'Module title' }),
@@ -29,6 +24,13 @@ export default class ConstructType extends React.Component {
     };
   }
 
+  /**
+   * getFormattedTypeList - Determines which items should be in the dropdowns
+   *
+   * @param  {string} type - Will be 'primary' or 'secondary' depending on which
+   *                       list is being accessed
+   * @return {list}      description - a list of items to go in the dropdown
+   */
   getFormattedTypeList(type) {
     let validTypeNames = [];
     if (type === 'primary') {
@@ -46,6 +48,12 @@ export default class ConstructType extends React.Component {
     return optionsList;
   }
 
+
+  /**
+   * getFields - Based on the properties of this type, this determines the fields to show
+   *
+   * @return {list}  list of UI elements
+   */
   getFields() {
     // Get all of the slugs from the type.parts
     // If we don't have an ordered array, React gets its references
@@ -114,6 +122,13 @@ export default class ConstructType extends React.Component {
     return fields;
   }
 
+
+  /**
+   * getButtons - Gets the buttons (add, save, cancel) based on state and if
+   * changes have been made
+   *
+   * @return {list}  the buttons to be displayed
+   */
   getButtons() {
     const buttons = [];
     buttons.push(<Button key="add-field" className="square-button" onClick={this.addField.bind(this)}>Add Field</Button>);
@@ -124,9 +139,18 @@ export default class ConstructType extends React.Component {
     return buttons;
   }
 
+
+  /**
+   * highlightAll - Highlights the current field so all text is selected
+   *
+   * @return {void}
+   */
   highlightAll() {
+    // If we have a target focused
     if (document.activeElement) {
+      // Wait until the target has finished focusing
       setTimeout(() => {
+        // Select all text on the focused element
         document.execCommand('selectAll', false, null);
       }, 0);
     }
@@ -135,7 +159,13 @@ export default class ConstructType extends React.Component {
   // ---------------------------------
   // EDIT OPERATIONS
   // ---------------------------------
-
+  /**
+   * editTypeState - Convenience method. When user makes changes to the type,
+   * this method will make the save/cancel buttons appear
+   *
+   * @param  {type} type description
+   * @return {type}      description
+   */
   editTypeState(type) {
     this.setState({
       type,
@@ -143,6 +173,18 @@ export default class ConstructType extends React.Component {
     });
   }
 
+
+  /**
+   * handleChangePart - When the user is changing values, this makes it easy to
+   * reflect those changes in the type object by specifying which field is changing
+   * and what the new value is
+   *
+   * @param  {type} event description
+   * @param  {type} val     description
+   * @param  {type} partID  description
+   * @param  {type} slug  description
+   * @return {type}         description
+   */
   handleChangePart({ event, val, partID, slug }) {
     this.saveStateIfNeeded();
     const type = this.state.type;
@@ -153,6 +195,12 @@ export default class ConstructType extends React.Component {
     this.editTypeState(type);
   }
 
+
+  /**
+   * addField - Adds a new empty field to the type
+   *
+   * @return {void}
+   */
   addField() {
     this.saveStateIfNeeded();
     const type = this.state.type;
@@ -160,6 +208,13 @@ export default class ConstructType extends React.Component {
     this.editTypeState(type);
   }
 
+
+  /**
+   * removeField - Removes an existing field from the type
+   *
+   * @param  {string} slug - the unique identifier of the field being removed
+   * @return {void}
+   */
   removeField(slug) {
     this.saveStateIfNeeded();
     const type = this.state.type;
@@ -167,6 +222,13 @@ export default class ConstructType extends React.Component {
     this.editTypeState(type);
   }
 
+
+  /**
+   * handleNameChange - Changes the name of the module
+   *
+   * @param  {string} val - new name
+   * @return {void}
+   */
   handleNameChange(val) {
     this.saveStateIfNeeded();
     const type = this.state.type;
@@ -178,6 +240,14 @@ export default class ConstructType extends React.Component {
   // SAVE AND CANCEL OPERATIONS
   // ---------------------------------
 
+
+  /**
+   * saveStateIfNeeded - When the user makes changes, this should be called before
+   * any of those changes are saved so that the user can cancel their Changes
+   * and have them reverted to this previous saved state
+   *
+   * @return {type}  description
+   */
   saveStateIfNeeded() {
     // We have the current, unedited version of state
     if (!this.state.needSave) {
@@ -188,6 +258,11 @@ export default class ConstructType extends React.Component {
     }
   }
 
+  /**
+   * save - Saves the changes the user made to the server
+   *
+   * @return {void}
+   */
   save() {
     // Save the current type to the server
     TypeState.addOrUpdateType(this.state.type).then(() => {
@@ -198,6 +273,12 @@ export default class ConstructType extends React.Component {
     });
   }
 
+
+  /**
+   * cancel - Reverts the changes made by the user to the state before the changes were made
+   *
+   * @return {void}
+   */
   cancel() {
     // Grab our last state and keep that as the current type
     const type = this.state.prevType;
@@ -217,6 +298,9 @@ export default class ConstructType extends React.Component {
   }
 
   render() {
+    // We need this ternary here because of the content editable fields.
+    // If we cancel the operation, the content editable fields do
+    // not rerender to the correct values
     const content = this.state.revert
       ? null
       : (
