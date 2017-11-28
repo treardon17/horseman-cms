@@ -1,6 +1,6 @@
 import { observable, computed, action } from 'mobx';
-import Type from '../resources/scripts/types/Type';
-import Util from '../resources/scripts/util/util';
+import Type from '../resources/scripts/object_definitions/Type.js';
+import Util from '../resources/scripts/util/util.js';
 import API from '../resources/scripts/util/API.js';
 
 class TypeState {

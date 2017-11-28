@@ -12,6 +12,7 @@ import Modules from './pages/Modules';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
 import Assets from './pages/Assets';
+import Objects from './pages/Objects';
 
 // create global state
 const appState = new AppState();
@@ -20,19 +21,13 @@ export default class Routes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuItems: [
-        { icon: "/assets/img/icons/home.svg", title: "Home", url: "/" },
-        { icon: "/assets/img/icons/users.svg", title: "Users", url: "/users" },
-        { icon: "/assets/img/icons/image.svg", title: "Assets", url: "/assets" },
-        { icon: "/assets/img/icons/layout.svg", title: "Modules", url: "/modules" },
-        { icon: "/assets/img/icons/settings.svg", title: "Settings", url: "/settings" }
-      ],
       routes: [
         <Route absolute path="/" key="Home" component={<Home state={appState} />} />,
         <Route absolute exact path="/modules" key="Modules" component={<Modules state={appState} />} />,
         <Route absolute exact path="/settings" key="Settings" component={<Settings state={appState} />} />,
         <Route absolute exact path="/users" key="Users" component={<Users state={appState} />} />,
         <Route absolute exact path="/assets" key="Assets" component={<Assets state={appState} />} />,
+        <Route exact path="/objects" key="Objects" component={<Objects state={appState} />} />,
       ],
     };
   }
@@ -51,14 +46,14 @@ export default class Routes extends React.Component {
     };
     return (
       <div className="app-wrapper">
-        <Sidebar menuItems={this.state.menuItems} />
+        <Sidebar menuItems={appState.menuItems} />
         <div className="transition-container">
           <PageTransition
             animations={animationObject}
             routes={this.state.routes}
             serialize={false}
           />
-          <CircleMenu menuItems={[{ icon: '/assets/img/icons/layout.svg', onClick: TypeState.addEmptyType.bind(TypeState) }]} />
+          <CircleMenu menuItems={appState.circleMenuItems} />
         </div>
       </div>
     );

@@ -89,5 +89,5 @@ export default class CircleMenu extends React.Component {
 }
 
 CircleMenu.propTypes = {
-  menuItems: PropTypes.array.isRequired,
+  menuItems: PropTypes.object.isRequired,
 };

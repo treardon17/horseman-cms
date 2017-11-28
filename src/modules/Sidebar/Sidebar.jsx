@@ -105,5 +105,5 @@ export default class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  menuItems: PropTypes.arrayOf(Object)
+  menuItems: PropTypes.object
 };
