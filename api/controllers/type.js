@@ -15,7 +15,23 @@ class TypeController {
     return new Promise((resolve, reject) => {
       this.getTypes().then((types) => {
         const newTypes = types;
-        newTypes[type.id] = type;
+        // newTypes[type.id] = type;
+        
+        // find the Slug of the item that we changed
+        let slug = '';
+        const keys = Object.keys(newTypes);
+        for (let i = 0; i < keys.length; i++) {
+          const typeItem = newTypes[keys[i]];
+          if (typeItem.id === type.id) {
+            slug = typeItem.slug;
+          }
+        }
+
+        // get rid of the old version
+        delete newTypes[slug];
+        // add the new type
+        newTypes[type.slug] = type;
+
         FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(newTypes, null, 2) }).then(() => {
           resolve({ type });
         }).catch((err) => {
