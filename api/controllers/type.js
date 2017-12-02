@@ -59,15 +59,18 @@ class TypeController {
       });
     });
   }
-}
 
-const typeController = new TypeController();
+  /*
+  *
+  *
+  * Actions
+  *
+  */
 
-module.exports = {
-  handleType: (req, res) => {
+  handleType = (req, res) => {
     const type = req.body;
     if (type.name) {
-      typeController.addOrUpdateType({ type }).then((myType) => {
+      this.addOrUpdateType({ type }).then((myType) => {
         res.header('Content-Type', 'application/json').status(200).send(myType);
       }).catch((error) => {
         res.header('Content-Type', 'application/json').status(400).send({ error });
@@ -75,20 +78,24 @@ module.exports = {
     } else {
       res.header('Content-Type', 'application/json').status(400).send({ error: 'Invalid type: Missing `name` attribute.' });
     }
-  },
-  getTypes: (req, res) => {
-    typeController.getTypes().then((types) => {
+  }
+
+  getTypes = (req, res) => {
+    this.getTypes().then((types) => {
       res.header('Content-Type', 'application/json').status(200).send(types);
     }).catch((err) => {
       res.header('Content-Type', 'application/json').status(500).send({ error: err });
     });
-  },
-  deleteType: (req, res) => {
+  }
+
+  deleteType = (req, res) => {
     const slug = req.params.slug;
-    typeController.deleteType({ slug }).then(() => {
+    this.deleteType({ slug }).then(() => {
       res.header('Content-Type', 'application/json').status(200).send({ success: true });
     }).catch((err) => {
       res.header('Content-Type', 'application/json').status(500).send({ error: err });
     });
   }
-};
+}
+
+module.exports = new TypeController();
