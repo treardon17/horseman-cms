@@ -39,6 +39,12 @@ export default class ObjectType {
     this.constructChildren();
   }
 
+
+  /**
+   * constructChildren - Build out all of the children to be instances ObjectType
+   *
+   * @return {type}  description
+   */
   constructChildren() {
     const keys = Object.keys(this.data);
     for (let i = 0; i < keys.length; i++) {
@@ -123,23 +129,21 @@ export default class ObjectType {
     // Get rid of the item from the parts object
     delete this.data[slug];
     // Reorder all the other objects to reflect the change in index
-    const orderedParts = this.getOrderedList();
-    for (let i = 0; i < orderedParts.length; i++) {
-      const ID = orderedParts.key;
-      this.data[ID].orderBy = i;
-    }
+    this.reorder({ newIndex: -1, slug });
   }
 
+
+  /**
+   * reorder - Changes the orderBy attribute to a new position and propagates the change to the other data attributes
+   *
+   * @param  {type} newIndex description   The index that will replace the current index
+   * @param  {type} slug     description   The slug to the item that will be moved
+   * @return {void}
+   */
   reorder({ newIndex, slug }) {
     const dataLength = Object.keys(this.data).length;
     if (!this.data[slug]) {
       console.warn(`Reorder Warn: Object ${slug} does not exist in ${this.name}'s data`);
-      return;
-    } else if (newIndex < 0) {
-      console.warn(`Reorder Warn: Index ${newIndex} is invalid. Must be a positive number.`);
-      return;
-    } else if (newIndex >= dataLength) {
-      console.warn(`Reorder Warn: Index ${newIndex} is too big. There are currently ${dataLength} items in data.`);
       return;
     } else if (newIndex === this.data[slug].orderBy) {
       // No point in reordering if we don't need to
@@ -161,7 +165,6 @@ export default class ObjectType {
           reorderIndex += 1;
         }
         this.data[dataItem.key].orderBy = reorderIndex;
-
         reorderIndex += 1;
       }
     }
@@ -195,11 +198,43 @@ export default class ObjectType {
     return arr;
   }
 
+  /**
+   * get - Gets an object from the data object
+   *
+   * @param  {String} slug - A unique ID for the object
+   * @return {ObjectType}      The ObjectType found at the specified slug
+   */
   get(slug) {
     return this.data[slug];
   }
 
+  /**
+   * getOrphanCopy - JSON.stringify can't deal with circular structures, so we remove all of the parent objects
+   *
+   * @return {type}  description
+   */
+  getOrphanCopy() {
+    // Make a deep clone of this so we don't mutate our current object
+    const clone = _.cloneDeep(this);
+    // Delete the parent object so the structure isn't circular any longer
+    delete clone.parent;
+    // Do this for all children as well
+    const keys = Object.keys(this.data);
+    for (let i = 0; i < keys.length; i++) {
+      clone.data[keys[i]] = clone.data[keys[i]].getOrphanCopy();
+    }
+    // All children now have no parent
+    return clone;
+  }
+
+  /**
+   * getJSON - Get a string version of the current object
+   *
+   * @return {String}  description   A JSON representation of the object
+   */
   getJSON() {
-    return JSON.stringify(this);
+    const clone = this.getOrphanCopy();
+    const json = JSON.stringify(clone);
+    return json;
   }
 }
