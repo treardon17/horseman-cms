@@ -2,6 +2,7 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import _ from 'lodash';
 import Type from '../../resources/scripts/definitions/Type.js';
+import ObjectType from '../../resources/scripts/definitions/ObjectType.js';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';

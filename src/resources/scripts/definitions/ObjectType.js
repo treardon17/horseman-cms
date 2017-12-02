@@ -2,10 +2,10 @@ import _ from 'lodash';
 import Util from '../util/util';
 
 export default class ObjectType {
-  constructor (arg, parent = {}) {
+  constructor(arg = {}, parent = {}) {
     // parent is the object (if any) that this current ObjectType
     // is living inside
-    this.parent = parent
+    this.parent = parent;
     this.setup(arg);
   }
 
@@ -15,7 +15,7 @@ export default class ObjectType {
    * @param  {object} arg the object to be copied
    * @return {void}
    */
-  setup (arg) {
+  setup(arg) {
     // Copy attributes from object passed in
     const keys = Object.keys(arg);
     for (let i = 0; i < keys.length; i++) {
@@ -28,19 +28,24 @@ export default class ObjectType {
       }
     }
 
-    if (!this.id) { this.id = Util.guid(); }
     if (!this.data) { this.data = { }; }
-    if (!this.orderBy) { this.orderBy = Object.keys(this.parent).length; }
+    if (!this.orderBy) { this.orderBy = Object.keys((this.parent.data || {})).length; }
+    if (!this.id) { this.id = Util.guid(); }
+
+    // We never want to mutate this ID
+    Object.freeze(this.id);
+
+    // Construct the children of this object if there are any
     this.constructChildren();
   }
 
-  constructChildren () {
+  constructChildren() {
     const keys = Object.keys(this.data);
     for (let i = 0; i < keys.length; i++) {
       let staticData = this.data[keys[i]];
       // If the data hasn't been made into an object yet
       if (typeof staticData === 'string') {
-        staticData = JSON.parse(staticData)
+        staticData = JSON.parse(staticData);
       }
       // Make a new ObjectType based on the data provided
       const dataObject = new ObjectType(staticData, this);
@@ -49,13 +54,23 @@ export default class ObjectType {
     }
   }
 
+  generateProxy({ slug, data }) {
+    const proxy = new Proxy(data, {
+      get: (target, name, receiver) => {
+        const rv = target[name];
+        return rv;
+      }
+    });
+    this[slug] = proxy;
+  }
+
   /**
    * add - Add properties to the type object
    *
    * @param  {String} name          description   Name of the new property being added to this type
    * @return {void}
    */
-  add ({ data }) {
+  add(data) {
     const newObject = new ObjectType(data, this);
     this.data[newObject.slug] = newObject;
   }
@@ -67,8 +82,8 @@ export default class ObjectType {
    * @param  {type} data = {} description   The new data containing what will be updated on the current data
    * @return {type}           description
    */
-  edit ({ slug, data = {} }) {
-    const dataCopy = this.data[slug]
+  edit({ slug, data = {} }) {
+    const dataCopy = this.data[slug];
     // If we even have data for that slug
     if (dataCopy) {
       const keys = Object.keys(data);
@@ -102,7 +117,7 @@ export default class ObjectType {
    * @param  {type} slug description   The ID of the item to be removed
    * @return {void}
    */
-  remove ({ slug }) {
+  remove({ slug }) {
     // Remember which index we removed
     const removedIndex = this.data[slug].orderBy;
     // Get rid of the item from the parts object
@@ -115,7 +130,7 @@ export default class ObjectType {
     }
   }
 
-  reorder ({ newIndex, slug }) {
+  reorder({ newIndex, slug }) {
     // Get an ordered list from this.getOrderedList()
     // Not including the object at this.data[slug]
     // Loop through the list
@@ -129,9 +144,9 @@ export default class ObjectType {
    * @param  {string} { name } description - The new name
    * @return {void}
    */
-  setTypeName ({ name }) {
+  setTypeName({ name }) {
     this.name = name;
-    this.slug = Util.findUniqueSlug({ slug: name, object: TypeState.userMadeTypes });
+    this.slug = Util.findUniqueSlug({ slug: name, object: this.parent.data || {} });
   }
 
   /**
@@ -139,18 +154,13 @@ export default class ObjectType {
    *
    * @return {Array of objects}  description   An array of objects containing the key modified and the data of that object
    */
-  getOrderedList () {
-    const arr = Object.keys(this.data).map((key) => {
-      return {
-        key,
-        data: this.data[key]
-      }
-    });
+  getOrderedList() {
+    const arr = Object.keys(this.data).map(key => ({ key, data: this.data[key] }));
     arr.sort((a, b) => a.data.orderBy - b.data.orderBy);
     return arr;
   }
 
-  getJSON () {
+  getJSON() {
     return JSON.stringify(this);
   }
 }

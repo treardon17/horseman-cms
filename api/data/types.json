@@ -1,9 +1,9 @@
 {
-  "newModule3": {
+  "newModule": {
     "name": "New module",
-    "slug": "newModule3",
-    "id": "62b80c8a-aabc8563",
+    "slug": "newModule",
+    "id": "219a7582-ff1e06d0",
     "parts": {},
-    "orderBy": 4
+    "orderBy": 1
   }
 }
