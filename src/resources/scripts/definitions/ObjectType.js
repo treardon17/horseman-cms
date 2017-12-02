@@ -28,8 +28,8 @@ export default class ObjectType {
       }
     }
 
-    if (!this.data) { this.data = { }; }
-    if (!this.orderBy) { this.orderBy = Object.keys((this.parent.data || {})).length; }
+    if (!this.children) { this.children = { }; }
+    if (!this.orderBy) { this.orderBy = Object.keys((this.parent.children || {})).length; }
     if (!this.id) { this.id = Util.guid(); }
 
     // We never want to mutate this ID
@@ -46,9 +46,9 @@ export default class ObjectType {
    * @return {type}  description
    */
   constructChildren() {
-    const keys = Object.keys(this.data);
+    const keys = Object.keys(this.children);
     for (let i = 0; i < keys.length; i++) {
-      let staticData = this.data[keys[i]];
+      let staticData = this.children[keys[i]];
       // If the data hasn't been made into an object yet
       if (typeof staticData === 'string') {
         staticData = JSON.parse(staticData);
@@ -56,7 +56,7 @@ export default class ObjectType {
       // Make a new ObjectType based on the data provided
       const dataObject = new ObjectType(staticData, this);
       // Replace the static data with the new dynamic object
-      this.data[keys[i]] = dataObject;
+      this.children[keys[i]] = dataObject;
     }
   }
 
@@ -78,18 +78,18 @@ export default class ObjectType {
    */
   add(data) {
     const newObject = new ObjectType(data, this);
-    this.data[newObject.slug] = newObject;
+    this.children[newObject.id] = newObject;
   }
 
   /**
    * edit - Edit an existing property of the Type object
    *
-   * @param  {type} slug      description   The ID of the object being modified in this.data
+   * @param  {type} slug      description   The ID of the object being modified in this.children
    * @param  {type} data = {} description   The new data containing what will be updated on the current data
    * @return {type}           description
    */
-  edit({ slug, data = {} }) {
-    const dataCopy = this.data[slug];
+  edit({ id, data = {} }) {
+    const dataCopy = this.children[id];
     // If we even have data for that slug
     if (dataCopy) {
       const keys = Object.keys(data);
@@ -102,15 +102,11 @@ export default class ObjectType {
       // If the name changed, we need to change the slug
       if (data.name !== dataCopy.name) {
         // Change the part location to be at the new slug
-        const newSlug = Util.findUniqueSlug({ slug: data.name, object: this.data });
-        this.data[newSlug] = dataCopy;
-        // Delete the old object if the ID is different
-        if (newSlug !== dataCopy.slug) {
-          delete this.data[slug];
-        }
+        const newSlug = Util.findUniqueSlug({ slug: data.name, object: this.children, attribute: 'slug' });
+        this.children[id] = dataCopy;
       } else {
         // Otherwise we just want to update the data to the newest version
-        this.data[slug] = dataCopy;
+        this.children[slug] = dataCopy;
       }
     } else {
       console.warn(`Doesn't look like there's any thing named ${slug} in this ObjectType`);
@@ -118,18 +114,18 @@ export default class ObjectType {
   }
 
   /**
-   * remove - Removes an item from this.data
+   * remove - Removes an item from this.children
    *
    * @param  {type} slug description   The ID of the item to be removed
    * @return {void}
    */
-  remove({ slug }) {
+  remove({ id }) {
     // Remember which index we removed
-    const removedIndex = this.data[slug].orderBy;
+    const removedIndex = this.children[id].orderBy;
     // Get rid of the item from the parts object
-    delete this.data[slug];
+    delete this.children[id];
     // Reorder all the other objects to reflect the change in index
-    this.reorder({ newIndex: -1, slug });
+    this.reorder({ newIndex: -1, id });
   }
 
 
@@ -140,12 +136,12 @@ export default class ObjectType {
    * @param  {type} slug     description   The slug to the item that will be moved
    * @return {void}
    */
-  reorder({ newIndex, slug }) {
-    const dataLength = Object.keys(this.data).length;
-    if (!this.data[slug]) {
-      console.warn(`Reorder Warn: Object ${slug} does not exist in ${this.name}'s data`);
+  reorder({ newIndex, id }) {
+    const dataLength = Object.keys(this.children).length;
+    if (!this.children[id]) {
+      console.warn(`Reorder Warn: Object ${id} does not exist in ${this.name}'s data`);
       return;
-    } else if (newIndex === this.data[slug].orderBy) {
+    } else if (newIndex === this.children[id].orderBy) {
       // No point in reordering if we don't need to
       return;
     }
@@ -153,18 +149,18 @@ export default class ObjectType {
     // Get the current ordered array of objects
     const dataList = this.getOrderedList();
     // Set the selected object's orderBy attribute here
-    this.data[slug].orderBy = newIndex;
+    this.children[id].orderBy = newIndex;
     // Reset all of the other orderBy attributes based on their new position
     let reorderIndex = 0;
     for (let i = 0; i < dataList.length; i++) {
       const dataItem = dataList[i];
-      if (dataItem.key !== slug) {
+      if (dataItem.key !== id) {
         if (newIndex === 0 && i === 0) {
           reorderIndex += 1;
         } else if (reorderIndex === newIndex) {
           reorderIndex += 1;
         }
-        this.data[dataItem.key].orderBy = reorderIndex;
+        this.children[dataItem.key].orderBy = reorderIndex;
         reorderIndex += 1;
       }
     }
@@ -181,7 +177,7 @@ export default class ObjectType {
    */
   setName({ name }) {
     this.name = name;
-    this.slug = Util.findUniqueSlug({ slug: name, object: this.parent.data || {} });
+    this.slug = Util.findUniqueSlug({ slug: name, object: this.parent.children || {}, attribute: 'slug' });
   }
 
   // -----------------------------
@@ -193,8 +189,8 @@ export default class ObjectType {
    * @return {Array of objects}  description   An array of objects containing the key modified and the data of that object
    */
   getOrderedList() {
-    const arr = Object.keys(this.data).map(key => ({ key, data: this.data[key] }));
-    arr.sort((a, b) => a.data.orderBy - b.data.orderBy);
+    const arr = Object.keys(this.children).map(key => ({ key, data: this.children[key] }));
+    arr.sort((a, b) => a.children.orderBy - b.children.orderBy);
     return arr;
   }
 
@@ -204,8 +200,8 @@ export default class ObjectType {
    * @param  {String} slug - A unique ID for the object
    * @return {ObjectType}      The ObjectType found at the specified slug
    */
-  get(slug) {
-    return this.data[slug];
+  get(id) {
+    return this.children[id];
   }
 
   /**
@@ -219,9 +215,9 @@ export default class ObjectType {
     // Delete the parent object so the structure isn't circular any longer
     delete clone.parent;
     // Do this for all children as well
-    const keys = Object.keys(this.data);
+    const keys = Object.keys(this.children);
     for (let i = 0; i < keys.length; i++) {
-      clone.data[keys[i]] = clone.data[keys[i]].getOrphanCopy();
+      clone.children[keys[i]] = clone.children[keys[i]].getOrphanCopy();
     }
     // All children now have no parent
     return clone;
@@ -234,7 +230,7 @@ export default class ObjectType {
    */
   getJSON() {
     const clone = this.getOrphanCopy();
-    const json = JSON.stringify(clone);
+    const json = JSON.stringify(clone, null, 4);
     return json;
   }
 }
