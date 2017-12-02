@@ -22,7 +22,7 @@ export default class ObjectType {
       const key = keys[i];
 
       if (key === 'name') {
-        this.setTypeName({ name: arg[key] });
+        this.setName({ name: arg[key] });
       } else {
         this[key] = arg[key];
       }
@@ -131,24 +131,59 @@ export default class ObjectType {
   }
 
   reorder({ newIndex, slug }) {
-    // Get an ordered list from this.getOrderedList()
-    // Not including the object at this.data[slug]
-    // Loop through the list
-    // If the newIndex is equal to the current index in the loop
-    // Increment the index of every item after that
+    const dataLength = Object.keys(this.data).length;
+    if (!this.data[slug]) {
+      console.warn(`Reorder Warn: Object ${slug} does not exist in ${this.name}'s data`);
+      return;
+    } else if (newIndex < 0) {
+      console.warn(`Reorder Warn: Index ${newIndex} is invalid. Must be a positive number.`);
+      return;
+    } else if (newIndex >= dataLength) {
+      console.warn(`Reorder Warn: Index ${newIndex} is too big. There are currently ${dataLength} items in data.`);
+      return;
+    } else if (newIndex === this.data[slug].orderBy) {
+      // No point in reordering if we don't need to
+      return;
+    }
+
+    // Get the current ordered array of objects
+    const dataList = this.getOrderedList();
+    // Set the selected object's orderBy attribute here
+    this.data[slug].orderBy = newIndex;
+    // Reset all of the other orderBy attributes based on their new position
+    let reorderIndex = 0;
+    for (let i = 0; i < dataList.length; i++) {
+      const dataItem = dataList[i];
+      if (dataItem.key !== slug) {
+        if (newIndex === 0 && i === 0) {
+          reorderIndex += 1;
+        } else if (reorderIndex === newIndex) {
+          reorderIndex += 1;
+        }
+        this.data[dataItem.key].orderBy = reorderIndex;
+
+        reorderIndex += 1;
+      }
+    }
   }
 
+  // -----------------------------
+  // SETTERS
+  // -----------------------------
   /**
-   * setTypeName - Finds a unique slug for the object based on the name given
+   * setName - Finds a unique slug for the object based on the name given
    *
    * @param  {string} { name } description - The new name
    * @return {void}
    */
-  setTypeName({ name }) {
+  setName({ name }) {
     this.name = name;
     this.slug = Util.findUniqueSlug({ slug: name, object: this.parent.data || {} });
   }
 
+  // -----------------------------
+  // GETTERS
+  // -----------------------------
   /**
    * getOrderedList - Gets the items in data based on the orderBy attribute
    *
@@ -158,6 +193,10 @@ export default class ObjectType {
     const arr = Object.keys(this.data).map(key => ({ key, data: this.data[key] }));
     arr.sort((a, b) => a.data.orderBy - b.data.orderBy);
     return arr;
+  }
+
+  get(slug) {
+    return this.data[slug];
   }
 
   getJSON() {
