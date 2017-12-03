@@ -2,6 +2,17 @@ import _ from 'lodash';
 import Util from '../util/util';
 
 export default class ObjectType {
+  /**
+   * constructor - description  Construct the object
+   *
+   * @param  {type} arg = {}    description
+   * The arg object should contain at least a `name` attribute
+   *
+   * @param  {type} parent = {} description
+   * The parent object containing this object (so we can find unique slugs)
+   *
+   * @return {type}             description
+   */
   constructor(arg = {}, parent = {}) {
     // parent is the object (if any) that this current ObjectType
     // is living inside
@@ -31,6 +42,7 @@ export default class ObjectType {
     if (!this.children) { this.children = { }; }
     if (!this.orderBy) { this.orderBy = Object.keys((this.parent.children || {})).length; }
     if (!this.id) { this.id = Util.guid(); }
+    if (!this.type) { this.type = { primary: ObjectType.types.empty, secondary: ObjectType.types.empty }; }
 
     // We never want to mutate this ID
     Object.freeze(this.id);
@@ -74,11 +86,12 @@ export default class ObjectType {
    * add - Add properties to the type object
    *
    * @param  {String} name          description   Name of the new property being added to this type
-   * @return {void}
+   * @return {String} The ID of the object type
    */
   add(data) {
     const newObject = new ObjectType(data, this);
     this.children[newObject.id] = newObject;
+    return newObject.id;
   }
 
   /**
@@ -102,14 +115,11 @@ export default class ObjectType {
       // If the name changed, we need to change the slug
       if (data.name !== dataCopy.name) {
         // Change the part location to be at the new slug
-        const newSlug = Util.findUniqueSlug({ slug: data.name, object: this.children, attribute: 'slug' });
-        this.children[id] = dataCopy;
-      } else {
-        // Otherwise we just want to update the data to the newest version
-        this.children[slug] = dataCopy;
+        this.children[id].setName({ name: data.name });
       }
+      this.children[id] = dataCopy;
     } else {
-      console.warn(`Doesn't look like there's any thing named ${slug} in this ObjectType`);
+      console.warn(`Doesn't look like there's any thing with the id: ${id} in this ObjectType`);
     }
   }
 
@@ -233,4 +243,43 @@ export default class ObjectType {
     const json = JSON.stringify(clone, null, 4);
     return json;
   }
+
+  createObjectInstance() {
+    const object = {};
+    object._id = Util.guid();
+    object._typeID = this.id;
+    const keys = Object.keys(this.children);
+    for (let i = 0; i < keys.length; i++) {
+      const child = this.children[keys[i]];
+
+      // If the child has children, it's just another object
+      if (Object.keys(child.children).length > 0) {
+        object[child.slug] = child.buildEmptyObject();
+      } else if (child.type.primary === ObjectType.types.string) {
+        // Otherwise we take the type that the object has and create an empty version of it
+        object[child.slug] = '';
+      } else if (child.type.primary === ObjectType.types.list) {
+        object[child.slug] = [];
+      } else if (child.type.primary === ObjectType.types.number) {
+        object[child.slug] = Number.MIN_SAFE_INTEGER;
+      }
+    }
+    return object;
+  }
 }
+
+
+// Setup static constant definitions of ObjectTypes
+ObjectType.types = { };
+ObjectType.types.object = 'object';
+ObjectType.types.empty = 'empty';
+ObjectType.types.string = 'string';
+ObjectType.types.list = 'list';
+ObjectType.types.module = 'module';
+ObjectType.types.number = 'number';
+ObjectType.types.double = 'double';
+ObjectType.types.int = 'integer';
+ObjectType.types.richText = 'richText';
+ObjectType.types.image = 'image';
+ObjectType.types.audio = 'audio';
+ObjectType.types.video = 'video';
