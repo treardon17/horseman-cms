@@ -5,5 +5,12 @@
     "id": "62b80c8a-aabc8563",
     "parts": {},
     "orderBy": 4
+  },
+  "newModule": {
+    "name": "New module",
+    "slug": "newModule",
+    "id": "a3ace2c4-ca0b5dab",
+    "parts": {},
+    "orderBy": 2
   }
 }

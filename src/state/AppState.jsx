@@ -9,12 +9,12 @@ class AppState {
   ];
 
   @observable menuItems = [
-    { icon: "/assets/img/featherIcons/home.svg", title: "Home", url: "/" },
-    { icon: "/assets/img/featherIcons/users.svg", title: "Users", url: "/users" },
-    { icon: "/assets/img/featherIcons/image.svg", title: "Assets", url: "/assets" },
-    { icon: "/assets/img/featherIcons/layout.svg", title: "Modules", url: "/modules" },
-    { icon: "/assets/img/featherIcons/layers.svg", title: "Objects", url: "/objects" },
-    { icon: "/assets/img/featherIcons/settings.svg", title: "Settings", url: "/settings" }
+    { icon: "/assets/img/featherIcons/home.svg", title: "Home", url: "/admin" },
+    { icon: "/assets/img/featherIcons/users.svg", title: "Users", url: "/admin/users" },
+    { icon: "/assets/img/featherIcons/image.svg", title: "Assets", url: "/admin/assets" },
+    { icon: "/assets/img/featherIcons/layout.svg", title: "Modules", url: "/admin/modules" },
+    { icon: "/assets/img/featherIcons/layers.svg", title: "Objects", url: "/admin/objects" },
+    { icon: "/assets/img/featherIcons/settings.svg", title: "Settings", url: "/admin/settings" }
   ];
 }
 
