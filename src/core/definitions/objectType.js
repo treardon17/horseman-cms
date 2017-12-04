@@ -244,10 +244,18 @@ export default class ObjectType {
     return json;
   }
 
-  createObjectInstance() {
+  createObjectInstance(existingObject = null) {
+    const existingObjectCopy = existingObject;
     const object = {};
-    object._id = IDUtil.guid();
-    object._typeID = this.id;
+
+    // If we're not re-creating an object that's already been made,
+    // wee need to give it an ID and a typeID
+    if (!existingObjectCopy) {
+      object._id = IDUtil.guid();
+      object._typeID = this.id;
+      object._slug = this.slug;
+    }
+
     const keys = Object.keys(this.children);
     for (let i = 0; i < keys.length; i++) {
       const child = this.children[keys[i]];
@@ -262,8 +270,27 @@ export default class ObjectType {
         object[child.slug] = [];
       } else if (child.type.primary === ObjectType.types.number) {
         object[child.slug] = Number.MIN_SAFE_INTEGER;
+      } else if (child.type.primary === ObjectType.types.empty) {
+        object[child.slug] = '__empty__';
       }
     }
+
+    // If we have an existing object we're trying to re-create
+    if (existingObjectCopy) {
+      // Check to make sure it's the right type of object
+      if (existingObjectCopy._typeID === this.id) {
+        // If the parent slug changed, we want to reflect that change to the object we're re-creating
+        existingObjectCopy._slug = this.slug;
+        // If any new fields were added to the object type, add them to the object,
+        // but override the values of the new object with those of the existing object
+        Object.assign(object, existingObjectCopy);
+      } else {
+        console.warn(`Object of type ${existingObjectCopy._typeID} does not match ${this.name} of type ${this.id}`);
+      }
+    }
+
+    // We have a set structure, so the attributes shouldn't be modified after initial creation
+    Object.preventExtensions(object);
     return object;
   }
 }
