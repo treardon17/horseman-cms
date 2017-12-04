@@ -63,7 +63,7 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 
 // server static files
-app.use('/assets', express.static('src/resources/assets'))
+app.use('/assets', express.static('src/assets'))
 
 // start server
 app.listen(port);

@@ -71,9 +71,9 @@ const config = Merge.smartStrategy({
 
   // specify bundle output config
   output: {
-    publicPath: path.resolve('/resources/assets/'),
+    publicPath: path.resolve('/assets/'),
     filename: '[name].js',
-    path: path.resolve('./prod/resources/assets'),
+    path: path.resolve('./prod/assets'),
   },
 
   // fastest for production

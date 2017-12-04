@@ -2,25 +2,19 @@ const express = require('express');
 const fs = require('fs-extra'); // eslint-disable-line global-require
 
 // const creds = JSON.parse(fs.readFileSync('./creds.json'));
-// const knex = require('knex')({
-//   client: 'mysql',
-//   connection: {
-//     host: creds.host,
-//     user: creds.user,
-//     password: creds.password,
-//     database: creds.database,
-//   },
-// });
 
 const router = express.Router(); // eslint-disable-line new-cap
 
 // import user routes
-const types = require('./controllers/type');
+const typeController = require('./controllers/type');
+const dataController = require('./controllers/data');
 
 // ROUTES
-// types
-router.post('/type', (req, res) => { types.handleType(req, res); });
-router.get('/type', (req, res) => { types.getTypes(req, res); });
-router.delete('/type/:slug', (req, res) => { types.deleteType(req, res); });
+// typeController
+router.post('/type', (req, res) => typeController.handleUpdateType(req, res));
+router.get('/type', (req, res) => typeController.handleGetTypes(req, res));
+router.delete('/type/:slug', (req, res) => typeController.handleDeleteType(req, res));
+
+router.get('/data', (req, res) => dataController.handleGetData(req,res));
 
 module.exports = router;

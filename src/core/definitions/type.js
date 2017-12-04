@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import Util from '../util/util';
-import TypeState from '../../../state/TypeState.js';
+import IDUtil from '../util/id';
+import TypeState from '../../state/TypeState';
 
 export default class Type {
   /**
@@ -19,7 +19,7 @@ export default class Type {
       }
     }
 
-    if (!this.id) { this.id = Util.guid(); }
+    if (!this.id) { this.id = IDUtil.guid(); }
     if (!this.parts) { this.parts = { }; }
     if (!this.orderBy) { this.orderBy = TypeState.userMadeTypeNames.length + 1; }
   }
@@ -34,7 +34,7 @@ export default class Type {
    * @return {void}
    */
   add({ name = 'New field', primary = Type.types.empty, secondary = null, description = 'Field description' } = {}) {
-    const slug = Util.findUniqueSlug({ slug: name, object: this.parts });
+    const slug = IDUtil.findUniqueSlug({ slug: name, object: this.parts });
     // Secondary types should only be specified for object types
     // or for list types that require additional information
     let skip = false;
@@ -48,7 +48,7 @@ export default class Type {
       secondary: !skip ? (secondary || Type.types.empty) : Type.types.empty,
       description: description || '',
       orderBy: Object.keys(this.parts).length,
-      id: Util.guid(),
+      id: IDUtil.guid(),
     };
   }
 
@@ -98,7 +98,7 @@ export default class Type {
 
   setTypeName({ name }) {
     this.name = name;
-    this.slug = Util.findUniqueSlug({ slug: name, object: TypeState.userMadeTypes });
+    this.slug = IDUtil.findUniqueSlug({ slug: name, object: TypeState.userMadeTypes });
   }
 
   getOrderedList() {

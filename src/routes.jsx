@@ -5,7 +5,7 @@ import AppState from './state/AppState';
 import CircleMenu from './modules/CircleMenu/CircleMenu';
 import TypeState from './state/TypeState.js';
 // import styles
-import './resources/styles/base.scss';
+import './styles/base.scss';
 // import pages
 import Home from './pages/Home';
 import Modules from './pages/Modules';
@@ -22,12 +22,12 @@ export default class Routes extends React.Component {
     super(props);
     this.state = {
       routes: [
-        <Route absolute path="/" key="Home" component={<Home state={appState} />} />,
-        <Route absolute exact path="/modules" key="Modules" component={<Modules state={appState} />} />,
-        <Route absolute exact path="/settings" key="Settings" component={<Settings state={appState} />} />,
-        <Route absolute exact path="/users" key="Users" component={<Users state={appState} />} />,
-        <Route absolute exact path="/assets" key="Assets" component={<Assets state={appState} />} />,
-        <Route exact path="/objects" key="Objects" component={<Objects state={appState} />} />,
+        <Route absolute path="/admin/" key="Home" component={<Home state={appState} />} />,
+        <Route absolute exact path="/admin/modules" key="Modules" component={<Modules state={appState} />} />,
+        <Route absolute exact path="/admin/settings" key="Settings" component={<Settings state={appState} />} />,
+        <Route absolute exact path="/admin/users" key="Users" component={<Users state={appState} />} />,
+        <Route absolute exact path="/admin/assets" key="Assets" component={<Assets state={appState} />} />,
+        <Route exact path="/admin/objects" key="Objects" component={<Objects state={appState} />} />,
       ],
     };
   }
