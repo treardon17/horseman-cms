@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Page from './Page.jsx';
 import AppState from '../state/AppState.jsx';
 import TypeState from '../state/TypeState.js';
-import Type from '../core/definitions/type';
+import ObjectType from '../../core/definitions/objectType';
 // import modules here
 import ConstructType from '../modules/ConstructType/ConstructType';
 import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';

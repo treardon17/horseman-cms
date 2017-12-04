@@ -21,4 +21,4 @@ class API {
   }
 }
 
-export default new API();
+Module.exports = new API();

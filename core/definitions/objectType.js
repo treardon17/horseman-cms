@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import IDUtil from '../util/id';
+const _ = require('lodash');
+const IDUtil = require('../util/id');
 
-export default class ObjectType {
+class ObjectType {
   /**
    * constructor - description  Construct the object
    *
@@ -310,3 +310,5 @@ ObjectType.types.richText = 'richText';
 ObjectType.types.image = 'image';
 ObjectType.types.audio = 'audio';
 ObjectType.types.video = 'video';
+
+module.exports = ObjectType;

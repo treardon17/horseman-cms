@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const Path = require('path');
+const isJSON = require('is-json');
 
 class FileManager {
   createFolderIfNeeded(myDir) {
@@ -39,7 +40,11 @@ class FileManager {
   fileToObject({ path }) {
     return new Promise((resolve, reject) => {
       this.readFile({ path }).then((data) => {
-        resolve(JSON.parse(data));
+        if (isJSON(data)) {
+          resolve(JSON.parse(data));
+        } else {
+          reject(`Invalid JSON in file ${path}`);
+        }
       }).catch((err) => {
         reject(err);
       });

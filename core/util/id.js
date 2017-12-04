@@ -1,4 +1,4 @@
-import _ from 'lodash';
+const _ = require('lodash');
 
 class IDUtil {
   /**
@@ -61,5 +61,4 @@ class IDUtil {
   /* eslint-enable */
 }
 
-const singleton = new IDUtil();
-export default singleton;
+module.exports = new IDUtil();

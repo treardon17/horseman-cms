@@ -1,6 +1,6 @@
 import { observable, computed, action } from 'mobx';
-import Type from '../core/definitions/type';
-import API from '../core/util/api';
+import ObjectType from '../../core/definitions/objectType';
+import API from '../../core/util/api';
 
 class TypeState {
   @observable userMadeTypes = { };
@@ -9,28 +9,30 @@ class TypeState {
     this.updateUserMadeTypes();
   }
 
-  // GETTERS FOR TYPE NAMES
+  // // GETTERS FOR TYPE NAMES
   @computed get validTypeNames() {
-    return Object.keys(Type.types).concat(Object.keys(this.userMadeTypes));
+    return Object.keys(ObjectType.types).concat(this.userMadeTypeNames);
   }
 
   @computed get secondaryTypeNames() {
-    const validGeneric = Object.keys(Type.types).filter(val => val !== Type.types.object && val !== Type.types.list);
-    return validGeneric.concat(Object.keys(this.userMadeTypeNames));
+    const validGeneric = Object.keys(Type.types).filter(val => val !== ObjectType.types.object && val !== ObjectType.types.list);
+    return validGeneric.concat(this.userMadeTypeNames);
   }
 
   @computed get genericTypeNames() {
-    return Object.keys(Type.types);
+    return Object.keys(ObjectType.types);
   }
 
   @computed get userMadeTypeNames() {
-    return Object.keys(this.userMadeTypes);
+    return this.userMadeTypes.getOrderedList().map(type => type.name);
   }
 
   @computed get orderedUserMadeTypeList() {
-    const arr = Object.keys(this.userMadeTypes).map(key => [key, this.userMadeTypes[key]]);
-    arr.sort((a, b) => a[1].orderBy - b[1].orderBy);
-    return arr;
+    if (Object.keys(this.userMadeTypes).length > 0) {
+      return this.userMadeTypes.getOrderedList();
+    } else {
+      return [];
+    }
   }
 
   // ACTIONS
@@ -75,15 +77,16 @@ class TypeState {
         method: 'get',
         query: `/api/type`,
       }).then((types) => {
-        // We need to make a bunch of type objects,
-        // so we construct those here
-        const newTypes = { };
-        const keys = Object.keys(types);
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
-          newTypes[key] = new Type(types[key]);
+        let typeObject = null;
+        // If there are no types on the server/we got an empty object
+        if (types && Object.keys(types).length === 0) {
+          typeObject = new ObjectType({ name: 'Object Types', type: { primary: ObjectType.types.object } });
+        } else if (types) {
+          // We have an existing type object stored on the server
+          // so lets create an object version of that
+          typeObject = new ObjectType(types);
         }
-        this.userMadeTypes = newTypes;
+        this.userMadeTypes = typeObject;
         resolve(this.userMadeTypes);
       }).catch((error) => {
         console.log(error);
@@ -95,7 +98,7 @@ class TypeState {
   // FUNCTIONS
   @action addEmptyType() {
     return new Promise((resolve, reject) => {
-      const type = new Type({ name: 'New module' });
+      const type = new ObjectType({ name: 'New module' });
       this.addOrUpdateType(type).then(() => {
         resolve();
       }).catch((error) => {
