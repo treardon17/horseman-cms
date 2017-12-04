@@ -1,7 +1,6 @@
 import { observable, computed, action } from 'mobx';
-import Type from '../resources/scripts/definitions/Type.js';
-import Util from '../resources/scripts/util/util.js';
-import API from '../resources/scripts/util/API.js';
+import Type from '../core/definitions/type';
+import API from '../core/util/api';
 
 class TypeState {
   @observable userMadeTypes = { };

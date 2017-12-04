@@ -5,7 +5,7 @@ import AppState from './state/AppState';
 import CircleMenu from './modules/CircleMenu/CircleMenu';
 import TypeState from './state/TypeState.js';
 // import styles
-import './resources/styles/base.scss';
+import './styles/base.scss';
 // import pages
 import Home from './pages/Home';
 import Modules from './pages/Modules';

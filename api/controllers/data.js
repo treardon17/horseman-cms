@@ -1,20 +1,24 @@
 // const FileManager = require('../util/FileManager.js');
 
 class DataController {
+  getData(req, res) {
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
+  }
   /*
   *
   *
   * Actions
   *
   */
-  getData = (req, res) => {
+  handleGetData(req, res) {
     // get some data...
-
-    // this.getTypes().then((types) => {
-    //   res.header('Content-Type', 'application/json').status(200).send(types);
-    // }).catch((err) => {
-    //   res.header('Content-Type', 'application/json').status(500).send({ error: err });
-    // });
+    this.getData().then((data) => {
+      res.header('Content-Type', 'application/json').status(200).send(data);
+    }).catch((err) => {
+      res.header('Content-Type', 'application/json').status(500).send({ error: err });
+    });
   }
 }
 

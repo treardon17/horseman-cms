@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Util from '../util/util';
+import IDUtil from '../util/id';
 
 export default class ObjectType {
   constructor (arg, parent = {}) {

@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VelocityComponent } from 'velocity-react';
 import SidebarItem from '../SidebarItem/SidebarItem.jsx';
-// import API from '../../resources/scripts/API';
 
 
 // scss
@@ -20,10 +19,6 @@ export default class Sidebar extends React.Component {
     this.state = {
       open: false
     };
-
-    // API.makeQuery('http://localhost:8080/graphql?query={moduleSettingOne(filter:{name:%22test-module%22}){name,fields}moduleSettingMany(filter:{name:%22test-module%22}){name,fields}}').then((response) => {
-    //   console.log(response);
-    // });
   }
 
   // Sidebar items with transitions

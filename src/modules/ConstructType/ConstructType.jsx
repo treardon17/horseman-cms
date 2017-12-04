@@ -1,7 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import _ from 'lodash';
-import Type from '../../resources/scripts/definitions/Type.js';
+import Type from '../../core/definitions/type.js';
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
@@ -114,7 +114,7 @@ export default class ConstructType extends React.Component {
             contentEditable="plaintext-only"
           />
           <div className="remove-button" onClick={() => { this.removeField(slug); }}>
-            <ISVG className="remove-icon" src="/assets/img/icons/trash.svg" />
+            <ISVG className="remove-icon" src="/assets/img/featherIcons/trash.svg" />
           </div>
         </div>
       );
@@ -316,7 +316,7 @@ export default class ConstructType extends React.Component {
       : (
         <div className="construct-type">
           <div className="module-title-container">
-            <ISVG className="module-icon" src="/assets/img/icons/layout.svg" />
+            <ISVG className="module-icon" src="/assets/img/featherIcons/layout.svg" />
             <div className="module-title-data">
               <ContentEditable
                 key="module-title"
@@ -331,7 +331,7 @@ export default class ConstructType extends React.Component {
             </div>
             <div className="module-settings-container">
               <div className="remove-module" onClick={() => { this.removeModule(); }}>
-                <ISVG className="remove-icon" src="/assets/img/icons/trash.svg" />
+                <ISVG className="remove-icon" src="/assets/img/featherIcons/trash.svg" />
               </div>
             </div>
           </div>

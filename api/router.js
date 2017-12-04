@@ -11,10 +11,10 @@ const dataController = require('./controllers/data');
 
 // ROUTES
 // typeController
-router.post('/type', (req, res) => typeController.handleType(req, res));
-router.get('/type', (req, res) => typeController.getTypes(req, res));
-router.delete('/type/:slug', (req, res) => typeController.deleteType(req, res));
+router.post('/type', (req, res) => typeController.handleUpdateType(req, res));
+router.get('/type', (req, res) => typeController.handleGetTypes(req, res));
+router.delete('/type/:slug', (req, res) => typeController.handleDeleteType(req, res));
 
-router.getData('/data', (req, res) => dataController.getData(req,res));
+router.get('/data', (req, res) => dataController.handleGetData(req,res));
 
 module.exports = router;

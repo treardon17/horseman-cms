@@ -32,7 +32,7 @@ app.use(compress());
 app.use(express.static('prod'));
 
 // serve static folder
-app.use('/assets', express.static('src/resources/assets'));
+app.use('/assets', express.static('src/assets'));
 
 // provide social data to bots
 app.use(social);

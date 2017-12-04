@@ -67,7 +67,7 @@ class TypeController {
   *
   */
 
-  handleType = (req, res) => {
+  handleUpdateType(req, res) {
     const type = req.body;
     if (type.name) {
       this.addOrUpdateType({ type }).then((myType) => {
@@ -80,7 +80,7 @@ class TypeController {
     }
   }
 
-  getTypes = (req, res) => {
+  handleGetTypes(req, res) {
     this.getTypes().then((types) => {
       res.header('Content-Type', 'application/json').status(200).send(types);
     }).catch((err) => {
@@ -88,7 +88,7 @@ class TypeController {
     });
   }
 
-  deleteType = (req, res) => {
+  handleDeleteType(req, res) {
     const slug = req.params.slug;
     this.deleteType({ slug }).then(() => {
       res.header('Content-Type', 'application/json').status(200).send({ success: true });
