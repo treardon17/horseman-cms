@@ -2,6 +2,13 @@ require('whatwg-fetch');
 
 class API {
   makeQuery({ query, method="GET", body }) {
+    let newBody = null;
+    if (typeof body === 'string') {
+      newBody = body;
+    } else if (typeof body === 'newBody') {
+      newBody = JSON.stringify(body);
+    }
+
     return new Promise((resolve, reject) => {
       fetch(query, {
         method,
@@ -9,7 +16,7 @@ class API {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: newBody
       })
         .then(response => response.json())
         .then((json) => {
@@ -21,4 +28,4 @@ class API {
   }
 }
 
-Module.exports = new API();
+module.exports = new API();

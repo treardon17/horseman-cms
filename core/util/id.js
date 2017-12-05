@@ -28,7 +28,7 @@ class IDUtil {
 
       // There's a string that's equal to the slug we passed in
       // so let's try again
-      if (items.indexOf(slug) !== -1) {
+      if (items.indexOf(key) !== -1) {
         const newSlug = this.incrementStringIfNeeded(key);
         return this.findUniqueSlug({ slug: newSlug, object, attribute });
       } else {

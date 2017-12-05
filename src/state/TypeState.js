@@ -6,17 +6,46 @@ class TypeState {
   @observable userMadeTypes = { };
 
   constructor() {
+    this.typeQueue = [];
     this.updateUserMadeTypes();
   }
 
-  // // GETTERS FOR TYPE NAMES
+
+  /**
+   *
+   *
+   * Helper Functions
+   *
+   */
+
+  processedQueuedTypes() {
+    if (this.userMadeTypes instanceof ObjectType && this.typeQueue.length > 0) {
+      this.addType(this.typeQueue.shift());
+      this.processedQueuedTypes();
+    }
+  }
+
+
+  /**
+   *
+   *
+   * Getters
+   *
+   */
+
   @computed get validTypeNames() {
-    return Object.keys(ObjectType.types).concat(this.userMadeTypeNames);
+    if (this.userMadeTypes instanceof ObjectType) {
+      return Object.keys(ObjectType.types).concat(this.userMadeTypeNames);
+    }
+    return [];
   }
 
   @computed get secondaryTypeNames() {
     const validGeneric = Object.keys(Type.types).filter(val => val !== ObjectType.types.object && val !== ObjectType.types.list);
-    return validGeneric.concat(this.userMadeTypeNames);
+    if (this.userMadeTypes instanceof ObjectType) {
+      return validGeneric.concat(this.userMadeTypeNames);
+    }
+    return validGeneric;
   }
 
   @computed get genericTypeNames() {
@@ -24,50 +53,27 @@ class TypeState {
   }
 
   @computed get userMadeTypeNames() {
-    return this.userMadeTypes.getOrderedList().map(type => type.name);
+    if (this.userMadeTypes instanceof ObjectType) {
+      return this.userMadeTypes.getOrderedList().map(type => type.name);
+    }
+    return [];
   }
 
   @computed get orderedUserMadeTypeList() {
-    if (Object.keys(this.userMadeTypes).length > 0) {
+    if (this.userMadeTypes instanceof ObjectType) {
       return this.userMadeTypes.getOrderedList();
     } else {
       return [];
     }
   }
 
-  // ACTIONS
-  @action addOrUpdateType(type) {
-    return new Promise((resolve, reject) => {
-      API.makeQuery({
-        method: 'post',
-        query: `/api/type`,
-        body: type
-      }).then((types) => {
-        this.updateUserMadeTypes().then((updatedTypes) => {
-          resolve(updatedTypes);
-        });
-      }).catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-    });
-  }
 
-  @action removeType(slug) {
-    return new Promise((resolve, reject) => {
-      API.makeQuery({
-        method: 'delete',
-        query: `/api/type/${slug}`
-      }).then((types) => {
-        this.updateUserMadeTypes().then((updatedTypes) => {
-          resolve(updatedTypes);
-        });
-      }).catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-    });
-  }
+  /**
+  *
+  *
+  * Actions
+  *
+  */
 
   // Grabs all the types in the types.json file on the server
   // and updates the types in the application to reflect what's saved
@@ -78,29 +84,68 @@ class TypeState {
         query: `/api/type`,
       }).then((types) => {
         let typeObject = null;
-        // If there are no types on the server/we got an empty object
-        if (types && Object.keys(types).length === 0) {
-          typeObject = new ObjectType({ name: 'Object Types', type: { primary: ObjectType.types.object } });
-        } else if (types) {
-          // We have an existing type object stored on the server
-          // so lets create an object version of that
-          typeObject = new ObjectType(types);
-        }
+        // We have an existing type object stored on the server
+        // so lets create an object version of that. If no object
+        // exists on the server, the server will create one
+        typeObject = new ObjectType(types);
         this.userMadeTypes = typeObject;
+        this.processedQueuedTypes();
         resolve(this.userMadeTypes);
       }).catch((error) => {
-        console.log(error);
         reject(error);
       });
     });
   }
 
-  // FUNCTIONS
-  @action addEmptyType() {
+  @action addType(typeObject) {
+    // This is the object we're going to add
+    const newType = typeObject || { name: 'New module' };
     return new Promise((resolve, reject) => {
-      const type = new ObjectType({ name: 'New module' });
-      this.addOrUpdateType(type).then(() => {
-        resolve();
+      // If we've gotten the types from the server back
+      if (this.userMadeTypes instanceof ObjectType) {
+        const id = this.userMadeTypes.add(newType);
+        const createdType = this.userMadeTypes.get(id);
+        // Add the new type
+        this.addOrUpdateType(createdType).then(() => {
+          resolve();
+        }).catch((error) => {
+          reject(error);
+        });
+      } else {
+        // Otherwise we haven't gotten the types back from the server yet
+        // so we need to queue this for when we get the types back from
+        // the server
+        this.typeQueue.push(newType);
+      }
+    });
+  }
+
+  @action addOrUpdateType(type) {
+    return new Promise((resolve, reject) => {
+      API.makeQuery({
+        method: 'post',
+        query: `/api/type`,
+        body: type.getJSON()
+      }).then((types) => {
+        this.updateUserMadeTypes().then((updatedTypes) => {
+          resolve(updatedTypes);
+        });
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  @action removeType(id) {
+    console.log(`Removing type ${id}`);
+    return new Promise((resolve, reject) => {
+      API.makeQuery({
+        method: 'delete',
+        query: `/api/type/${id}`
+      }).then((types) => {
+        this.updateUserMadeTypes().then((updatedTypes) => {
+          resolve(updatedTypes);
+        });
       }).catch((error) => {
         reject(error);
       });
@@ -108,5 +153,4 @@ class TypeState {
   }
 }
 
-const singleton = new TypeState();
-export default singleton;
+export default new TypeState();

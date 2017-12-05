@@ -52,11 +52,12 @@ class TypeController {
   }
 
   saveChanges() {
-    console.log('Saving type changes');
     return new Promise((resolve, reject) => {
       FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(this.parentObject, null, 2) }).then(() => {
+        console.log('Changes saved');
         resolve();
       }).catch((err) => {
+        console.log('Could not save changes');
         reject(err);
       });
     });
@@ -67,7 +68,7 @@ class TypeController {
       FileManager.fileToObject({ path: '../data/types.json' }).then((object) => {
         // There is one parent container. All of the parent's
         // children are the types.
-        resolve(object.children);
+        resolve(object);
       }).catch((err) => {
         reject(err);
       });
@@ -85,28 +86,31 @@ class TypeController {
   addOrUpdateType({ type }) {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
+        const newType = new ObjectType(type);
         // If the type is an actual object
-        if (type && type.id) {
+        if (newType && newType.id) {
           // If the type exists in the parent object
-          if (this.parentObject.get(type.id)) {
-            this.parentObject.edit(type);
+          if (this.parentObject.get(newType.id)) {
+            this.parentObject.edit(newType);
           } else {
-            this.parentObject.add(type);
+            this.parentObject.add(newType);
           }
         }
 
         this.saveChanges().then(() => {
-          resolve({ type });
+          resolve({ type: newType });
         }).catch((error) => {
           reject(error);
         });
       }).catch((error) => {
         reject(error);
+        console.log('Issue initializing parent');
       });
     });
   }
 
   deleteType({ id }) {
+    console.log(`Deleting ${id}`);
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
         this.parentObject.remove({ id });
@@ -146,7 +150,11 @@ class TypeController {
   }
 
   handleGetTypes(req, res) {
+    const id = req.params.id;
     this.initParentIfNeeded().then(() => {
+      if (id) {
+        console.log(`DELETE TYPE ${id} HERE. NOT YET IMPLEMENTED`);
+      }
       this.getTypes().then((types) => {
         res.header('Content-Type', 'application/json').status(200).send(types);
       }).catch((error) => {
@@ -159,7 +167,7 @@ class TypeController {
 
   handleDeleteType(req, res) {
     this.initParentIfNeeded().then(() => {
-      const slug = req.params.id;
+      const id = req.params.id;
       this.deleteType({ id }).then(() => {
         res.header('Content-Type', 'application/json').status(200).send({ success: true });
       }).catch((err) => {

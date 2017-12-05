@@ -12,21 +12,15 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 @observer export default class Modules extends React.Component {
   constructor(props) {
     super(props);
+
+    TypeState.removeType('315444fa-5fadb91e-66c2b654');
   }
 
   getModuleTypes() {
     const moduleTypes = [];
-    // const types = TypeState.userMadeTypes;
-    // const keys = Object.keys(types);
-    // for (let i = 0; i < keys.length; i++) {
-    //   const type = types[keys[i]];
-    //   moduleTypes.push(
-    //     <ConstructType key={`construct-type-${type.id}`} type={type} />
-    //   );
-    // }
     const types = TypeState.orderedUserMadeTypeList;
     for (let i = 0; i < types.length; i++) {
-      const type = types[i][1];
+      const type = types[i].data;
       moduleTypes.push(
         <ConstructType key={`construct-type-${type.id}`} type={type} />
       );

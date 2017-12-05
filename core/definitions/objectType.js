@@ -42,6 +42,7 @@ class ObjectType {
     if (!this.children) { this.children = { }; }
     if (!this.orderBy) { this.orderBy = Object.keys((this.parent.children || {})).length; }
     if (!this.id) { this.id = IDUtil.guid(); }
+    if (!this.name) { this.setName({ name: 'New Type' }); }
     if (!this.type) { this.type = { primary: ObjectType.types.empty, secondary: ObjectType.types.empty }; }
 
     // We never want to mutate this ID
@@ -200,7 +201,8 @@ class ObjectType {
    */
   getOrderedList() {
     const arr = Object.keys(this.children).map(key => ({ key, data: this.children[key] }));
-    arr.sort((a, b) => a.children.orderBy - b.children.orderBy);
+    // arr.sort((a, b) => a.children.orderBy - b.children.orderBy);
+    arr.sort((a, b) => a.data.orderBy - b.data.orderBy);
     return arr;
   }
 

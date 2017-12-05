@@ -13,6 +13,10 @@ import { VelocityTransitionGroup } from 'velocity-react';
 import './ConstructType.scss';
 
 export default class ConstructType extends React.Component {
+  constructor() {
+    super();
+  }
+
   // constructor(props) {
   //   super(props);
   //

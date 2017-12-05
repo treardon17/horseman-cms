@@ -3,7 +3,7 @@ import TypeState from './TypeState.js';
 
 class AppState {
   @observable circleMenuItems = [
-    { icon: '/assets/img/featherIcons/layout.svg', onClick: TypeState.addEmptyType.bind(TypeState) },
+    { icon: '/assets/img/featherIcons/layout.svg', onClick: TypeState.addType.bind(TypeState) },
     { icon: '/assets/img/featherIcons/image.svg', onClick: () => {} },
     { icon: '/assets/img/featherIcons/layers.svg', onClick: () => {} }
   ];

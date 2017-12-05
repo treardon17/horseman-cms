@@ -13,7 +13,8 @@ const dataController = require('./controllers/data');
 // typeController
 router.post('/type', (req, res) => typeController.handleUpdateType(req, res));
 router.get('/type', (req, res) => typeController.handleGetTypes(req, res));
-router.delete('/type/:slug', (req, res) => typeController.handleDeleteType(req, res));
+router.get('/type/:id', (req, res) => typeController.handleGetTypes(req, res));
+router.delete('/type/:id', (req, res) => typeController.handleDeleteType(req, res));
 
 router.get('/data', (req, res) => dataController.handleGetData(req,res));
 
