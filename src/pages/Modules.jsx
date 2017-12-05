@@ -12,8 +12,6 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 @observer export default class Modules extends React.Component {
   constructor(props) {
     super(props);
-
-    TypeState.removeType('315444fa-5fadb91e-66c2b654');
   }
 
   getModuleTypes() {

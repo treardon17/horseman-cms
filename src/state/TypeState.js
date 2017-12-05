@@ -137,7 +137,6 @@ class TypeState {
   }
 
   @action removeType(id) {
-    console.log(`Removing type ${id}`);
     return new Promise((resolve, reject) => {
       API.makeQuery({
         method: 'delete',
