@@ -20,7 +20,7 @@ class TypeState {
 
   processedQueuedTypes() {
     if (this.userMadeTypes instanceof ObjectType && this.typeQueue.length > 0) {
-      this.addType(this.typeQueue.shift());
+      this.addOrUpdateType(this.typeQueue.shift());
       this.processedQueuedTypes();
     }
   }
@@ -97,17 +97,34 @@ class TypeState {
     });
   }
 
-  @action addType(typeObject) {
+  @action addOrUpdateType(typeObject) {
     // This is the object we're going to add
     const newType = typeObject || { name: 'New module' };
     return new Promise((resolve, reject) => {
       // If we've gotten the types from the server back
       if (this.userMadeTypes instanceof ObjectType) {
-        const id = this.userMadeTypes.add(newType);
-        const createdType = this.userMadeTypes.get(id);
-        // Add the new type
-        this.addOrUpdateType(createdType).then(() => {
-          resolve();
+        let createdType = {};
+
+        // If we've already added this type
+        // we need to edit this type
+        if (typeObject.id && this.userMadeTypes.get(typeObject.id)) {
+          this.userMadeTypes.edit(typeObject);
+          createdType = this.userMadeTypes.get(typeObject.id);
+        } else {
+          // Otherwise, we add a new type
+          const id = this.userMadeTypes.add(newType);
+          createdType = this.userMadeTypes.get(id);
+        }
+
+        // Tell the server about the changes we made
+        API.makeQuery({
+          method: 'post',
+          query: `/api/type`,
+          body: createdType.getJSON()
+        }).then((types) => {
+          this.updateUserMadeTypes().then((updatedTypes) => {
+            resolve(updatedTypes);
+          });
         }).catch((error) => {
           reject(error);
         });
@@ -117,22 +134,6 @@ class TypeState {
         // the server
         this.typeQueue.push(newType);
       }
-    });
-  }
-
-  @action addOrUpdateType(type) {
-    return new Promise((resolve, reject) => {
-      API.makeQuery({
-        method: 'post',
-        query: `/api/type`,
-        body: type.getJSON()
-      }).then((types) => {
-        this.updateUserMadeTypes().then((updatedTypes) => {
-          resolve(updatedTypes);
-        });
-      }).catch((error) => {
-        reject(error);
-      });
     });
   }
 

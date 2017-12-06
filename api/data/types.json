@@ -1,0 +1,24 @@
+{
+  "parent": {},
+  "name": "Parent Type Container",
+  "slug": "parentTypeContainer",
+  "type": {
+    "primary": "object"
+  },
+  "children": {
+    "25fcce3b-d511ec70-4b0971f1": {
+      "parent": {},
+      "slug": "anotherModule",
+      "children": {},
+      "orderBy": 0,
+      "id": "25fcce3b-d511ec70-4b0971f1",
+      "type": {
+        "primary": "empty",
+        "secondary": "empty"
+      },
+      "name": "another module"
+    }
+  },
+  "orderBy": 0,
+  "id": "c90075c9-41765b67-8a607273"
+}

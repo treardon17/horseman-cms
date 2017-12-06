@@ -102,7 +102,8 @@ class ObjectType {
    * @param  {type} data = {} description   The new data containing what will be updated on the current data
    * @return {type}           description
    */
-  edit({ id, data = {} }) {
+  edit(data) {
+    const { id } = data;
     const dataCopy = this.children[id];
     // If we even have data for that slug
     if (dataCopy) {
@@ -113,8 +114,9 @@ class ObjectType {
           dataCopy[key] = data[key];
         }
       }
+
       // If the name changed, we need to change the slug
-      if (data.name !== dataCopy.name) {
+      if (data.name && data.name !== dataCopy.name) {
         // Change the part location to be at the new slug
         this.children[id].setName({ name: data.name });
       }
