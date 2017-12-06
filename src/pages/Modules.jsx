@@ -12,6 +12,8 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 @observer export default class Modules extends React.Component {
   constructor(props) {
     super(props);
+
+    TypeState.addOrUpdateType({ name: 'hero module' });
   }
 
   getModuleTypes() {

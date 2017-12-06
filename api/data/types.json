@@ -6,19 +6,31 @@
     "primary": "object"
   },
   "children": {
-    "25fcce3b-d511ec70-4b0971f1": {
+    "5552bc15-fcb0c541-c1089c74": {
       "parent": {},
-      "slug": "moreModules",
+      "name": "hero module",
+      "slug": "heroModule",
       "children": {},
       "orderBy": 0,
-      "id": "25fcce3b-d511ec70-4b0971f1",
+      "id": "5552bc15-fcb0c541-c1089c74",
       "type": {
         "primary": "empty",
         "secondary": "empty"
-      },
-      "name": "more modules"
+      }
+    },
+    "7fdd9137-e423c10a-4f6cce5c": {
+      "parent": {},
+      "name": "hero module",
+      "slug": "heroModule1",
+      "children": {},
+      "orderBy": 1,
+      "id": "7fdd9137-e423c10a-4f6cce5c",
+      "type": {
+        "primary": "empty",
+        "secondary": "empty"
+      }
     }
   },
   "orderBy": 0,
-  "id": "c90075c9-41765b67-8a607273"
+  "id": "09723402-5b8c8aa6-0e96dbaa"
 }

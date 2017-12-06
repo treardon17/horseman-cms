@@ -28,16 +28,17 @@ class TypeController {
       } else {
         // Otherwise we don't have a parent object, so we
         // read the current types file and get the current types
-        this.getTypes().then((storedTypes) => {
-          // Construct our parent from the types found in the file
-          this.parentObject = this.createParent(storedTypes);
+        FileManager.fileToObject({ path: '../data/types.json' }).then((storedTypes) => {
+          // There is one parent container. All of the parent's
+          // children are the types.
+          this.parentObject = new ObjectType(storedTypes);
           // Save our progress
           this.saveChanges().then(() => {
             resolve();
           }).catch((error) => {
             reject(error);
           });
-        }).catch(() => {
+        }).catch((err) => {
           // The file didn't have a valid JSON object in it,
           // so we make a completely new parent and save that
           // to the file
@@ -80,10 +81,10 @@ class TypeController {
   saveChanges() {
     return new Promise((resolve, reject) => {
       FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(this.parentObject, null, 2) }).then(() => {
-        console.log('Changes saved');
+        console.log('Changes to TYPE saved');
         resolve();
       }).catch((err) => {
-        console.log('Could not save changes');
+        console.log('Could not save changes to TYPE');
         reject(err);
       });
     });
@@ -95,16 +96,23 @@ class TypeController {
    */
   getTypes() {
     return new Promise((resolve, reject) => {
-      FileManager.fileToObject({ path: '../data/types.json' }).then((object) => {
-        // There is one parent container. All of the parent's
-        // children are the types.
-        resolve(object);
-      }).catch((err) => {
-        reject(err);
+      this.initParentIfNeeded().then(() => {
+        resolve(this.parentObject);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
 
+  getType({ id }) {
+    return new Promise((resolve, reject) => {
+      this.initParentIfNeeded().then(() => {
+        resolve(this.parentObject.get(id));
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
 
   /*
   *
@@ -198,10 +206,14 @@ class TypeController {
     const id = req.params.id;
     this.initParentIfNeeded().then(() => {
       if (id) {
-        console.log(`GET TYPE ${id} HERE. NOT YET IMPLEMENTED`);
+        this.getType({ id }).then((type) => {
+          res.header('Content-Type', 'application/json').status(200).send(type);
+        }).catch((error) => {
+          res.header('Content-Type', 'application/json').status(500).send({ error });
+        });
       }
       this.getTypes().then((types) => {
-        res.header('Content-Type', 'application/json').status(200).send(types);
+        res.header('Content-Type', 'application/json').status(200).send(types.getJSON());
       }).catch((error) => {
         res.header('Content-Type', 'application/json').status(500).send({ error });
       });
