@@ -8,7 +8,7 @@
   "children": {
     "25fcce3b-d511ec70-4b0971f1": {
       "parent": {},
-      "slug": "anotherModule",
+      "slug": "moreModules",
       "children": {},
       "orderBy": 0,
       "id": "25fcce3b-d511ec70-4b0971f1",
@@ -16,7 +16,7 @@
         "primary": "empty",
         "secondary": "empty"
       },
-      "name": "another module"
+      "name": "more modules"
     }
   },
   "orderBy": 0,

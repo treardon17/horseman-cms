@@ -13,21 +13,34 @@ class TypeController {
   *
   */
 
+
+  /**
+   * initParentIfNeeded - This checks if we've initialized our parentObject.
+   * if we have, it immediately resolves, otherwise it creates a parent object
+   * from the JSON in the types.json file. If there is nothing in that file, it
+   * saves a new object to that file.
+   */
   initParentIfNeeded() {
     return new Promise((resolve, reject) => {
       // If we already have a parent object, we don't need to recreate it
       if (this.parentObject != null) {
         resolve();
       } else {
-        // Read the current types file and get the current types
+        // Otherwise we don't have a parent object, so we
+        // read the current types file and get the current types
         this.getTypes().then((storedTypes) => {
+          // Construct our parent from the types found in the file
           this.parentObject = this.createParent(storedTypes);
+          // Save our progress
           this.saveChanges().then(() => {
             resolve();
           }).catch((error) => {
             reject(error);
           });
         }).catch(() => {
+          // The file didn't have a valid JSON object in it,
+          // so we make a completely new parent and save that
+          // to the file
           this.parentObject = this.createParent();
           this.saveChanges().then(() => {
             resolve();
@@ -39,6 +52,14 @@ class TypeController {
     });
   }
 
+
+  /**
+   * createParent - Creates an ObjectType that will act as the parent
+   * container for all other object types to live inside
+   *
+   * @param  {type} obj description   The data that will be used to create
+   * the new object type. If it is null, we use default values.
+   */
   createParent(obj) {
     if (obj && Object.keys(obj).length > 0) {
       // Otherwise we want to make an object version
@@ -51,6 +72,11 @@ class TypeController {
     }
   }
 
+
+  /**
+   * saveChanges - Takes the current state of the parent object and
+   * saves it to the types.json file.
+   */
   saveChanges() {
     return new Promise((resolve, reject) => {
       FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(this.parentObject, null, 2) }).then(() => {
@@ -63,6 +89,10 @@ class TypeController {
     });
   }
 
+
+  /**
+   * getTypes - Reads the types.json file and returns an object version of that file.
+   */
   getTypes() {
     return new Promise((resolve, reject) => {
       FileManager.fileToObject({ path: '../data/types.json' }).then((object) => {
@@ -83,16 +113,25 @@ class TypeController {
   *
   */
 
+
+  /**
+   * addOrUpdateType - Adds a type to the parent if it doesn't exist
+   * or edits it if it does exist
+   *
+   * @param  {ObjectType} type The type to be edited or added
+   */
   addOrUpdateType({ type }) {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
         const newType = new ObjectType(type);
         // If the type is an actual object
         if (newType && newType.id) {
-          // If the type exists in the parent object
+          // If the type exists in the parent object, we edit it
           if (this.parentObject.get(newType.id)) {
             this.parentObject.edit(newType);
           } else {
+            // If the type does not exist in the parent object,
+            // we add it
             this.parentObject.add(newType);
           }
         }
@@ -109,6 +148,12 @@ class TypeController {
     });
   }
 
+
+  /**
+   * deleteType - Deletes the type with the given ID
+   *
+   * @param  {String} { id } The string ID of the type to be deleted
+   */
   deleteType({ id }) {
     console.log(`Deleting ${id}`);
     return new Promise((resolve, reject) => {
@@ -153,7 +198,7 @@ class TypeController {
     const id = req.params.id;
     this.initParentIfNeeded().then(() => {
       if (id) {
-        console.log(`DELETE TYPE ${id} HERE. NOT YET IMPLEMENTED`);
+        console.log(`GET TYPE ${id} HERE. NOT YET IMPLEMENTED`);
       }
       this.getTypes().then((types) => {
         res.header('Content-Type', 'application/json').status(200).send(types);
