@@ -1,55 +1,55 @@
 {
-    "name": "Parent Type Container",
-    "slug": "parentTypeContainer",
-    "type": {
-        "primary": "object"
-    },
-    "children": {
-        "987dfe7c-c873dfff-3eb0b4b0": {
-            "name": "hero module",
-            "slug": "heroModule",
-            "children": {
-                "c9ef6880-c3e8f5e2-10e0ac5f": {
-                    "name": "title",
-                    "slug": "title",
-                    "type": {
-                        "primary": "string"
-                    },
-                    "children": {},
-                    "orderBy": 1,
-                    "id": "c9ef6880-c3e8f5e2-10e0ac5f"
-                }
-            },
-            "orderBy": 1,
-            "id": "987dfe7c-c873dfff-3eb0b4b0",
-            "type": {
-                "primary": "empty",
-                "secondary": "empty"
-            }
-        },
-        "9a448716-820846f7-c8e85060": {
-            "name": "hero module",
-            "slug": "heroModule1",
-            "children": {
-                "8fa32d90-1c8bd170-eb2ccde8": {
-                    "name": "title",
-                    "slug": "title",
-                    "type": {
-                        "primary": "string"
-                    },
-                    "children": {},
-                    "orderBy": 1,
-                    "id": "8fa32d90-1c8bd170-eb2ccde8"
-                }
-            },
-            "orderBy": 1,
-            "id": "9a448716-820846f7-c8e85060",
-            "type": {
-                "primary": "empty",
-                "secondary": "empty"
-            }
+  "name": "Parent Type Container",
+  "slug": "parentTypeContainer",
+  "type": {
+    "primary": "object"
+  },
+  "children": {
+    "987dfe7c-c873dfff-3eb0b4b0": {
+      "name": "hero module",
+      "slug": "heroModule",
+      "children": {
+        "c9ef6880-c3e8f5e2-10e0ac5f": {
+          "name": "title",
+          "slug": "title",
+          "type": {
+            "primary": "string"
+          },
+          "children": {},
+          "orderBy": 1,
+          "id": "c9ef6880-c3e8f5e2-10e0ac5f"
         }
+      },
+      "orderBy": 1,
+      "id": "987dfe7c-c873dfff-3eb0b4b0",
+      "type": {
+        "primary": "empty",
+        "secondary": "empty"
+      }
     },
-    "orderBy": 0,
-    "id": "aca433c9-6ed9bc64-554584ed"
+    "9a448716-820846f7-c8e85060": {
+      "name": "hero module",
+      "slug": "heroModule1",
+      "children": {
+        "8fa32d90-1c8bd170-eb2ccde8": {
+          "name": "title",
+          "slug": "title",
+          "type": {
+            "primary": "string"
+          },
+          "children": {},
+          "orderBy": 1,
+          "id": "8fa32d90-1c8bd170-eb2ccde8"
+        }
+      },
+      "orderBy": 1,
+      "id": "9a448716-820846f7-c8e85060",
+      "type": {
+        "primary": "empty",
+        "secondary": "empty"
+      }
+    }
+  },
+  "orderBy": 0,
+  "id": "aca433c9-6ed9bc64-554584ed"
 }

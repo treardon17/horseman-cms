@@ -245,8 +245,6 @@ class ObjectType {
       }
     }
 
-    // We have a set structure, so the attributes shouldn't be modified after initial creation
-    // Object.preventExtensions(object);
     return object;
   }
 
@@ -256,35 +254,48 @@ class ObjectType {
    * @param  {[Object]} [object={}}] [The object that will be updated]
    * @return {[Object]}                [The updated object]
    */
-  updateExistingObjectSchema({object = {}}) {
+  updateExistingObjectSchema({ object }) {
     // Make an empty object of the current type
-    const currentSchemaObject = this.createObjectInstance();
-    const existingObjectCopy = object;
+    let objectCopy = object;
     // If we actually have an existing object we're trying to modify
-    if (existingObjectCopy) {
+    if (object) {
+      const currentSchemaObject = this.createObjectInstance();
       // Check to make sure it's the right type of object
-      if (existingObjectCopy._typeID === this.id) {
+      if (objectCopy._typeID === this.id) {
         // If the parent slug changed, we want to reflect that change to the object we're re-creating
-        existingObjectCopy._slug = this.slug;
+        objectCopy._slug = this.slug;
 
         // Go through the different properties and make sure we don't keep
         // a property if that property was deleted
-        for (const key in currentSchemaObject) {
-          // All keys that begin with _ are variables that shouldn't
-          // be modified here
-          if (key.length > 0 && key[0] !== '_' && existingObjectCopy[key] == null) {
-            delete existingObjectCopy[key];
-          }
-        }
+        this.trimObject(objectCopy, currentSchemaObject);
 
         // If any new fields were added to the object type, add them to the object,
         // but override the values of the new object with those of the existing object
-        Object.assign(currentSchemaObject, existingObjectCopy);
+        objectCopy = Object.assign({}, currentSchemaObject, objectCopy);
       } else {
-        console.warn(`Object of type ${existingObjectCopy._typeID} does not match ${this.name} of type ${this.id}`);
+        console.warn(`Object of type ${objectCopy._typeID} does not match ${this.name} of type ${this.id}`);
       }
     }
-    return existingObjectCopy;
+    return objectCopy;
+  }
+
+  /**
+   * [trimObject Deletes all keys/values from the first object that don't exist in the second object]
+   * @param  {[Object]} obj1 [The object that will be modified]
+   * @param  {[Object]} obj2 [The object that will act as the schema]
+   */
+  trimObject(obj1, obj2) {
+    for (const key in obj1) {
+      // All keys that begin with _ are variables that shouldn't
+      // be modified here (they're reserved)
+      if (key.length > 0 && key[0] !== '_') {
+        if (obj2[key] == null) {
+          delete obj1[key];
+        } else if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+          this.trimObject(obj1[key], obj2[key]);
+        }
+      }
+    }
   }
 }
 

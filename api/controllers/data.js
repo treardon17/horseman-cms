@@ -77,7 +77,7 @@ class DataController {
                if (object) {
                  // We're updating the scheme of the object so that it matches
                  // the current parent object
-                 this.data[_id] = typeDef.updateExistingObjectSchema({ object });
+                 this.data[_id] = typeDef.updateExistingObjectSchema({ object: data });
                } else {
                  // We're adding this piece of data for the first time
                  this.data[_id] = typeDef.updateExistingObjectSchema({ object: data });
@@ -89,9 +89,15 @@ class DataController {
 
              // Save our changes to the data file
              this.saveChanges().then(() => resolve(this.data[_id])).catch(error => reject(error));
-           }).catch(error => reject(error));
+           }).catch((error) => {
+             console.log(error);
+             reject(error)
+           });
          }
-       }).catch(error => reject(error));
+       }).catch((error) => {
+         console.log(error);
+         reject(error)
+       });
      });
    }
 
@@ -130,6 +136,7 @@ class DataController {
     return new Promise(() => {
       this.initParentIfNeeded().then(() => {
         const data = req.body;
+        console.log('Handling data');
         this.addOrUpdateData({ data }).then((addedData) => {
           res.header('Content-Type', 'application/json').status(201).send({ data: addedData });
         }).catch(error => {
