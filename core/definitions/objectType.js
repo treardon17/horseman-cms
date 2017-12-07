@@ -211,30 +211,24 @@ class ObjectType {
    */
   getJSON() {
     const clone = this.getOrphanCopy();
-    const json = JSON.stringify(clone, null, 4);
+    const json = JSON.stringify(clone, null, 2);
     return json;
   }
 
 /**
  * [createObjectInstance Creates an object using the scheme defined in the ObjectType]
- * @param  {[Object]} [existingObject=null] [If an instance already exists but the scheme changed]
  * @return {[Object]}                       [The object instance]
  */
-  createObjectInstance(existingObject = null) {
-    const existingObjectCopy = existingObject;
+  createObjectInstance() {
     const object = {};
 
-    // If we're not re-creating an object that's already been made,
-    // wee need to give it an ID and a typeID
-    if (!existingObjectCopy) {
-      object._id = IDUtil.guid();
-      object._typeID = this.id;
-      object._slug = this.slug;
-    }
+    // We need to give it an ID and a typeID
+    object._id = IDUtil.guid();
+    object._typeID = this.id;
+    object._slug = this.slug;
 
-    const keys = Object.keys(this.children);
-    for (let i = 0; i < keys.length; i++) {
-      const child = this.children[keys[i]];
+    for (const key in this.children) {
+      const child = this.children[key];
 
       // If the child has children, it's just another object
       if (Object.keys(child.children).length > 0) {
@@ -251,25 +245,49 @@ class ObjectType {
       }
     }
 
-    // If we have an existing object we're trying to re-create
+    // We have a set structure, so the attributes shouldn't be modified after initial creation
+    // Object.preventExtensions(object);
+    return object;
+  }
+
+
+  /**
+   * [updateExistingObjectSchema Takes an existing object and updates the schema to reflect the current schema]
+   * @param  {[Object]} [object={}}] [The object that will be updated]
+   * @return {[Object]}                [The updated object]
+   */
+  updateExistingObjectSchema({object = {}}) {
+    // Make an empty object of the current type
+    const currentSchemaObject = this.createObjectInstance();
+    const existingObjectCopy = object;
+    // If we actually have an existing object we're trying to modify
     if (existingObjectCopy) {
       // Check to make sure it's the right type of object
       if (existingObjectCopy._typeID === this.id) {
         // If the parent slug changed, we want to reflect that change to the object we're re-creating
         existingObjectCopy._slug = this.slug;
+
+        // Go through the different properties and make sure we don't keep
+        // a property if that property was deleted
+        for (const key in currentSchemaObject) {
+          // All keys that begin with _ are variables that shouldn't
+          // be modified here
+          if (key.length > 0 && key[0] !== '_' && existingObjectCopy[key] == null) {
+            delete existingObjectCopy[key];
+          }
+        }
+
         // If any new fields were added to the object type, add them to the object,
         // but override the values of the new object with those of the existing object
-        Object.assign(object, existingObjectCopy);
+        Object.assign(currentSchemaObject, existingObjectCopy);
       } else {
         console.warn(`Object of type ${existingObjectCopy._typeID} does not match ${this.name} of type ${this.id}`);
       }
     }
-
-    // We have a set structure, so the attributes shouldn't be modified after initial creation
-    Object.preventExtensions(object);
-    return object;
+    return existingObjectCopy;
   }
 }
+
 
 
 // Setup static constant definitions of ObjectTypes

@@ -1,5 +1,0 @@
-class TypeInstance {
-  constructor ({ definition }) {
-    
-  }
-}

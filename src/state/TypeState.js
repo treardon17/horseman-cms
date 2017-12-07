@@ -20,11 +20,13 @@ class TypeState {
 
   processedQueuedTypes() {
     if (this.userMadeTypes instanceof ObjectType && this.typeQueue.length > 0) {
-      this.addOrUpdateType(this.typeQueue.shift());
-      this.processedQueuedTypes();
+      const queuedType = this.typeQueue.shift();
+      this.addOrUpdateType(queuedType.type).then((type) => {
+        queuedType.resolver(type);
+        this.processedQueuedTypes();
+      });
     }
   }
-
 
   /**
    *
@@ -123,7 +125,9 @@ class TypeState {
           body: createdType.getJSON()
         }).then((types) => {
           this.updateUserMadeTypes().then((updatedTypes) => {
-            resolve(updatedTypes);
+            // Resolve with the type we just created
+            const addedType = updatedTypes.get(createdType.id);
+            resolve(addedType);
           });
         }).catch((error) => {
           reject(error);
@@ -132,7 +136,7 @@ class TypeState {
         // Otherwise we haven't gotten the types back from the server yet
         // so we need to queue this for when we get the types back from
         // the server
-        this.typeQueue.push(newType);
+        this.typeQueue.push({ type: newType, resolver: resolve });
       }
     });
   }

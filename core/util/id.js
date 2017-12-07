@@ -25,7 +25,6 @@ class IDUtil {
     } else {
       // We're searching through the object's children looking for the attribute provided
       const items = Object.keys(object).map(objKey => object[objKey][attribute]);
-
       // There's a string that's equal to the slug we passed in
       // so let's try again
       if (items.indexOf(key) !== -1) {

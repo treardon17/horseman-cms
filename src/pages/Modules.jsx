@@ -13,7 +13,10 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
   constructor(props) {
     super(props);
 
-    TypeState.addOrUpdateType({ name: 'hero module' });
+    TypeState.addOrUpdateType({ name: 'hero module' }).then((addedType) => {
+      addedType.add({ name: 'title', type: { primary: ObjectType.types.string } });
+      TypeState.addOrUpdateType(addedType);
+    });
   }
 
   getModuleTypes() {

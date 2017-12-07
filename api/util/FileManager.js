@@ -44,6 +44,7 @@ class FileManager {
           resolve(JSON.parse(data));
         } else {
           reject(`Invalid JSON in file ${path}`);
+          reject(data);
         }
       }).catch((err) => {
         reject(err);

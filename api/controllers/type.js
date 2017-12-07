@@ -13,7 +13,6 @@ class TypeController {
   *
   */
 
-
   /**
    * initParentIfNeeded - This checks if we've initialized our parentObject.
    * if we have, it immediately resolves, otherwise it creates a parent object
@@ -46,6 +45,7 @@ class TypeController {
           this.saveChanges().then(() => {
             resolve();
           }).catch((error) => {
+            console.log('Error initializing parent: ', error);
             reject(error);
           });
         });
@@ -58,7 +58,7 @@ class TypeController {
    * createParent - Creates an ObjectType that will act as the parent
    * container for all other object types to live inside
    *
-   * @param  {type} obj description   The data that will be used to create
+   * @param  {Object} obj description   The data that will be used to create
    * the new object type. If it is null, we use default values.
    */
   createParent(obj) {
@@ -80,11 +80,11 @@ class TypeController {
    */
   saveChanges() {
     return new Promise((resolve, reject) => {
-      FileManager.writeToFile({ path: '../data/types.json', data: JSON.stringify(this.parentObject, null, 2) }).then(() => {
+      FileManager.writeToFile({ path: '../data/types.json', data: this.parentObject.getJSON() }).then(() => {
         console.log('Changes to TYPE saved');
         resolve();
       }).catch((err) => {
-        console.log('Could not save changes to TYPE');
+        console.log('Could not save changes to TYPE', err);
         reject(err);
       });
     });
@@ -145,7 +145,7 @@ class TypeController {
         }
 
         this.saveChanges().then(() => {
-          resolve({ type: newType });
+          resolve(newType);
         }).catch((error) => {
           reject(error);
         });
@@ -190,8 +190,9 @@ class TypeController {
       const type = req.body;
       if (type.name) {
         this.addOrUpdateType({ type }).then((myType) => {
-          res.header('Content-Type', 'application/json').status(200).send(myType);
+          res.header('Content-Type', 'application/json').status(201).send(myType.getJSON());
         }).catch((error) => {
+          console.log(`Error processing update type`, error);
           res.header('Content-Type', 'application/json').status(400).send({ error });
         });
       } else {
@@ -207,7 +208,7 @@ class TypeController {
     this.initParentIfNeeded().then(() => {
       if (id) {
         this.getType({ id }).then((type) => {
-          res.header('Content-Type', 'application/json').status(200).send(type);
+          res.header('Content-Type', 'application/json').status(200).send(type.getJSON());
         }).catch((error) => {
           res.header('Content-Type', 'application/json').status(500).send({ error });
         });
@@ -226,7 +227,7 @@ class TypeController {
     this.initParentIfNeeded().then(() => {
       const id = req.params.id;
       this.deleteType({ id }).then(() => {
-        res.header('Content-Type', 'application/json').status(200).send({ success: true });
+        res.header('Content-Type', 'application/json').status(202).send({ success: true });
       }).catch((err) => {
         res.header('Content-Type', 'application/json').status(500).send({ error: err });
       });
