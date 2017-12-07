@@ -112,11 +112,9 @@ class ObjectType {
    * @param  {[String]} id [The string ID of the item to be deleted]
    */
   remove({ id }) {
-    // Remember which index we removed
-    const removedIndex = this.children[id].orderBy;
-    // Get rid of the item from the parts object
+    // Get rid of the item from the parts object and then
+    // reorder all the other objects to reflect the change in index
     delete this.children[id];
-    // Reorder all the other objects to reflect the change in index
     this.reorder({ newIndex: -1, id });
   }
 
