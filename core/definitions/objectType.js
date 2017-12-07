@@ -3,15 +3,9 @@ const IDUtil = require('../util/id');
 
 class ObjectType {
   /**
-   * constructor - description  Construct the object
-   *
-   * @param  {type} arg = {}    description
-   * The arg object should contain at least a `name` attribute
-   *
-   * @param  {type} parent = {} description
-   * The parent object containing this object (so we can find unique slugs)
-   *
-   * @return {type}             description
+   * [constructor Construct the object]
+   * @param  {Object} [arg={}]    [The arg object should contain at least a `name` attribute]
+   * @param  {Object} [parent={}] [The parent object containing this object (so we can find unique slugs)]
    */
   constructor(arg = {}, parent = {}) {
     // parent is the object (if any) that this current ObjectType
@@ -21,10 +15,8 @@ class ObjectType {
   }
 
   /**
-   * setup - Copies the data from the object passed in, into the current object
-   *
-   * @param  {object} arg the object to be copied
-   * @return {void}
+   * [setup Copies the data from the object passed in, into the current object]
+   * @param  {[type]} arg [The object to be copied]
    */
   setup(arg) {
     // Copy attributes from object passed in
@@ -52,11 +44,8 @@ class ObjectType {
     this.constructChildren();
   }
 
-
   /**
-   * constructChildren - Build out all of the children to be instances ObjectType
-   *
-   * @return {type}  description
+   * [constructChildren Build out all of the children to be instances ObjectType]
    */
   constructChildren() {
     const keys = Object.keys(this.children);
@@ -73,34 +62,24 @@ class ObjectType {
     }
   }
 
-  generateProxy({ slug, data }) {
-    const proxy = new Proxy(data, {
-      get: (target, name, receiver) => {
-        const rv = target[name];
-        return rv;
-      }
-    });
-    this[slug] = proxy;
-  }
-
   /**
-   * add - Add properties to the type object
-   *
-   * @param  {String} name          description   Name of the new property being added to this type
-   * @return {String} The ID of the object type
+   * [add Add properties to the type object]
+   * @param {[ObjectType || object]} data [Can be a regular object, or an ObjectType]
+   * @return {[String]} The ID of the object type
    */
   add(data) {
+    // Create a new ObjectType using the data given,
+    // add it to the children of the current object
+    // and return the ID that was generated
     const newObject = new ObjectType(data, this);
     this.children[newObject.id] = newObject;
     return newObject.id;
   }
 
   /**
-   * edit - Edit an existing property of the Type object
-   *
-   * @param  {type} slug      description   The ID of the object being modified in this.children
-   * @param  {type} data = {} description   The new data containing what will be updated on the current data
-   * @return {type}           description
+   * [edit Edit properties on the object]
+   * @param  {[ObjectType || object]} data [Can be a regular object, or an ObjectType]
+   * @return {[type]}      [description]
    */
   edit(data) {
     const { id } = data;
@@ -110,6 +89,8 @@ class ObjectType {
       const keys = Object.keys(data);
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
+        // We don't want to set the slug/name here because there's a
+        // special function that handles those
         if (key !== 'slug' && key !== 'name') {
           dataCopy[key] = data[key];
         }
@@ -127,10 +108,8 @@ class ObjectType {
   }
 
   /**
-   * remove - Removes an item from this.children
-   *
-   * @param  {type} slug description   The ID of the item to be removed
-   * @return {void}
+   * [remove Removes a type from the parent object and reorders the types]
+   * @param  {[String]} id [The string ID of the item to be deleted]
    */
   remove({ id }) {
     // Remember which index we removed
@@ -141,13 +120,10 @@ class ObjectType {
     this.reorder({ newIndex: -1, id });
   }
 
-
   /**
-   * reorder - Changes the orderBy attribute to a new position and propagates the change to the other data attributes
-   *
-   * @param  {type} newIndex description   The index that will replace the current index
-   * @param  {type} slug     description   The slug to the item that will be moved
-   * @return {void}
+   * [reorder Changes the orderBy attribute to a new position and propagates the change to the other data attributes]
+   * @param  {[Int]} newIndex [The index that will replace the current index]
+   * @param  {[type]} id       [The id to the item that will be moved]
    */
   reorder({ newIndex, id }) {
     const dataLength = Object.keys(this.children).length;
@@ -183,10 +159,8 @@ class ObjectType {
   // SETTERS
   // -----------------------------
   /**
-   * setName - Finds a unique slug for the object based on the name given
-   *
-   * @param  {string} { name } description - The new name
-   * @return {void}
+   * [setName Finds a unique slug for the object based on the name given]
+   * @param {[type]} name [The new name]
    */
   setName({ name }) {
     this.name = name;
@@ -197,31 +171,27 @@ class ObjectType {
   // GETTERS
   // -----------------------------
   /**
-   * getOrderedList - Gets the items in data based on the orderBy attribute
-   *
-   * @return {Array of objects}  description   An array of objects containing the key modified and the data of that object
+   * [getOrderedList Gets the items in data based on the orderBy attribute]
+   * @return {[Array]} [An array of objects containing the key modified and the data of that object]
    */
   getOrderedList() {
     const arr = Object.keys(this.children).map(key => ({ key, data: this.children[key] }));
-    // arr.sort((a, b) => a.children.orderBy - b.children.orderBy);
     arr.sort((a, b) => a.data.orderBy - b.data.orderBy);
     return arr;
   }
 
   /**
-   * get - Gets an object from the data object
-   *
-   * @param  {String} slug - A unique ID for the object
-   * @return {ObjectType}      The ObjectType found at the specified slug
+   * [get Gets an object from the data object]
+   * @param  {[String]} id [The unique ID for the object]
+   * @return {[ObjectType]}    [The ObjectType found at the specified ID]
    */
   get(id) {
     return this.children[id];
   }
 
   /**
-   * getOrphanCopy - JSON.stringify can't deal with circular structures, so we remove all of the parent objects
-   *
-   * @return {type}  description
+   * [getOrphanCopy JSON.stringify can't deal with circular structures, so this removes all of the parent objects]
+   * @return {[ObjectType]} [An ObjectType without the circular reference to parent]
    */
   getOrphanCopy() {
     // Make a deep clone of this so we don't mutate our current object
@@ -238,9 +208,8 @@ class ObjectType {
   }
 
   /**
-   * getJSON - Get a string version of the current object
-   *
-   * @return {String}  description   A JSON representation of the object
+   * [getJSON Makes a JSON string of the current object]
+   * @return {[JSON]} [A stringified version of the object]
    */
   getJSON() {
     const clone = this.getOrphanCopy();
@@ -248,6 +217,11 @@ class ObjectType {
     return json;
   }
 
+/**
+ * [createObjectInstance Creates an object using the scheme defined in the ObjectType]
+ * @param  {[Object]} [existingObject=null] [If an instance already exists but the scheme changed]
+ * @return {[Object]}                       [The object instance]
+ */
   createObjectInstance(existingObject = null) {
     const existingObjectCopy = existingObject;
     const object = {};
