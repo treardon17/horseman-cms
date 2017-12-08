@@ -52,7 +52,30 @@ class IDUtil {
     return `${newSlug}${slugNum}`;
   }
 
-  /* eslint-disable */
+  /**
+   * [trimObject Deletes all keys/values from the first object that don't exist in the second object]
+   * @param  {[Object]} obj1 [The object that will be modified]
+   * @param  {[Object]} obj2 [The object that will act as the schema]
+   */
+  trimObject(obj1, obj2) {
+    for (const key in obj1) {
+      // All keys that begin with _ are variables that shouldn't
+      // be modified here (they're reserved)
+      if (key.length > 0 && key[0] !== '_') {
+        if (obj2[key] == null) {
+          delete obj1[key];
+        } else if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+          this.trimObject(obj1[key], obj2[key]);
+        }
+      }
+    }
+  }
+
+  /**
+   * [guid Generates a unique string ID]
+   * @return {[String]} [Unique ID]
+   */
+   /* eslint-disable */
   guid() {
     const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     return `${s4()}${s4()}-${s4()}${s4()}-${s4()}${s4()}`;

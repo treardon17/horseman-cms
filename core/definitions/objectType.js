@@ -267,7 +267,7 @@ class ObjectType {
 
         // Go through the different properties and make sure we don't keep
         // a property if that property was deleted
-        this.trimObject(objectCopy, currentSchemaObject);
+        IDUtil.trimObject(objectCopy, currentSchemaObject);
 
         // If any new fields were added to the object type, add them to the object,
         // but override the values of the new object with those of the existing object
@@ -277,25 +277,6 @@ class ObjectType {
       }
     }
     return objectCopy;
-  }
-
-  /**
-   * [trimObject Deletes all keys/values from the first object that don't exist in the second object]
-   * @param  {[Object]} obj1 [The object that will be modified]
-   * @param  {[Object]} obj2 [The object that will act as the schema]
-   */
-  trimObject(obj1, obj2) {
-    for (const key in obj1) {
-      // All keys that begin with _ are variables that shouldn't
-      // be modified here (they're reserved)
-      if (key.length > 0 && key[0] !== '_') {
-        if (obj2[key] == null) {
-          delete obj1[key];
-        } else if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-          this.trimObject(obj1[key], obj2[key]);
-        }
-      }
-    }
   }
 }
 
