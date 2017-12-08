@@ -37,6 +37,18 @@ watcher.on('ready', function() {
     });
   });
 });
+const coreWatcher = chokidar.watch(path.resolve('./core/'));
+watcher.on('ready', function() {
+  watcher.on('all', function() {
+    // clear require cache and re require new files after change
+    console.log("Updated core");
+    Object.keys(require.cache).forEach(function(id) {
+      if (/[\/\\]core/.test(id)) {
+        delete require.cache[id];
+      }
+    });
+  });
+});
 
 // devMiddleware serves the files emitted from webpack over a connect server
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
