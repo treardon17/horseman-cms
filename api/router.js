@@ -18,6 +18,6 @@ router.delete('/type/:id', (req, res) => typeController.handleDeleteType(req, re
 router.post('/data', (req, res) => dataController.handleUpdateData(req, res));
 router.get('/data', (req, res) => dataController.handleGetData(req,res));
 router.get('/data/:id', (req, res) => dataController.handleGetData(req, res));
-router.delete('/data/:id', (req, res) => typeController.handleDeleteData(req, res));
+router.delete('/data/:id', (req, res) => dataController.handleDeleteData(req, res));
 
 module.exports = router;

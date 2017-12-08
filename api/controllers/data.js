@@ -101,29 +101,36 @@ class DataController {
      });
    }
 
-   deleteData({ id }) {
+  deleteData({ id }) {
+    return new Promise((resolve, reject) => {
+      this.initParentIfNeeded().then(() => {
+        delete this.data[id];
+        this.saveChanges().then(() => {
+          resolve();
+        }).catch(error => reject(error));
+      }).catch(error => reject(error));
+    });
+  }
 
-   }
+  getAllData() {
+    return new Promise((resolve, reject) => {
+      this.initParentIfNeeded().then(() => {
+        return this.data;
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
 
-   getAllData() {
-     return new Promise((resolve, reject) => {
-       this.initParentIfNeeded().then(() => {
-         return this.data;
-       }).catch(error => {
-         reject(error);
-       });
-     });
-   }
-
-   getData({ id }) {
-     return new Promise((resolve, reject) => {
-       this.initParentIfNeeded().then(() => {
-         return this.data[id];
-       }).catch(error => {
-         reject(error);
-       });
-     });
-   }
+  getData({ id }) {
+    return new Promise((resolve, reject) => {
+      this.initParentIfNeeded().then(() => {
+        return this.data[id];
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
 
   /*
   *
@@ -170,7 +177,11 @@ class DataController {
     return new Promise(() => {
       this.initParentIfNeeded().then(() => {
         const id = req.params.id;
-        this.deleteData({ id });
+        this.deleteData({ id }).then(() => {
+          res.header('Content-Type', 'application/json').status(200).send({ success: true, id });
+        }).catch(error => {
+          res.header('Content-Type', 'application/json').status(500).send({ error });
+        });
       }).catch((error) => {
         res.header('Content-Type', 'application/json').status(500).send({ error });
       });
