@@ -1,6 +1,13 @@
 require('whatwg-fetch');
 
 class API {
+  /**
+   * [makeQuery A wrapper for the fetch method]
+   * @param  {[String]} query               [The url that will be queried/posted to]
+   * @param  {String} [method="GET"]        [The fetch method]
+   * @param  {[Object or String]} body      [The data that will be sent]
+   * @return {[Promise]}
+   */
   makeQuery({ query, method="GET", body }) {
     let newBody = null;
     if (typeof body === 'string') {

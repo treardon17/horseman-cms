@@ -37,6 +37,13 @@ class IDUtil {
     }
   }
 
+/**
+ * [incrementStringIfNeeded Takes a string and appends a number to the end. If a number
+ * already exists, it increments that number]
+ *
+ * @param  {[String]} string [The string the number will be appended to]
+ * @return {[String]}        [The modified string]
+ */
   incrementStringIfNeeded(string) {
     // If there's already a number at the end
     const pattern = /([0-9]+)/i;
