@@ -20,10 +20,7 @@ class ObjectType {
    */
   setup(arg) {
     // Copy attributes from object passed in
-    const keys = Object.keys(arg);
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-
+    for (const key in arg) {
       if (key === 'name') {
         this.setName({ name: arg[key] });
       } else {
@@ -48,9 +45,8 @@ class ObjectType {
    * [constructChildren Build out all of the children to be instances ObjectType]
    */
   constructChildren() {
-    const keys = Object.keys(this.children);
-    for (let i = 0; i < keys.length; i++) {
-      let staticData = this.children[keys[i]];
+    for (const key in this.children) {
+      let staticData = this.children[key];
       // If the data hasn't been made into an object yet
       if (typeof staticData === 'string') {
         staticData = JSON.parse(staticData);
@@ -86,9 +82,7 @@ class ObjectType {
     const dataCopy = this.children[id];
     // If we even have data for that slug
     if (dataCopy) {
-      const keys = Object.keys(data);
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
+      for (const key in data) {
         // We don't want to set the slug/name here because there's a
         // special function that handles those
         if (key !== 'slug' && key !== 'name') {
@@ -197,9 +191,8 @@ class ObjectType {
     // Delete the parent object so the structure isn't circular any longer
     delete clone.parent;
     // Do this for all children as well
-    const keys = Object.keys(this.children);
-    for (let i = 0; i < keys.length; i++) {
-      clone.children[keys[i]] = clone.children[keys[i]].getOrphanCopy();
+    for (const key in this.children) {
+      clone.children[key] = clone.children[key].getOrphanCopy();
     }
     // All children now have no parent
     return clone;

@@ -15,17 +15,20 @@ class DataController {
    */
    initParentIfNeeded() {
      return new Promise((resolve, reject) => {
+       // If we already initialized our data object,
+       // we don't have to make another read operation
        if (this.data != null) {
          resolve();
        } else {
+         // Otherwise, we need to read the data.json file
+         // and grab the current data from there
          FileManager.fileToObject({ path: '../data/data.json' }).then(dataObject => {
+           // Set our data object
            this.data = dataObject;
-           this.saveChanges().then(() => {
-             resolve();
-           }).catch((error) => {
-             reject(error);
-           });
          }).catch((error) => {
+           // If something bad happened, we need to abort
+           // so we start fresh with an empty object
+           // and save that to the file
            this.data = {};
            this.saveChanges().then(() => {
              resolve();
@@ -61,6 +64,10 @@ class DataController {
    *
    */
 
+   /**
+    * [addOrUpdateData Adds new data or updates existing data]
+    * @param {[Object]} data [The new data that should be added/updated]
+    */
    addOrUpdateData({ data }) {
      return new Promise((resolve, reject) => {
        this.initParentIfNeeded().then(() => {
