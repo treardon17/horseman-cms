@@ -54,7 +54,7 @@ class ObjectType {
       // Make a new ObjectType based on the data provided
       const dataObject = new ObjectType(staticData, this);
       // Replace the static data with the new dynamic object
-      this.children[keys[i]] = dataObject;
+      this.children[key] = dataObject;
     }
   }
 
