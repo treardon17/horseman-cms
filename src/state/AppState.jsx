@@ -1,10 +1,11 @@
 import { observable, computed } from 'mobx';
 import TypeState from './TypeState.js';
 import ModalState from './ModalState.js';
+import React from 'react';
 
 class AppState {
   @observable circleMenuItems = [
-    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.modalOpen = true; } },
+    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.open(); } },
     { icon: '/assets/img/featherIcons/image.svg', onClick: () => {} },
     { icon: '/assets/img/featherIcons/layers.svg', onClick: () => {} }
   ];

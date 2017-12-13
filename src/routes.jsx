@@ -54,9 +54,7 @@ export default class Routes extends React.Component {
             routes={this.state.routes}
             serialize={false}
           />
-          <Modal>
-            <h1>hello world</h1>
-          </Modal>
+          <Modal />
           <CircleMenu menuItems={appState.circleMenuItems} />
         </div>
       </div>

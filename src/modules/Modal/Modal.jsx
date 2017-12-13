@@ -16,12 +16,10 @@ import './Modal.scss';
   }
 
   navigateBack() {
-    console.log('navigate back');
   }
 
   close() {
-    console.log('close');
-    ModalState.modalOpen = false;
+    ModalState.close();
   }
 
   didEnter() { }
@@ -47,6 +45,7 @@ import './Modal.scss';
         </div>
         <div className="modal-content">
           {this.props.children}
+          {ModalState.modalItems}
         </div>
       </div>
     ) : null;
