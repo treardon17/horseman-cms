@@ -13,36 +13,42 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
   constructor(props) {
     super(props);
 
-    TypeState.addOrUpdateType({ name: 'hero module' }).then((addedType) => {
-      addedType.add({ name: 'title', type: { primary: ObjectType.types.string } });
-      TypeState.addOrUpdateType(addedType);
-    });
+    // TypeState.addOrUpdateType({ name: 'hero module' }).then((addedType) => {
+    //   addedType.add({ name: 'title-section', type: { primary: ObjectType.types.string } });
+    //   TypeState.addOrUpdateType(addedType);
+    // });
   }
 
-  getModuleTypes() {
-    const moduleTypes = [];
-    const types = TypeState.orderedUserMadeTypeList;
-    for (let i = 0; i < types.length; i++) {
-      const type = types[i].data;
-      moduleTypes.push(
-        <ConstructType key={`construct-type-${type.id}`} type={type} />
-      );
-    }
-    return moduleTypes;
-  }
+  // getModuleTypes() {
+  //   const moduleTypes = [];
+  //   const types = TypeState.orderedUserMadeTypeList;
+  //   for (let i = 0; i < types.length; i++) {
+  //     const type = types[i].data;
+  //     moduleTypes.push(
+  //       <ConstructType key={`construct-type-${type.id}`} type={type} />
+  //     );
+  //   }
+  //   return moduleTypes;
+  // }
+  //
+  // render() {
+  //   const moduleTypes = this.getModuleTypes();
+  //   let child = null;
+  //   if (moduleTypes.length > 0) {
+  //     child = moduleTypes;
+  //   } else {
+  //     child = (<EmptyPage title="No Modules" message="Press the + button in the bottom right to add a module" />);
+  //   }
+  //   return (
+  //     <Page id="Modules" title="Modules">
+  //       {child}
+  //     </Page>
+  //   );
+  // }
 
   render() {
-    const moduleTypes = this.getModuleTypes();
-    let child = null;
-    if (moduleTypes.length > 0) {
-      child = moduleTypes;
-    } else {
-      child = (<EmptyPage title="No Modules" message="Press the + button in the bottom right to add a module" />);
-    }
     return (
-      <Page id="Modules" title="Modules">
-        {child}
-      </Page>
+      <div className="modules" />
     );
   }
 }

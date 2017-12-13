@@ -3,6 +3,7 @@ import { PageTransition, Route } from 'react-transition-router';
 import Sidebar from './modules/Sidebar/Sidebar';
 import AppState from './state/AppState';
 import CircleMenu from './modules/CircleMenu/CircleMenu';
+import Modal from './modules/Modal/Modal';
 import TypeState from './state/TypeState.js';
 // import styles
 import './styles/base.scss';
@@ -53,6 +54,9 @@ export default class Routes extends React.Component {
             routes={this.state.routes}
             serialize={false}
           />
+          <Modal>
+            <h1>hello world</h1>
+          </Modal>
           <CircleMenu menuItems={appState.circleMenuItems} />
         </div>
       </div>

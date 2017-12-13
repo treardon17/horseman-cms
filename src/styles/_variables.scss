@@ -27,7 +27,7 @@ $base:             #122235;
 $shade1:           #44637F;
 $shade2:           #A4BAD1;
 $shade3:           #DBE4ED;
-$white:           #FEFFFF;
+$white:            #FEFFFF;
 
 // $dark:            #17252A;
 // $darkGreen:       #2B7A78;
@@ -65,3 +65,6 @@ $border-style: 2px solid $base;
 
 // TRANSITIONS
 $transitionSlow: 0.33s;
+
+// SHADOWS
+$box-shadow: 1px 1px 45px rgba($base, 0.7);

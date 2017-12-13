@@ -1,0 +1,55 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+.modal{
+  position: fixed;
+  top: 0; bottom: 0; right: 0; left: 0;
+  z-index: $zTop;
+
+  &.closed{
+    pointer-events: none;
+  }
+
+  .background{
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
+    background-color: $black;
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  .modal-container{
+    max-width: 100%;
+    width: 650px;
+    margin: $medium-spacing auto;
+    box-shadow: $box-shadow;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+
+    .modal-header{
+      height: 45px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $shade1;
+
+      .back-btn, .exit-btn{
+        cursor: pointer;
+        svg{
+          margin: 0 $medium-spacing;
+          stroke: $white;
+        }
+      }
+
+      .back-btn{ }
+      .exit-btn{ }
+    }
+
+    .modal-content{
+      padding: $medium-spacing;
+      background-color: $white;
+      position: relative;
+    }
+  }
+}

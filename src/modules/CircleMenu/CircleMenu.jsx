@@ -19,7 +19,6 @@ export default class CircleMenu extends React.Component {
     this.angle = 90;
   }
 
-
   getButtons() {
     const numButtons = this.props.menuItems.length;
 
@@ -54,7 +53,7 @@ export default class CircleMenu extends React.Component {
                     duration={rotateDuration}
                     delay={rotateDelay}
                   >
-                    <ActionButton icon={button.icon} onClick={button.onClick} />
+                    <ActionButton icon={button.icon} onClick={() => { this.handleButtonClick(button.onClick); }} />
                   </VelocityComponent>
                 </div>
               </div>
@@ -66,10 +65,23 @@ export default class CircleMenu extends React.Component {
     return buttons;
   }
 
+  handleButtonClick(callback) {
+    this.closeMenu();
+    if (typeof callback === 'function') {
+      callback();
+    }
+  }
+
   toggleMenu() {
-    this.setState({
-      open: !this.state.open,
-    });
+    this.setState({ open: !this.state.open });
+  }
+
+  closeMenu() {
+    this.setState({ open: false });
+  }
+
+  openMenu() {
+    this.setState({ open: true });
   }
 
   render() {
