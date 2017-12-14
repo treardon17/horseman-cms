@@ -6,9 +6,7 @@
   top: 0; bottom: 0; right: 0; left: 0;
   z-index: $zTop;
 
-  &.closed{
-    pointer-events: none;
-  }
+  &.closed{ pointer-events: none; }
 
   .background{
     position: absolute;
@@ -50,6 +48,15 @@
       padding: $medium-spacing;
       background-color: $white;
       position: relative;
+      transition: height $transitionSlow ease-in-out;
+      max-height: calc(100vh - 50px);
+      // min-height: 50px;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      .modal-transition-container{
+        *{ backface-visibility: hidden !important; }
+      }
     }
   }
 }

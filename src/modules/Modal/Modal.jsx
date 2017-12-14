@@ -13,27 +13,60 @@ import './Modal.scss';
   constructor(props) {
     super(props);
     this.animationDuration = 600;
+    this.modalHeight = null;
+    this.modalContent = null;
+
+    this.state = {
+      currentView: ModalState.currentView
+    };
+
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        ModalState.push({ page: (<h1>hey there!</h1>) });
+      }, 250 * i);
+    }
+  }
+
+  getModalContentHeight() {
+    if (this.modalContent) {
+      const element = this.modalContent;
+      const computedStyle = getComputedStyle(element);
+      // height with padding
+      let elementHeight = element.clientHeight;
+      elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+      return elementHeight;
+    }
+    return 0;
   }
 
   navigateBack() {
+    const modalHeight = this.getModalContentHeight();
+    this.modalHeight = modalHeight;
+    ModalState.pop();
+    // We need to set this to null so
+    // the enter/exit animation can happen.
+    // The actual navigation stuff happens in the
+    // pageDidExit function
+    this.setState({ currentView: null });
   }
 
   close() {
     ModalState.close();
   }
 
-  didEnter() { }
-  didClose() { }
+  pageDidExit() {
+    this.setState({ currentView: ModalState.currentView }, () => {
+      this.modalHeight = null;
+    });
+  }
 
+  modalDidEnter() { }
+  modalDidClose() { }
 
   render() {
-    // The faded background behind the modal
-    const background = ModalState.modalOpen ? (
-      <div className="background" onClick={this.close.bind(this)} />
-    ) : null;
-
+    const modalStyles = { minHeight: this.modalHeight || 0 };
     // The actual modal itself
-    const modal = ModalState.modalOpen ? (
+    const modal = ModalState.isOpen ? (
       <div className="modal-container">
         <div className="modal-header">
           <div className="back-btn" onClick={this.navigateBack.bind(this)}>
@@ -43,14 +76,24 @@ import './Modal.scss';
             <ISVG src="/assets/img/featherIcons/x.svg" />
           </div>
         </div>
-        <div className="modal-content">
-          {this.props.children}
-          {ModalState.modalItems}
+        <div className="modal-content" style={modalStyles} ref={(el) => { this.modalContent = el; }}>
+          <VelocityTransitionGroup
+            className="modal-content-transitioner"
+            enter={{ animation: { translateX: ['0%', '-100%'], translateZ: 0, }, duration: this.animationDuration/2, easing: 'ease-in-out' }}
+            leave={{ animation: { translateX: ['100%', '0%'], translateZ: 0 }, duration: this.animationDuration/2, easing: 'ease-in-out', complete: this.pageDidExit.bind(this) }}
+          >
+            {this.state.currentView}
+          </VelocityTransitionGroup>
         </div>
       </div>
     ) : null;
 
-    const classes = `modal ${(ModalState.modalOpen ? 'open' : 'closed')}`;
+    // The faded background behind the modal
+    const background = ModalState.isOpen ? (
+      <div className="background" onClick={this.close.bind(this)} />
+    ) : null;
+
+    const classes = `modal ${(ModalState.isOpen ? 'open' : 'closed')}`;
 
     return (
       <div className={classes}>
