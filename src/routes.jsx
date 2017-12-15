@@ -4,6 +4,7 @@ import Sidebar from './modules/Sidebar/Sidebar';
 import AppState from './state/AppState';
 import CircleMenu from './modules/CircleMenu/CircleMenu';
 import Modal from './modules/Modal/Modal';
+import ModalState from './state/ModalState.js';
 import TypeState from './state/TypeState.js';
 // import styles
 import './styles/base.scss';
@@ -54,7 +55,7 @@ export default class Routes extends React.Component {
             routes={this.state.routes}
             serialize={false}
           />
-          <Modal />
+          <Modal ref={(ref) => { ModalState.modal = ref; }} />
           <CircleMenu menuItems={appState.circleMenuItems} />
         </div>
       </div>

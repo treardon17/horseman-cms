@@ -18,9 +18,14 @@ import './Modal.scss';
     this.modalContent = null;
 
     this.state = {
-      currentView: ModalState.currentView,
-      isPushing: false
+      currentView: ModalState.currentView
     };
+
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        ModalState.pushModal({ page: <h1>testing!</h1>, animate: false });
+      }, 250*i);
+    }
   }
 
   getModalContentHeight() {
@@ -43,20 +48,18 @@ import './Modal.scss';
     // the enter/exit animation can happen.
     // The actual navigation stuff happens in the
     // pageDidExit function
-    this.setState({
-      currentView: null,
-      isPushing: false
-    });
+    this.setState({ currentView: null });
   }
 
-  pushHistory({ page }) {
+  pushHistory({ page, animate }) {
     const modalHeight = this.getModalContentHeight();
     this.modalHeight = modalHeight;
     ModalState.push({ page });
-    this.setState({
-      currentView: null,
-      isPushing: true
-    });
+    if (animate) {
+      this.setState({ currentView: null });
+    } else {
+      this.setState({ currentView: ModalState.currentView });
+    }
   }
 
   close() {
@@ -88,8 +91,8 @@ import './Modal.scss';
         <div className="modal-content" style={modalStyles} ref={(el) => { this.modalContent = el; }}>
           <VelocityTransitionGroup
             className="modal-content-transitioner"
-            enter={{ animation: { translateX: ['0%', `${this.state.isPushing ? '' : '-'}${'100%'}`], translateZ: 0, }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out' }}
-            leave={{ animation: { translateX: [`${this.state.isPushing ? '-' : ''}${'100%'}`, '0%'], translateZ: 0 }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out', complete: this.pageDidExit.bind(this) }}
+            enter={{ animation: { translateX: ['0%', `${ModalState.isPushing ? '' : '-'}${'100%'}`], translateZ: 0, }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out' }}
+            leave={{ animation: { translateX: [`${ModalState.isPushing ? '-' : ''}${'100%'}`, '0%'], translateZ: 0 }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out', complete: this.pageDidExit.bind(this) }}
           >
             {this.state.currentView}
           </VelocityTransitionGroup>

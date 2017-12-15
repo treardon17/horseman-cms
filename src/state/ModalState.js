@@ -6,6 +6,8 @@ class ModalState {
   * @type {Array}
   */
   @observable history = [];
+  @observable isPushing = false;
+  @observable modal = null;
 
   // /////////////////////////
   // GETTERS -----------------
@@ -33,11 +35,25 @@ class ModalState {
   }
 
   @action push({ page }) {
+    this.isPushing = true;
     this.history.push(page);
   }
 
+  @action pushModal({ page }) {
+    this.isPushing = true;
+    if (this.modal) this.modal.pushHistory({ page });
+    else this.push({ page });
+  }
+
   @action pop() {
+    this.isPushing = false;
     this.history.pop();
+  }
+
+  @action popModal() {
+    this.isPushing = false;
+    if (this.modal) this.modal.popHistory();
+    else this.pop();
   }
 }
 
