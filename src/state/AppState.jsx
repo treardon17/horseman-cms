@@ -5,7 +5,7 @@ import React from 'react';
 
 class AppState {
   @observable circleMenuItems = [
-    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.push({ page: (<h1>hello world</h1>) }); } },
+    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.pushModal({ page: <h1>hello world</h1> }); } },
     { icon: '/assets/img/featherIcons/image.svg', onClick: () => {} },
     { icon: '/assets/img/featherIcons/layers.svg', onClick: () => {} }
   ];
