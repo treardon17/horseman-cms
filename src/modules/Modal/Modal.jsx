@@ -12,19 +12,15 @@ import './Modal.scss';
 @observer export default class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.animationDuration = 600;
+    this.modalAnimationDuration = 600;
+    this.modalPageAnimationDuration = 200;
     this.modalHeight = null;
     this.modalContent = null;
 
     this.state = {
-      currentView: ModalState.currentView
+      currentView: ModalState.currentView,
+      isPushing: false
     };
-
-    for (let i = 0; i < 5; i++) {
-      setTimeout(() => {
-        ModalState.push({ page: (<h1>hey there!</h1>) });
-      }, 250 * i);
-    }
   }
 
   getModalContentHeight() {
@@ -39,7 +35,7 @@ import './Modal.scss';
     return 0;
   }
 
-  navigateBack() {
+  popHistory() {
     const modalHeight = this.getModalContentHeight();
     this.modalHeight = modalHeight;
     ModalState.pop();
@@ -47,7 +43,20 @@ import './Modal.scss';
     // the enter/exit animation can happen.
     // The actual navigation stuff happens in the
     // pageDidExit function
-    this.setState({ currentView: null });
+    this.setState({
+      currentView: null,
+      isPushing: false
+    });
+  }
+
+  pushHistory({ page }) {
+    const modalHeight = this.getModalContentHeight();
+    this.modalHeight = modalHeight;
+    ModalState.push({ page });
+    this.setState({
+      currentView: null,
+      isPushing: true
+    });
   }
 
   close() {
@@ -69,7 +78,7 @@ import './Modal.scss';
     const modal = ModalState.isOpen ? (
       <div className="modal-container">
         <div className="modal-header">
-          <div className="back-btn" onClick={this.navigateBack.bind(this)}>
+          <div className="back-btn" onClick={this.popHistory.bind(this)}>
             <ISVG src="/assets/img/featherIcons/arrow-left.svg" />
           </div>
           <div className="exit-btn" onClick={this.close.bind(this)}>
@@ -79,8 +88,8 @@ import './Modal.scss';
         <div className="modal-content" style={modalStyles} ref={(el) => { this.modalContent = el; }}>
           <VelocityTransitionGroup
             className="modal-content-transitioner"
-            enter={{ animation: { translateX: ['0%', '-100%'], translateZ: 0, }, duration: this.animationDuration/2, easing: 'ease-in-out' }}
-            leave={{ animation: { translateX: ['100%', '0%'], translateZ: 0 }, duration: this.animationDuration/2, easing: 'ease-in-out', complete: this.pageDidExit.bind(this) }}
+            enter={{ animation: { translateX: ['0%', `${this.state.isPushing ? '' : '-'}${'100%'}`], translateZ: 0, }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out' }}
+            leave={{ animation: { translateX: [`${this.state.isPushing ? '-' : ''}${'100%'}`, '0%'], translateZ: 0 }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out', complete: this.pageDidExit.bind(this) }}
           >
             {this.state.currentView}
           </VelocityTransitionGroup>
@@ -99,16 +108,16 @@ import './Modal.scss';
       <div className={classes}>
         <VelocityTransitionGroup
           className="modal-transition-container"
-          enter={{ animation: { opacity: [0.6, 0] }, duration: this.animationDuration, easing: 'ease-in-out' }}
-          leave={{ animation: { opacity: [0, 0.6] }, duration: this.animationDuration, easing: 'ease-in-out' }}
+          enter={{ animation: { opacity: [0.6, 0] }, duration: this.modalAnimationDuration, easing: 'ease-in-out' }}
+          leave={{ animation: { opacity: [0, 0.6] }, duration: this.modalAnimationDuration, easing: 'ease-in-out' }}
           runOnMount
         >
           {background}
         </VelocityTransitionGroup>
         <VelocityTransitionGroup
           className="modal-transition-container"
-          enter={{ animation: { top: ['0vh', '-100vh'] }, duration: this.animationDuration, easing: 'ease-in-out' }}
-          leave={{ animation: { top: ['-100vh', '0vh'] }, duration: this.animationDuration, easing: 'ease-in-out' }}
+          enter={{ animation: { top: ['0vh', '-100vh'] }, duration: this.modalAnimationDuration, easing: 'ease-in-out' }}
+          leave={{ animation: { top: ['-100vh', '0vh'] }, duration: this.modalAnimationDuration, easing: 'ease-in-out' }}
           runOnMount
         >
           {modal}
