@@ -20,12 +20,6 @@ import './Modal.scss';
     this.state = {
       currentView: ModalState.currentView
     };
-
-    for (let i = 0; i < 5; i++) {
-      setTimeout(() => {
-        ModalState.pushModal({ page: <h1>testing!</h1>, animate: false });
-      }, 250*i);
-    }
   }
 
   getModalContentHeight() {
