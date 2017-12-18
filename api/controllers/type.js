@@ -69,7 +69,7 @@ class TypeController {
     } else {
       // There isn't anything in the types object
       // we should make a parent object
-      return new ObjectType({ name: 'Parent Type Container', type: { primary: ObjectType.types.object } });
+      return new ObjectType({ name: 'Parent Type Container', typePrimary: ObjectType.types.object });
     }
   }
 

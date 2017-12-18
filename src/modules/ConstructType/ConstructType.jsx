@@ -37,9 +37,9 @@ export default class ConstructType extends React.Component {
     let validTypeNames = [];
     if (type === 'primary') {
       validTypeNames = TypeState.genericTypeNames;
-    } else if (type === Type.types.object) {
+    } else if (type === ObjectType.types.object) {
       validTypeNames = TypeState.userMadeTypeNames;
-    } else if (type === Type.types.list) {
+    } else if (type === ObjectType.types.list) {
       validTypeNames = TypeState.secondaryTypeNames;
     }
     const optionsList = [];
@@ -74,13 +74,14 @@ export default class ConstructType extends React.Component {
       // Only give the option to edit the secondary type if the primary
       // type is a list or an object
       let secondaryType = null;
-      if (part.type.primary === ObjectType.types.module || part.type.primary === ObjectType.types.list) {
+      if (part.typePrimary === ObjectType.types.module || part.typePrimary === ObjectType.types.list) {
         secondaryType = (
           <Select
-            value={part.type.secondary}
+            key={`field-type-secondary-${part.id}-${i}`}
+            value={part.typeSecondary}
             className={'secondary-type'}
-            options={this.getFormattedTypeList(part.type.primary)}
-            onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'secondary', typeID: part.id }); }}
+            options={this.getFormattedTypeList(part.typePrimary)}
+            onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'typeSecondary', typeID: part.id }); }}
           />
         );
       }
@@ -89,7 +90,7 @@ export default class ConstructType extends React.Component {
         <div className="field" key={`module-field-${part.id}`}>
           <div className="name-container">
             <ContentEditable
-              key={`field-name-${part.id}`}
+              key={`field-name-${part.id}-${i}`}
               html={part.name}
               className={`field-name input-field`}
               onClick={this.highlightAll.bind(this)}
@@ -100,14 +101,15 @@ export default class ConstructType extends React.Component {
             <div className="slug-name sub-text">{part.slug}</div>
           </div>
           <Select
-            value={part.primary}
+            key={`field-type-primary-${part.id}-${i}`}
+            value={part.typePrimary}
             className={'primary-type'}
             options={this.getFormattedTypeList('primary')}
-            onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'primary', typeID: part.id }); }}
+            onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'typePrimary', typeID: part.id }); }}
           />
           {secondaryType}
           <ContentEditable
-            key={`field-description-${part.id}`}
+            key={`field-description-${part.id}-${i}`}
             html={part.description}
             className={`field-description input-field`}
             onClick={this.highlightAll.bind(this)}
@@ -184,10 +186,11 @@ export default class ConstructType extends React.Component {
    * @param  {type} event description
    * @param  {type} val     description
    * @param  {type} partID  description
+   * @param  {type} subPartID If there's a nested object we need to access
    * @param  {type} typeID  The ID of the item being edited
    * @return {type}         description
    */
-  handleChangePart({ event, val, partID, typeID }) {
+  handleChangePart({ event, val, partID, subPartID, typeID }) {
     this.saveStateIfNeeded();
     const type = this.state.type;
     const editObject = {};

@@ -25,11 +25,12 @@ class ObjectType {
       else this[key] = arg[key]
     }
 
-    if (!this.children) this.children = { }
-    if (!this.orderBy) this.orderBy = Object.keys((this.parent.children || {})).length
-    if (!this.id) this.id = IDUtil.guid()
-    if (!this.name) this.setName({ name: 'New Type' })
-    if (!this.type) this.type = { primary: ObjectType.types.empty, secondary: ObjectType.types.empty }
+    if (this.children == null) this.children = { }
+    if (this.orderBy == null) this.orderBy = Object.keys((this.parent.children || {})).length
+    if (this.id == null) this.id = IDUtil.guid()
+    if (this.name  == null) this.setName({ name: 'New Type' })
+    if (this.typePrimary == null) this.typePrimary = ObjectType.types.empty
+    if (this.typeSecondary == null) this.typeSecondary = ObjectType.types.empty
 
     // We never want to mutate this ID
     Object.freeze(this.id)
@@ -218,14 +219,14 @@ class ObjectType {
       // If the child has children, it's just another object
       if (Object.keys(child.children).length > 0) {
         object[child.slug] = child.buildEmptyObject()
-      } else if (child.type.primary === ObjectType.types.string) {
+      } else if (child.typePrimary === ObjectType.types.string) {
         // Otherwise we take the type that the object has and create an empty version of it
         object[child.slug] = ''
-      } else if (child.type.primary === ObjectType.types.list) {
+      } else if (child.typePrimary === ObjectType.types.list) {
         object[child.slug] = []
-      } else if (child.type.primary === ObjectType.types.number) {
+      } else if (child.typePrimary === ObjectType.types.number) {
         object[child.slug] = Number.MIN_SAFE_INTEGER
-      } else if (child.type.primary === ObjectType.types.empty) {
+      } else if (child.typePrimary === ObjectType.types.empty) {
         object[child.slug] = '__empty__'
       }
     }
