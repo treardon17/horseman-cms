@@ -93,6 +93,10 @@
       }
 
       .Select{
+        position: relative;
+        z-index: 500;
+        &-menu-outer{
+        }
       }
 
       .field-description{

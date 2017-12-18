@@ -22,8 +22,12 @@ export default class CreateType extends Creator {
 
     this.state = {
       ...super.state,
-      current: this.props.type || new ObjectType({ name: 'Module title' }),
+      current: this.props.type || new ObjectType({ name: 'Module title', typePrimary: ObjectType.types.object }),
     };
+
+    // setTimeout(() => {
+    //   debugger // eslint-disable-line
+    // }, 5000);
   }
 
   /**

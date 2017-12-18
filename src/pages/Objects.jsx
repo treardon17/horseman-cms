@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppState from '../state/AppState.jsx';
+import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 import Page from './Page.jsx';
 // import modules here
 
@@ -10,9 +11,16 @@ export default class Objects extends React.Component {
   }
 
   render() {
+    let child = null;
+    // if (moduleTypes.length > 0) {
+    //   child = moduleTypes;
+    // } else {
+    child = (<EmptyPage title="No Module Types" message="Press the + button in the bottom right to add a module" />);
+    // }
+    //
     return (
       <Page id="Objects" title="Objects">
-        <div />
+        {child}
       </Page>
     );
   }

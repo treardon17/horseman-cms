@@ -8,7 +8,7 @@ import CreateType from '../modules/CreateType/CreateType';
 
 class AppState {
   @observable circleMenuItems = [
-    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.pushModal({ page: <CreateType /> }); } },
+    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.pushModal({ page: <CreateType />, title: 'Create Module Type' }); } },
     { icon: '/assets/img/featherIcons/image.svg', onClick: () => {} },
     { icon: '/assets/img/featherIcons/layers.svg', onClick: () => {} }
   ];

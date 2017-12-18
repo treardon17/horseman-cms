@@ -18,7 +18,7 @@ import './Modal.scss';
     this.modalContent = null;
 
     this.state = {
-      currentView: ModalState.currentView
+      currentView: ModalState.currentView,
     };
   }
 
@@ -45,10 +45,10 @@ import './Modal.scss';
     this.setState({ currentView: null });
   }
 
-  pushHistory({ page, animate }) {
+  pushHistory({ page, title, animate }) {
     const modalHeight = this.getModalContentHeight();
     this.modalHeight = modalHeight;
-    ModalState.push({ page });
+    ModalState.push({ page, title });
     if (animate) {
       this.setState({ currentView: null });
     } else {
@@ -78,6 +78,7 @@ import './Modal.scss';
           <div className="back-btn" onClick={this.popHistory.bind(this)}>
             <ISVG src="/assets/img/featherIcons/arrow-left.svg" />
           </div>
+          <h3 className="modal-title">{ModalState.currentTitle}</h3>
           <div className="exit-btn" onClick={this.close.bind(this)}>
             <ISVG src="/assets/img/featherIcons/x.svg" />
           </div>

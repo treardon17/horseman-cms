@@ -1,3 +1,4 @@
+@import '../variables.scss';
 @import '_select.scss';
 
 //
@@ -33,6 +34,9 @@
 .Select-menu {
 	max-height: ($select-menu-max-height - 2px);
 	overflow-y: auto;
+	position: relative;
+	z-index: $zTop;
+	display: block;
 }
 
 

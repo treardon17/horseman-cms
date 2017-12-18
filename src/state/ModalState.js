@@ -22,7 +22,14 @@ class ModalState {
 
   @computed get currentView() {
     if (this.history.length > 0) {
-      return this.history[this.history.length - 1];
+      return this.history[this.history.length - 1].page;
+    }
+    return null;
+  }
+
+  @computed get currentTitle() {
+    if (this.history.length > 0) {
+      return this.history[this.history.length - 1].title;
     }
     return null;
   }
@@ -34,15 +41,15 @@ class ModalState {
     this.history = [];
   }
 
-  @action push({ page }) {
+  @action push({ page, title }) {
     this.isPushing = true;
-    this.history.push(page);
+    this.history.push({ page, title });
   }
 
-  @action pushModal({ page }) {
+  @action pushModal({ page, title }) {
     this.isPushing = true;
-    if (this.modal) this.modal.pushHistory({ page });
-    else this.push({ page });
+    if (this.modal) this.modal.pushHistory({ page, title });
+    else this.push({ page, title });
   }
 
   @action pop() {

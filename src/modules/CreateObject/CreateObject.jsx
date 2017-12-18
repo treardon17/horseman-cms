@@ -1,20 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
+import Proptypes from 'prop-types';
+import Creator from '../Creator/Creator';
+
+import TypeState from '../../state/TypeState';
 
 // scss
 import './ConstructObject.scss';
 
-export default class ConstructObject extends React.Component {
+export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
+
+    this.state = {
+      ...super.state,
+    }
+  }
+
+  getFields() {
+
   }
 
   render() {
+    const fields = this.getFields();
     return (
       <div className="construct-object">
-        <h1>ConstructObject</h1>
+        {fields}
       </div>
     );
   }
 }
+
+CreateObject.propTypes = {
+  type: Proptypes.object,
+  objectInstance: PropTypes.object,
+};

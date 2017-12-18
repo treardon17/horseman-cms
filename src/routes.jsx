@@ -29,7 +29,7 @@ export default class Routes extends React.Component {
         <Route absolute exact path="/admin/settings" key="Settings" component={<Settings state={appState} />} />,
         <Route absolute exact path="/admin/users" key="Users" component={<Users state={appState} />} />,
         <Route absolute exact path="/admin/assets" key="Assets" component={<Assets state={appState} />} />,
-        <Route exact path="/admin/objects" key="Objects" component={<Objects state={appState} />} />,
+        <Route absolute exact path="/admin/objects" key="Objects" component={<Objects state={appState} />} />,
       ],
     };
   }
