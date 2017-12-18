@@ -303,13 +303,13 @@ export default class ConstructType extends React.Component {
   }
 
   removeModule() {
-    let slug = '';
+    let id = '';
     if (this.state.type.prevType) {
-      slug = this.state.prevType.slug;
+      id = this.state.prevType.id;
     } else {
-      slug = this.state.type.slug;
+      id = this.state.type.id;
     }
-    TypeState.removeType(slug);
+    TypeState.removeType(id);
   }
 
   render() {

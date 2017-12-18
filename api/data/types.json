@@ -2,27 +2,7 @@
   "name": "Parent Type Container",
   "slug": "parentTypeContainer",
   "typePrimary": "object",
-  "children": {
-    "41892f46-ce98c8f1-adfe87b6": {
-      "name": "hi there",
-      "slug": "hiThere",
-      "children": {
-        "526f6b39-5d7904db-b52c42d4": {
-          "children": {},
-          "orderBy": 0,
-          "id": "526f6b39-5d7904db-b52c42d4",
-          "name": "title",
-          "slug": "title",
-          "typePrimary": "string",
-          "typeSecondary": "empty"
-        }
-      },
-      "orderBy": 0,
-      "id": "41892f46-ce98c8f1-adfe87b6",
-      "typePrimary": "empty",
-      "typeSecondary": "empty"
-    }
-  },
+  "children": {},
   "orderBy": 0,
   "id": "442b89ee-5c289704-05715bca",
   "typeSecondary": "empty"
