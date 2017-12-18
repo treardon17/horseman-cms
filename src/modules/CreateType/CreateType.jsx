@@ -1,28 +1,28 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import _ from 'lodash';
+import WindowUtil from '../../../core/util/window';
 
 import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
 import ISVG from 'react-inlinesvg';
 import { VelocityTransitionGroup } from 'velocity-react';
+import Creator from '../Creator/Creator';
 
 import TypeState from '../../state/TypeState';
 import ObjectType from '../../../core/definitions/objectType';
 
 // scss
-import './ConstructType.scss';
+import './CreateType.scss';
 
-export default class ConstructType extends React.Component {
+export default class CreateType extends Creator {
   constructor(props) {
     super(props);
 
     this.state = {
-      prevType: null,
-      type: this.props.type || new ObjectType({ name: 'Module title' }),
-      needSave: false,
-      revert: false,
+      ...super.state,
+      current: this.props.type || new ObjectType({ name: 'Module title' }),
     };
   }
 
@@ -69,8 +69,8 @@ export default class ConstructType extends React.Component {
     // all messed up. So we keep an orderBy property on each part so
     // it works like it's supposed to.
     // DO NOT REMOVE THIS OR EVERYTHING GOES TO HELL
-    const partsArray = this.state.type.getOrderedList();
-    const slugs = Object.keys(this.state.type.children);
+    const partsArray = this.state.current.getOrderedList();
+    const slugs = Object.keys(this.state.current.children);
     const fields = [];
 
     // This is the formatting for all of the fields in the module type
@@ -100,8 +100,8 @@ export default class ConstructType extends React.Component {
               key={`field-name-${part.id}-${i}`}
               html={part.name}
               className={`field-name input-field`}
-              onClick={this.highlightAll.bind(this)}
-              onFocus={this.highlightAll.bind(this)}
+              onClick={WindowUtil.highlightAll}
+              onFocus={WindowUtil.highlightAll}
               onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'name', typeID: part.id }); }}
               contentEditable="plaintext-only"
             />
@@ -119,8 +119,8 @@ export default class ConstructType extends React.Component {
             key={`field-description-${part.id}-${i}`}
             html={part.description}
             className={`field-description input-field`}
-            onClick={this.highlightAll.bind(this)}
-            onFocus={this.highlightAll.bind(this)}
+            onClick={WindowUtil.highlightAll}
+            onFocus={WindowUtil.highlightAll}
             onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'description', typeID: part.id }); }}
             contentEditable="plaintext-only"
           />
@@ -131,40 +131,6 @@ export default class ConstructType extends React.Component {
       );
     }
     return fields;
-  }
-
-
-  /**
-   * getButtons - Gets the buttons (add, save, cancel) based on state and if
-   * changes have been made
-   *
-   * @return {list}  the buttons to be displayed
-   */
-  getButtons() {
-    const buttons = [];
-    buttons.push(<Button key="add-field" className="square-button" onClick={this.addField.bind(this)}>Add Field</Button>);
-    if (this.state.needSave) {
-      buttons.push(<Button key="save-type" className="square-button" onClick={this.save.bind(this)}>Save</Button>);
-      buttons.push(<Button key="cancel-type" className="square-button" onClick={this.cancel.bind(this)}>Cancel</Button>);
-    }
-    return buttons;
-  }
-
-
-  /**
-   * highlightAll - Highlights the current field so all text is selected
-   *
-   * @return {void}
-   */
-  highlightAll() {
-    // If we have a target focused
-    if (document.activeElement) {
-      // Wait until the target has finished focusing
-      setTimeout(() => {
-        // Select all text on the focused element
-        document.execCommand('selectAll', false, null);
-      }, 0);
-    }
   }
 
   // ---------------------------------
@@ -199,7 +165,7 @@ export default class ConstructType extends React.Component {
    */
   handleChangePart({ event, val, partID, subPartID, typeID }) {
     this.saveStateIfNeeded();
-    const type = this.state.type;
+    const type = this.state.current;
     const editObject = {};
     editObject[partID] = val;
     editObject.id = typeID;
@@ -209,13 +175,14 @@ export default class ConstructType extends React.Component {
 
 
   /**
-   * addField - Adds a new empty field to the type
+   * addProperty - Adds a new empty field to the type
    *
    * @return {void}
    */
-  addField() {
+  addProperty() {
+    super.addProperty();
     this.saveStateIfNeeded();
-    const type = this.state.type;
+    const type = this.state.current;
     type.add();
     this.editTypeState(type);
   }
@@ -229,7 +196,7 @@ export default class ConstructType extends React.Component {
    */
   removeField(id) {
     this.saveStateIfNeeded();
-    const type = this.state.type;
+    const type = this.state.current;
     type.remove({ id });
     this.editTypeState(type);
   }
@@ -243,32 +210,11 @@ export default class ConstructType extends React.Component {
    */
   handleNameChange(val) {
     this.saveStateIfNeeded();
-    const type = this.state.type;
+    const type = this.state.current;
     type.setName({ name: val });
     this.editTypeState(type);
   }
 
-  // ---------------------------------
-  // SAVE AND CANCEL OPERATIONS
-  // ---------------------------------
-
-
-  /**
-   * saveStateIfNeeded - When the user makes changes, this should be called before
-   * any of those changes are saved so that the user can cancel their Changes
-   * and have them reverted to this previous saved state
-   *
-   * @return {type}  description
-   */
-  saveStateIfNeeded() {
-    // We have the current, unedited version of state
-    if (!this.state.needSave) {
-      this.setState({
-        prevType: _.cloneDeep(this.state.type),
-        needSave: true,
-      });
-    }
-  }
 
   /**
    * save - Saves the changes the user made to the server
@@ -277,47 +223,22 @@ export default class ConstructType extends React.Component {
    */
   save() {
     // Save the current type to the server
-    TypeState.addOrUpdateType(this.state.type).then(() => {
-      this.setState({
-        prevType: null,
-        needSave: false,
-      });
+    TypeState.addOrUpdateType(this.state.current).then(() => {
+      super.save();
     });
   }
 
-
-  /**
-   * cancel - Reverts the changes made by the user to the state before the changes were made
-   *
-   * @return {void}
-   */
-  cancel() {
-    // Grab our last state and keep that as the current type
-    const type = this.state.prevType;
-
-    // There are issues with how ContentEditable renders
-    // because it uses dangerouslySetInnerHtml, which needs a unique key
-    // to rerender correctly, but the npm package we're using doesn't do that.
-    this.setState({
-      revert: true,
-    }, () => {
-      this.setState({
-        type,
-        prevType: null,
-        needSave: false,
-      });
-    });
-  }
 
   removeModule() {
     let id = '';
-    if (this.state.type.prevType) {
-      id = this.state.prevType.id;
+    if (this.state.current.prev) {
+      id = this.state.prev.id;
     } else {
-      id = this.state.type.id;
+      id = this.state.current.id;
     }
     TypeState.removeType(id);
   }
+
 
   render() {
     // We need this ternary here because of the content editable fields.
@@ -332,14 +253,14 @@ export default class ConstructType extends React.Component {
             <div className="module-title-data">
               <ContentEditable
                 key="module-title"
-                html={this.state.type.name}
+                html={this.state.current.name}
                 className="module-title input-field"
-                onClick={this.highlightAll.bind(this)}
-                onFocus={this.highlightAll.bind(this)}
+                onClick={WindowUtil.highlightAll}
+                onFocus={WindowUtil.highlightAll}
                 onChange={(e, val) => { this.handleNameChange(val); }}
                 contentEditable="plaintext-only"
               />
-              <h3 className="module-slug sub-text">{this.state.type.slug}</h3>
+              <h3 className="module-slug sub-text">{this.state.current.slug}</h3>
             </div>
             <div className="module-settings-container">
               <div className="remove-module" onClick={() => { this.removeModule(); }}>
@@ -374,6 +295,6 @@ export default class ConstructType extends React.Component {
   }
 }
 
-ConstructType.propTypes = {
+CreateType.propTypes = {
   type: Proptypes.object,
 };

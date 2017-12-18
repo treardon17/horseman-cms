@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 
 // scss
 import './ConstructObject.scss';

@@ -4,11 +4,11 @@ import ModalState from './ModalState.js';
 import React from 'react';
 
 // components
-import ConstructType from '../modules/ConstructType/ConstructType';
+import CreateType from '../modules/CreateType/CreateType';
 
 class AppState {
   @observable circleMenuItems = [
-    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.pushModal({ page: <ConstructType /> }); } },
+    { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.pushModal({ page: <CreateType /> }); } },
     { icon: '/assets/img/featherIcons/image.svg', onClick: () => {} },
     { icon: '/assets/img/featherIcons/layers.svg', onClick: () => {} }
   ];

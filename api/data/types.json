@@ -3,31 +3,22 @@
   "slug": "parentTypeContainer",
   "typePrimary": "object",
   "children": {
-    "0a4a2e15-89361828-6fa903f3": {
-      "name": "hero Module",
-      "slug": "heroModule",
+    "63579379-14fa6123-a43090ce": {
+      "name": "page",
+      "slug": "page",
       "children": {
-        "61a2196e-2f8b3cd0-23d56817": {
+        "8922847b-f0ca6fe9-1ab15cb1": {
           "children": {},
           "orderBy": 0,
-          "id": "61a2196e-2f8b3cd0-23d56817",
-          "name": "New Type",
-          "slug": "newType",
+          "id": "8922847b-f0ca6fe9-1ab15cb1",
+          "name": "modules",
+          "slug": "modules",
           "typePrimary": "list",
-          "typeSecondary": "0a4a2e15-89361828-6fa903f3"
-        },
-        "98029741-afd40a14-d95b0e07": {
-          "children": {},
-          "orderBy": 1,
-          "id": "98029741-afd40a14-d95b0e07",
-          "name": "New Type",
-          "slug": "newType1",
-          "typePrimary": "empty",
-          "typeSecondary": "empty"
+          "typeSecondary": "module"
         }
       },
       "orderBy": 0,
-      "id": "0a4a2e15-89361828-6fa903f3",
+      "id": "63579379-14fa6123-a43090ce",
       "typePrimary": "empty",
       "typeSecondary": "empty"
     }

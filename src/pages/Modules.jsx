@@ -6,7 +6,7 @@ import AppState from '../state/AppState.jsx';
 import TypeState from '../state/TypeState.js';
 import ObjectType from '../../core/definitions/objectType';
 // import modules here
-import ConstructType from '../modules/ConstructType/ConstructType';
+import CreateType from '../modules/CreateType/CreateType';
 import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
 
 @observer export default class Modules extends React.Component {
@@ -20,7 +20,7 @@ import EmptyPage from '../modules/EmptyPage/EmptyPage.jsx';
     for (let i = 0; i < types.length; i++) {
       const type = types[i].data;
       moduleTypes.push(
-        <ConstructType key={`construct-type-${type.id}`} type={type} />
+        <CreateType key={`construct-type-${type.id}`} type={type} />
       );
     }
     return moduleTypes;
