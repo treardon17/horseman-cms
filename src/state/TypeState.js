@@ -43,7 +43,7 @@ class TypeState {
   }
 
   @computed get secondaryTypeNames() {
-    const validGeneric = Object.keys(Type.types).filter(val => val !== ObjectType.types.object && val !== ObjectType.types.list);
+    const validGeneric = Object.keys(ObjectType.types).filter(val => val !== ObjectType.types.object && val !== ObjectType.types.list);
     if (this.userMadeTypes instanceof ObjectType) {
       return validGeneric.concat(this.userMadeTypeNames);
     }
@@ -56,7 +56,7 @@ class TypeState {
 
   @computed get userMadeTypeNames() {
     if (this.userMadeTypes instanceof ObjectType) {
-      return this.userMadeTypes.getOrderedList().map(type => type.name);
+      return this.userMadeTypes.getOrderedList().map(type => ({ slug: type.data.slug, id: type.data.id }));
     }
     return [];
   }

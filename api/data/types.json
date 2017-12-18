@@ -2,7 +2,36 @@
   "name": "Parent Type Container",
   "slug": "parentTypeContainer",
   "typePrimary": "object",
-  "children": {},
+  "children": {
+    "0a4a2e15-89361828-6fa903f3": {
+      "name": "hero Module",
+      "slug": "heroModule",
+      "children": {
+        "61a2196e-2f8b3cd0-23d56817": {
+          "children": {},
+          "orderBy": 0,
+          "id": "61a2196e-2f8b3cd0-23d56817",
+          "name": "New Type",
+          "slug": "newType",
+          "typePrimary": "list",
+          "typeSecondary": "0a4a2e15-89361828-6fa903f3"
+        },
+        "98029741-afd40a14-d95b0e07": {
+          "children": {},
+          "orderBy": 1,
+          "id": "98029741-afd40a14-d95b0e07",
+          "name": "New Type",
+          "slug": "newType1",
+          "typePrimary": "empty",
+          "typeSecondary": "empty"
+        }
+      },
+      "orderBy": 0,
+      "id": "0a4a2e15-89361828-6fa903f3",
+      "typePrimary": "empty",
+      "typeSecondary": "empty"
+    }
+  },
   "orderBy": 0,
   "id": "442b89ee-5c289704-05715bca",
   "typeSecondary": "empty"

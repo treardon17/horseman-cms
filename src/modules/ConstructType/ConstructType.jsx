@@ -35,6 +35,7 @@ export default class ConstructType extends React.Component {
    */
   getFormattedTypeList(type) {
     let validTypeNames = [];
+
     if (type === 'primary') {
       validTypeNames = TypeState.genericTypeNames;
     } else if (type === ObjectType.types.object) {
@@ -45,7 +46,13 @@ export default class ConstructType extends React.Component {
     const optionsList = [];
     for (let i = 0; i < validTypeNames.length; i++) {
       const value = validTypeNames[i];
-      optionsList.push({ value, label: value });
+      // If we're dealing with a user made type
+      if (value.id && value.slug) {
+        optionsList.push({ value: value.id, label: value.slug });
+      } else {
+        // We're looking at a generic type
+        optionsList.push({ value, label: value });
+      }
     }
     return optionsList;
   }
