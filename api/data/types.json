@@ -16,6 +16,15 @@
           "slug": "modules",
           "typePrimary": "list",
           "typeSecondary": "module"
+        },
+        "820d3080-76216b4e-9b795e93": {
+          "children": {},
+          "orderBy": 1,
+          "id": "820d3080-76216b4e-9b795e93",
+          "name": "name",
+          "slug": "name",
+          "typePrimary": "string",
+          "typeSecondary": "empty"
         }
       },
       "orderBy": 0,
