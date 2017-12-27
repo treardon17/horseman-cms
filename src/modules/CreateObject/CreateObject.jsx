@@ -2,10 +2,13 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import Creator from '../Creator/Creator';
 
+import DataState from '../../state/DataState';
 import TypeState from '../../state/TypeState';
 
+import ObjectType from '../../../core/definitions/objectType';
+
 // scss
-import './ConstructObject.scss';
+import './CreateObject.scss';
 
 /**
  * Flow ---
@@ -34,17 +37,38 @@ export default class CreateObject extends Creator {
 
     this.state = {
       ...super.state,
-    }
+    };
   }
 
   getFields() {
+    const fields = [];
+    const childObject = this.props.childObject;
+    if (childObject) {
+      const { _typeID, _id } = childObject;
+      const type = TypeState.userMadeTypes.get(_typeID);
+      const keys = Object.keys(type.children);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const child = type.get(key);
 
+        if (child.typePrimary === ObjectType.types.module) {
+          // We need to be able to recursively call subtypes here
+          const field = (<CreateObject key={`construct-object-${_id}-${i}`} childObject={""} keyIndex={i} />);
+          fields.push(field);
+        } else if (child.typePrimary === ObjectType.types.string) {
+          fields.push(<input key={`${ObjectType.types.string}-${_id}`} data-type={ObjectType.types.string} />);
+        } else if (child.typePrimary === ObjectType.types.number) {
+          fields.push(<input key={`${ObjectType.types.number}-${_id}`} data-type={ObjectType.types.number} />);
+        }
+      }
+    }
+    return fields;
   }
 
   render() {
     const fields = this.getFields();
     return (
-      <div className="construct-object">
+      <div className="create-object">
         {fields}
       </div>
     );
@@ -52,6 +76,6 @@ export default class CreateObject extends Creator {
 }
 
 CreateObject.propTypes = {
-  type: Proptypes.object,
-  objectInstance: PropTypes.object,
+  childObject: Proptypes.object,
+  keyIndex: Proptypes.number,
 };
