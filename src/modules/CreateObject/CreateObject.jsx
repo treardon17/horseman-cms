@@ -50,15 +50,16 @@ export default class CreateObject extends Creator {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const child = type.get(key);
+        const childVal = childObject[child.slug];
 
         if (child.typePrimary === ObjectType.types.module) {
           // We need to be able to recursively call subtypes here
-          const field = (<CreateObject key={`construct-object-${_id}-${i}`} childObject={""} keyIndex={i} />);
+          const field = (<CreateObject key={`construct-object-${_id}-${i}`} childObject={childVal} keyIndex={i} />);
           fields.push(field);
         } else if (child.typePrimary === ObjectType.types.string) {
-          fields.push(<input key={`${ObjectType.types.string}-${_id}`} data-type={ObjectType.types.string} />);
+          fields.push(<input key={`${ObjectType.types.string}-${_id}`} value={childVal} data-type={ObjectType.types.string} />);
         } else if (child.typePrimary === ObjectType.types.number) {
-          fields.push(<input key={`${ObjectType.types.number}-${_id}`} data-type={ObjectType.types.number} />);
+          fields.push(<input key={`${ObjectType.types.number}-${_id}`} value={childVal} data-type={ObjectType.types.number} />);
         }
       }
     }

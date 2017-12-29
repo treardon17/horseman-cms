@@ -21,13 +21,17 @@ export default class Objects extends React.Component {
 
   setupChildren() {
     setTimeout(() => {
-      const type = TypeState.userMadeTypes.get('d42b09f9-5e8c3695-9f24b6eb');
-      console.log('type is', type);
-      const instance = type.createObjectInstance();
-      console.log('instance is: ', instance);
-      const child = <CreateObject key="1" childObject={instance} />;
-      this.setState({
-        children: [child],
+      // const type = TypeState.userMadeTypes.get('d42b09f9-5e8c3695-9f24b6eb');
+      // console.log('type is', type);
+      // const instance = type.createObjectInstance();
+      // DataState.addOrUpdateData(instance);
+      // console.log('instance is: ', instance);
+      DataState.getData('c90e3392-bc664dfc-45d6f25d').then((instance) => {
+        console.log('instance', instance);
+        const child = <CreateObject key="1" childObject={instance} />;
+        this.setState({
+          children: [child],
+        });
       });
     }, 5000);
   }

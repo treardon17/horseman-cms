@@ -1,1 +1,9 @@
-{}
+{
+  "c90e3392-bc664dfc-45d6f25d": {
+    "_id": "c90e3392-bc664dfc-45d6f25d",
+    "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
+    "_slug": "page",
+    "modules": [],
+    "name": "Hello world"
+  }
+}

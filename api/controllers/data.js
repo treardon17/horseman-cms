@@ -25,6 +25,7 @@ class DataController {
          FileManager.fileToObject({ path: '../data/data.json' }).then(dataObject => {
            // Set our data object
            this.data = dataObject;
+           resolve();
          }).catch((error) => {
            // If something bad happened, we need to abort
            // so we start fresh with an empty object
@@ -69,6 +70,7 @@ class DataController {
     * @param {[Object]} data [The new data that should be added/updated]
     */
    addOrUpdateData({ data }) {
+     console.log('data is: ', data);
      return new Promise((resolve, reject) => {
        this.initParentIfNeeded().then(() => {
          const { _id, _typeID } = data;
@@ -122,7 +124,7 @@ class DataController {
   getAllData() {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
-        return this.data;
+        resolve(this.data);
       }).catch(error => {
         reject(error);
       });
@@ -132,7 +134,7 @@ class DataController {
   getData({ id }) {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
-        return this.data[id];
+        resolve(this.data[id]);
       }).catch(error => {
         reject(error);
       });
@@ -147,51 +149,48 @@ class DataController {
   */
 
   handleUpdateData(req, res) {
-    return new Promise(() => {
-      this.initParentIfNeeded().then(() => {
-        const data = req.body;
-        console.log('Handling data');
-        this.addOrUpdateData({ data }).then((addedData) => {
-          res.header('Content-Type', 'application/json').status(201).send({ data: addedData });
-        }).catch(error => {
-          res.header('Content-Type', 'application/json').status(500).send({ error });
-        });
+    this.initParentIfNeeded().then(() => {
+      const data = req.body;
+      console.log('Handling data', data);
+      this.addOrUpdateData({ data }).then((addedData) => {
+        res.header('Content-Type', 'application/json').status(201).send({ data: addedData });
       }).catch(error => {
         res.header('Content-Type', 'application/json').status(500).send({ error });
       });
+    }).catch(error => {
+      res.header('Content-Type', 'application/json').status(500).send({ error });
     });
   }
 
   handleGetData(req, res) {
-    return new Promise(() => {
-      this.initParentIfNeeded().then(() => {
-        const id = req.params.id;
-        let data = {};
-        // If the user is asking for a specific piece of data
-        if (id) {
-          data = this.getData({ id });
-        } else {
-          data = this.getAllData();
-        }
-        res.header('Content-Type', 'application/json').status(200).send({ data });
-      }).catch((error) => {
-        res.header('Content-Type', 'application/json').status(500).send({ error });
-      });
+    this.initParentIfNeeded().then(() => {
+      const id = req.params.id;
+      console.log('id is:', id);
+      // If the user is asking for a specific piece of data
+      if (id) {
+        this.getData({ id }).then((data) => {
+          res.header('Content-Type', 'application/json').status(200).send({ data });
+        });
+      } else {
+        this.getAllData().then((data) => {
+          res.header('Content-Type', 'application/json').status(200).send({ data });
+        });
+      }
+    }).catch((error) => {
+      res.header('Content-Type', 'application/json').status(500).send({ error });
     });
   }
 
   handleDeleteData(req, res) {
-    return new Promise(() => {
-      this.initParentIfNeeded().then(() => {
-        const id = req.params.id;
-        this.deleteData({ id }).then(() => {
-          res.header('Content-Type', 'application/json').status(200).send({ success: true, id });
-        }).catch(error => {
-          res.header('Content-Type', 'application/json').status(500).send({ error });
-        });
-      }).catch((error) => {
+    this.initParentIfNeeded().then(() => {
+      const id = req.params.id;
+      this.deleteData({ id }).then(() => {
+        res.header('Content-Type', 'application/json').status(200).send({ success: true, id });
+      }).catch(error => {
         res.header('Content-Type', 'application/json').status(500).send({ error });
       });
+    }).catch((error) => {
+      res.header('Content-Type', 'application/json').status(500).send({ error });
     });
   }
 }

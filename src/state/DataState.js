@@ -47,7 +47,7 @@ class DataState {
         API.makeQuery({
           method: 'post',
           query: `/api/data`,
-          body: newData
+          body: JSON.stringify(data)
         }).then(() => {
           this.updateUserData().then((updatedData) => {
             resolve(updatedData);
@@ -64,10 +64,23 @@ class DataState {
       API.makeQuery({
         method: 'delete',
         query: `/api/data/${id}`
-      }).then((types) => {
+      }).then(() => {
         this.updateUserData().then((updatedData) => {
           resolve(updatedData);
         });
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  @action getData(id) {
+    return new Promise((resolve, reject) => {
+      API.makeQuery({
+        method: 'get',
+        query: `/api/data/${id}`
+      }).then((newData) => {
+        resolve(newData.data);
       }).catch((error) => {
         reject(error);
       });
