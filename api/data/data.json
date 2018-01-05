@@ -4,6 +4,7 @@
     "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
     "_slug": "page",
     "modules": [],
-    "name": "Hello world"
+    "name": "Hi there!",
+    "number": 5
   }
 }

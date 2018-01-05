@@ -1,12 +1,18 @@
+// Helpers
 import React from 'react';
 import Proptypes from 'prop-types';
 import Creator from '../Creator/Creator';
 import _ from 'lodash';
 
+// State
 import DataState from '../../state/DataState';
 import TypeState from '../../state/TypeState';
 
+// Definitions
 import ObjectType from '../../../core/definitions/objectType';
+
+// Modules
+import CreateObjectField from '../CreateObjectField/CreateObjectField';
 
 // scss
 import './CreateObject.scss';
@@ -41,32 +47,6 @@ export default class CreateObject extends Creator {
       current: this.props.childObject,
     };
   }
-
-  // getFields() {
-  //   const fields = [];
-  //   const childObject = this.props.childObject;
-  //   if (childObject) {
-  //     const { _typeID, _id } = childObject;
-  //     const type = TypeState.userMadeTypes.get(_typeID);
-  //     const keys = Object.keys(type.children);
-  //     for (let i = 0; i < keys.length; i++) {
-  //       const key = keys[i];
-  //       const child = type.get(key);
-  //       const childVal = childObject[child.slug];
-  //
-  //       if (child.typePrimary === ObjectType.types.module) {
-  //         // We need to be able to recursively call subtypes here
-  //         const field = (<CreateObject key={`construct-object-${_id}-${i}`} childObject={childVal} keyIndex={i} />);
-  //         fields.push(field);
-  //       } else if (child.typePrimary === ObjectType.types.string) {
-  //         fields.push(<input key={`${ObjectType.types.string}-${_id}`} value={childVal} data-type={ObjectType.types.string} />);
-  //       } else if (child.typePrimary === ObjectType.types.number) {
-  //         fields.push(<input key={`${ObjectType.types.number}-${_id}`} value={childVal} data-type={ObjectType.types.number} />);
-  //       }
-  //     }
-  //   }
-  //   return fields;
-  // }
 
   handleFieldChange(event, nestedIDs) {
     this.saveStateIfNeeded();
@@ -106,9 +86,17 @@ export default class CreateObject extends Creator {
         // We need to be able to recursively call subtypes here
         fields.concat(this.getObjectFields(childVal, nestedIDs));
       } else if (child.typePrimary === ObjectType.types.string) {
-        fields.push(<input key={guid} value={this.nestedObject({ object: this.state.current, idArray: nestedIDs })} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />);
+        fields.push(
+          <CreateObjectField title={child.name} type={ObjectType.types.string} key={guid}>
+            <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs })} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
+          </CreateObjectField>
+        );
       } else if (child.typePrimary === ObjectType.types.number) {
-        fields.push(<input key={guid} value={this.nestedObject({ object: this.state.current, idArray: nestedIDs })} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />);
+        fields.push(
+          <CreateObjectField title={child.name} type={ObjectType.types.number} key={guid}>
+            <input key={guid} value={this.nestedObject({ object: this.state.current, idArray: nestedIDs })} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
+          </CreateObjectField>
+        );
       }
     }
     return fields;

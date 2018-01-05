@@ -1,10 +1,9 @@
 @import '../../styles/_variables.scss';
 @import '../../styles/_mixins.scss';
 
-.create-object{
+.create-object-field{
+  display: flex;
+  align-items: center;
+
   h4{ margin: 0 $small-spacing 0 0; }
-  .field-section{
-    display: flex;
-    align-items: center;
-  }
 }

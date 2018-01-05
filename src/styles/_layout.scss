@@ -64,36 +64,12 @@ body {
   transform: translate3d(0, 0px, 0);
 }
 
-
 .page{
   .page-body{
     min-height: 100vh;
     position: relative;
   }
 }
-
-// // PAGE TRANSITIONS
-// .page{
-//   opacity: 1;
-//
-//   &.page-transition-enter {
-//     opacity: 0.01;
-//   }
-//
-//   &.page-transition-enter.page-transition-enter-active {
-//     opacity: 1;
-//     transition: opacity 500ms ease-in;
-//   }
-//
-//   &.page-transition-exit {
-//     opacity: 1;
-//   }
-//
-//   &.page-transition-exit.page-transition-exit-active {
-//     opacity: 0.01;
-//     transition: opacity 300ms ease-in;
-//   }
-// }
 
 // breakpoints template - order matters - ** use these in module specific scss files. **
 // http://patorjk.com/software/taag/#p=display&f=Rectangles&t=400%20MAX%0A
