@@ -21,7 +21,7 @@ export default class Objects extends React.Component {
 
   setupChildren() {
     DataState.getData('c90e3392-bc664dfc-45d6f25d').then((instance) => {
-      console.log('instance', instance);
+      // console.log('instance', instance);
       const child = <CreateObject key="1" childObject={instance} />;
       this.setState({
         children: [child],

@@ -42,7 +42,7 @@ export default class CreateType extends Creator {
 
     if (type === 'primary') {
       validTypeNames = TypeState.genericTypeNames;
-    } else if (type === ObjectType.types.object) {
+    } else if (type === ObjectType.types.module) {
       validTypeNames = TypeState.userMadeTypeNames;
     } else if (type === ObjectType.types.list) {
       validTypeNames = TypeState.secondaryTypeNames;

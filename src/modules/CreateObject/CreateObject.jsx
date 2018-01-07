@@ -41,10 +41,12 @@ import './CreateObject.scss';
 export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
+    const objectTree = this.buildObjectTree(this.props.childObject);
+    console.log('objectTree', objectTree);
 
     this.state = {
       ...super.state,
-      current: this.props.childObject,
+      current: objectTree,
     };
   }
 
@@ -68,6 +70,39 @@ export default class CreateObject extends Creator {
     return value;
   }
 
+  buildObjectTree(childObject) {
+    const childObjectCopy = childObject;
+    const { _typeID, _id } = childObject;
+    const type = TypeState.userMadeTypes.get(_typeID);
+    const fields = [];
+    const keys = Object.keys(type.children);
+    // Walk through all the children of the type
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const child = type.get(key);
+      let childVal = childObject[child.slug];
+      // If we have a module, we need to validate the type
+      if (child.typePrimary === ObjectType.types.module) {
+        // Get the module type and create an instance of it
+        const childType = TypeState.userMadeTypes.get(child.typeSecondary);
+        const newChildVal = childType.createObjectInstance();
+        // If our current object doesn't have an instance of the child module yet
+        if (!childVal) {
+          childVal = newChildVal;
+        } else {
+          // Otherwise we already have an instance of the module
+          // so we validate the object to match the current schema
+          // and then add any new items to the object that must be
+          childType.updateExistingObjectSchema({ object: childVal });
+          childVal = Object.assign(newChildVal, childVal);
+        }
+        childVal = this.buildObjectTree(childVal);
+        childObjectCopy[child.slug] = childVal;
+      }
+    }
+    return childObjectCopy;
+  }
+
   getObjectFields(childObject, nestedWithin = []) {
     const { _typeID, _id } = childObject;
     const type = TypeState.userMadeTypes.get(_typeID);
@@ -76,25 +111,30 @@ export default class CreateObject extends Creator {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
       const child = type.get(key);
-      const childVal = childObject[child.slug];
-      const guid = `${ObjectType.types.string}-${_id}-${i}`;
+      const guid = `${_id}-${i}`;
       const nestedIDs = [];
+      const childVal = childObject[child.slug];
       nestedIDs.concat(nestedWithin);
       nestedIDs.push(child.slug);
 
       if (child.typePrimary === ObjectType.types.module) {
         // We need to be able to recursively call subtypes here
-        fields.concat(this.getObjectFields(childVal, nestedIDs));
+        fields.push(
+          <div className="submodule-container" key={guid}>
+            <h3>{child.name}</h3>
+            {this.getObjectFields(childVal)}
+          </div>
+        );
       } else if (child.typePrimary === ObjectType.types.string) {
         fields.push(
           <CreateObjectField title={child.name} type={ObjectType.types.string} key={guid}>
-            <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs })} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
+            <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
           </CreateObjectField>
         );
       } else if (child.typePrimary === ObjectType.types.number) {
         fields.push(
           <CreateObjectField title={child.name} type={ObjectType.types.number} key={guid}>
-            <input key={guid} value={this.nestedObject({ object: this.state.current, idArray: nestedIDs })} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
+            <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
           </CreateObjectField>
         );
       }
@@ -103,7 +143,7 @@ export default class CreateObject extends Creator {
   }
 
   render() {
-    const fields = this.getObjectFields(this.props.childObject);
+    const fields = this.getObjectFields(this.state.current);
     return (
       <div className="create-object">
         {fields}

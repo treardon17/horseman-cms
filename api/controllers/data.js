@@ -65,6 +65,32 @@ class DataController {
    *
    */
 
+  // validateData({ data }) {
+  //   return new Promise((resolve, reject) => {
+  //     const { _id, _typeID } = data;
+  //     TypeController.getType({ id: _typeID }).then(typeDef => {
+  //       data = typeDef.updateExistingObjectSchema({ object: data });
+  //       const keys = Object.keys(typeDef.children);
+  //       for (let i = 0; i < keys.length; i++) {
+  //         const key = keys[i];
+  //         const child = typeDef.children[key];
+  //
+  //         // If the child is a valid module
+  //         // type but doesn't exist in the data yet,
+  //         // we add a new instance of that type to the data
+  //         if (child.typePrimary === ObjectType.types.module
+  //             && child.typeSecondary
+  //             && !data[child.slug]
+  //           ) {
+  //             TypeController.getType({ id: child.typeSecondary }).then(subTypeDef => {
+  //               data[child.slug] = subTypeDef.createObjectInstance()
+  //             });
+  //         }
+  //       }
+  //     });
+  //   });
+  // }
+
    /**
     * [addOrUpdateData Adds new data or updates existing data]
     * @param {[Object]} data [The new data that should be added/updated]

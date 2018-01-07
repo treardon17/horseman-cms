@@ -25,10 +25,56 @@
           "slug": "name",
           "typePrimary": "string",
           "typeSecondary": "empty"
+        },
+        "e20ad3ef-8111fca3-1c0b5208": {
+          "children": {},
+          "orderBy": 2,
+          "id": "e20ad3ef-8111fca3-1c0b5208",
+          "name": "number",
+          "slug": "number",
+          "typePrimary": "number",
+          "typeSecondary": "empty"
+        },
+        "847931ca-e67341e3-187a0ced": {
+          "children": {},
+          "orderBy": 3,
+          "id": "847931ca-e67341e3-187a0ced",
+          "name": "TestModule",
+          "slug": "testModule",
+          "typePrimary": "module",
+          "typeSecondary": "3002a1c3-212a8fdb-2ce7c384"
         }
       },
       "orderBy": 0,
       "id": "d42b09f9-5e8c3695-9f24b6eb",
+      "typeSecondary": "empty"
+    },
+    "3002a1c3-212a8fdb-2ce7c384": {
+      "name": "test module",
+      "slug": "testModule",
+      "typePrimary": "object",
+      "children": {
+        "e3b312e3-c9e89292-ca133d84": {
+          "children": {},
+          "orderBy": 0,
+          "id": "e3b312e3-c9e89292-ca133d84",
+          "name": "Some String",
+          "slug": "someString",
+          "typePrimary": "string",
+          "typeSecondary": "empty"
+        },
+        "4fa2aad8-944cbd4d-826ccef0": {
+          "children": {},
+          "orderBy": 1,
+          "id": "4fa2aad8-944cbd4d-826ccef0",
+          "name": "Some Number",
+          "slug": "someNumber",
+          "typePrimary": "number",
+          "typeSecondary": "empty"
+        }
+      },
+      "orderBy": 0,
+      "id": "3002a1c3-212a8fdb-2ce7c384",
       "typeSecondary": "empty"
     }
   },
