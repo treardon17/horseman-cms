@@ -184,7 +184,6 @@ export default class CreateType extends Creator {
    * @return {void}
    */
   addProperty() {
-    super.addProperty();
     this.saveStateIfNeeded();
     const type = this.state.current;
     type.add();
@@ -232,7 +231,6 @@ export default class CreateType extends Creator {
     });
   }
 
-
   removeModule() {
     let id = '';
     if (this.state.current.prev) {
@@ -243,6 +241,11 @@ export default class CreateType extends Creator {
     TypeState.removeType(id);
   }
 
+  persistentButtons() {
+    return [
+      <Button key="add-field" className="square-button" onClick={this.addProperty.bind(this)}>Add Field</Button>
+    ];
+  }
 
   render() {
     // We need this ternary here because of the content editable fields.

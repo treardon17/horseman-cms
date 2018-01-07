@@ -26,13 +26,20 @@ export default class Creator extends React.Component {
    * @return {list}  the buttons to be displayed
    */
   getButtons() {
-    const buttons = [];
-    buttons.push(<Button key="add-field" className="square-button" onClick={this.addProperty.bind(this)}>Add Field</Button>);
+    const buttons = this.persistentButtons();
     if (this.state.needSave) {
       buttons.push(<Button key="save-type" className="square-button" onClick={this.save.bind(this)}>Save</Button>);
       buttons.push(<Button key="cancel-type" className="square-button" onClick={this.cancel.bind(this)}>Cancel</Button>);
     }
     return buttons;
+  }
+
+  /**
+  * [persistentButtons The buttons that will be persistent]
+  * @return {[type]} [A list of persistent buttons]
+  */
+  persistentButtons() {
+    return [];
   }
 
   /**
