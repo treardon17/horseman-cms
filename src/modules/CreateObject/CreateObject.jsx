@@ -41,12 +41,10 @@ import './CreateObject.scss';
 export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
-    const objectTree = this.buildObjectTree(this.props.childObject);
-    console.log('objectTree', objectTree);
 
     this.state = {
       ...super.state,
-      current: objectTree,
+      current: this.buildObjectTree(this.props.childObject),
     };
   }
 
@@ -93,7 +91,7 @@ export default class CreateObject extends Creator {
           // Otherwise we already have an instance of the module
           // so we validate the object to match the current schema
           // and then add any new items to the object that must be
-          childType.updateExistingObjectSchema({ object: childVal });
+          childVal = childType.updateExistingObjectSchema({ object: childVal });
           childVal = Object.assign(newChildVal, childVal);
         }
         childVal = this.buildObjectTree(childVal);
@@ -142,11 +140,20 @@ export default class CreateObject extends Creator {
     return fields;
   }
 
+  save() {
+    DataState.addOrUpdateData(this.state.current).then((updatedData) => {
+      super.save();
+    });
+  }
+
   render() {
     const fields = this.getObjectFields(this.state.current);
     return (
       <div className="create-object">
         {fields}
+        <div className="buttons">
+          {this.getButtons()}
+        </div>
       </div>
     );
   }

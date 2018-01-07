@@ -65,32 +65,6 @@ class DataController {
    *
    */
 
-  // validateData({ data }) {
-  //   return new Promise((resolve, reject) => {
-  //     const { _id, _typeID } = data;
-  //     TypeController.getType({ id: _typeID }).then(typeDef => {
-  //       data = typeDef.updateExistingObjectSchema({ object: data });
-  //       const keys = Object.keys(typeDef.children);
-  //       for (let i = 0; i < keys.length; i++) {
-  //         const key = keys[i];
-  //         const child = typeDef.children[key];
-  //
-  //         // If the child is a valid module
-  //         // type but doesn't exist in the data yet,
-  //         // we add a new instance of that type to the data
-  //         if (child.typePrimary === ObjectType.types.module
-  //             && child.typeSecondary
-  //             && !data[child.slug]
-  //           ) {
-  //             TypeController.getType({ id: child.typeSecondary }).then(subTypeDef => {
-  //               data[child.slug] = subTypeDef.createObjectInstance()
-  //             });
-  //         }
-  //       }
-  //     });
-  //   });
-  // }
-
    /**
     * [addOrUpdateData Adds new data or updates existing data]
     * @param {[Object]} data [The new data that should be added/updated]
@@ -108,22 +82,16 @@ class DataController {
            TypeController.getType({ id: _typeID }).then(typeDef => {
              const object = this.data[_id];
              if (typeDef) {
-               // If we have this object in the data store already
-               if (object) {
-                 // We're updating the scheme of the object so that it matches
-                 // the current parent object
-                 this.data[_id] = typeDef.updateExistingObjectSchema({ object: data });
-               } else {
-                 // We're adding this piece of data for the first time
-                 this.data[_id] = typeDef.updateExistingObjectSchema({ object: data });
-               }
+               // Update the data
+               this.data[_id] = data;
+               // Save our changes to the data file
+               this.saveChanges().then(() => resolve(this.data[_id])).catch(error => reject(error));
              } else {
                // The type doesn't exist any longer...
-               console.log(`Attempting to update ${_id}, but the type ${_typeID} no longer exists.`)
+               const error = `Attempting to update ${_id}, but the type ${_typeID} no longer exists.`;
+               console.log(error);
+               reject(error);
              }
-
-             // Save our changes to the data file
-             this.saveChanges().then(() => resolve(this.data[_id])).catch(error => reject(error));
            }).catch((error) => {
              console.log(error);
              reject(error)
@@ -177,7 +145,6 @@ class DataController {
   handleUpdateData(req, res) {
     this.initParentIfNeeded().then(() => {
       const data = req.body;
-      console.log('Handling data', data);
       this.addOrUpdateData({ data }).then((addedData) => {
         res.header('Content-Type', 'application/json').status(201).send({ data: addedData });
       }).catch(error => {
