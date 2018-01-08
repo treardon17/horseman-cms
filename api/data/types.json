@@ -26,23 +26,14 @@
           "typePrimary": "string",
           "typeSecondary": "empty"
         },
-        "e20ad3ef-8111fca3-1c0b5208": {
+        "f7a1cee5-0cab023b-cd7f3685": {
           "children": {},
           "orderBy": 2,
-          "id": "e20ad3ef-8111fca3-1c0b5208",
+          "id": "f7a1cee5-0cab023b-cd7f3685",
           "name": "number",
           "slug": "number",
           "typePrimary": "number",
           "typeSecondary": "empty"
-        },
-        "847931ca-e67341e3-187a0ced": {
-          "children": {},
-          "orderBy": 3,
-          "id": "847931ca-e67341e3-187a0ced",
-          "name": "TestModule",
-          "slug": "testModule",
-          "typePrimary": "module",
-          "typeSecondary": "3002a1c3-212a8fdb-2ce7c384"
         }
       },
       "orderBy": 0,

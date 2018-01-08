@@ -4,16 +4,7 @@
     "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
     "_slug": "page",
     "modules": [],
-    "name": "Hi there!",
-    "number": "5555",
-    "testModule": {
-      "_id": "4fc35408-45d0d4ff-43062489",
-      "_typeID": "3002a1c3-212a8fdb-2ce7c384",
-      "_slug": "testModule",
-      "someString": "",
-      "someNumber": -9007199254740991
-    },
-    "someString": "other datas",
-    "someNumber": "this was some data"
+    "name": "Hi there!!!!",
+    "number": "55555"
   }
 }

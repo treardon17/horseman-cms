@@ -201,8 +201,17 @@ class ObjectType {
     return json
   }
 
+  getTopLevelParent() {
+    let parent = this.parent
+    while (parent && parent.parent instanceof ObjectType) {
+      parent = parent.parent
+    }
+    return parent
+  }
+
 /**
  * [createObjectInstance Creates an object using the scheme defined in the ObjectType]
+ * @param  {[availableTypes]}      [An object containing other types that this type may depend on]
  * @return {[Object]}                       [The object instance]
  */
   createObjectInstance() {
@@ -219,13 +228,17 @@ class ObjectType {
       // If the child has children, it's just another object
       if (Object.keys(child.children).length > 0) {
         object[child.slug] = child.buildEmptyObject()
+      } else if (child.typePrimary === ObjectType.types.list) {
+        object[child.slug] = []
+      } else if (child.typePrimary === ObjectType.types.module) {
+        const topLevelParent = this.getTopLevelParent()
+        const childType = topLevelParent.get(child.typeSecondary)
+        object[child.slug] = childType.createObjectInstance();
       } else if (child.typePrimary === ObjectType.types.string) {
         // Otherwise we take the type that the object has and create an empty version of it
         object[child.slug] = ''
-      } else if (child.typePrimary === ObjectType.types.list) {
-        object[child.slug] = []
       } else if (child.typePrimary === ObjectType.types.number) {
-        object[child.slug] = Number.MIN_SAFE_INTEGER
+        object[child.slug] = 0
       } else if (child.typePrimary === ObjectType.types.empty) {
         object[child.slug] = '__empty__'
       }
@@ -238,12 +251,13 @@ class ObjectType {
   /**
    * [updateExistingObjectSchema Takes an existing object and updates the schema to reflect the current schema]
    * @param  {[Object]} [object={}}] [The object that will be updated]
+   * @param  {[availableTypes]}      [An object containing other types that this type may depend on]
    * @return {[Object]}                [The updated object]
    */
   updateExistingObjectSchema({ object }) {
     let objectCopy = object
     // If we actually have an existing object we're trying to modify
-    if (object) {
+    if (objectCopy) {
       const currentSchemaObject = this.createObjectInstance();
       // Check to make sure it's the right type of object
       if (objectCopy._typeID === this.id) {

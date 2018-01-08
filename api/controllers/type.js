@@ -114,6 +114,13 @@ class TypeController {
     });
   }
 
+  getTypeSync({ id }) {
+    if (this.parentObject) {
+      return this.parentObject.get(id);
+    }
+    return null;
+  }
+
   /*
   *
   *

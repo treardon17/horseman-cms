@@ -2,6 +2,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import Creator from '../Creator/Creator';
+import Button from 'material-ui/Button';
 import _ from 'lodash';
 
 // State
@@ -41,16 +42,25 @@ import './CreateObject.scss';
 export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
+    const objectTree = this.buildObjectTree(this.props.childObject);
+    console.log('object tree is:', objectTree);
 
     this.state = {
       ...super.state,
-      current: this.buildObjectTree(this.props.childObject),
+      current: objectTree,
     };
   }
 
   handleFieldChange(event, nestedIDs) {
     this.saveStateIfNeeded();
-    const newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDs, newVal: event.target.value });
+    const nestedIDsCopy = nestedIDs.slice();
+    let newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: event.target.value });
+    // If an object within the main object was changed
+    // we want to only replace that part
+    if (nestedIDs && nestedIDsCopy.length > 1) {
+      nestedIDsCopy.pop();
+      newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+    }
     this.setState({ current: newVal });
   }
 
@@ -101,6 +111,10 @@ export default class CreateObject extends Creator {
     return childObjectCopy;
   }
 
+  addListItem() {
+    console.log('adding list item');
+  }
+
   getObjectFields(childObject, nestedWithin = []) {
     const { _typeID, _id } = childObject;
     const type = TypeState.userMadeTypes.get(_typeID);
@@ -110,9 +124,8 @@ export default class CreateObject extends Creator {
       const key = keys[i];
       const child = type.get(key);
       const guid = `${_id}-${i}`;
-      const nestedIDs = [];
+      const nestedIDs = nestedWithin.slice();
       const childVal = childObject[child.slug];
-      nestedIDs.concat(nestedWithin);
       nestedIDs.push(child.slug);
 
       if (child.typePrimary === ObjectType.types.module) {
@@ -121,15 +134,29 @@ export default class CreateObject extends Creator {
         fields.push(
           <div className="submodule-container" key={guid}>
             <h3>{child.name}</h3>
-            {this.getObjectFields(childVal)}
+            {this.getObjectFields(childVal, nestedIDs)}
           </div>
         );
       } else if (child.typePrimary === ObjectType.types.list) {
         // LIST
         // For every item in the list, we want to have an input
+        const listItems = [];
         for (let listIndex = 0; listIndex < childVal.length; listIndex++) {
-          fields.push(this.getObjectFields(childVal[listIndex]));
+          listItems.push(
+            <div className="list-item" key={`list-item-${listIndex}`}>
+              {this.getObjectFields(childVal[listIndex])}
+            </div>
+          );
         }
+        // Add each list item section to the fields
+        fields.push(
+          <CreateObjectField title={child.name} type={ObjectType.types.list} key={guid}>
+            <div className="list-container">
+              {listItems}
+              <Button key onClick={this.addListItem.bind(this)}>Add item</Button>
+            </div>
+          </CreateObjectField>
+        );
       } else if (child.typePrimary === ObjectType.types.string) {
         // STRING
         fields.push(

@@ -83,7 +83,7 @@ class DataController {
              const object = this.data[_id];
              if (typeDef) {
                // Update the data
-               this.data[_id] = data;
+               this.data[_id] = typeDef.updateExistingObjectSchema({ object:  data });
                // Save our changes to the data file
                this.saveChanges().then(() => resolve(this.data[_id])).catch(error => reject(error));
              } else {
