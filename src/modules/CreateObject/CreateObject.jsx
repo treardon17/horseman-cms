@@ -116,6 +116,7 @@ export default class CreateObject extends Creator {
       nestedIDs.push(child.slug);
 
       if (child.typePrimary === ObjectType.types.module) {
+        // MODULE
         // We need to be able to recursively call subtypes here
         fields.push(
           <div className="submodule-container" key={guid}>
@@ -123,13 +124,21 @@ export default class CreateObject extends Creator {
             {this.getObjectFields(childVal)}
           </div>
         );
+      } else if (child.typePrimary === ObjectType.types.list) {
+        // LIST
+        // For every item in the list, we want to have an input
+        for (let listIndex = 0; listIndex < childVal.length; listIndex++) {
+          fields.push(this.getObjectFields(childVal[listIndex]));
+        }
       } else if (child.typePrimary === ObjectType.types.string) {
+        // STRING
         fields.push(
           <CreateObjectField title={child.name} type={ObjectType.types.string} key={guid}>
             <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
           </CreateObjectField>
         );
       } else if (child.typePrimary === ObjectType.types.number) {
+        // NUMBER
         fields.push(
           <CreateObjectField title={child.name} type={ObjectType.types.number} key={guid}>
             <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />

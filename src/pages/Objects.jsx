@@ -20,12 +20,30 @@ export default class Objects extends React.Component {
   }
 
   setupChildren() {
-    DataState.getData('c90e3392-bc664dfc-45d6f25d').then((instance) => {
-      // console.log('instance', instance);
-      const child = <CreateObject key="1" childObject={instance} />;
-      this.setState({
-        children: [child],
-      });
+    // DataState.getData('c90e3392-bc664dfc-45d6f25d').then((instance) => {
+    //   // console.log('instance', instance);
+    //   const child = <CreateObject key="1" childObject={instance} />;
+    //   this.setState({
+    //     children: [child],
+    //   });
+    // });
+    DataState.getData().then((instance) => {
+      if (instance) {
+        const dataObjects = [];
+        const keys = Object.keys(instance);
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          const dataObject = <CreateObject key={`data-object-${i}`} childObject={instance[key]} />;
+          dataObjects.push(dataObject);
+        }
+        this.setState({
+          children: dataObjects,
+        });
+      }
+      // const child = <CreateObject key="1" childObject={instance} />;
+      // this.setState({
+      //   children: [child],
+      // });
     });
   }
 

@@ -13,3 +13,8 @@ button[class^='MuiButtonBase'], div[class*=' MuiButtonBase']{
 .square-button{
   margin: $small-spacing $small-spacing/2;
 }
+
+.inactive-button{
+  opacity: 0.4;
+  pointer-events: none;
+}

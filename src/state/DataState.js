@@ -75,10 +75,11 @@ class DataState {
   }
 
   @action getData(id) {
+    const myID = id || '';
     return new Promise((resolve, reject) => {
       API.makeQuery({
         method: 'get',
-        query: `/api/data/${id}`
+        query: `/api/data/${myID}`
       }).then((newData) => {
         resolve(newData.data);
       }).catch((error) => {

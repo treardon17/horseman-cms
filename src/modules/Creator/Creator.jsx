@@ -27,10 +27,10 @@ export default class Creator extends React.Component {
    */
   getButtons() {
     const buttons = this.persistentButtons();
-    if (this.state.needSave) {
-      buttons.push(<Button key="save-type" className="square-button" onClick={this.save.bind(this)}>Save</Button>);
-      buttons.push(<Button key="cancel-type" className="square-button" onClick={this.cancel.bind(this)}>Cancel</Button>);
-    }
+
+    const classNames = this.state.needSave ? `square-button active-button` : `square-button inactive-button`;
+    buttons.push(<Button key="save-type" className={classNames} onClick={this.save.bind(this)}>Save</Button>);
+    buttons.push(<Button key="cancel-type" className={classNames} onClick={this.cancel.bind(this)}>Cancel</Button>);
     return buttons;
   }
 
@@ -41,11 +41,6 @@ export default class Creator extends React.Component {
   persistentButtons() {
     return [];
   }
-
-  /**
-   * [add description]
-   */
-  addProperty() { }
 
   // ---------------------------------
   // SAVE AND CANCEL OPERATIONS

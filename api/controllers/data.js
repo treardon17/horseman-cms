@@ -158,13 +158,14 @@ class DataController {
   handleGetData(req, res) {
     this.initParentIfNeeded().then(() => {
       const id = req.params.id;
-      console.log('id is:', id);
       // If the user is asking for a specific piece of data
-      if (id) {
+      if (id != null) {
+        console.log(`Getting data with id ${id}`);
         this.getData({ id }).then((data) => {
           res.header('Content-Type', 'application/json').status(200).send({ data });
         });
       } else {
+        console.log('Getting all data');
         this.getAllData().then((data) => {
           res.header('Content-Type', 'application/json').status(200).send({ data });
         });
