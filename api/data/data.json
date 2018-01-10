@@ -3,8 +3,16 @@
     "_id": "c90e3392-bc664dfc-45d6f25d",
     "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
     "_slug": "page",
-    "modules": [],
-    "name": "Hi there!!!!",
+    "modules": [
+      {
+        "_id": "9aee0659-e82ca4a3-be5918f8",
+        "_typeID": "3002a1c3-212a8fdb-2ce7c384",
+        "_slug": "testModule",
+        "someString": "asdf",
+        "someNumber": "234234"
+      }
+    ],
+    "name": "hello world",
     "number": "55555"
   }
 }

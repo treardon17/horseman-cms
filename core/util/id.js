@@ -71,6 +71,8 @@ class IDUtil {
       if (key.length > 0 && key[0] !== '_') {
         if (obj2[key] == null) {
           delete obj1[key];
+        } else if (obj1[key] instanceof Array && obj2[key] instanceof Array) {
+          break;
         } else if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
           this.trimObject(obj1[key], obj2[key]);
         }

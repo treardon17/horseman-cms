@@ -69,6 +69,37 @@ class TypeState {
     }
   }
 
+  /**
+   * getFormattedTypeList - Determines which items should be in the dropdowns
+   *
+   * @param  {string} type - Will be 'primary' or 'secondary' depending on which
+   *                       list is being accessed
+   * @return {list}      description - a list of items to go in the dropdown
+   */
+  getFormattedTypeList(type) {
+    let validTypeNames = [];
+
+    if (type === 'primary') {
+      validTypeNames = this.genericTypeNames;
+    } else if (type === ObjectType.types.module) {
+      validTypeNames = this.userMadeTypeNames;
+    } else if (type === ObjectType.types.list) {
+      validTypeNames = this.secondaryTypeNames;
+    }
+    const optionsList = [];
+    for (let i = 0; i < validTypeNames.length; i++) {
+      const value = validTypeNames[i];
+      // If we're dealing with a user made type
+      if (value.id && value.slug) {
+        optionsList.push({ value: value.id, label: value.slug });
+      } else {
+        // We're looking at a generic type
+        optionsList.push({ value, label: value });
+      }
+    }
+    return optionsList;
+  }
+
 
   /**
   *

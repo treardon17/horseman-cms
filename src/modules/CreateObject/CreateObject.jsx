@@ -3,6 +3,7 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import Creator from '../Creator/Creator';
 import Button from 'material-ui/Button';
+import Select from 'react-select';
 import _ from 'lodash';
 
 // State
@@ -42,12 +43,11 @@ import './CreateObject.scss';
 export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
-    const objectTree = this.buildObjectTree(this.props.childObject);
-    console.log('object tree is:', objectTree);
 
     this.state = {
       ...super.state,
-      current: objectTree,
+      current: this.buildObjectTree(this.props.childObject),
+      moduleTypeToAdd: null,
     };
   }
 
@@ -58,8 +58,10 @@ export default class CreateObject extends Creator {
     // If an object within the main object was changed
     // we want to only replace that part
     if (nestedIDs && nestedIDsCopy.length > 1) {
-      nestedIDsCopy.pop();
-      newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+      while (nestedIDsCopy.length > 1) {
+        nestedIDsCopy.pop();
+        newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+      }
     }
     this.setState({ current: newVal });
   }
@@ -76,6 +78,36 @@ export default class CreateObject extends Creator {
       }
     }
     return value;
+  }
+
+  addListItem(type, nestedIDs) {
+    this.saveStateIfNeeded();
+    const nestedIDsCopy = nestedIDs.slice();
+    console.log(type);
+    console.log(nestedIDsCopy);
+
+    // If the user selected a type of object to create
+    if (type && type.value) {
+      // Get the type and check to see if that type is valid
+      const typeDef = TypeState.userMadeTypes.get(type.value);
+      if (typeDef) {
+        // If we got a type, create an instance of that type
+        const instance = typeDef.createObjectInstance();
+        // Grab the list we're trying to modify from state
+        let newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
+        // Make sure that we actually got a list back.
+        // If we did, append our instance to that list
+        if (newVal && newVal instanceof Array) {
+          newVal.push(instance);
+        }
+        newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+        while (nestedIDsCopy.length > 1) {
+          nestedIDsCopy.pop();
+          newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+        }
+        this.setState({ current: newVal });
+      }
+    }
   }
 
   buildObjectTree(childObject) {
@@ -111,66 +143,76 @@ export default class CreateObject extends Creator {
     return childObjectCopy;
   }
 
-  addListItem() {
-    console.log('adding list item');
-  }
-
   getObjectFields(childObject, nestedWithin = []) {
-    const { _typeID, _id } = childObject;
-    const type = TypeState.userMadeTypes.get(_typeID);
     const fields = [];
-    const keys = Object.keys(type.children);
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const child = type.get(key);
-      const guid = `${_id}-${i}`;
-      const nestedIDs = nestedWithin.slice();
-      const childVal = childObject[child.slug];
-      nestedIDs.push(child.slug);
+    if (childObject) {
+      const { _typeID, _id } = childObject;
+      const type = TypeState.userMadeTypes.get(_typeID);
+      const keys = Object.keys(type.children);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const child = type.get(key);
+        const guid = `${_id}-${i}`;
+        const nestedIDs = nestedWithin.slice();
+        const childVal = childObject[child.slug];
+        nestedIDs.push(child.slug);
 
-      if (child.typePrimary === ObjectType.types.module) {
-        // MODULE
-        // We need to be able to recursively call subtypes here
-        fields.push(
-          <div className="submodule-container" key={guid}>
-            <h3>{child.name}</h3>
-            {this.getObjectFields(childVal, nestedIDs)}
-          </div>
-        );
-      } else if (child.typePrimary === ObjectType.types.list) {
-        // LIST
-        // For every item in the list, we want to have an input
-        const listItems = [];
-        for (let listIndex = 0; listIndex < childVal.length; listIndex++) {
-          listItems.push(
-            <div className="list-item" key={`list-item-${listIndex}`}>
-              {this.getObjectFields(childVal[listIndex])}
+        if (child.typePrimary === ObjectType.types.module) {
+          // MODULE
+          // We need to be able to recursively call subtypes here
+          fields.push(
+            <div className="submodule-container" key={guid}>
+              <h3>{child.name}</h3>
+              {this.getObjectFields(childVal, nestedIDs)}
             </div>
           );
+        } else if (child.typePrimary === ObjectType.types.list) {
+          // LIST
+          // For every item in the list, we want to have an input
+          const listItems = [];
+          for (let listIndex = 0; listIndex < childVal.length; listIndex++) {
+            const tempIDList = nestedIDs.slice();
+            tempIDList.push(listIndex);
+            listItems.push(
+              <div className="list-item" key={`list-item-${listIndex}`}>
+                {this.getObjectFields(childVal[listIndex], tempIDList)}
+              </div>
+            );
+          }
+
+          const moduleSelector = child.typeSecondary === ObjectType.types.module ?
+            <Select
+              value={this.state.moduleTypeToAdd}
+              className={'secondary-type'}
+              options={TypeState.getFormattedTypeList(ObjectType.types.module)}
+              onChange={(val) => { this.setState({ moduleTypeToAdd: val }); }}
+            /> : null;
+
+          // Add each list item section to the fields
+          fields.push(
+            <CreateObjectField title={child.name} type={ObjectType.types.list} key={guid}>
+              <div className="list-container">
+                {listItems}
+                {moduleSelector}
+                <Button onClick={() => { this.addListItem(this.state.moduleTypeToAdd, nestedIDs); }}>Add item</Button>
+              </div>
+            </CreateObjectField>
+          );
+        } else if (child.typePrimary === ObjectType.types.string) {
+          // STRING
+          fields.push(
+            <CreateObjectField title={child.name} type={ObjectType.types.string} key={guid}>
+              <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
+            </CreateObjectField>
+          );
+        } else if (child.typePrimary === ObjectType.types.number) {
+          // NUMBER
+          fields.push(
+            <CreateObjectField title={child.name} type={ObjectType.types.number} key={guid}>
+              <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
+            </CreateObjectField>
+          );
         }
-        // Add each list item section to the fields
-        fields.push(
-          <CreateObjectField title={child.name} type={ObjectType.types.list} key={guid}>
-            <div className="list-container">
-              {listItems}
-              <Button key onClick={this.addListItem.bind(this)}>Add item</Button>
-            </div>
-          </CreateObjectField>
-        );
-      } else if (child.typePrimary === ObjectType.types.string) {
-        // STRING
-        fields.push(
-          <CreateObjectField title={child.name} type={ObjectType.types.string} key={guid}>
-            <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
-          </CreateObjectField>
-        );
-      } else if (child.typePrimary === ObjectType.types.number) {
-        // NUMBER
-        fields.push(
-          <CreateObjectField title={child.name} type={ObjectType.types.number} key={guid}>
-            <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
-          </CreateObjectField>
-        );
       }
     }
     return fields;

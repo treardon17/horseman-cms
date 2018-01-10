@@ -2,9 +2,5 @@
 @import '../../styles/_mixins.scss';
 
 .create-object{
-  h4{ margin: 0 $small-spacing 0 0; }
-  .field-section{
-    display: flex;
-    align-items: center;
-  }
+  margin: $small-spacing;
 }

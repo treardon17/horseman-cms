@@ -31,38 +31,6 @@ export default class CreateType extends Creator {
   }
 
   /**
-   * getFormattedTypeList - Determines which items should be in the dropdowns
-   *
-   * @param  {string} type - Will be 'primary' or 'secondary' depending on which
-   *                       list is being accessed
-   * @return {list}      description - a list of items to go in the dropdown
-   */
-  getFormattedTypeList(type) {
-    let validTypeNames = [];
-
-    if (type === 'primary') {
-      validTypeNames = TypeState.genericTypeNames;
-    } else if (type === ObjectType.types.module) {
-      validTypeNames = TypeState.userMadeTypeNames;
-    } else if (type === ObjectType.types.list) {
-      validTypeNames = TypeState.secondaryTypeNames;
-    }
-    const optionsList = [];
-    for (let i = 0; i < validTypeNames.length; i++) {
-      const value = validTypeNames[i];
-      // If we're dealing with a user made type
-      if (value.id && value.slug) {
-        optionsList.push({ value: value.id, label: value.slug });
-      } else {
-        // We're looking at a generic type
-        optionsList.push({ value, label: value });
-      }
-    }
-    return optionsList;
-  }
-
-
-  /**
    * getFields - Based on the properties of this type, this determines the fields to show
    *
    * @return {list}  list of UI elements
@@ -91,7 +59,7 @@ export default class CreateType extends Creator {
             key={`field-type-secondary-${part.id}-${i}`}
             value={part.typeSecondary}
             className={'secondary-type'}
-            options={this.getFormattedTypeList(part.typePrimary)}
+            options={TypeState.getFormattedTypeList(part.typePrimary)}
             onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'typeSecondary', typeID: part.id }); }}
           />
         );
@@ -115,7 +83,7 @@ export default class CreateType extends Creator {
             key={`field-type-primary-${part.id}-${i}`}
             value={part.typePrimary}
             className={'primary-type'}
-            options={this.getFormattedTypeList('primary')}
+            options={TypeState.getFormattedTypeList('primary')}
             onChange={(val) => { this.handleChangePart({ val: (val ? val.value : Type.types.empty), partID: 'typePrimary', typeID: part.id }); }}
           />
           {secondaryType}

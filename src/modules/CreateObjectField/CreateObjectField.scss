@@ -2,8 +2,12 @@
 @import '../../styles/_mixins.scss';
 
 .create-object-field{
-  display: flex;
-  align-items: center;
+  text-align: left;
+  margin: $small-spacing 0;
 
-  h4{ margin: 0 $small-spacing 0 0; }
+  h4{
+    margin: 0 $small-spacing 0 0;
+    display: block;
+    text-align: left;
+  }
 }
