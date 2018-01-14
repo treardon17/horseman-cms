@@ -10,7 +10,7 @@
       "children": {
         "2659ae2b-59f379d6-05c0da11": {
           "children": {},
-          "orderBy": 0,
+          "orderBy": 1,
           "id": "2659ae2b-59f379d6-05c0da11",
           "name": "modules",
           "slug": "modules",
@@ -19,20 +19,11 @@
         },
         "820d3080-76216b4e-9b795e93": {
           "children": {},
-          "orderBy": 1,
+          "orderBy": 0,
           "id": "820d3080-76216b4e-9b795e93",
           "name": "name",
           "slug": "name",
           "typePrimary": "string",
-          "typeSecondary": "empty"
-        },
-        "f7a1cee5-0cab023b-cd7f3685": {
-          "children": {},
-          "orderBy": 2,
-          "id": "f7a1cee5-0cab023b-cd7f3685",
-          "name": "number",
-          "slug": "number",
-          "typePrimary": "number",
           "typeSecondary": "empty"
         }
       },
@@ -53,19 +44,29 @@
           "slug": "someString",
           "typePrimary": "string",
           "typeSecondary": "empty"
-        },
-        "4fa2aad8-944cbd4d-826ccef0": {
-          "children": {},
-          "orderBy": 1,
-          "id": "4fa2aad8-944cbd4d-826ccef0",
-          "name": "Some Number",
-          "slug": "someNumber",
-          "typePrimary": "number",
-          "typeSecondary": "empty"
         }
       },
       "orderBy": 0,
       "id": "3002a1c3-212a8fdb-2ce7c384",
+      "typeSecondary": "empty"
+    },
+    "15b16310-d7d0d437-ad3abb3b": {
+      "name": "site",
+      "slug": "site",
+      "typePrimary": "object",
+      "children": {
+        "5a58d1c6-a3699e26-d76df3dc": {
+          "children": {},
+          "orderBy": 0,
+          "id": "5a58d1c6-a3699e26-d76df3dc",
+          "name": "pages",
+          "slug": "pages",
+          "typePrimary": "list",
+          "typeSecondary": "d42b09f9-5e8c3695-9f24b6eb"
+        }
+      },
+      "orderBy": 0,
+      "id": "15b16310-d7d0d437-ad3abb3b",
       "typeSecondary": "empty"
     }
   },
