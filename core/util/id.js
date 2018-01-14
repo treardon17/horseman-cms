@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _ = require('lodash')
 
 class IDUtil {
   /**
@@ -10,29 +10,29 @@ class IDUtil {
    * @return {String}          description   A unique hash
    */
   findUniqueSlug({ slug, object, attribute }) {
-    const key = _.camelCase(slug);
+    const key = _.camelCase(slug)
     // We're only searching through the object's keys
     if (!attribute) {
       // If a slug already exists
       if (object[key] != null) {
-        const newSlug = this.incrementStringIfNeeded(key);
+        const newSlug = this.incrementStringIfNeeded(key)
         // Return the new number and check if it's available
-        return this.findUniqueSlug({ slug: newSlug, object });
+        return this.findUniqueSlug({ slug: newSlug, object })
       } else {
         // We found a unique object key
-        return key;
+        return key
       }
     } else {
       // We're searching through the object's children looking for the attribute provided
-      const items = Object.keys(object).map(objKey => object[objKey][attribute]);
+      const items = Object.keys(object).map(objKey => object[objKey][attribute])
       // There's a string that's equal to the slug we passed in
       // so let's try again
       if (items.indexOf(key) !== -1) {
-        const newSlug = this.incrementStringIfNeeded(key);
-        return this.findUniqueSlug({ slug: newSlug, object, attribute });
+        const newSlug = this.incrementStringIfNeeded(key)
+        return this.findUniqueSlug({ slug: newSlug, object, attribute })
       } else {
         // We found a unique object key
-        return key;
+        return key
       }
     }
   }
@@ -46,17 +46,17 @@ class IDUtil {
  */
   incrementStringIfNeeded(string) {
     // If there's already a number at the end
-    const pattern = /([0-9]+)/i;
-    const matches = string.match(pattern);
+    const pattern = /([0-9]+)/i
+    const matches = string.match(pattern)
 
-    let slugNum = 1;
-    let newSlug = string;
+    let slugNum = 1
+    let newSlug = string
     if (matches) {
       // Replace the current number and increment it
-      slugNum = parseInt(matches[1]) + 1;
-      newSlug = newSlug.replace(matches[0], '');
+      slugNum = parseInt(matches[1]) + 1
+      newSlug = newSlug.replace(matches[0], '')
     }
-    return `${newSlug}${slugNum}`;
+    return `${newSlug}${slugNum}`
   }
 
   /**
@@ -70,11 +70,11 @@ class IDUtil {
       // be modified here (they're reserved)
       if (key.length > 0 && key[0] !== '_') {
         if (obj2[key] == null) {
-          delete obj1[key];
+          delete obj1[key]
         } else if (obj1[key] instanceof Array && obj2[key] instanceof Array) {
-          break;
+          break
         } else if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-          this.trimObject(obj1[key], obj2[key]);
+          this.trimObject(obj1[key], obj2[key])
         }
       }
     }
@@ -86,10 +86,10 @@ class IDUtil {
    */
    /* eslint-disable */
   guid() {
-    const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    return `${s4()}${s4()}-${s4()}${s4()}-${s4()}${s4()}`;
+    const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
+    return `${s4()}${s4()}-${s4()}${s4()}-${s4()}${s4()}`
   }
   /* eslint-enable */
 }
 
-module.exports = new IDUtil();
+module.exports = new IDUtil()

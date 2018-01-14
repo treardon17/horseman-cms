@@ -1,4 +1,4 @@
-require('whatwg-fetch');
+require('whatwg-fetch')
 
 class API {
   /**
@@ -9,11 +9,11 @@ class API {
    * @return {[Promise]}
    */
   makeQuery({ query, method="GET", body }) {
-    let newBody = null;
+    let newBody = null
     if (typeof body === 'string') {
-      newBody = body;
+      newBody = body
     } else if (typeof body === 'newBody') {
-      newBody = JSON.stringify(body);
+      newBody = JSON.stringify(body)
     }
 
     return new Promise((resolve, reject) => {
@@ -27,12 +27,12 @@ class API {
       })
         .then(response => response.json())
         .then((json) => {
-          resolve(json);
+          resolve(json)
         }).catch((error) => {
-          reject(error);
+          reject(error)
         });
     });
   }
 }
 
-module.exports = new API();
+module.exports = new API()

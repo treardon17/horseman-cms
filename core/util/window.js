@@ -10,10 +10,10 @@ class WindowUtil {
       // Wait until the target has finished focusing
       setTimeout(() => {
         // Select all text on the focused element
-        document.execCommand('selectAll', false, null);
+        document.execCommand('selectAll', false, null)
       }, 0);
     }
   }
 }
 
-module.exports = new WindowUtil();
+module.exports = new WindowUtil()
