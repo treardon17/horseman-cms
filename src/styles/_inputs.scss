@@ -15,3 +15,7 @@
 .Select{
   @extend %base-input-styles;
 }
+
+input[type=text]{
+  padding: $small-spacing;
+}

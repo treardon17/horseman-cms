@@ -4,6 +4,7 @@ import Proptypes from 'prop-types';
 import Creator from '../Creator/Creator';
 import Button from 'material-ui/Button';
 import Select from 'react-select';
+import SortUtil from '../../../core/util/sort';
 import _ from 'lodash';
 
 // State
@@ -147,11 +148,14 @@ export default class CreateObject extends Creator {
     const fields = [];
     if (childObject) {
       const { _typeID, _id } = childObject;
+      // Get our type
       const type = TypeState.userMadeTypes.get(_typeID);
-      const keys = Object.keys(type.children);
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const child = type.get(key);
+      const childList = type.getSortedChildren();
+
+      // const keys = Object.keys(type.children);
+      for (let i = 0; i < childList.length; i++) {
+        const key = childList[i].key;
+        const child = childList[i].value;
         const guid = `${_id}-${i}`;
         const nestedIDs = nestedWithin.slice();
         const childVal = childObject[child.slug];
@@ -180,6 +184,7 @@ export default class CreateObject extends Creator {
             );
           }
 
+          // debugger // eslint-disable-line
           const moduleSelector = child.typeSecondary === ObjectType.types.module ?
             <Select
               value={this.state.moduleTypeToAdd}
@@ -202,14 +207,14 @@ export default class CreateObject extends Creator {
           // STRING
           fields.push(
             <CreateObjectField title={child.name} type={ObjectType.types.string} key={guid}>
-              <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
+              <input type="text" value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.string} />
             </CreateObjectField>
           );
         } else if (child.typePrimary === ObjectType.types.number) {
           // NUMBER
           fields.push(
             <CreateObjectField title={child.name} type={ObjectType.types.number} key={guid}>
-              <input value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
+              <input type="text" value={this.nestedObject({ object: this.state.current, idArray: nestedIDs }) || ''} onChange={(e) => { this.handleFieldChange(e, nestedIDs); }} data-type={ObjectType.types.number} />
             </CreateObjectField>
           );
         }
