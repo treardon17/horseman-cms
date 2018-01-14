@@ -3,4 +3,9 @@
 
 .create-object{
   margin: $small-spacing;
+  stroke: $shade3;
+
+  .list-container{
+    margin-left: $small-spacing;
+  }
 }
