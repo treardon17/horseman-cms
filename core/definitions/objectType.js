@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const IDUtil = require('../util/id');
+const SortUtil = require('../util/sort');
 
 class ObjectType {
   /**
@@ -201,12 +202,26 @@ class ObjectType {
     return json
   }
 
+  /**
+   * [getTopLevelParent Finds the root parent ObjectType]
+   * @return {[ObjectType]} [The parent]
+   */
   getTopLevelParent() {
     let parent = this.parent
     while (parent && parent.parent instanceof ObjectType) {
       parent = parent.parent
     }
     return parent
+  }
+
+  /**
+   * [getSortedChildren Gets a list sorted by the orderBy value]
+   * @return {[Array]} [The sorted list]
+   */
+  getSortedChildren() {
+    const childList = SortUtil.makeListFromObjectKeys({ object: this.children });
+    SortUtil.sortListByObjectProperty({ list: childList, idArray: ['value', 'orderBy'] });
+    return childList;
   }
 
 /**
