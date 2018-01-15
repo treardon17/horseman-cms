@@ -1,12 +1,13 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, toJS } from 'mobx';
 import ObjectType from '../../core/definitions/objectType';
 import API from '../../core/util/api';
 
 class DataState {
   @observable userData = { };
 
-  // constructor() {
-  // }
+  constructor() {
+    this.updateUserData();
+  }
 
   /**
    *
@@ -14,6 +15,10 @@ class DataState {
    * Getters
    *
    */
+
+  @computed get userDataObject() {
+    return toJS(this.userData);
+  }
 
 
   /**

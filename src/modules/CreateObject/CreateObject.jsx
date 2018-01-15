@@ -20,27 +20,6 @@ import CreateObjectField from '../CreateObjectField/CreateObjectField';
 // scss
 import './CreateObject.scss';
 
-/**
- * Flow ---
- * 1. user select which type they want to create an instance of
- *
- * 2. grab type definition and loop through children
- *
- * 3. if child typePrimary is anything other than a list, object, or module,
- *    grab the appropriate input box and display it
- *
- * 4. if child typePrimary is an object, or module, make another CreateObject
- *    instance and display those input fields tabbed over a little bit
- *
- * 5. if child typePrimary is a list, show an 'add' button that either displays
- *    a simple input field like those mentioned above but defined in the typeSecondary,
- *    or creates another CreateObject instance of whatever type is specified
- *    in the typeSecondary
- *
- * ** Note **
- * This is a recursively defined class, so be wary of infinite recursion.
- */
-
 export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
@@ -182,8 +161,8 @@ export default class CreateObject extends Creator {
     for (let listIndex = 0; listIndex < value.length; listIndex++) {
       const tempIDList = nestedIDs.slice();
       tempIDList.push(listIndex);
-      // {this.getObjectFields({ childObject: value[listIndex], childTypeInfo: type, nestedWithin: tempIDList })}
-      const content = value[listIndex] instanceof Object ?
+      const isObject = value[listIndex] instanceof Object;
+      const content = isObject ?
         this.getObjectFields({ childObject: value[listIndex], childTypeInfo: type, nestedWithin: tempIDList }) :
         this.getField({ typeName: type.typeSecondary, guid, nestedIDs: tempIDList, type });
 
@@ -245,7 +224,7 @@ export default class CreateObject extends Creator {
   getObjectFields({ childObject, childTypeInfo, nestedWithin = [] }) {
     const fields = [];
 
-    if (childObject) {
+    if (childObject != null) {
       const { _typeID, _id } = childObject;
       // Get our type
       const type = TypeState.userMadeTypes.get(_typeID);
@@ -304,5 +283,4 @@ export default class CreateObject extends Creator {
 
 CreateObject.propTypes = {
   childObject: Proptypes.object,
-  keyIndex: Proptypes.number,
 };

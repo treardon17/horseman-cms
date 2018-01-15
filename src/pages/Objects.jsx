@@ -1,3 +1,4 @@
+import { observer, toJS } from "mobx-react";
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppState from '../state/AppState.jsx';
@@ -8,56 +9,29 @@ import Page from './Page.jsx';
 // import modules here
 import CreateObject from '../modules/CreateObject/CreateObject';
 
-export default class Objects extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      children: null,
-    };
-
-    this.setupChildren();
-  }
-
-  setupChildren() {
-    // DataState.getData('c90e3392-bc664dfc-45d6f25d').then((instance) => {
-    //   // console.log('instance', instance);
-    //   const child = <CreateObject key="1" childObject={instance} />;
-    //   this.setState({
-    //     children: [child],
-    //   });
-    // });
-    DataState.getData().then((instance) => {
+@observer export default class Objects extends React.Component {
+  getDataObjects() {
+    const dataObjects = [];
+    const userData = DataState.userDataObject;
+    if (userData) {
+      const instance = userData.data;
       if (instance) {
-        const dataObjects = [];
         const keys = Object.keys(instance);
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i];
           const dataObject = <CreateObject key={`data-object-${i}`} childObject={instance[key]} />;
           dataObjects.push(dataObject);
         }
-        this.setState({
-          children: dataObjects,
-        });
       }
-      // const child = <CreateObject key="1" childObject={instance} />;
-      // this.setState({
-      //   children: [child],
-      // });
-    });
+    }
+    return dataObjects;
   }
 
   render() {
-    // let child = null;
-    // if (moduleTypes.length > 0) {
-    //   child = moduleTypes;
-    // } else {
-    //   child = (<EmptyPage title="No Module Types" message="Press the + button in the bottom right to add a module" />);
-    // }
-
+    const dataObjects = this.getDataObjects();
     return (
       <Page id="Objects" title="Objects">
-        {this.state.children}
+        {dataObjects}
       </Page>
     );
   }

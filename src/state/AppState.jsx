@@ -5,12 +5,13 @@ import React from 'react';
 
 // components
 import CreateType from '../modules/CreateType/CreateType';
+import CreateNewObject from '../modules/CreateNewObject/CreateNewObject';
 
 class AppState {
   @observable circleMenuItems = [
     { icon: '/assets/img/featherIcons/layout.svg', onClick: () => { ModalState.pushModal({ page: <CreateType />, title: 'Create Module Type' }); } },
     { icon: '/assets/img/featherIcons/image.svg', onClick: () => {} },
-    { icon: '/assets/img/featherIcons/layers.svg', onClick: () => {} }
+    { icon: '/assets/img/featherIcons/layers.svg', onClick: () => { ModalState.pushModal({ page: <CreateNewObject />, title: 'Create New Object' }); } }
   ];
 
   @observable menuItems = [

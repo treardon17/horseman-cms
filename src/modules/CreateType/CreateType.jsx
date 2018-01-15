@@ -24,10 +24,6 @@ export default class CreateType extends Creator {
       ...super.state,
       current: this.props.type || new ObjectType({ name: 'Module title', typePrimary: ObjectType.types.object }),
     };
-
-    // setTimeout(() => {
-    //   debugger // eslint-disable-line
-    // }, 5000);
   }
 
   /**
@@ -260,8 +256,8 @@ export default class CreateType extends Creator {
 
     return (
       <VelocityTransitionGroup
-        leave={{ animation: { opacity: 0, translateY: -15 }, duration: 300, complete: () => { this.setState({ revert: false }); } }}
-        enter={{ animation: { opacity: 1, translateY: 0 }, duration: 300 }}
+        leave={{ animation: { opacity: 0 }, duration: 300, complete: () => { this.setState({ revert: false }); } }}
+        enter={{ animation: { opacity: 1 }, duration: 300 }}
         runOnMount
       >
         {content}
