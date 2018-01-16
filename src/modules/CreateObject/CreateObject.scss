@@ -7,5 +7,10 @@
 
   .list-container{
     margin-left: $small-spacing;
+    .list-item{
+      display: flex;
+      &-content{ flex: 1; }
+      .trash-button{ margin: 0 $small-spacing; }
+    }
   }
 }

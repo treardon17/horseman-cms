@@ -104,7 +104,7 @@
         user-select: all;
       }
 
-      .remove-button{
+      .trash-button{
         cursor: pointer;
         margin: auto;
         position: absolute;
@@ -112,12 +112,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
-        .remove-icon{
-          svg{
-            stroke: $base;
-          }
-        }
       }
     }
   }

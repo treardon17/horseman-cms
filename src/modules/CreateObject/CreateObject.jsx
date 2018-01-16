@@ -4,6 +4,7 @@ import Proptypes from 'prop-types';
 import Creator from '../Creator/Creator';
 import Button from 'material-ui/Button';
 import Select from 'react-select';
+import TrashButton from '../TrashButton/TrashButton';
 import SortUtil from '../../../core/util/sort';
 import _ from 'lodash';
 
@@ -128,6 +129,16 @@ export default class CreateObject extends Creator {
     return childObjectCopy;
   }
 
+  removeListItem({ nestedIDs }) {
+    this.saveStateIfNeeded();
+    const nestedIDsCopy = nestedIDs.slice();
+    // The last item in the array is the index of the item
+    const listIndex = nestedIDsCopy.pop();
+    const listVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
+    listVal.splice(listIndex, 1);
+    this.setState({ current: this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: listVal }) });
+  }
+
   // -----------------------------------------------------
   // FIELDS
   // -----------------------------------------------------
@@ -168,7 +179,10 @@ export default class CreateObject extends Creator {
 
       listItems.push(
         <div className="list-item" key={`list-item-${listIndex}`}>
-          {content}
+          <div className="list-item-content">
+            {content}
+          </div>
+          <TrashButton onClick={() => { this.removeListItem({ nestedIDs: tempIDList }); }} />
         </div>
       );
     }

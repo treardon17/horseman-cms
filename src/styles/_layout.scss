@@ -13,6 +13,10 @@ body {
   text-align: center;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 .test{
   background-color: black;
   margin: $large-spacing;

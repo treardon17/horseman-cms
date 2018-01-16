@@ -5,6 +5,7 @@ import Creator from '../Creator/Creator';
 import Button from 'material-ui/Button';
 import Select from 'react-select';
 import SortUtil from '../../../core/util/sort';
+import IDUtil from '../../../core/util/id';
 import _ from 'lodash';
 
 // State
@@ -76,7 +77,9 @@ export default class CreateNewObject extends Creator {
   render() {
     let objectCreator = null;
     if (this.state.current) {
-      objectCreator = (<CreateObject childObject={this.state.current} />);
+      // We give it a unique key so that the constructor is called everytime
+      // --> we want it to create a new object if a different item was selected
+      objectCreator = (<CreateObject key={IDUtil.guid()} childObject={this.state.current} />);
     }
     return (
       <div className="create-new-object">

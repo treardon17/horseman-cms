@@ -7,6 +7,7 @@ import Select from 'react-select';
 import Button from 'material-ui/Button';
 import ContentEditable from 'react-simple-contenteditable';
 import ISVG from 'react-inlinesvg';
+import TrashButton from '../TrashButton/TrashButton';
 import { VelocityTransitionGroup } from 'velocity-react';
 import Creator from '../Creator/Creator';
 
@@ -92,9 +93,7 @@ export default class CreateType extends Creator {
             onChange={(e, val) => { this.handleChangePart({ event: e, val, partID: 'description', typeID: part.id }); }}
             contentEditable="plaintext-only"
           />
-          <div className="remove-button" onClick={() => { this.removeField(part.id); }}>
-            <ISVG className="remove-icon" src="/assets/img/featherIcons/trash.svg" />
-          </div>
+          <TrashButton onClick={() => { this.removeField(part.id); }} />
         </div>
       );
     }
