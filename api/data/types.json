@@ -15,7 +15,7 @@
           "name": "modules",
           "slug": "modules",
           "typePrimary": "list",
-          "typeSecondary": "number"
+          "typeSecondary": "3002a1c3-212a8fdb-2ce7c384"
         },
         "820d3080-76216b4e-9b795e93": {
           "children": {},
@@ -43,6 +43,15 @@
           "name": "Some String",
           "slug": "someString",
           "typePrimary": "string",
+          "typeSecondary": "empty"
+        },
+        "9d09b145-f6cfe1b4-f95ce157": {
+          "children": {},
+          "orderBy": 1,
+          "id": "9d09b145-f6cfe1b4-f95ce157",
+          "name": "Some number",
+          "slug": "someNumber",
+          "typePrimary": "number",
           "typeSecondary": "empty"
         }
       },

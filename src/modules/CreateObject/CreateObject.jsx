@@ -139,6 +139,10 @@ export default class CreateObject extends Creator {
     this.setState({ current: this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: listVal }) });
   }
 
+  removeData() {
+    DataState.removeData(this.state.current._id);
+  }
+
   // -----------------------------------------------------
   // FIELDS
   // -----------------------------------------------------
@@ -274,6 +278,12 @@ export default class CreateObject extends Creator {
       }));
     }
     return fields;
+  }
+
+  persistentButtons() {
+    return [
+      <Button key="delete-type" onClick={this.removeData.bind(this)}>Delete</Button>
+    ];
   }
 
   save() {

@@ -1,42 +1,31 @@
 {
-  "f6efcbd2-593b7f7b-5ff14bba": {
-    "_id": "f6efcbd2-593b7f7b-5ff14bba",
-    "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
-    "_slug": "page",
-    "modules": [],
-    "name": "Some page"
-  },
-  "77881524-b54955db-c9d897d3": {
-    "_id": "77881524-b54955db-c9d897d3",
-    "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
-    "_slug": "page",
-    "modules": [
-      "",
-      "",
-      ""
-    ],
-    "name": "hi there"
-  },
-  "ce8e5ae7-545acd1a-1711e7a4": {
-    "_id": "ce8e5ae7-545acd1a-1711e7a4",
-    "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
-    "_slug": "page",
-    "modules": [
-      "hi",
-      "there",
-      "strings"
-    ],
-    "name": "Contact"
-  },
-  "30078b53-f526c751-367b0a3c": {
-    "_id": "30078b53-f526c751-367b0a3c",
-    "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
-    "_slug": "page",
-    "modules": [
-      "one",
-      "two",
-      "three"
-    ],
-    "name": "hello world"
+  "8acd0506-31dd4d7e-32b2200e": {
+    "_id": "8acd0506-31dd4d7e-32b2200e",
+    "_typeID": "15b16310-d7d0d437-ad3abb3b",
+    "_slug": "site",
+    "pages": [
+      {
+        "_id": "388d8432-93bdae1b-d176ea1c",
+        "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
+        "_slug": "page",
+        "modules": [
+          {
+            "_id": "2afcf890-f4d56f94-52f944b8",
+            "_typeID": "3002a1c3-212a8fdb-2ce7c384",
+            "_slug": "testModule",
+            "someString": "hello",
+            "someNumber": "5"
+          },
+          {
+            "_id": "90af354c-1b6bb105-ad7d7c05",
+            "_typeID": "3002a1c3-212a8fdb-2ce7c384",
+            "_slug": "testModule",
+            "someString": "world",
+            "someNumber": "6"
+          }
+        ],
+        "name": "RockTech"
+      }
+    ]
   }
 }
