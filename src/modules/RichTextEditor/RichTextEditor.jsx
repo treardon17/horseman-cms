@@ -7,8 +7,11 @@ import Proptypes from 'prop-types';
 import './RichTextEditor.scss';
 
 export default class RichTextEditor extends React.Component {
-  state = {
-    value: ReactRTE.createValueFromString(this.props.html || '', 'html')
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ReactRTE.createValueFromString(this.props.value || '', 'html')
+    };
   }
 
   onChange(value) {
@@ -30,5 +33,5 @@ export default class RichTextEditor extends React.Component {
 
 RichTextEditor.propTypes = {
   onChange: Proptypes.func,
-  html: Proptypes.string,
+  value: Proptypes.string,
 };

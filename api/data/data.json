@@ -16,7 +16,7 @@
             "someString": "test",
             "someNumber": "234235130598",
             "name": "Alex",
-            "paragraph": "<p>hello world</p>"
+            "paragraph": "<p>hello this is <strong>pretty cool</strong></p>"
           },
           {
             "_id": "c073a73b-d06cef67-b2ae7e21",
