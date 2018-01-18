@@ -200,7 +200,16 @@ export default class CreateObject extends Creator {
         onChange={(val) => { this.setState({ moduleTypeToAdd: val }); }}
       /> : null;
 
-    const moduleTypeToAdd = (type.typeSecondary === ObjectType.types.module) ? this.state.moduleTypeToAdd.value : type.typeSecondary;
+    let moduleTypeToAdd = null;
+    if (type.typeSecondary === ObjectType.types.module) {
+      if (this.state.moduleTypeToAdd) {
+        moduleTypeToAdd = this.state.moduleTypeToAdd.value;
+      } else {
+        moduleTypeToAdd = '';
+      }
+    } else {
+      moduleTypeToAdd = type.typeSecondary;
+    }
 
     // Add each list item section to the fields
     return (
