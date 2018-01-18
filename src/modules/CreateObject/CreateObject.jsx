@@ -17,6 +17,7 @@ import ObjectType from '../../../core/definitions/objectType';
 
 // Modules
 import CreateObjectField from '../CreateObjectField/CreateObjectField';
+import RichTextEditor from '../RichTextEditor/RichTextEditor';
 
 // scss
 import './CreateObject.scss';
@@ -32,19 +33,19 @@ export default class CreateObject extends Creator {
     };
   }
 
-  handleFieldChange(event, nestedIDs) {
+  handleFieldChange(newVal, nestedIDs) {
     this.saveStateIfNeeded();
     const nestedIDsCopy = nestedIDs.slice();
-    let newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: event.target.value });
+    let stateVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
     // If an object within the main object was changed
     // we want to only replace that part
     if (nestedIDs && nestedIDsCopy.length > 1) {
       while (nestedIDsCopy.length > 1) {
         nestedIDsCopy.pop();
-        newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+        stateVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: stateVal });
       }
     }
-    this.setState({ current: newVal });
+    this.setState({ current: stateVal });
   }
 
   nestedObject({ object, idArray, newVal = null }) {
@@ -162,6 +163,14 @@ export default class CreateObject extends Creator {
     );
   }
 
+  getRichTextField({ title, type, guid, value, onChange }) {
+    return (
+      <CreateObjectField title={title} type={ObjectType.types.richText} key={guid}>
+        <RichTextEditor value={value || ''} onChange={onChange} />
+      </CreateObjectField>
+    );
+  }
+
   getModuleField({ title, value, nestedIDs, guid }) {
     return (
       <div className="submodule-container" key={guid}>
@@ -234,14 +243,21 @@ export default class CreateObject extends Creator {
           title,
           guid,
           value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
-          onChange: (e) => { this.handleFieldChange(e, nestedIDs); }
+          onChange: (e) => { this.handleFieldChange(e.target.value, nestedIDs); }
+        });
+      case ObjectType.types.richText:
+        return this.getRichTextField({
+          title,
+          guid,
+          value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
+          onChange: (val) => { this.handleFieldChange(val, nestedIDs); }
         });
       case ObjectType.types.number:
         return this.getNumberField({
           title,
           guid,
           value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
-          onChange: (e) => { this.handleFieldChange(e, nestedIDs); }
+          onChange: (e) => { this.handleFieldChange(e.target.value, nestedIDs); }
         });
       default:
         return null;

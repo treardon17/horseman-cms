@@ -58,9 +58,9 @@
           "children": {},
           "orderBy": 2,
           "id": "bded7ee7-3ee658ff-68d9949e",
-          "name": "Name",
-          "slug": "name",
-          "typePrimary": "string",
+          "name": "paragraph",
+          "slug": "paragraph",
+          "typePrimary": "richText",
           "typeSecondary": "empty"
         }
       },
