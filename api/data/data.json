@@ -14,35 +14,19 @@
             "_typeID": "3002a1c3-212a8fdb-2ce7c384",
             "_slug": "testModule",
             "someString": "test",
-            "someNumber": "234235130598",
+            "someNumber": -234235130598.345,
             "name": "Alex",
             "paragraph": "<p>hello this is <strong>pretty cool</strong></p>"
-          },
-          {
-            "_id": "c073a73b-d06cef67-b2ae7e21",
-            "_typeID": "3002a1c3-212a8fdb-2ce7c384",
-            "_slug": "testModule",
-            "someString": "testing2",
-            "someNumber": "123123123",
-            "name": "Tyler"
-          },
-          {
-            "_id": "0d4de44c-f058ec99-4ab3264a",
-            "_typeID": "3002a1c3-212a8fdb-2ce7c384",
-            "_slug": "testModule",
-            "someString": "",
-            "someNumber": 0,
-            "name": ""
           }
         ],
-        "name": "Home page"
+        "name": "Home"
       },
       {
-        "_id": "0afe1aed-9a39a379-cc7fe6b2",
+        "_id": "69273e37-1c329f6d-b78de985",
         "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
         "_slug": "page",
         "modules": [],
-        "name": "Contact"
+        "name": ""
       }
     ]
   }

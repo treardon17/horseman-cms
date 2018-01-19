@@ -26,7 +26,6 @@ import './CreateObject.scss';
 export default class CreateObject extends Creator {
   constructor(props) {
     super(props);
-
     this.state = {
       ...super.state,
       current: this.buildObjectTree(this.props.childObject),
@@ -36,24 +35,25 @@ export default class CreateObject extends Creator {
 
   handleFieldChange(newVal, nestedIDs) {
     this.saveStateIfNeeded();
-    const nestedIDsCopy = nestedIDs.slice();
-    let stateVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
-    // If an object within the main object was changed
-    // we want to only replace that part
-    if (nestedIDs && nestedIDsCopy.length > 1) {
-      while (nestedIDsCopy.length > 1) {
-        nestedIDsCopy.pop();
-        stateVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: stateVal });
-      }
-    }
+    const stateVal = this.mergeObject({ object: this.state.current, idArray: nestedIDs, newVal });
     this.setState({ current: stateVal });
+  }
+
+  mergeObject({ object, idArray, newVal }) {
+    const idArrayCopy = idArray.slice();
+    let value = this.nestedObject({ object, idArray: idArrayCopy, newVal });
+    while (idArrayCopy && idArrayCopy.length > 1) {
+      idArrayCopy.pop();
+      value = this.nestedObject({ object, idArray: idArrayCopy, newVal: value });
+    }
+    return value;
   }
 
   nestedObject({ object, idArray, newVal = null }) {
     let value = _.cloneDeep(object);
     for (let i = 0; i < idArray.length; i++) {
       const id = idArray[i];
-      if ((newVal || newVal === '') && i === idArray.length - 1) {
+      if ((newVal || newVal === '' || newVal === 0) && i === idArray.length - 1) {
         value[id] = newVal;
       } else {
         // Get the next nested value
@@ -88,11 +88,7 @@ export default class CreateObject extends Creator {
         if (newVal && newVal instanceof Array) {
           newVal.push(instance);
         }
-        newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
-        while (nestedIDsCopy.length > 1) {
-          nestedIDsCopy.pop();
-          newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
-        }
+        newVal = this.mergeObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
         this.setState({ current: newVal });
       }
     }

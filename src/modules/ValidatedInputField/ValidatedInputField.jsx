@@ -15,18 +15,18 @@ export default class ValidatedInputField extends React.Component {
     }
   }
 
-  getRegex() {
-    const allowType = this.props.allowType;
-    let regex = this.props.regex;
-    if (allowType === 'string') {
-      regex = /(-?[0-9]+\.?[0-9]*)/;
-    } else if (allowType === 'number') {
-      regex = /([^\d-.])/g;
-    } else {
-      regex = new RegExp(regex);
-    }
-    return regex;
-  }
+  // getRegex() {
+  //   const allowType = this.props.allowType;
+  //   let regex = this.props.regex;
+  //   // if (allowType === 'string') {
+  //   //   regex = /(-?[0-9]+\.?[0-9]*)/;
+  //   // } else if (allowType === 'number') {
+  //   //
+  //   // } else {
+  //   //   regex = new RegExp(regex);
+  //   // }
+  //   return regex;
+  // }
 
   replaceAll(string, replaceArray) {
     let stringCopy = string;
@@ -38,31 +38,46 @@ export default class ValidatedInputField extends React.Component {
     return stringCopy;
   }
 
+  validateString(input) { }
+
   validateNumber(input) {
+    const regex = /([^\d-.])/g;
+    let validInput = input;
+    const matches = validInput.match(regex);
+    validInput = this.replaceAll(validInput, matches);
+
     let inputNumber = input;
-    if (input[input.length - 1] === '.') {
+    if (validInput[validInput.length - 1] === '.') {
       inputNumber = parseFloat(`${inputNumber}.0`).toFixed(1);
+      // select the zero we put on the end so the user can edit it if they want
+      setTimeout(() => {
+        this.input.selectionStart = this.input.selectionStart - 1;
+      }, 0);
     } else {
-      inputNumber = parseFloat(input);
+      inputNumber = parseFloat(validInput);
     }
+    if (inputNumber == null || isNaN(inputNumber)) {
+      inputNumber = 0;
+    }
+
     return inputNumber;
   }
 
   validateInput(input) {
-    let validInput = input;
-    const regex = this.getRegex();
-    if (regex) {
-      const matches = validInput.match(regex);
-      validInput = this.replaceAll(validInput, matches);
+    const allowType = this.props.allowType;
+    if (allowType === 'string') {
+      return this.validateString(input);
+    } else if (allowType === 'number') {
+      return this.validateNumber(input);
+    } else {
+      return input;
     }
-    validInput = this.validateNumber(validInput);
-    return validInput;
   }
 
   render() {
     return (
       <div className="validated-input-field">
-        <input type="text" value={this.props.value || ''} onChange={this.onChange.bind(this)} />
+        <input ref={(ref) => { this.input = ref; }} type="text" value={this.props.value || ''} onChange={this.onChange.bind(this)} />
       </div>
     );
   }
