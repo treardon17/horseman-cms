@@ -18,6 +18,7 @@ import ObjectType from '../../../core/definitions/objectType';
 // Modules
 import CreateObjectField from '../CreateObjectField/CreateObjectField';
 import RichTextEditor from '../RichTextEditor/RichTextEditor';
+import ValidatedInputField from '../ValidatedInputField/ValidatedInputField';
 
 // scss
 import './CreateObject.scss';
@@ -155,7 +156,7 @@ export default class CreateObject extends Creator {
   getNumberField({ title, type, guid, value, onChange }) {
     return (
       <CreateObjectField title={title} type={ObjectType.types.number} key={guid}>
-        <input type="text" value={value || ''} onChange={onChange} />
+        <ValidatedInputField allowType="number" value={value} onChange={onChange} />
       </CreateObjectField>
     );
   }
@@ -264,7 +265,7 @@ export default class CreateObject extends Creator {
           title,
           guid,
           value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
-          onChange: (e) => { this.handleFieldChange(e.target.value, nestedIDs); }
+          onChange: (val) => { this.handleFieldChange(val, nestedIDs); }
         });
       default:
         return null;
