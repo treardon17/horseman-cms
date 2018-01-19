@@ -41,15 +41,7 @@
         "_id": "0afe1aed-9a39a379-cc7fe6b2",
         "_typeID": "d42b09f9-5e8c3695-9f24b6eb",
         "_slug": "page",
-        "modules": [
-          {
-            "_id": "48491e91-8aa7f15e-13c3d425",
-            "_typeID": "3002a1c3-212a8fdb-2ce7c384",
-            "_slug": "testModule",
-            "someString": "",
-            "someNumber": 0
-          }
-        ],
+        "modules": [],
         "name": "Contact"
       }
     ]

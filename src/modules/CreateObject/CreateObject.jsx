@@ -137,7 +137,12 @@ export default class CreateObject extends Creator {
     const listIndex = nestedIDsCopy.pop();
     const listVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
     listVal.splice(listIndex, 1);
-    this.setState({ current: this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: listVal }) });
+    let newState = listVal;
+    while (nestedIDsCopy.length > 0) {
+      newState = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: newState });
+      nestedIDsCopy.pop();
+    }
+    this.setState({ current: newState });
   }
 
   removeData() {
@@ -225,8 +230,10 @@ export default class CreateObject extends Creator {
       <CreateObjectField title={type.name} type={ObjectType.types.list} key={guid}>
         <div className="list-container">
           {listItems}
-          {moduleSelector}
-          <Button onClick={() => { this.addListItem(moduleTypeToAdd, nestedIDs); }}>Add item</Button>
+          <div className="list-container__action">
+            {moduleSelector}
+            <Button onClick={() => { this.addListItem(moduleTypeToAdd, nestedIDs); }}>Add item</Button>
+          </div>
         </div>
       </CreateObjectField>
     );
