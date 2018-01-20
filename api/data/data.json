@@ -13,13 +13,13 @@
             "_id": "049cf8a9-bb004af7-56a7fb29",
             "_typeID": "3002a1c3-212a8fdb-2ce7c384",
             "_slug": "testModule",
-            "someString": "test",
+            "someString": "tests",
             "someNumber": -234235130598.345,
             "name": "Alex",
             "paragraph": "<p>hello this is <strong>pretty cool</strong></p>"
           }
         ],
-        "name": "Home"
+        "name": "Home is here"
       },
       {
         "_id": "69273e37-1c329f6d-b78de985",

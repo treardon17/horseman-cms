@@ -6,6 +6,7 @@ import Button from 'material-ui/Button';
 import Select from 'react-select';
 import TrashButton from '../TrashButton/TrashButton';
 import SortUtil from '../../../core/util/sort';
+import IDUtil from '../../../core/util/id';
 import _ from 'lodash';
 
 // State
@@ -35,32 +36,8 @@ export default class CreateObject extends Creator {
 
   handleFieldChange(newVal, nestedIDs) {
     this.saveStateIfNeeded();
-    const stateVal = this.mergeObject({ object: this.state.current, idArray: nestedIDs, newVal });
+    const stateVal = IDUtil.mergeObject({ object: this.state.current, idArray: nestedIDs, newVal });
     this.setState({ current: stateVal });
-  }
-
-  mergeObject({ object, idArray, newVal }) {
-    const idArrayCopy = idArray.slice();
-    let value = this.nestedObject({ object, idArray: idArrayCopy, newVal });
-    while (idArrayCopy && idArrayCopy.length > 1) {
-      idArrayCopy.pop();
-      value = this.nestedObject({ object, idArray: idArrayCopy, newVal: value });
-    }
-    return value;
-  }
-
-  nestedObject({ object, idArray, newVal = null }) {
-    let value = _.cloneDeep(object);
-    for (let i = 0; i < idArray.length; i++) {
-      const id = idArray[i];
-      if ((newVal || newVal === '' || newVal === 0) && i === idArray.length - 1) {
-        value[id] = newVal;
-      } else {
-        // Get the next nested value
-        value = value[id];
-      }
-    }
-    return value;
   }
 
   addListItem(type, nestedIDs) {
@@ -82,13 +59,13 @@ export default class CreateObject extends Creator {
       // If we successfully created something
       if (instance != null) {
         // Grab the list we're trying to modify from state
-        let newVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
+        let newVal = IDUtil.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
         // Make sure that we actually got a list back.
         // If we did, append our instance to that list
         if (newVal && newVal instanceof Array) {
           newVal.push(instance);
         }
-        newVal = this.mergeObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
+        newVal = IDUtil.mergeObject({ object: this.state.current, idArray: nestedIDsCopy, newVal });
         this.setState({ current: newVal });
       }
     }
@@ -132,11 +109,11 @@ export default class CreateObject extends Creator {
     const nestedIDsCopy = nestedIDs.slice();
     // The last item in the array is the index of the item
     const listIndex = nestedIDsCopy.pop();
-    const listVal = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
+    const listVal = IDUtil.nestedObject({ object: this.state.current, idArray: nestedIDsCopy });
     listVal.splice(listIndex, 1);
     let newState = listVal;
     while (nestedIDsCopy.length > 0) {
-      newState = this.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: newState });
+      newState = IDUtil.nestedObject({ object: this.state.current, idArray: nestedIDsCopy, newVal: newState });
       nestedIDsCopy.pop();
     }
     this.setState({ current: newState });
@@ -246,21 +223,21 @@ export default class CreateObject extends Creator {
         return this.getStringField({
           title,
           guid,
-          value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
+          value: IDUtil.nestedObject({ object: this.state.current, idArray: nestedIDs }),
           onChange: (e) => { this.handleFieldChange(e.target.value, nestedIDs); }
         });
       case ObjectType.types.richText:
         return this.getRichTextField({
           title,
           guid,
-          value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
+          value: IDUtil.nestedObject({ object: this.state.current, idArray: nestedIDs }),
           onChange: (val) => { this.handleFieldChange(val, nestedIDs); }
         });
       case ObjectType.types.number:
         return this.getNumberField({
           title,
           guid,
-          value: this.nestedObject({ object: this.state.current, idArray: nestedIDs }),
+          value: IDUtil.nestedObject({ object: this.state.current, idArray: nestedIDs }),
           onChange: (val) => { this.handleFieldChange(val, nestedIDs); }
         });
       default:

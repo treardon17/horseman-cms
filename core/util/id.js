@@ -80,6 +80,30 @@ class IDUtil {
     }
   }
 
+  mergeObject({ object, idArray, newVal }) {
+    const idArrayCopy = idArray.slice();
+    let value = this.nestedObject({ object, idArray: idArrayCopy, newVal });
+    while (idArrayCopy && idArrayCopy.length > 1) {
+      idArrayCopy.pop();
+      value = this.nestedObject({ object, idArray: idArrayCopy, newVal: value });
+    }
+    return value;
+  }
+
+  nestedObject({ object, idArray, newVal = null }) {
+    let value = _.cloneDeep(object);
+    for (let i = 0; i < idArray.length; i++) {
+      const id = idArray[i];
+      if ((newVal || newVal === '' || newVal === 0) && i === idArray.length - 1) {
+        value[id] = newVal;
+      } else {
+        // Get the next nested value
+        value = value[id];
+      }
+    }
+    return value;
+  }
+
   /**
    * [guid Generates a unique string ID]
    * @return {[String]} [Unique ID]
