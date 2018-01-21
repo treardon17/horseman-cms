@@ -102,6 +102,7 @@
     "verbose": true
   },
   "dependencies": {
+    "app-root-path": "^2.0.1",
     "ava": "^0.22.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",

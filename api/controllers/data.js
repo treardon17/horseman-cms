@@ -4,6 +4,7 @@ const TypeController = require('./type');
 class DataController {
   constructor() {
     this.data = null;
+    this.dataPath = '../data/data.json';
   }
 
 
@@ -22,7 +23,7 @@ class DataController {
        } else {
          // Otherwise, we need to read the data.json file
          // and grab the current data from there
-         FileManager.fileToObject({ path: '../data/data.json' }).then(dataObject => {
+         FileManager.fileToObject({ path: this.dataPath }).then(dataObject => {
            // Set our data object
            this.data = dataObject;
            resolve();
@@ -47,7 +48,7 @@ class DataController {
     */
    saveChanges() {
      return new Promise((resolve, reject) => {
-       FileManager.writeToFile({ path: '../data/data.json', data: JSON.stringify(this.data, null, 2) }).then(() => {
+       FileManager.writeToFile({ path: this.dataPath, data: JSON.stringify(this.data, null, 2) }).then(() => {
          console.log('Changes to DATA saved');
          resolve();
        }).catch((err) => {

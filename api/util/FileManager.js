@@ -51,6 +51,16 @@ class FileManager {
       });
     });
   }
+
+  getFiles({ path }) {
+    const newPath = Path.resolve(__dirname, path);
+    return new Promise((resolve, reject) => {
+      fs.readdir(newPath, (err, files) => {
+        if (err) { reject(err) }
+        else { resolve(files) }
+      })
+    })
+  }
 }
 
 module.exports = new FileManager();
