@@ -1,7 +1,7 @@
 @import "_variables";
 
 // MaterialUI buttons
-button[class^='MuiButtonBase'], div[class*=' MuiButtonBase']{
+button[class^='MuiButtonBase'], div[class*='MuiButtonBase']{
   background-color: $shade2;
   color: $white;
 

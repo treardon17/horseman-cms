@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppState from '../state/AppState.jsx';
+import React from 'react'
+import PropTypes from 'prop-types'
+import AppState from '../state/AppState.jsx'
 // import modules here
-import TitleSection from '../modules/TitleSection/TitleSection.jsx';
+import TitleSection from '../components/TitleSection'
 
 export default class Page extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
@@ -20,7 +20,7 @@ export default class Page extends React.Component {
           {this.props.children}
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -28,4 +28,4 @@ Page.propTypes = {
   state: PropTypes.instanceOf(AppState),
   children: PropTypes.instanceOf(Object),
   title: PropTypes.string
-};
+}

@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppState from '../state/AppState.jsx';
-import Page from './Page.jsx';
+import React from 'react'
+import PropTypes from 'prop-types'
+import AppState from '../state/AppState.jsx'
+import Page from './Page.jsx'
 // import modules here
-import TitleSection from '../modules/TitleSection/TitleSection.jsx';
+import TitleSection from '../components/TitleSection'
 
 export default class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
@@ -15,10 +15,10 @@ export default class Home extends React.Component {
       <Page id="Home" title="Home">
         <div />
       </Page>
-    );
+    )
   }
 }
 
 Home.propTypes = {
   state: PropTypes.instanceOf(AppState),
-};
+}
