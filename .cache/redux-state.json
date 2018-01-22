@@ -1,0 +1,1016 @@
+{
+  "nodes": {
+    "SitePage /dev-404-page/": {
+      "layout": null,
+      "jsonName": "dev-404-page.json",
+      "internalComponentName": "ComponentDev404Page",
+      "path": "/dev-404-page/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/.cache/dev-404-page.js",
+      "componentChunkName": "component---cache-dev-404-page-js",
+      "context": {},
+      "updatedAt": 1516579804936,
+      "pluginCreator___NODE": "Plugin dev-404-page",
+      "pluginCreatorId": "Plugin dev-404-page",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/.cache/dev-404-page.js",
+      "id": "SitePage /dev-404-page/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "27b94fc7ed4bd5146ede0f580f1e391f",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin dev-404-page": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/dev-404-page",
+      "id": "Plugin dev-404-page",
+      "name": "dev-404-page",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "createPages"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/dev-404-page",
+      "packageJson": {
+        "name": "dev-404-page",
+        "description": "Internal plugin to add a 404 page in development with helpful information",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "cec43013ff35353237a5c7995126094e",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin component-page-creator": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/component-page-creator",
+      "id": "Plugin component-page-creator",
+      "name": "component-page-creator",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "createPagesStatefully"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/component-page-creator",
+      "packageJson": {
+        "name": "component-page-creator",
+        "description": "An internal Gatsby plugin that creates pages from component files in src/pages",
+        "version": "1.0.0",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin"
+        ],
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "9171bc660dafdced826d73c801a4c6d5",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin component-layout-creator": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/component-layout-creator",
+      "id": "Plugin component-layout-creator",
+      "name": "component-layout-creator",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "createLayouts"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/component-layout-creator",
+      "packageJson": {
+        "name": "component-layout-creator",
+        "description": "An internal Gatsby plugin that creates pages from component files in src/layouts",
+        "version": "1.0.0",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin"
+        ],
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "b9d8bcf8ec45e27d6f1c4b8ac0cae8f2",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin internal-data-bridge": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/internal-data-bridge",
+      "id": "Plugin internal-data-bridge",
+      "name": "internal-data-bridge",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "sourceNodes",
+        "onCreatePage"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/internal-data-bridge",
+      "packageJson": {
+        "name": "internal-data-bridge",
+        "description": "An internal Gatsby plugin which creates data nodes from internal data",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "54068dc49607587a5dd7838a9641e821",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin prod-404": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/prod-404",
+      "id": "Plugin prod-404",
+      "name": "prod-404",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onCreatePage"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/prod-404",
+      "packageJson": {
+        "name": "prod-404",
+        "description": "Internal plugin to detect various flavors of 404 pages and ensure there's a 404.html path created as well to ensure compatability with static hosts",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "2fb2ed2fb00bd59b23cda5cc7f764999",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin query-runner": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/query-runner",
+      "id": "Plugin query-runner",
+      "name": "query-runner",
+      "version": "1.0.0",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onCreatePage",
+        "onCreateLayout"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby/dist/internal-plugins/query-runner",
+      "packageJson": {
+        "name": "query-runner",
+        "description": "Internal plugin for running queries",
+        "version": "1.0.0",
+        "main": "index.js",
+        "author": "",
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "8b2d9c117c48772ea930bb79ed7a233a",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin gatsby-source-filesystem": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-source-filesystem",
+      "id": "Plugin gatsby-source-filesystem",
+      "name": "gatsby-source-filesystem",
+      "version": "1.5.14",
+      "pluginOptions": {
+        "plugins": [],
+        "name": "data",
+        "path": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/data/"
+      },
+      "nodeAPIs": [
+        "sourceNodes"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-source-filesystem",
+      "packageJson": {
+        "name": "gatsby-source-filesystem",
+        "description": "Gatsby plugin which parses files within a directory for further parsing by other plugins",
+        "version": "1.5.14",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin"
+        ],
+        "author": {
+          "name": "Kyle Mathews",
+          "email": "mathews.kyle@gmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "babel-cli",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "babel-runtime",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "bluebird",
+            "version": "^3.5.0"
+          },
+          {
+            "name": "chokidar",
+            "version": "^1.7.0"
+          },
+          {
+            "name": "fs-extra",
+            "version": "^4.0.1"
+          },
+          {
+            "name": "got",
+            "version": "^7.1.0"
+          },
+          {
+            "name": "md5-file",
+            "version": "^3.1.1"
+          },
+          {
+            "name": "mime",
+            "version": "^1.3.6"
+          },
+          {
+            "name": "pretty-bytes",
+            "version": "^4.0.2"
+          },
+          {
+            "name": "slash",
+            "version": "^1.0.0"
+          },
+          {
+            "name": "valid-url",
+            "version": "^1.0.9"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "cross-env",
+            "version": "^5.0.5"
+          }
+        ],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "750761f5ec84a5e40823576b0e153c99",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin gatsby-plugin-react-helmet": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-plugin-react-helmet",
+      "id": "Plugin gatsby-plugin-react-helmet",
+      "name": "gatsby-plugin-react-helmet",
+      "version": "1.0.8",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-plugin-react-helmet",
+      "packageJson": {
+        "name": "gatsby-plugin-react-helmet",
+        "description": "Stub description for gatsby-plugin-react-helmet",
+        "version": "1.0.8",
+        "main": "index.js",
+        "keywords": [
+          "gatsby"
+        ],
+        "author": {
+          "name": "Kyle Mathews &lt;mathews.kyle@gmail.com&gt;"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "babel-runtime",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "react-helmet",
+            "version": "^5.1.3"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "babel-cli",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.0.5"
+          }
+        ],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "bbc086e160755de22f882d5d7f3636d1",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin gatsby-transformer-json": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-transformer-json",
+      "id": "Plugin gatsby-transformer-json",
+      "name": "gatsby-transformer-json",
+      "version": "1.0.14",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "onCreateNode"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-transformer-json",
+      "packageJson": {
+        "name": "gatsby-transformer-json",
+        "description": "Gatsby transformer plugin for JSON files",
+        "version": "1.0.14",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin",
+          "json"
+        ],
+        "author": {
+          "name": "Kyle Mathews",
+          "email": "mathews.kyle@gmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "babel-runtime",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "bluebird",
+            "version": "^3.5.0"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "babel-cli",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.0.5"
+          }
+        ],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "786a0140a94b1517d3fabc6de375ea7f",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin gatsby-plugin-styled-components": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-plugin-styled-components",
+      "id": "Plugin gatsby-plugin-styled-components",
+      "name": "gatsby-plugin-styled-components",
+      "version": "2.0.4",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-plugin-styled-components",
+      "packageJson": {
+        "name": "gatsby-plugin-styled-components",
+        "description": "Gatsby plugin to add support for styled components",
+        "version": "2.0.4",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "gatsby-plugin",
+          "styled-components"
+        ],
+        "author": {
+          "name": "Guten Ye",
+          "email": "ywzhaifei@gmail.com"
+        },
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "babel-runtime",
+            "version": "^6.26.0"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "babel-cli",
+            "version": "^6.26.0"
+          }
+        ],
+        "peerDependencies": [
+          {
+            "name": "styled-components",
+            "version": ">= 2.0.0"
+          }
+        ],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "6ac21797b1efd91451d2db2fe61ea0a6",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin gatsby-plugin-google-fonts": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-plugin-google-fonts",
+      "id": "Plugin gatsby-plugin-google-fonts",
+      "name": "gatsby-plugin-google-fonts",
+      "version": "0.0.3",
+      "pluginOptions": {
+        "plugins": [],
+        "fonts": [
+          "Montserrat",
+          "Raleway"
+        ]
+      },
+      "nodeAPIs": [],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/node_modules/gatsby-plugin-google-fonts",
+      "packageJson": {
+        "name": "gatsby-plugin-google-fonts",
+        "description": "Bring Google Fonts to Gatsby",
+        "version": "0.0.3",
+        "main": "index.js",
+        "keywords": [
+          "gatsby",
+          "react",
+          "google",
+          "fonts"
+        ],
+        "author": {
+          "name": "Didier Franc",
+          "email": "dev@didierfranc.com"
+        },
+        "license": "MIT",
+        "dependencies": [],
+        "devDependencies": [],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "6b9741749bb4eab0cf6852a24531454e",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Plugin default-site-plugin": {
+      "resolve": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms",
+      "id": "Plugin default-site-plugin",
+      "name": "default-site-plugin",
+      "version": "c26624bf7fca74f6609640d6a3260186",
+      "pluginOptions": {
+        "plugins": []
+      },
+      "nodeAPIs": [
+        "modifyWebpackConfig"
+      ],
+      "pluginFilepath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms",
+      "packageJson": {
+        "name": "horseman",
+        "description": "A headless CMS",
+        "version": "1.0.0",
+        "author": "Tyler Reardon",
+        "license": "MIT",
+        "dependencies": [
+          {
+            "name": "app-root-path",
+            "version": "^2.0.1"
+          },
+          {
+            "name": "ava",
+            "version": "^0.22.0"
+          },
+          {
+            "name": "babel-runtime",
+            "version": "^6.26.0"
+          },
+          {
+            "name": "body-parser",
+            "version": "^1.18.1"
+          },
+          {
+            "name": "chokidar",
+            "version": "^1.7.0"
+          },
+          {
+            "name": "compression",
+            "version": "^1.7.0"
+          },
+          {
+            "name": "copy-webpack-plugin",
+            "version": "^4.0.1"
+          },
+          {
+            "name": "cross-env",
+            "version": "^5.0.5"
+          },
+          {
+            "name": "css-loader",
+            "version": "^0.28.7"
+          },
+          {
+            "name": "enzyme",
+            "version": "^2.9.1"
+          },
+          {
+            "name": "express",
+            "version": "^4.15.4"
+          },
+          {
+            "name": "extract-text-webpack-plugin",
+            "version": "^3.0.1"
+          },
+          {
+            "name": "fs-extra",
+            "version": "^4.0.2"
+          },
+          {
+            "name": "gatsby",
+            "version": "^1.9.145"
+          },
+          {
+            "name": "gatsby-link",
+            "version": "^1.6.32"
+          },
+          {
+            "name": "gatsby-plugin-google-fonts",
+            "version": "0.0.3"
+          },
+          {
+            "name": "gatsby-plugin-react-helmet",
+            "version": "^1.0.8"
+          },
+          {
+            "name": "gatsby-plugin-styled-components",
+            "version": "^2.0.4"
+          },
+          {
+            "name": "gatsby-source-filesystem",
+            "version": "^1.5.11"
+          },
+          {
+            "name": "gatsby-transformer-json",
+            "version": "^1.0.14"
+          },
+          {
+            "name": "ignore-styles",
+            "version": "^5.0.1"
+          },
+          {
+            "name": "is-json",
+            "version": "^2.0.1"
+          },
+          {
+            "name": "jsdom",
+            "version": "^11.2.0"
+          },
+          {
+            "name": "knex",
+            "version": "^0.13.0"
+          },
+          {
+            "name": "lodash",
+            "version": "^4.17.4"
+          },
+          {
+            "name": "material-ui",
+            "version": "^1.0.0-beta.18"
+          },
+          {
+            "name": "mobx",
+            "version": "^3.3.0"
+          },
+          {
+            "name": "mobx-react",
+            "version": "^4.3.2"
+          },
+          {
+            "name": "mysql",
+            "version": "^2.14.1"
+          },
+          {
+            "name": "node-sass",
+            "version": "^4.5.3"
+          },
+          {
+            "name": "postcss-loader",
+            "version": "^2.0.6"
+          },
+          {
+            "name": "prop-types",
+            "version": "^15.5.10"
+          },
+          {
+            "name": "react",
+            "version": "^15.6.1"
+          },
+          {
+            "name": "react-dom",
+            "version": "^15.6.1"
+          },
+          {
+            "name": "react-inlinesvg",
+            "version": "^0.6.2"
+          },
+          {
+            "name": "react-router",
+            "version": "^4.2.0"
+          },
+          {
+            "name": "react-router-dom",
+            "version": "^4.2.2"
+          },
+          {
+            "name": "react-rte",
+            "version": "^0.16.0"
+          },
+          {
+            "name": "react-select",
+            "version": "^1.0.0-rc.10"
+          },
+          {
+            "name": "react-simple-contenteditable",
+            "version": "^0.0.1"
+          },
+          {
+            "name": "react-style-proptype",
+            "version": "^3.1.0"
+          },
+          {
+            "name": "react-transition-router",
+            "version": "^1.1.1"
+          },
+          {
+            "name": "sass-loader",
+            "version": "^6.0.6"
+          },
+          {
+            "name": "sitemap",
+            "version": "^1.13.0"
+          },
+          {
+            "name": "velocity-react",
+            "version": "^1.3.3"
+          },
+          {
+            "name": "whatwg-fetch",
+            "version": "^2.0.3"
+          }
+        ],
+        "devDependencies": [
+          {
+            "name": "babel-eslint",
+            "version": "^8.2.1"
+          },
+          {
+            "name": "babel-plugin-transform-class-properties",
+            "version": "^6.24.1"
+          },
+          {
+            "name": "babel-plugin-transform-react-jsx",
+            "version": "^6.24.1"
+          },
+          {
+            "name": "babel-plugin-transform-react-pug",
+            "version": "^3.2.0"
+          },
+          {
+            "name": "eslint",
+            "version": "^4.15.0"
+          },
+          {
+            "name": "eslint-config-airbnb",
+            "version": "^16.1.0"
+          },
+          {
+            "name": "eslint-loader",
+            "version": "^1.9.0"
+          },
+          {
+            "name": "eslint-plugin-import",
+            "version": "^2.8.0"
+          },
+          {
+            "name": "eslint-plugin-jsx-a11y",
+            "version": "^6.0.3"
+          },
+          {
+            "name": "eslint-plugin-react",
+            "version": "^7.5.1"
+          }
+        ],
+        "peerDependencies": [],
+        "optionalDependecies": [],
+        "bundledDependecies": []
+      },
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "e2ccec902cc84ac7458066ed78d59936",
+        "type": "SitePlugin",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "Site": {
+      "siteMetadata": {
+        "title": "Gatsby Default Starter"
+      },
+      "port": "2727",
+      "host": "localhost",
+      "proxy": {
+        "prefix": "/api",
+        "url": "http://127.0.0.1:2757"
+      },
+      "pathPrefix": "",
+      "polyfill": true,
+      "buildTime": "2018-01-22T00:10:02.811Z",
+      "id": "Site",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "contentDigest": "922eee36b27de64dad79b1de846e7a2b",
+        "type": "Site",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/data/ absPath of file": {
+      "id": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/data/ absPath of file",
+      "children": [],
+      "parent": "___SOURCE___",
+      "internal": {
+        "contentDigest": "b4245314ad4b1e23e9e6d2883b986917",
+        "type": "Directory",
+        "owner": "gatsby-source-filesystem"
+      },
+      "sourceInstanceName": "data",
+      "absolutePath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/data/",
+      "relativePath": "",
+      "extension": "",
+      "size": 64,
+      "prettySize": "64 B",
+      "modifiedTime": "2018-01-21T23:57:53.908Z",
+      "accessTime": "2018-01-22T00:10:04.810Z",
+      "changeTime": "2018-01-21T23:57:53.908Z",
+      "birthTime": "2018-01-21T23:57:53.908Z",
+      "root": "/",
+      "dir": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src",
+      "base": "data",
+      "ext": "",
+      "name": "data",
+      "relativeDirectory": "..",
+      "dev": 16777220,
+      "mode": 16877,
+      "nlink": 2,
+      "uid": 501,
+      "gid": 20,
+      "rdev": 0,
+      "blksize": 4194304,
+      "ino": 8601656875,
+      "blocks": 0,
+      "atimeMs": 1516579804810.2754,
+      "mtimeMs": 1516579073908.1665,
+      "ctimeMs": 1516579073908.1665,
+      "birthtimeMs": 1516579073908.1665,
+      "atime": "2018-01-22T00:10:04.810Z",
+      "mtime": "2018-01-21T23:57:53.908Z",
+      "ctime": "2018-01-21T23:57:53.908Z",
+      "birthtime": "2018-01-21T23:57:53.908Z"
+    },
+    "SitePage /Assets/": {
+      "layout": null,
+      "jsonName": "assets.json",
+      "internalComponentName": "ComponentAssets",
+      "path": "/Assets/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Assets.jsx",
+      "componentChunkName": "component---src-pages-assets-jsx",
+      "context": {},
+      "updatedAt": 1516579804946,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Assets.jsx",
+      "id": "SitePage /Assets/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "04ccddb40cce024049dfd2df759a8a3d",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /Home/": {
+      "layout": null,
+      "jsonName": "home.json",
+      "internalComponentName": "ComponentHome",
+      "path": "/Home/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Home.jsx",
+      "componentChunkName": "component---src-pages-home-jsx",
+      "context": {},
+      "updatedAt": 1516579804947,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Home.jsx",
+      "id": "SitePage /Home/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "a69f5ec9dc4662d65fcc3d0b3df5b13f",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /Modules/": {
+      "layout": null,
+      "jsonName": "modules.json",
+      "internalComponentName": "ComponentModules",
+      "path": "/Modules/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Modules.jsx",
+      "componentChunkName": "component---src-pages-modules-jsx",
+      "context": {},
+      "updatedAt": 1516579804948,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Modules.jsx",
+      "id": "SitePage /Modules/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "f927a8e7e08ae5bdddd5b1bb5cafa0d7",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /Objects/": {
+      "layout": null,
+      "jsonName": "objects.json",
+      "internalComponentName": "ComponentObjects",
+      "path": "/Objects/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Objects.jsx",
+      "componentChunkName": "component---src-pages-objects-jsx",
+      "context": {},
+      "updatedAt": 1516579804948,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Objects.jsx",
+      "id": "SitePage /Objects/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "4622142aebeffaf44215da50bfb8f936",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /Page/": {
+      "layout": null,
+      "jsonName": "page.json",
+      "internalComponentName": "ComponentPage",
+      "path": "/Page/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Page.jsx",
+      "componentChunkName": "component---src-pages-page-jsx",
+      "context": {},
+      "updatedAt": 1516579804949,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Page.jsx",
+      "id": "SitePage /Page/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "af761957629b172648b021177a141540",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /Settings/": {
+      "layout": null,
+      "jsonName": "settings.json",
+      "internalComponentName": "ComponentSettings",
+      "path": "/Settings/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Settings.jsx",
+      "componentChunkName": "component---src-pages-settings-jsx",
+      "context": {},
+      "updatedAt": 1516579804950,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Settings.jsx",
+      "id": "SitePage /Settings/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "ad0a17e214be2014b37f045d2b516eea",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /Users/": {
+      "layout": null,
+      "jsonName": "users.json",
+      "internalComponentName": "ComponentUsers",
+      "path": "/Users/",
+      "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Users.jsx",
+      "componentChunkName": "component---src-pages-users-jsx",
+      "context": {},
+      "updatedAt": 1516579804950,
+      "pluginCreator___NODE": "Plugin component-page-creator",
+      "pluginCreatorId": "Plugin component-page-creator",
+      "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Users.jsx",
+      "id": "SitePage /Users/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "7012826fd2340f7d88b03e21f851764e",
+        "owner": "internal-data-bridge"
+      }
+    }
+  },
+  "status": {
+    "plugins": {},
+    "PLUGINS_HASH": "3dc0daafc0a627672bd419703d696a78"
+  },
+  "componentDataDependencies": {
+    "nodes": {},
+    "connections": {
+      "SitePage": [
+        "/dev-404-page/"
+      ]
+    }
+  }
+}

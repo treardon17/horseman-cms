@@ -1,4 +1,4 @@
-const MediaManager = require('../util/MediaManager.js')
+const FileManager = require('../util/FileManager.js')
 
 class MediaController {
   constructor() {
@@ -7,41 +7,41 @@ class MediaController {
   }
 
   /**
-   *
-   *
-   * Helper Functions
-   *
-   */
-   initParentIfNeeded() {
-     return new Promise((resolve, reject) => {
-       resolve()
-     })
-   }
+  *
+  *
+  * Helper Functions
+  *
+  */
+  initParentIfNeeded() {
+    return new Promise((resolve, reject) => {
+      console.log(this.media)
+      resolve()
+    })
+  }
 
-   saveChanges() {
-     return new Promise((resolve, reject) => {
+  saveChanges() {
+    console.log(this.media)
+    return new Promise((resolve, reject) => {})
+  }
 
-     })
-   }
 
+  /*
+  *
+  *
+  * Mutations
+  *
+  */
 
-   /*
-   *
-   *
-   * Mutations
-   *
-   */
+  addOrUpdateMedia({ media }) {
+    return new Promise((resolve, reject) => {
+      this.initParentIfNeeded().then(() => {
 
-   addOrUpdateMedia({ media }) {
-     return new Promise((resolve, reject) => {
-       this.initParentIfNeeded().then(() => {
-
-       }).catch((error) => {
-         console.log(error)
-         reject(error)
-       })
-     })
-   }
+      }).catch((error) => {
+        console.log(error)
+        reject(error)
+      })
+    })
+  }
 
   deleteMedia({ id }) {
     return new Promise((resolve, reject) => {
@@ -54,12 +54,10 @@ class MediaController {
   getAllMedia() {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
-        MediaManager.getMediaFiles({ path: this.mediaPath }).then((media) => {
+        FileManager.getFile({ path: this.mediaPath }).then((media) => {
           resolve(media)
         }).catch(err => reject(err))
-      }).catch(error => {
-        reject(error)
-      })
+      }).catch(error => reject(error))
     })
   }
 
@@ -67,9 +65,7 @@ class MediaController {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
         resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      }).catch(error => reject(error))
     })
   }
 
@@ -85,17 +81,13 @@ class MediaController {
       const media = req.body
       this.addOrUpdateMedia({ media }).then((addedMedia) => {
         res.header('Content-Type', 'application/json').status(201).send({ media: addedMedia })
-      }).catch(error => {
-        res.header('Content-Type', 'application/json').status(500).send({ error })
-      })
-    }).catch(error => {
-      res.header('Content-Type', 'application/json').status(500).send({ error })
-    })
+      }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
+    }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
   }
 
   handleGetMedia(req, res) {
     this.initParentIfNeeded().then(() => {
-      const id = req.params.id
+      const { id } = req.params
       // If the user is asking for a specific piece of media
       if (id != null) {
         console.log(`Getting media with id ${id}`)
@@ -108,22 +100,16 @@ class MediaController {
           res.header('Content-Type', 'application/json').status(200).send(media)
         })
       }
-    }).catch((error) => {
-      res.header('Content-Type', 'application/json').status(500).send({ error })
-    })
+    }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
   }
 
   handleDeleteMedia(req, res) {
     this.initParentIfNeeded().then(() => {
-      const id = req.params.id
+      const { id } = req.params
       this.deleteMedia({ id }).then(() => {
         res.header('Content-Type', 'application/json').status(200).send({ success: true, id })
-      }).catch(error => {
-        res.header('Content-Type', 'application/json').status(500).send({ error })
-      })
-    }).catch((error) => {
-      res.header('Content-Type', 'application/json').status(500).send({ error })
-    })
+      }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
+    }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
   }
 }
 

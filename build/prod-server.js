@@ -1,26 +1,14 @@
 const path = require('path');
-const sm = require('sitemap');
 const express = require('express');
 const compress = require('compression');
 const bodyParser = require('body-parser');
-const router = require('../api/router');
-const social = require('../api/social');
+const router = require(path.resolve('./api/router'));
 
 // get port
 const port = parseInt(process.env.PORT);
 
 // create express instance
 const app = express();
-
-// create sitemap
-const sitemap = sm.createSitemap({
-  hostname: 'https://thatslofty.com',
-  cacheTime: 600000,
-  urls: [
-    { url: '/' },
-    { url: '/about' }
-  ]
-});
 
 // use body parser for api requests
 app.use(bodyParser.json());
@@ -29,10 +17,10 @@ app.use(bodyParser.json());
 app.use(compress());
 
 // serve prod folder at '/'
-app.use(express.static('prod'));
+app.use(express.static('public'));
 
 // serve static folder
-app.use('/assets', express.static('src/assets'));
+// app.use('/assets', express.static('src/assets'));
 
 // provide social data to bots
 app.use(social);
@@ -40,15 +28,9 @@ app.use(social);
 // serve api
 app.use('/api', router);
 
-// respond with sitemap
-app.get('/sitemap.xml', function(req, res) {
-  res.header('Content-Type', 'application/xml');
-  res.send(sitemap.toString());
-});
-
 // handles '/url/path' page refreshes to /index.html - spa
 app.get('*', function(req, res){
-  res.sendFile(path.resolve('./prod/index.html'));
+  res.sendFile(path.resolve('./public/index.html'));
 });
 
 // start server
