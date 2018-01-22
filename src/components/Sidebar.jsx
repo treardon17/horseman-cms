@@ -21,30 +21,32 @@ export default class Sidebar extends React.Component {
   // Sidebar items with transitions
   getSidebarMenuItems() {
     const sidebarItems = []
-    for (let i = 0; i < this.props.menuItems.length; i++) {
-      const calculatedDelay = this.initialDelay + ((i) * this.itemDelay) + (this.openDuration * 0.1)
-      const menuItem = this.props.menuItems[i]
-      sidebarItems.push(
-        <VelocityComponent
-          key={i}
-          animation={this.state.open ? {
-            paddingTop: '0px',
-            paddingLeft: '10px',
-            paddingBottom: '0px',
-            paddingRight: '10px',
-          } : {
-            paddingTop: '10px',
-            paddingLeft: '10px',
-            paddingBottom: '10px',
-            paddingRight: '10px',
-          }}
-          duration={this.itemDuration}
-          easing={'ease-in-out'}
-          delay={calculatedDelay}
-        >
-          <SidebarItem key={i} bigIcon={!this.state.open} icon={menuItem.icon} title={menuItem.title} url={menuItem.url} />
-        </VelocityComponent>
-      )
+    if (this.props.sidebarItems) {
+      for (let i = 0; i < this.props.menuItems.length; i++) {
+        const calculatedDelay = this.initialDelay + ((i) * this.itemDelay) + (this.openDuration * 0.1)
+        const menuItem = this.props.menuItems[i]
+        sidebarItems.push(
+          <VelocityComponent
+            key={i}
+            animation={this.state.open ? {
+              paddingTop: '0px',
+              paddingLeft: '10px',
+              paddingBottom: '0px',
+              paddingRight: '10px',
+            } : {
+              paddingTop: '10px',
+              paddingLeft: '10px',
+              paddingBottom: '10px',
+              paddingRight: '10px',
+            }}
+            duration={this.itemDuration}
+            easing={'ease-in-out'}
+            delay={calculatedDelay}
+            >
+              <SidebarItem key={i} bigIcon={!this.state.open} icon={menuItem.icon} title={menuItem.title} url={menuItem.url} />
+            </VelocityComponent>
+          )
+        }
     }
     return sidebarItems
   }
@@ -140,7 +142,7 @@ const SidebarComponent = styled.div`
           width: 100%;
           height: ${styles.spacing.closedMenuIconSize};
           @include containImage();
-          background-image: url('/assets/img/lofty-logo.svg');
+          background-image: url(${require('../assets/img/lofty-logo.svg')});
           cursor: pointer;
           background-color: transparent;
           border: none;

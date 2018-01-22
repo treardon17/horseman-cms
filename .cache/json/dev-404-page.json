@@ -1,1 +1,1 @@
-{"data":{"allSitePage":{"totalCount":7,"edges":[{"node":{"path":"/Assets/"}},{"node":{"path":"/Home/"}},{"node":{"path":"/Modules/"}},{"node":{"path":"/Objects/"}},{"node":{"path":"/Page/"}},{"node":{"path":"/Settings/"}},{"node":{"path":"/Users/"}}]}},"pathContext":{}}
+{"data":{"allSitePage":{"totalCount":1,"edges":[{"node":{"path":"/"}}]}},"pathContext":{}}

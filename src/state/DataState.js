@@ -1,11 +1,12 @@
-import { observable, computed, action, toJS } from 'mobx'
+import { observable, extendObservable, computed, action, toJS } from 'mobx'
 import ObjectType from '../../core/definitions/objectType'
 import API from '../../core/util/api'
 
 class DataState {
-  @observable userData = { }
-
   constructor() {
+    extendObservable(this, {
+      userData: {}
+    })
     this.updateUserData()
   }
 

@@ -6,45 +6,9 @@
         "path": "/dev-404-page/"
     },
     {
-        "componentChunkName": "component---src-pages-assets-jsx",
+        "componentChunkName": "component---src-pages-index-jsx",
         "layout": null,
-        "jsonName": "assets.json",
-        "path": "/Assets/"
-    },
-    {
-        "componentChunkName": "component---src-pages-home-jsx",
-        "layout": null,
-        "jsonName": "home.json",
-        "path": "/Home/"
-    },
-    {
-        "componentChunkName": "component---src-pages-modules-jsx",
-        "layout": null,
-        "jsonName": "modules.json",
-        "path": "/Modules/"
-    },
-    {
-        "componentChunkName": "component---src-pages-objects-jsx",
-        "layout": null,
-        "jsonName": "objects.json",
-        "path": "/Objects/"
-    },
-    {
-        "componentChunkName": "component---src-pages-page-jsx",
-        "layout": null,
-        "jsonName": "page.json",
-        "path": "/Page/"
-    },
-    {
-        "componentChunkName": "component---src-pages-settings-jsx",
-        "layout": null,
-        "jsonName": "settings.json",
-        "path": "/Settings/"
-    },
-    {
-        "componentChunkName": "component---src-pages-users-jsx",
-        "layout": null,
-        "jsonName": "users.json",
-        "path": "/Users/"
+        "jsonName": "index.json",
+        "path": "/"
     }
 ]

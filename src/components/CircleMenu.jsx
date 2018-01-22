@@ -91,7 +91,7 @@ export default class CircleMenu extends React.Component {
           duration={this.animationDuration}
           easing={[50, 8]}
         >
-          <ActionButton icon="/assets/img/featherIcons/plus.svg" onClick={this.toggleMenu.bind(this)} />
+          <ActionButton icon={require('../assets/img/featherIcons/plus.svg')} onClick={this.toggleMenu.bind(this)} />
         </VelocityComponent>
         {this.getButtons()}
       </MenuStyles>

@@ -1,8 +1,7 @@
-@import "_variables";
+import styled from 'styled-components'
+import variables from './variables'
 
-// use google fonts whenever possible
-// example: @include font-face("name", "path", weight, style, filenames);
-
+export default `
 @import url('https://fonts.googleapis.com/css?family=Karla|Lato:300,700');
 
 html {
@@ -11,7 +10,7 @@ html {
 }
 
 h1, h2, h3, p {
-  color: $brand-dark;
+  color: ${variables.color.base};
 }
 
 h1 {
@@ -71,3 +70,4 @@ p {
   font-size: 12px;
   margin: 0;
 }
+`

@@ -31,5 +31,6 @@ const image = {
 }
 
 export default {
+  image,
   media
 }

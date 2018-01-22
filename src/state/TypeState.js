@@ -1,11 +1,12 @@
-import { observable, computed, action } from 'mobx'
+import { observable, extendObservable, computed, action } from 'mobx'
 import ObjectType from '../../core/definitions/objectType'
 import API from '../../core/util/api'
 
 class TypeState {
-  @observable userMadeTypes = { }
-
   constructor() {
+    extendObservable(this, {
+      userMadeTypes: { }
+    })
     this.typeQueue = []
     this.updateUserMadeTypes()
   }

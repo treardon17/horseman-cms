@@ -1,13 +1,13 @@
-import { observable, computed, action } from 'mobx'
+import { observable, extendObservable, computed, action } from 'mobx'
 
 class ModalState {
-  /**
-  * [history The current history stack]
-  * @type {Array}
-  */
-  @observable history = []
-  @observable isPushing = false
-  @observable modal = null
+  constructor() {
+    extendObservable(this, {
+      history: [],
+      isPushing: false,
+      modal: null
+    })
+  }
 
   // /////////////////////////
   // GETTERS -----------------
