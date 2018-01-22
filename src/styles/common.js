@@ -3,6 +3,7 @@ import buttons from './buttons'
 import fonts from './fonts'
 import inputs from './inputs'
 import layout from './layout'
+import reactSelect from './plugins/reactSelect'
 
 /* eslint-disable */
 injectGlobal`
