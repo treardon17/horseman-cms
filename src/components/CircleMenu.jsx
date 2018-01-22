@@ -85,7 +85,7 @@ export default class CircleMenu extends React.Component {
 
   render() {
     return (
-      <MenuStyles>
+      <MenuStyles className="circle-menu">
         <VelocityComponent
           animation={this.state.open ? { rotateZ: '-45deg' } : { rotateZ: '0deg' }}
           duration={this.animationDuration}
@@ -100,7 +100,7 @@ export default class CircleMenu extends React.Component {
 }
 
 // STYLES
-const MenuStyles = styled.div.attrs({ className: 'circle-menu' })`
+const MenuStyles = styled.div`
   position: fixed;
   bottom: ${styles.spacing.small};
   right: ${styles.spacing.small};
@@ -147,5 +147,5 @@ const MenuStyles = styled.div.attrs({ className: 'circle-menu' })`
 `
 
 CircleMenu.propTypes = {
-  menuItems: PropTypes.object.isRequired,
+  menuItems: PropTypes.array.isRequired,
 }

@@ -60,9 +60,9 @@ import Objects from '../pageContainers/Objects'
             serialize={false}
           />
           <Modal ref={(ref) => { ModalState.modal = ref }} />
+          <CircleMenu menuItems={AppState.circleMenuItems} />
         </div>
       </div>
     )
   }
 }
-// {/* <CircleMenu menuItems={AppState.circleMenuItems} /> */}

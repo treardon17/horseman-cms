@@ -19,7 +19,7 @@ export default class TrashButton extends React.Component {
   render() {
     return (
       <TrashButtonStyles onClick={this.buttonClicked.bind(this)} >
-        <ISVG className="trash-icon" src="/assets/img/featherIcons/trash.svg" />
+        <ISVG className="trash-icon" src={require("../assets/img/featherIcons/trash.svg")} />
       </TrashButtonStyles>
     )
   }

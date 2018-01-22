@@ -74,11 +74,11 @@ import styles from '../styles'
       <div className="modal-container">
         <div className="modal-header">
           <div className="back-btn" onClick={this.popHistory.bind(this)}>
-            <ISVG src="/assets/img/featherIcons/arrow-left.svg" />
+            <ISVG src={require("../assets/img/featherIcons/arrow-left.svg")} />
           </div>
           <h3 className="modal-title">{ModalState.currentTitle}</h3>
           <div className="exit-btn" onClick={this.close.bind(this)}>
-            <ISVG src="/assets/img/featherIcons/x.svg" />
+            <ISVG src={require("../assets/img/featherIcons/x.svg")} />
           </div>
         </div>
         <div className="modal-content" style={modalStyles} ref={(el) => { this.modalContent = el }}>

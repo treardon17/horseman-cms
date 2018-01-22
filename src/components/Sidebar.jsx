@@ -21,7 +21,7 @@ export default class Sidebar extends React.Component {
   // Sidebar items with transitions
   getSidebarMenuItems() {
     const sidebarItems = []
-    if (this.props.sidebarItems) {
+    if (this.props.menuItems) {
       for (let i = 0; i < this.props.menuItems.length; i++) {
         const calculatedDelay = this.initialDelay + ((i) * this.itemDelay) + (this.openDuration * 0.1)
         const menuItem = this.props.menuItems[i]
@@ -139,9 +139,9 @@ const SidebarComponent = styled.div`
         width: 80%;
 
         .sidebar-logo{
+          ${styles.image.containImage}
           width: 100%;
           height: ${styles.spacing.closedMenuIconSize};
-          @include containImage();
           background-image: url(${require('../assets/img/lofty-logo.svg')});
           cursor: pointer;
           background-color: transparent;
@@ -173,5 +173,5 @@ const SidebarComponent = styled.div`
 `
 
 Sidebar.propTypes = {
-  menuItems: PropTypes.object
+  menuItems: PropTypes.array
 }

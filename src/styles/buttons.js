@@ -8,7 +8,7 @@ export default `
     color: ${variables.color.white};
 
     &:hover{
-      background-color: ${variables.color.white};
+      background-color: ${variables.color.shade1};
     }
   }
 

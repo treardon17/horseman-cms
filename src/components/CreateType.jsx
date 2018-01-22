@@ -219,7 +219,7 @@ export default class CreateType extends Creator {
       : (
         <div className="construct-type">
           <div className="module-title-container">
-            <ISVG className="module-icon" src="/assets/img/featherIcons/layout.svg" />
+            <ISVG className="module-icon" src={require("../assets/img/featherIcons/layout.svg")} />
             <div className="module-title-data">
               <ContentEditable
                 key="module-title"
@@ -234,7 +234,7 @@ export default class CreateType extends Creator {
             </div>
             <div className="module-settings-container">
               <div className="remove-module" onClick={() => { this.removeModule() }}>
-                <ISVG className="remove-icon" src="/assets/img/featherIcons/trash.svg" />
+                <ISVG className="remove-icon" src={require("../assets/img/featherIcons/trash.svg")} />
               </div>
             </div>
           </div>
