@@ -32,7 +32,7 @@ export default class ActionButton extends React.Component {
 }
 
 // STYLES
-const ActionButtonStyles = styled.div.attr({ className: 'action-button' })`
+const ActionButtonStyles = styled.div.attrs({ className: 'action-button' })`
   border: 2px solid ${styles.color.white};
   border-radius: 100%;
 `

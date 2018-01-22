@@ -1,12 +1,12 @@
-import { observable, computed, action, toJS } from 'mobx';
-import ObjectType from '../../core/definitions/objectType';
-import API from '../../core/util/api';
+import { observable, computed, action, toJS } from 'mobx'
+import ObjectType from '../../core/definitions/objectType'
+import API from '../../core/util/api'
 
 class DataState {
-  @observable userData = { };
+  @observable userData = { }
 
   constructor() {
-    this.updateUserData();
+    this.updateUserData()
   }
 
   /**
@@ -17,7 +17,7 @@ class DataState {
    */
 
   @computed get userDataObject() {
-    return toJS(this.userData);
+    return toJS(this.userData)
   }
 
 
@@ -34,14 +34,14 @@ class DataState {
     return new Promise((resolve, reject) => {
       API.makeQuery({
         method: 'get',
-        query: `/api/data`,
+        query: '/api/data',
       }).then((data) => {
-        this.userData = data;
-        resolve(this.userData);
+        this.userData = data
+        resolve(this.userData)
       }).catch((error) => {
-        reject(error);
-      });
-    });
+        reject(error)
+      })
+    })
   }
 
   @action addOrUpdateData(data) {
@@ -51,17 +51,17 @@ class DataState {
         // Tell the server about the changes we made
         API.makeQuery({
           method: 'post',
-          query: `/api/data`,
+          query: '/api/data',
           body: JSON.stringify(data)
         }).then(() => {
           this.updateUserData().then((updatedData) => {
-            resolve(updatedData);
-          });
+            resolve(updatedData)
+          })
         }).catch((error) => {
-          reject(error);
-        });
+          reject(error)
+        })
       }
-    });
+    })
   }
 
   @action removeData(id) {
@@ -71,27 +71,27 @@ class DataState {
         query: `/api/data/${id}`
       }).then(() => {
         this.updateUserData().then((updatedData) => {
-          resolve(updatedData);
-        });
+          resolve(updatedData)
+        })
       }).catch((error) => {
-        reject(error);
-      });
-    });
+        reject(error)
+      })
+    })
   }
 
   @action getData(id) {
-    const myID = id || '';
+    const myID = id || ''
     return new Promise((resolve, reject) => {
       API.makeQuery({
         method: 'get',
         query: `/api/data/${myID}`
       }).then((newData) => {
-        resolve(newData.data);
+        resolve(newData.data)
       }).catch((error) => {
-        reject(error);
-      });
-    });
+        reject(error)
+      })
+    })
   }
 }
 
-export default new DataState();
+export default new DataState()

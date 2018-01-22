@@ -26,7 +26,7 @@ export default class TrashButton extends React.Component {
 }
 
 // STYLES
-const TrashButtonStyles = styled.div.attr({ className: 'trash-button' })`
+const TrashButtonStyles = styled.div.attrs({ className: 'trash-button' })`
   cursor: pointer;
   margin: auto;
   top: 0; bottom: 0; right: ${styles.spacing.small};
@@ -35,7 +35,7 @@ const TrashButtonStyles = styled.div.attr({ className: 'trash-button' })`
   align-items: center;
 
   .trash-icon{
-    svg{ stroke: ${styles.colors.base}; }
+    svg{ stroke: ${styles.color.base}; }
   }
 `
 

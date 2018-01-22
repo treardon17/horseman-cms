@@ -2,7 +2,8 @@ const _ = require('lodash')
 
 class SortUtil {
   /**
-   * [makeListFromObjectKeys Takes an object and creates a list of objects {key, value} from that object]
+   * [makeListFromObjectKeys Takes an object and creates a
+   * list of objects {key, value} from that object]
    * @param  {[Object]} object [The object the list will be created from]
    * @return {[Array]}        [A list of {key, value} pairs]
    */
@@ -39,7 +40,8 @@ class SortUtil {
    */
   sortListByObjectProperty({ list, idArray }) {
     list.sort((a, b) => {
-      return this.getObjectProperty({ object: a, idArray }) - this.getObjectProperty({ object: b, idArray })
+      const property = this.getObjectProperty({ object: a, idArray })
+      return property - this.getObjectProperty({ object: b, idArray })
     })
     return list
   }

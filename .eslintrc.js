@@ -20,7 +20,11 @@ module.exports = {
       "class-methods-use-this": 0,
       "brace-style": 0,
       "prefer-promise-reject-errors": 0,
-      "allowTemplateLiterals": true
+      "allowTemplateLiterals": true,
+      "no-plusplus": 0,
+      "no-minusminus": 0,
+      "no-restricted-syntax": 0,
+      "guard-for-in": 0
     },
     "env": {
       "browser": true,

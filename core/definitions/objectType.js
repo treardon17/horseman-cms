@@ -1,12 +1,13 @@
-const _ = require('lodash');
-const IDUtil = require('../util/id');
-const SortUtil = require('../util/sort');
+const _ = require('lodash')
+const IDUtil = require('../util/id')
+const SortUtil = require('../util/sort')
 
 class ObjectType {
   /**
    * [constructor Construct the object]
    * @param  {Object} [arg={}]    [The arg object should contain at least a `name` attribute]
-   * @param  {Object} [parent={}] [The parent object containing this object (so we can find unique slugs)]
+   * @param  {Object} [parent={}]
+   * [The parent object containing this object (so we can find unique slugs)]
    */
   constructor(arg = {}, parent = {}) {
     // parent is the object (if any) that this current ObjectType
@@ -29,7 +30,7 @@ class ObjectType {
     if (this.children == null) this.children = { }
     if (this.orderBy == null) this.orderBy = Object.keys((this.parent.children || {})).length
     if (this.id == null) this.id = IDUtil.guid()
-    if (this.name  == null) this.setName({ name: 'New Type' })
+    if (this.name == null) this.setName({ name: 'New Type' })
     if (this.typePrimary == null) this.typePrimary = ObjectType.types.empty
     if (this.typeSecondary == null) this.typeSecondary = ObjectType.types.empty
 
@@ -109,7 +110,8 @@ class ObjectType {
   }
 
   /**
-   * [reorder Changes the orderBy attribute to a new position and propagates the change to the other data attributes]
+   * [reorder Changes the orderBy attribute to a new
+   *    position and propagates the change to the other data attributes]
    * @param  {[Int]} newIndex [The index that will replace the current index]
    * @param  {[type]} id       [The id to the item that will be moved]
    */
@@ -137,7 +139,7 @@ class ObjectType {
         } else if (reorderIndex === newIndex) {
           reorderIndex += 1
         }
-        this.children[dataItem.key].orderBy = reorderIndex;
+        this.children[dataItem.key].orderBy = reorderIndex
         reorderIndex += 1
       }
     }
@@ -178,7 +180,8 @@ class ObjectType {
   }
 
   /**
-   * [getOrphanCopy JSON.stringify can't deal with circular structures, so this removes all of the parent objects]
+   * [getOrphanCopy JSON.stringify can't deal with circular structures,
+   *    so this removes all of the parent objects]
    * @return {[ObjectType]} [An ObjectType without the circular reference to parent]
    */
   getOrphanCopy() {
@@ -207,9 +210,9 @@ class ObjectType {
    * @return {[ObjectType]} [The parent]
    */
   getTopLevelParent() {
-    let parent = this.parent
+    let { parent } = this
     while (parent && parent.parent instanceof ObjectType) {
-      parent = parent.parent
+      parent = parent.parent // eslint-disable-line
     }
     return parent
   }
@@ -219,16 +222,16 @@ class ObjectType {
    * @return {[Array]} [The sorted list]
    */
   getSortedChildren() {
-    const childList = SortUtil.makeListFromObjectKeys({ object: this.children });
-    SortUtil.sortListByObjectProperty({ list: childList, idArray: ['value', 'orderBy'] });
-    return childList;
+    const childList = SortUtil.makeListFromObjectKeys({ object: this.children })
+    SortUtil.sortListByObjectProperty({ list: childList, idArray: ['value', 'orderBy'] })
+    return childList
   }
 
-/**
- * [createObjectInstance Creates an object using the scheme defined in the ObjectType]
- * @param  {[availableTypes]}      [An object containing other types that this type may depend on]
- * @return {[Object]}                       [The object instance]
- */
+  /**
+   * [createObjectInstance Creates an object using the scheme defined in the ObjectType]
+   * @param  {[availableTypes]}      [An object containing other types that this type may depend on]
+   * @return {[Object]}                       [The object instance]
+  */
   createObjectInstance() {
     const object = {}
 
@@ -248,7 +251,7 @@ class ObjectType {
       } else if (child.typePrimary === ObjectType.types.module) {
         const topLevelParent = this.getTopLevelParent()
         const childType = topLevelParent.get(child.typeSecondary)
-        object[child.slug] = childType.createObjectInstance();
+        object[child.slug] = childType.createObjectInstance()
       } else if (child.typePrimary === ObjectType.types.string) {
         // Otherwise we take the type that the object has and create an empty version of it
         object[child.slug] = ''
@@ -264,7 +267,8 @@ class ObjectType {
 
 
   /**
-   * [updateExistingObjectSchema Takes an existing object and updates the schema to reflect the current schema]
+   * [updateExistingObjectSchema Takes an existing object and
+   *    updates the schema to reflect the current schema]
    * @param  {[Object]} [object={}}] [The object that will be updated]
    * @param  {[availableTypes]}      [An object containing other types that this type may depend on]
    * @return {[Object]}                [The updated object]
@@ -273,10 +277,11 @@ class ObjectType {
     let objectCopy = object
     // If we actually have an existing object we're trying to modify
     if (objectCopy) {
-      const currentSchemaObject = this.createObjectInstance();
+      const currentSchemaObject = this.createObjectInstance()
       // Check to make sure it's the right type of object
       if (objectCopy._typeID === this.id) {
-        // If the parent slug changed, we want to reflect that change to the object we're re-creating
+        // If the parent slug changed, we want to
+        // reflect that change to the object we're re-creating
         objectCopy._slug = this.slug
         // Go through the different properties and make sure we don't keep
         // a property if that property was deleted
@@ -291,8 +296,6 @@ class ObjectType {
     return objectCopy
   }
 }
-
-
 
 // Setup static constant definitions of ObjectTypes
 ObjectType.types = { }
@@ -309,4 +312,4 @@ ObjectType.types.image = 'image'
 ObjectType.types.audio = 'audio'
 ObjectType.types.video = 'video'
 
-module.exports = ObjectType;
+module.exports = ObjectType

@@ -18,20 +18,16 @@ const media = Object.keys(sizes).reduce((acc, label) => {
 }, {})
 
 const image = {
-  containImage: () => {
-    return `
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: contain;
-    `
-  },
-  coverImage: () => {
-    return `
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    `
-  }
+  containImage: `
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  `,
+  coverImage: `
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  `
 }
 
 export default {

@@ -8,7 +8,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/.cache/dev-404-page.js",
       "componentChunkName": "component---cache-dev-404-page-js",
       "context": {},
-      "updatedAt": 1516587734848,
+      "updatedAt": 1516592233532,
       "pluginCreator___NODE": "Plugin dev-404-page",
       "pluginCreatorId": "Plugin dev-404-page",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/.cache/dev-404-page.js",
@@ -17,7 +17,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "710b37059ee52e4ff645e584fa81a709",
+        "contentDigest": "870065dfb547a8d709c4532c792c7a9b",
         "owner": "internal-data-bridge"
       }
     },
@@ -726,6 +726,10 @@
             "version": "^1.13.0"
           },
           {
+            "name": "styled-components",
+            "version": "^2.4.0"
+          },
+          {
             "name": "velocity-react",
             "version": "^1.3.3"
           },
@@ -742,6 +746,10 @@
           {
             "name": "babel-plugin-transform-class-properties",
             "version": "^6.24.1"
+          },
+          {
+            "name": "babel-plugin-transform-decorators-legacy",
+            "version": "^1.3.4"
           },
           {
             "name": "babel-plugin-transform-react-jsx",
@@ -800,12 +808,12 @@
       },
       "pathPrefix": "",
       "polyfill": true,
-      "buildTime": "2018-01-22T02:22:12.586Z",
+      "buildTime": "2018-01-22T03:37:11.373Z",
       "id": "Site",
       "parent": "SOURCE",
       "children": [],
       "internal": {
-        "contentDigest": "3af7b95c5530a0937f814c42ad6a90aa",
+        "contentDigest": "389bff39f88bdfb3aefaba5f79ab6358",
         "type": "Site",
         "owner": "internal-data-bridge"
       }
@@ -815,7 +823,7 @@
       "children": [],
       "parent": "___SOURCE___",
       "internal": {
-        "contentDigest": "ea212d3ec929d9409bfb50415e7dcc08",
+        "contentDigest": "40f4b909db07a83b6af557cc96452ff2",
         "type": "Directory",
         "owner": "gatsby-source-filesystem"
       },
@@ -826,7 +834,7 @@
       "size": 64,
       "prettySize": "64 B",
       "modifiedTime": "2018-01-21T23:57:53.908Z",
-      "accessTime": "2018-01-22T02:22:14.686Z",
+      "accessTime": "2018-01-22T03:37:13.378Z",
       "changeTime": "2018-01-21T23:57:53.908Z",
       "birthTime": "2018-01-21T23:57:53.908Z",
       "root": "/",
@@ -844,11 +852,11 @@
       "blksize": 4194304,
       "ino": 8601656875,
       "blocks": 0,
-      "atimeMs": 1516587734686.189,
+      "atimeMs": 1516592233377.8093,
       "mtimeMs": 1516579073908.1665,
       "ctimeMs": 1516579073908.1665,
       "birthtimeMs": 1516579073908.1665,
-      "atime": "2018-01-22T02:22:14.686Z",
+      "atime": "2018-01-22T03:37:13.378Z",
       "mtime": "2018-01-21T23:57:53.908Z",
       "ctime": "2018-01-21T23:57:53.908Z",
       "birthtime": "2018-01-21T23:57:53.908Z"
@@ -861,7 +869,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Assets.jsx",
       "componentChunkName": "component---src-pages-assets-jsx",
       "context": {},
-      "updatedAt": 1516587734857,
+      "updatedAt": 1516592233542,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Assets.jsx",
@@ -870,7 +878,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "c35fde0c7f2249c95dd3f2d7053b1192",
+        "contentDigest": "936be051d7ca1cede0fd557b63d6724e",
         "owner": "internal-data-bridge"
       }
     },
@@ -882,7 +890,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Home.jsx",
       "componentChunkName": "component---src-pages-home-jsx",
       "context": {},
-      "updatedAt": 1516587734858,
+      "updatedAt": 1516592233543,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Home.jsx",
@@ -891,7 +899,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "72e68d9174a521168761bb7d2ec860aa",
+        "contentDigest": "d9c9c8e75d21201b06e316bbd4806aae",
         "owner": "internal-data-bridge"
       }
     },
@@ -903,7 +911,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Modules.jsx",
       "componentChunkName": "component---src-pages-modules-jsx",
       "context": {},
-      "updatedAt": 1516587734859,
+      "updatedAt": 1516592233543,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Modules.jsx",
@@ -912,7 +920,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "c4d8c222bd4c0224e93725c606fbeabc",
+        "contentDigest": "460351e5212a68b610ae194dc431e703",
         "owner": "internal-data-bridge"
       }
     },
@@ -924,7 +932,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Objects.jsx",
       "componentChunkName": "component---src-pages-objects-jsx",
       "context": {},
-      "updatedAt": 1516587734860,
+      "updatedAt": 1516592233544,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Objects.jsx",
@@ -933,7 +941,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "d7aa2b9fe73c3c4adece75271c03e35f",
+        "contentDigest": "249e4a04039309832224ae52130afc45",
         "owner": "internal-data-bridge"
       }
     },
@@ -945,7 +953,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Page.jsx",
       "componentChunkName": "component---src-pages-page-jsx",
       "context": {},
-      "updatedAt": 1516587734861,
+      "updatedAt": 1516592233544,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Page.jsx",
@@ -954,7 +962,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "32d9f6633803f74f594c0949bf5f0b15",
+        "contentDigest": "5e92e8b3cb801c5c095ea0ae66e3dbca",
         "owner": "internal-data-bridge"
       }
     },
@@ -966,7 +974,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Settings.jsx",
       "componentChunkName": "component---src-pages-settings-jsx",
       "context": {},
-      "updatedAt": 1516587734861,
+      "updatedAt": 1516592233545,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Settings.jsx",
@@ -975,7 +983,7 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "219080a4b1c17d6cfff46e2f6b61f42f",
+        "contentDigest": "6c80a1ee55260813f87af67cef34e362",
         "owner": "internal-data-bridge"
       }
     },
@@ -987,7 +995,7 @@
       "component": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Users.jsx",
       "componentChunkName": "component---src-pages-users-jsx",
       "context": {},
-      "updatedAt": 1516587734862,
+      "updatedAt": 1516592233546,
       "pluginCreator___NODE": "Plugin component-page-creator",
       "pluginCreatorId": "Plugin component-page-creator",
       "componentPath": "/Applications/Developer/Projects/Lofty/CMSs/horseman-cms/src/pages/Users.jsx",
@@ -996,14 +1004,14 @@
       "children": [],
       "internal": {
         "type": "SitePage",
-        "contentDigest": "c4a282bc84c115d5dbac9ae668442af3",
+        "contentDigest": "95538027f758f28e04b3c005aac76fac",
         "owner": "internal-data-bridge"
       }
     }
   },
   "status": {
     "plugins": {},
-    "PLUGINS_HASH": "3dc0daafc0a627672bd419703d696a78"
+    "PLUGINS_HASH": "e62efcd2578ebd40ba3554ea43d3cbc0"
   },
   "componentDataDependencies": {
     "nodes": {},

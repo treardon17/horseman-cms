@@ -100,7 +100,7 @@ export default class CircleMenu extends React.Component {
 }
 
 // STYLES
-const MenuStyles = styled.div.attr({ className: 'circle-menu' })`
+const MenuStyles = styled.div.attrs({ className: 'circle-menu' })`
   position: fixed;
   bottom: ${styles.spacing.small};
   right: ${styles.spacing.small};

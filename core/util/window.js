@@ -11,7 +11,7 @@ class WindowUtil {
       setTimeout(() => {
         // Select all text on the focused element
         document.execCommand('selectAll', false, null)
-      }, 0);
+      }, 0)
     }
   }
 }

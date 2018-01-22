@@ -25,7 +25,7 @@ export default class TitleSection extends React.Component {
 }
 
 // STYLES
-const TitleSectionStyles = styled.div.attr({ className: 'title-section' })`
+const TitleSectionStyles = styled.div.attrs({ className: 'title-section' })`
   height: ${styles.spacing.headerHeight};
   position: relative;
 
@@ -43,7 +43,7 @@ const TitleSectionStyles = styled.div.attr({ className: 'title-section' })`
       display: inline-block;
       text-transform: lowercase;
       font-size: 40px;
-      color: ${styles.colors.white};
+      color: ${styles.color.white};
       padding-left: ${styles.spacing.small};
       text-align: left;
       margin: 0;
