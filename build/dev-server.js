@@ -11,6 +11,9 @@ const port = parseInt(process.env.PORT);
 // create express instance
 const app = express();
 
+// use body parser for api requests
+app.use(bodyParser.json());
+
 // Use router for API calls
 app.use('/api', (req, res, next) => {
   require(path.resolve('api/router'))(req, res, next);
@@ -34,9 +37,6 @@ const watchPath = ({ filepath, message }) => {
 
 watchPath({ filepath: './api/', message: 'Updated backend' });
 watchPath({ filepath: './core/', message: 'Updated core' });
-
-// use body parser for api requests
-app.use(bodyParser.json());
 
 // start server
 app.listen(port + 30);

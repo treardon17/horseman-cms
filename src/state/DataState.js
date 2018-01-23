@@ -53,7 +53,7 @@ class DataState {
         API.makeQuery({
           method: 'post',
           query: '/api/data',
-          body: JSON.stringify(data)
+          body: data
         }).then(() => {
           this.updateUserData().then((updatedData) => {
             resolve(updatedData)

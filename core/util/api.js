@@ -9,6 +9,7 @@ class API {
    * @return {[Promise]}
   */
   makeQuery({ query, method = 'GET', body }) {
+    debugger // eslint-disable-line
     let newBody = null
     if (typeof body === 'string') {
       newBody = body
@@ -20,7 +21,7 @@ class API {
       fetch(query, {
         method,
         headers: {
-          Accept: 'application/json',
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: newBody
