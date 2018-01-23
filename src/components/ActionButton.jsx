@@ -52,10 +52,6 @@ const ButtonComponent = styled.div`
 `
 
 const ActionButtonComponent = styled(({ ...rest }) => {
-  // for (let i = 0; i < children.length; i++) {
-  //   const child = children[i]
-  //   console.log(child.props)
-  // }
   return <div {...rest} />
 })
 `
