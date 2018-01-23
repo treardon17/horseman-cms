@@ -1,7 +1,7 @@
 import React from 'react'
 import Proptypes from 'prop-types'
 import _ from 'lodash'
-import Button from 'material-ui/Button'
+import { Button } from '../styles/buttons'
 
 export default class Creator extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import styled, { injectGlobal } from 'styled-components'
-import buttons from './buttons'
+import { Button } from './buttons'
 import fonts from './fonts'
 import inputs from './inputs'
 import layout from './layout'
@@ -8,7 +8,6 @@ import reactSelect from './plugins/reactSelect'
 /* eslint-disable */
 injectGlobal`
   ${fonts}
-  ${buttons}
   ${inputs}
   ${layout}
 `
@@ -20,5 +19,6 @@ const MainHeader = styled.div`
 `
 
 export default {
-  MainHeader
+  MainHeader,
+  Button
 }

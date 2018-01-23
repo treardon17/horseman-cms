@@ -1,7 +1,7 @@
 // Helpers
 import React from 'react'
 import Proptypes from 'prop-types'
-import Button from 'material-ui/Button'
+import { Button } from '../styles/buttons'
 import Select from 'react-select'
 
 import SortUtil from '../../core/util/sort'

@@ -4,7 +4,7 @@ import _ from 'lodash'
 import WindowUtil from '../../core/util/window'
 
 import Select from 'react-select'
-import Button from 'material-ui/Button'
+import { Button } from '../styles/buttons'
 import ContentEditable from 'react-simple-contenteditable'
 import ISVG from 'react-inlinesvg'
 import TrashButton from './TrashButton'
