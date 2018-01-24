@@ -1,8 +1,8 @@
-import 'whatwg-fetch'; // Fetch polyfill
-import '../../core/polyfill/ObjectAssign'; // Object.assign polyfill
+import 'whatwg-fetch' // Fetch polyfill
 import React from 'react'
-import { observer } from "mobx-react"
+import { observer } from 'mobx-react'
 import { PageTransition, Route } from 'react-transition-router'
+import '../../core/polyfill/ObjectAssign' // Object.assign polyfill
 
 // Components
 import CircleMenu from '../components/CircleMenu'
