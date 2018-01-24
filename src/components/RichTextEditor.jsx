@@ -1,6 +1,6 @@
 // Helpers
 import React from 'react'
-import ReactRTE from 'react-rte'
+// import ReactRTE from 'react-rte'
 import Proptypes from 'prop-types'
 import styled from 'styled-components'
 import styles from '../styles'
@@ -22,10 +22,11 @@ export default class RichTextEditor extends React.Component {
 
   render() {
     return (
-      <ReactRTE
-        value={this.state.value}
-        onChange={this.onChange.bind(this)}
-      />
+      // <ReactRTE
+      //   value={this.state.value}
+      //   onChange={this.onChange.bind(this)}
+      // />
+      <div />
     )
   }
 }

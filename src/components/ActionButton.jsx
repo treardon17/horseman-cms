@@ -1,5 +1,4 @@
 import React from 'react'
-import IconButton from 'material-ui/IconButton'
 import ISVG from 'react-inlinesvg'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
@@ -38,7 +37,6 @@ export default class ActionButton extends React.Component {
 }
 
 // STYLES
-// const StyledIconButton = styled(IconButton)``
 const ButtonComponent = styled.div`
   cursor: pointer;
   border-radius: 100%;

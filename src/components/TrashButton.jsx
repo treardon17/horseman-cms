@@ -1,16 +1,11 @@
 import React from 'react'
-import IconButton from 'material-ui/IconButton'
 import ISVG from 'react-inlinesvg'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import styles from '../styles'
 
 export default class TrashButton extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  buttonClicked(event) {
+  buttonClicked = (event) => {
     if (typeof this.props.onClick === 'function') {
       this.props.onClick(event)
     }
@@ -18,8 +13,8 @@ export default class TrashButton extends React.Component {
 
   render() {
     return (
-      <TrashButtonStyles onClick={this.buttonClicked.bind(this)} >
-        <ISVG className="trash-icon" src={require("../assets/img/featherIcons/trash.svg")} />
+      <TrashButtonStyles onClick={this.buttonClicked} >
+        <ISVG className="trash-icon" src={require('../assets/img/featherIcons/trash.svg')} />
       </TrashButtonStyles>
     )
   }

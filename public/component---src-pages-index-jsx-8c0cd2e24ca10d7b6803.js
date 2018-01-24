@@ -1,6 +1,6 @@
 webpackJsonp([213534597649335],{
 
-/***/ 119:
+/***/ 96:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -43,11 +43,11 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 46:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
-		 true ? factory(exports, __webpack_require__(47), __webpack_require__(2), __webpack_require__(17)) :
+		 true ? factory(exports, __webpack_require__(35), __webpack_require__(2), __webpack_require__(19)) :
 		typeof define === 'function' && define.amd ? define(['exports', 'mobx', 'react', 'react-dom'], factory) :
 		(factory((global.mobxReact = {}),global.mobx,global.React,global.ReactDOM));
 	}(this, (function (exports,mobx,react,reactDom) { 'use strict';
@@ -1051,7 +1051,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 182:
+/***/ 154:
 /***/ (function(module, exports) {
 
 	// GENERATED DO NOT EDIT
@@ -2641,10 +2641,10 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 183:
+/***/ 155:
 /***/ (function(module, exports, __webpack_require__) {
 
-	var properties = __webpack_require__(182);
+	var properties = __webpack_require__(154);
 	var PropTypes = __webpack_require__(1);
 	
 	module.exports = function(props, propName, componentName) {
@@ -2679,7 +2679,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 662:
+/***/ 528:
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -3472,7 +3472,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 663:
+/***/ 529:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/******/ (function(modules) { // webpackBootstrap
@@ -3631,7 +3631,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 664:
+/***/ 530:
 /***/ (function(module, exports) {
 
 	webpackJsonpreact_transition_router([0],[
@@ -34112,7 +34112,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 665:
+/***/ 531:
 /***/ (function(module, exports, __webpack_require__) {
 
 	let window // eslint-disable-line
@@ -34120,42 +34120,42 @@ webpackJsonp([213534597649335],{
 	  window = { location: {pathname: ''}, history: [] }
 	}
 	
-	__webpack_require__(663);
-	__webpack_require__(664);
-	module.exports = __webpack_require__(662).default;
+	__webpack_require__(529);
+	__webpack_require__(530);
+	module.exports = __webpack_require__(528).default;
 
 
 /***/ }),
 
-/***/ 186:
+/***/ 158:
 /***/ (function(module, exports) {
 
 	module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYXJyb3ctbGVmdCI+PGxpbmUgeDE9IjIwIiB5MT0iMTIiIHgyPSI0IiB5Mj0iMTIiPjwvbGluZT48cG9seWxpbmUgcG9pbnRzPSIxMCAxOCA0IDEyIDEwIDYiPjwvcG9seWxpbmU+PC9zdmc+"
 
 /***/ }),
 
-/***/ 188:
+/***/ 160:
 /***/ (function(module, exports) {
 
 	module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItcGx1cyI+PGxpbmUgeDE9IjEyIiB5MT0iNSIgeDI9IjEyIiB5Mj0iMTkiPjwvbGluZT48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiI+PC9saW5lPjwvc3ZnPg=="
 
 /***/ }),
 
-/***/ 189:
+/***/ 161:
 /***/ (function(module, exports) {
 
 	module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXIteCI+PGxpbmUgeDE9IjE4IiB5MT0iNiIgeDI9IjYiIHkyPSIxOCI+PC9saW5lPjxsaW5lIHgxPSI2IiB5MT0iNiIgeDI9IjE4IiB5Mj0iMTgiPjwvbGluZT48L3N2Zz4="
 
 /***/ }),
 
-/***/ 190:
+/***/ 162:
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "static/lofty-logo.758b9e4d.svg";
 
 /***/ }),
 
-/***/ 123:
+/***/ 100:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34170,11 +34170,11 @@ webpackJsonp([213534597649335],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _IconButton = __webpack_require__(159);
+	var _IconButton = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/IconButton\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 	
-	var _reactInlinesvg = __webpack_require__(48);
+	var _reactInlinesvg = __webpack_require__(36);
 	
 	var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
 	
@@ -34182,15 +34182,15 @@ webpackJsonp([213534597649335],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _lodash = __webpack_require__(35);
+	var _lodash = __webpack_require__(24);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _styledComponents = __webpack_require__(7);
+	var _styledComponents = __webpack_require__(6);
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
-	var _styles = __webpack_require__(9);
+	var _styles = __webpack_require__(8);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -34268,7 +34268,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 124:
+/***/ 101:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34286,17 +34286,17 @@ webpackJsonp([213534597649335],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _ActionButton = __webpack_require__(123);
+	var _ActionButton = __webpack_require__(100);
 	
 	var _ActionButton2 = _interopRequireDefault(_ActionButton);
 	
-	var _velocityReact = __webpack_require__(33);
+	var _velocityReact = __webpack_require__(21);
 	
-	var _styledComponents = __webpack_require__(7);
+	var _styledComponents = __webpack_require__(6);
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
-	var _styles = __webpack_require__(9);
+	var _styles = __webpack_require__(8);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -34423,7 +34423,7 @@ webpackJsonp([213534597649335],{
 	          duration: this.animationDuration,
 	          easing: [50, 8]
 	        },
-	        _react2.default.createElement(_ActionButton2.default, { icon: __webpack_require__(188), onClick: this.toggleMenu.bind(this) })
+	        _react2.default.createElement(_ActionButton2.default, { icon: __webpack_require__(160), onClick: this.toggleMenu.bind(this) })
 	      ),
 	      this.getButtons()
 	    );
@@ -34445,7 +34445,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 127:
+/***/ 104:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34457,13 +34457,13 @@ webpackJsonp([213534597649335],{
 	
 	var _templateObject = _taggedTemplateLiteralLoose(['\n  position: fixed;\n  top: 0; bottom: 0; right: 0; left: 0;\n  z-index: ', ';\n\n  &.closed{ pointer-events: none; }\n\n  .background{\n    position: absolute;\n    top: 0; bottom: 0; right: 0; left: 0;\n    background-color: ', ';\n    opacity: 0.4;\n    z-index: ', ';\n  }\n\n  .modal-container{\n    max-width: 100%;\n    width: 650px;\n    margin: ', ' auto;\n    box-shadow: ', ';\n    position: absolute;\n    top: 0; left: 0; right: 0;\n\n    .modal-header{\n      height: 45px;\n      width: 100%;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background-color: ', ';\n\n      .back-btn, .exit-btn{\n        cursor: pointer;\n        svg{\n          margin: 0 ', ';\n          stroke: ', ';\n        }\n      }\n\n      .back-btn{ }\n      .exit-btn{ }\n      .modal-title{\n        font-weight: bold;\n        color: ', ';\n        margin: 0;\n      }\n    }\n\n    .modal-content{\n      padding: ', ';\n      background-color: ', ';\n      position: relative;\n      transition: height $transitionSlow ease-in-out;\n      max-height: calc(100vh - 125px);\n      overflow-y: visible;\n\n      .modal-transition-container{\n        *{ backface-visibility: hidden !important; }\n      }\n    }\n  }\n'], ['\n  position: fixed;\n  top: 0; bottom: 0; right: 0; left: 0;\n  z-index: ', ';\n\n  &.closed{ pointer-events: none; }\n\n  .background{\n    position: absolute;\n    top: 0; bottom: 0; right: 0; left: 0;\n    background-color: ', ';\n    opacity: 0.4;\n    z-index: ', ';\n  }\n\n  .modal-container{\n    max-width: 100%;\n    width: 650px;\n    margin: ', ' auto;\n    box-shadow: ', ';\n    position: absolute;\n    top: 0; left: 0; right: 0;\n\n    .modal-header{\n      height: 45px;\n      width: 100%;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background-color: ', ';\n\n      .back-btn, .exit-btn{\n        cursor: pointer;\n        svg{\n          margin: 0 ', ';\n          stroke: ', ';\n        }\n      }\n\n      .back-btn{ }\n      .exit-btn{ }\n      .modal-title{\n        font-weight: bold;\n        color: ', ';\n        margin: 0;\n      }\n    }\n\n    .modal-content{\n      padding: ', ';\n      background-color: ', ';\n      position: relative;\n      transition: height $transitionSlow ease-in-out;\n      max-height: calc(100vh - 125px);\n      overflow-y: visible;\n\n      .modal-transition-container{\n        *{ backface-visibility: hidden !important; }\n      }\n    }\n  }\n']);
 	
-	var _mobxReact = __webpack_require__(46);
+	var _mobxReact = __webpack_require__(34);
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactInlinesvg = __webpack_require__(48);
+	var _reactInlinesvg = __webpack_require__(36);
 	
 	var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
 	
@@ -34471,17 +34471,17 @@ webpackJsonp([213534597649335],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _velocityReact = __webpack_require__(33);
+	var _velocityReact = __webpack_require__(21);
 	
-	var _ModalState = __webpack_require__(72);
+	var _ModalState = __webpack_require__(57);
 	
 	var _ModalState2 = _interopRequireDefault(_ModalState);
 	
-	var _styledComponents = __webpack_require__(7);
+	var _styledComponents = __webpack_require__(6);
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
-	var _styles = __webpack_require__(9);
+	var _styles = __webpack_require__(8);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -34582,7 +34582,7 @@ webpackJsonp([213534597649335],{
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'back-btn', onClick: this.popHistory.bind(this) },
-	          _react2.default.createElement(_reactInlinesvg2.default, { src: __webpack_require__(186) })
+	          _react2.default.createElement(_reactInlinesvg2.default, { src: __webpack_require__(158) })
 	        ),
 	        _react2.default.createElement(
 	          'h3',
@@ -34592,7 +34592,7 @@ webpackJsonp([213534597649335],{
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'exit-btn', onClick: this.close.bind(this) },
-	          _react2.default.createElement(_reactInlinesvg2.default, { src: __webpack_require__(189) })
+	          _react2.default.createElement(_reactInlinesvg2.default, { src: __webpack_require__(161) })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -34659,7 +34659,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 128:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34677,17 +34677,17 @@ webpackJsonp([213534597649335],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _velocityReact = __webpack_require__(33);
+	var _velocityReact = __webpack_require__(21);
 	
-	var _styledComponents = __webpack_require__(7);
+	var _styledComponents = __webpack_require__(6);
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
-	var _SidebarItem = __webpack_require__(129);
+	var _SidebarItem = __webpack_require__(106);
 	
 	var _SidebarItem2 = _interopRequireDefault(_SidebarItem);
 	
-	var _styles = __webpack_require__(9);
+	var _styles = __webpack_require__(8);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -34825,7 +34825,7 @@ webpackJsonp([213534597649335],{
 	
 	
 	exports.default = Sidebar;
-	var SidebarComponent = _styledComponents2.default.div(_templateObject, _styles2.default.color.shade1, _styles2.default.zIndex.top, _styles2.default.spacing.headerHeight, _styles2.default.spacing.medium, _styles2.default.color.white, _styles2.default.image.containImage, _styles2.default.spacing.closedMenuIconSize, __webpack_require__(190));
+	var SidebarComponent = _styledComponents2.default.div(_templateObject, _styles2.default.color.shade1, _styles2.default.zIndex.top, _styles2.default.spacing.headerHeight, _styles2.default.spacing.medium, _styles2.default.color.white, _styles2.default.image.containImage, _styles2.default.spacing.closedMenuIconSize, __webpack_require__(162));
 	
 	Sidebar.propTypes = {
 	  menuItems: _propTypes2.default.array
@@ -34834,7 +34834,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 129:
+/***/ 106:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34848,27 +34848,27 @@ webpackJsonp([213534597649335],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _velocityReact = __webpack_require__(33);
+	var _velocityReact = __webpack_require__(21);
 	
 	var _propTypes = __webpack_require__(1);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _reactInlinesvg = __webpack_require__(48);
+	var _reactInlinesvg = __webpack_require__(36);
 	
 	var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
 	
-	var _styledComponents = __webpack_require__(7);
+	var _styledComponents = __webpack_require__(6);
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
-	var _reactStyleProptype = __webpack_require__(183);
+	var _reactStyleProptype = __webpack_require__(155);
 	
 	var _reactStyleProptype2 = _interopRequireDefault(_reactStyleProptype);
 	
-	var _gatsbyLink = __webpack_require__(151);
+	var _gatsbyLink = __webpack_require__(128);
 	
-	var _styles = __webpack_require__(9);
+	var _styles = __webpack_require__(8);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -34972,7 +34972,7 @@ webpackJsonp([213534597649335],{
 
 /***/ }),
 
-/***/ 354:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34992,33 +34992,33 @@ webpackJsonp([213534597649335],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _mobxReact = __webpack_require__(46);
+	var _mobxReact = __webpack_require__(34);
 	
-	var _reactTransitionRouter = __webpack_require__(665);
+	var _reactTransitionRouter = __webpack_require__(531);
 	
-	__webpack_require__(119);
+	__webpack_require__(96);
 	
-	var _CircleMenu = __webpack_require__(124);
+	var _CircleMenu = __webpack_require__(101);
 	
 	var _CircleMenu2 = _interopRequireDefault(_CircleMenu);
 	
-	var _Sidebar = __webpack_require__(128);
+	var _Sidebar = __webpack_require__(105);
 	
 	var _Sidebar2 = _interopRequireDefault(_Sidebar);
 	
-	var _Modal = __webpack_require__(127);
+	var _Modal = __webpack_require__(104);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
-	var _AppState = __webpack_require__(24);
+	var _AppState = __webpack_require__(16);
 	
 	var _AppState2 = _interopRequireDefault(_AppState);
 	
-	var _ModalState = __webpack_require__(72);
+	var _ModalState = __webpack_require__(57);
 	
 	var _ModalState2 = _interopRequireDefault(_ModalState);
 	
-	var _TypeState = __webpack_require__(41);
+	var _TypeState = __webpack_require__(30);
 	
 	var _TypeState2 = _interopRequireDefault(_TypeState);
 	

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const router = require(path.resolve('./api/router'))
 
 // get port
-const port = parseInt(process.env.PORT)
+const port = parseInt(process.env.PORT, 10)
 
 // create express instance
 const app = express()

@@ -23,7 +23,10 @@ export default class SidebarItem extends React.Component {
 
   render = () => {
     // Should the item be highlighted?
-    const currentPage = (window.location.pathname === this.props.url)
+    let currentPage = false
+    if (typeof window !== 'undefined') {
+      currentPage = (window.location.pathname === this.props.url)
+    }
     const isActive = (this.props.active || currentPage || this.clicked)
     // Reset the click state after it's been rendered
     this.clicked = false

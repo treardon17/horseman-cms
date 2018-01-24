@@ -1,9 +1,9 @@
 // get port
-const port = parseInt(process.env.PORT);
+const port = parseInt(process.env.PORT, 10)
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: 'Gatsby Default Starter',
   },
   proxy: {
     prefix: '/api',
@@ -11,19 +11,19 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `data`,
+        name: 'data',
         path: `${__dirname}/src/data/`
       }
     },
-    `gatsby-plugin-react-helmet`,
-    `gatsby-transformer-json`,
-    `gatsby-plugin-styled-components`,
+    'gatsby-plugin-react-helmet',
+    'gatsby-transformer-json',
+    'gatsby-plugin-styled-components',
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: [`Montserrat`, `Raleway`]
+        fonts: ['Montserrat', 'Raleway']
       }
     }
   ],
