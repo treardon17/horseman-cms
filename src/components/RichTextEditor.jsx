@@ -5,12 +5,18 @@ import Proptypes from 'prop-types'
 import styled from 'styled-components'
 import styles from '../styles'
 
+let ReactRTE
+
 export default class RichTextEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       value: ReactRTE.createValueFromString(this.props.value || '', 'html')
     }
+  }
+
+  componentDidMount() {
+    ReactRTE = require('react-rte')
   }
 
   onChange(value) {
@@ -22,11 +28,10 @@ export default class RichTextEditor extends React.Component {
 
   render() {
     return (
-      // <ReactRTE
-      //   value={this.state.value}
-      //   onChange={this.onChange.bind(this)}
-      // />
-      <div />
+      <ReactRTE
+        value={this.state.value}
+        onChange={this.onChange.bind(this)}
+      />
     )
   }
 }

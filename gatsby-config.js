@@ -10,13 +10,6 @@ module.exports = {
     url: `http://127.0.0.1:${port + 30}`
   },
   plugins: [
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'data',
-        path: `${__dirname}/src/data/`
-      }
-    },
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-json',
     'gatsby-plugin-styled-components',
