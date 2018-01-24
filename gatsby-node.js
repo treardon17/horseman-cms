@@ -3,5 +3,5 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
     test: /\.js$/,
     exclude: /node_modules/,
   })
-  return config;
-};
+  return config
+}
