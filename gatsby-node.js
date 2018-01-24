@@ -5,3 +5,7 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
   })
   return config
 }
+
+exports.onPreBootstrap = () => {
+  require('isomorphic-fetch') // eslint-disable-line
+}

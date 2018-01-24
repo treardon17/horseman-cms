@@ -1,0 +1,84 @@
+{
+  "assetsByChunkName": {
+    "component---src-pages-assets-jsx": [
+      "component---src-pages-assets-jsx-458f40eae9ff4eba1d6c.js",
+      "component---src-pages-assets-jsx-458f40eae9ff4eba1d6c.js.map"
+    ],
+    "component---src-pages-modules-jsx": [
+      "component---src-pages-modules-jsx-337ddb301ec17331477b.js",
+      "component---src-pages-modules-jsx-337ddb301ec17331477b.js.map"
+    ],
+    "path---assets": [
+      "path---assets-a0e39f21c11f6a62c5ab.js",
+      "path---assets-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-pages-page-jsx": [
+      "component---src-pages-page-jsx-013ac8eaa6229b9efa9f.js",
+      "component---src-pages-page-jsx-013ac8eaa6229b9efa9f.js.map"
+    ],
+    "path---settings": [
+      "path---settings-a0e39f21c11f6a62c5ab.js",
+      "path---settings-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "path---objects": [
+      "path---objects-a0e39f21c11f6a62c5ab.js",
+      "path---objects-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "path---": [
+      "path----557518bd178906f8d58a.js",
+      "path----557518bd178906f8d58a.js.map"
+    ],
+    "component---src-pages-objects-jsx": [
+      "component---src-pages-objects-jsx-efba4a68dd2053b814c0.js",
+      "component---src-pages-objects-jsx-efba4a68dd2053b814c0.js.map"
+    ],
+    "path---home": [
+      "path---home-a0e39f21c11f6a62c5ab.js",
+      "path---home-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-layouts-index-js": [
+      "component---src-layouts-index-js-831218520f6fef94dda9.js",
+      "component---src-layouts-index-js-831218520f6fef94dda9.js.map"
+    ],
+    "component---src-pages-users-jsx": [
+      "component---src-pages-users-jsx-5c8cbae3fad63721bf69.js",
+      "component---src-pages-users-jsx-5c8cbae3fad63721bf69.js.map"
+    ],
+    "component---src-pages-home-jsx": [
+      "component---src-pages-home-jsx-40de908c7577b2c23867.js",
+      "component---src-pages-home-jsx-40de908c7577b2c23867.js.map"
+    ],
+    "path---index": [
+      "path---index-a0e39f21c11f6a62c5ab.js",
+      "path---index-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "commons": [
+      "commons-18f9444ae1f062571fc3.js",
+      "commons-18f9444ae1f062571fc3.js.map"
+    ],
+    "path---modules": [
+      "path---modules-a0e39f21c11f6a62c5ab.js",
+      "path---modules-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-pages-index-jsx": [
+      "component---src-pages-index-jsx-8c0cd2e24ca10d7b6803.js",
+      "component---src-pages-index-jsx-8c0cd2e24ca10d7b6803.js.map"
+    ],
+    "path---users": [
+      "path---users-a0e39f21c11f6a62c5ab.js",
+      "path---users-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "app": [
+      "app-2a329f92c4a72345fd2e.js",
+      "app-2a329f92c4a72345fd2e.js.map"
+    ],
+    "path---page": [
+      "path---page-a0e39f21c11f6a62c5ab.js",
+      "path---page-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-pages-settings-jsx": [
+      "component---src-pages-settings-jsx-64ef3c80363cf441f259.js",
+      "component---src-pages-settings-jsx-64ef3c80363cf441f259.js.map"
+    ]
+  }
+}

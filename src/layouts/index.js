@@ -2,8 +2,8 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
-// Polyfills
 import 'whatwg-fetch'
+// Polyfills
 import '../../core/polyfill/ObjectAssign'
 // State
 import AppState from '../state/AppState'

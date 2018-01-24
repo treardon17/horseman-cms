@@ -17,20 +17,24 @@ class API {
     }
 
     return new Promise((resolve, reject) => {
-      fetch(query, {
-        method,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: newBody
-      })
-        .then(response => response.json())
-        .then((json) => {
-          resolve(json)
-        }).catch((error) => {
-          reject(error)
+      if (typeof window !== 'undefined') {
+        fetch(query, {
+          method,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: newBody
         })
+          .then(response => response.json())
+          .then((json) => {
+            resolve(json)
+          }).catch((error) => {
+            reject(error)
+          })
+      } else {
+        resolve({})
+      }
     })
   }
 }
