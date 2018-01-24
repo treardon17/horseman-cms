@@ -7,11 +7,7 @@ import styled from 'styled-components'
 import styles from '../styles'
 
 export default class ActionButton extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  buttonClicked(event) {
+  buttonClicked = (event) => {
     if (typeof this.props.onClick === 'function') {
       this.props.onClick(event)
     }
@@ -20,9 +16,18 @@ export default class ActionButton extends React.Component {
   render() {
     return (
       <ActionButtonComponent className="action-button">
-        <ButtonComponent onClick={this.buttonClicked.bind(this)}>
+        <ButtonComponent onClick={this.buttonClicked}>
           <ISVG
-            style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, margin: 'auto', height: 24, width: 24 }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              margin: 'auto',
+              height: 24,
+              width: 24
+            }}
             className="item-icon"
             src={this.props.icon}
           />
@@ -51,15 +56,12 @@ const ButtonComponent = styled.div`
   }
 `
 
-const ActionButtonComponent = styled(({ ...rest }) => {
-  return <div {...rest} />
-})
-`
+const ActionButtonComponent = styled.div`
   border: 2px solid ${styles.color.white};
   border-radius: 100%;
 `
 
 ActionButton.propTypes = {
   icon: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { VelocityComponent } from 'velocity-react'
-import SidebarItem from './SidebarItem'
 import styled from 'styled-components'
+import SidebarItem from './SidebarItem'
 import styles from '../styles'
 
 export default class Sidebar extends React.Component {
@@ -25,10 +25,9 @@ export default class Sidebar extends React.Component {
       for (let i = 0; i < this.props.menuItems.length; i++) {
         const calculatedDelay = this.initialDelay + ((i) * this.itemDelay) + (this.openDuration * 0.1)
         const menuItem = this.props.menuItems[i]
-        sidebarItems.push(
-          <VelocityComponent
-            key={i}
-            animation={this.state.open ? {
+        sidebarItems.push(<VelocityComponent
+          key={i}
+          animation={this.state.open ? {
               paddingTop: '0px',
               paddingLeft: '10px',
               paddingBottom: '0px',
@@ -39,14 +38,18 @@ export default class Sidebar extends React.Component {
               paddingBottom: '10px',
               paddingRight: '10px',
             }}
-            duration={this.itemDuration}
-            easing={'ease-in-out'}
-            delay={calculatedDelay}
-            >
-              <SidebarItem key={i} bigIcon={!this.state.open} icon={menuItem.icon} title={menuItem.title} url={menuItem.url} />
-            </VelocityComponent>
-          )
-        }
+          duration={this.itemDuration}
+          easing="ease-in-out"
+          delay={calculatedDelay}
+        >
+          <SidebarItem
+            key={i}
+            bigIcon={!this.state.open}
+            icon={menuItem.icon}
+            title={menuItem.title}
+            url={menuItem.url}
+          />
+        </VelocityComponent>) }
     }
     return sidebarItems
   }
@@ -55,20 +58,20 @@ export default class Sidebar extends React.Component {
     return (
       <div className="sidebar-header">
         <div className="header-content">
-          <button className="sidebar-logo" onClick={this.toggleMenu.bind(this)} />
+          <button className="sidebar-logo" onClick={this.toggleMenu} />
         </div>
       </div>
     )
   }
 
-  toggleMenu() {
+  toggleMenu = () => {
     this.setState({ open: !this.state.open })
   }
 
   // Render element
-  render() {
+  render = () => {
     const classes = `sidebar-content ${(this.state.open ? 'open' : 'closed')}`
-    const animation = this.state.open ? { width: "250px" } : { width: "70px" }
+    const animation = this.state.open ? { width: '250px' } : { width: '70px' }
     const easing = 'ease-in-out'
 
     return (

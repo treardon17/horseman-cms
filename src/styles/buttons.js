@@ -1,3 +1,4 @@
+import GatsbyLink from 'gatsby-link'
 import styled from 'styled-components'
 import variables from './variables'
 
@@ -20,4 +21,7 @@ export const Button = styled.button`
     opacity: 0.4;
     pointer-events: none;
   }
+`
+export const Link = styled(GatsbyLink).attrs({ className: 'link' })`
+  text-decoration: none;
 `

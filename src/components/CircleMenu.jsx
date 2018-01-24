@@ -27,39 +27,37 @@ export default class CircleMenu extends React.Component {
     const buttons = []
     for (let i = 0; i < numButtons; i++) {
       const button = this.props.menuItems[i]
-      const rotateBy = -(i*degreesBetweenButtons)
+      const rotateBy = -(i * degreesBetweenButtons)
       const rotateDelay = this.state.open ? ((i * this.rotateDelay) + (this.animationDuration / 1.5)) : 0
 
-      buttons.push(
-        <VelocityComponent
-          animation={this.state.open ? { rotateZ: rotateBy } : { rotateZ: 0 }}
-          duration={rotateDuration}
-          easing={this.state.open ? [50, 10] : 'ease-out'}
-          delay={rotateDelay}
-          key={`button-${i}`}
-        >
-          <div className="button-anchor">
-            <VelocityComponent
-              animation={this.state.open ? { height: 100 } : { height: 0 }}
-              duration={this.state.open ? this.animationDuration : (this.animationDuration / 2)}
-              easing={this.state.open ? [50, 10] : 'ease-out'}
-              delay={this.state.open ? 0 : this.animationDuration}
-            >
-              <div className="button-extent">
-                <div className="button-container">
-                  <VelocityComponent
-                    animation={this.state.open ? { rotateZ: -rotateBy } : { rotateZ: 0 }}
-                    duration={rotateDuration}
-                    delay={rotateDelay}
-                  >
-                    <ActionButton icon={button.icon} onClick={() => { this.handleButtonClick(button.onClick) }} />
-                  </VelocityComponent>
-                </div>
+      buttons.push(<VelocityComponent
+        animation={this.state.open ? { rotateZ: rotateBy } : { rotateZ: 0 }}
+        duration={rotateDuration}
+        easing={this.state.open ? [50, 10] : 'ease-out'}
+        delay={rotateDelay}
+        key={`button-${i}`}
+      >
+        <div className="button-anchor">
+          <VelocityComponent
+            animation={this.state.open ? { height: 100 } : { height: 0 }}
+            duration={this.state.open ? this.animationDuration : (this.animationDuration / 2)}
+            easing={this.state.open ? [50, 10] : 'ease-out'}
+            delay={this.state.open ? 0 : this.animationDuration}
+          >
+            <div className="button-extent">
+              <div className="button-container">
+                <VelocityComponent
+                  animation={this.state.open ? { rotateZ: -rotateBy } : { rotateZ: 0 }}
+                  duration={rotateDuration}
+                  delay={rotateDelay}
+                >
+                  <ActionButton icon={button.icon} onClick={() => { this.handleButtonClick(button.onClick) }} />
+                </VelocityComponent>
               </div>
-            </VelocityComponent>
-          </div>
-        </VelocityComponent>
-      )
+            </div>
+          </VelocityComponent>
+        </div>
+                   </VelocityComponent>)
     }
     return buttons
   }
@@ -100,10 +98,11 @@ export default class CircleMenu extends React.Component {
 }
 
 // STYLES
-const MenuStyles = styled('div')`
+const MenuStyles = styled.div`
   position: fixed;
   bottom: ${styles.spacing.small};
   right: ${styles.spacing.small};
+  z-index: ${styles.zIndex.top};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -27,40 +27,21 @@ body {
   }
 }
 
-#___gatsby{
+// #___gatsby{
+//   min-height: 100vh;
+// }
+
+.page-wrapper{
   min-height: 100vh;
-  .app-wrapper{
-    display: flex;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  display: flex;
 
-    .transition-container{
-      position: relative;
-      flex: auto;
-      height: inherit;
+  .page-container{
+    flex: auto;
 
-      .page-transition{
-        height: 100%;
-        .route{ width: 100%; }
-        .page-container{
-          .page-wrapper{
-            .page{
-              .page-body{
-                height: 100%;
-                width: 100%;
-                margin-top: ${variables.spacing.headerHeight};
-              }
-            }
-          }
-        }
-      }
+    .page-body{
+      width: 100%;
     }
-  }
-}
-.page{
-  .page-body{
-    min-height: 100vh;
-    position: relative;
   }
 }
 `
