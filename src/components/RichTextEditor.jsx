@@ -1,19 +1,22 @@
 // Helpers
 import React from 'react'
-// import ReactRTE from 'react-rte'
 import Proptypes from 'prop-types'
 import styled from 'styled-components'
 import styles from '../styles'
+
+const ReactRTE = (typeof window !== 'undefined') ? require('react-rte').default : null
 
 export default class RichTextEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: ReactRTE.createValueFromString(this.props.value || '', 'html')
+      value: ReactRTE ?
+        ReactRTE.createValueFromString(this.props.value || '', 'html')
+        : ''
     }
   }
 
-  onChange(value) {
+  onChange = (value) => {
     this.setState({ value })
     if (this.props.onChange) {
       this.props.onChange(value.toString('html'))
@@ -21,12 +24,14 @@ export default class RichTextEditor extends React.Component {
   }
 
   render() {
+    const child = ReactRTE ?
+      <ReactRTE value={this.state.value} onChange={this.onChange} />
+      : null
+
     return (
-      // <ReactRTE
-      //   value={this.state.value}
-      //   onChange={this.onChange.bind(this)}
-      // />
-      <div />
+      <div className="text-editor-wrapper">
+        { child }
+      </div>
     )
   }
 }
