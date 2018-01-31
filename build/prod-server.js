@@ -24,7 +24,7 @@ app.use(express.static('public'))
 // app.use('/assets', express.static('src/assets'));
 
 // provide social data to bots
-app.use(social)
+// app.use(social)
 
 // serve api
 app.use('/api', router)
