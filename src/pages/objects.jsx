@@ -1,4 +1,4 @@
-import { observer, toJS } from "mobx-react"
+import { observer, toJS } from 'mobx-react'
 import React from 'react'
 import PropTypes from 'prop-types'
 import AppState from '../state/AppState.jsx'
@@ -28,10 +28,13 @@ import CreateObject from '../components/CreateObject'
   }
 
   render() {
-    const dataObjects = this.getDataObjects()
+    let children = this.getDataObjects()
+    if (children.length === 0) {
+      children = (<EmptyPage title="No Objects" message="Press the + button in the bottom right to add an object" />)
+    }
     return (
       <Page id="Objects" title="Objects">
-        {dataObjects}
+        {children}
       </Page>
     )
   }

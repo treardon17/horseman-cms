@@ -1,9 +1,11 @@
 const FileManager = require('../util/FileManager.js')
 const ObjectType = require('../../core/definitions/objectType')
+const Config = require('../config/config')
 
 class TypeController {
   constructor() {
     this.parentObject = null
+    this.typePath = Config.typePath
   }
 
   /*
@@ -27,7 +29,7 @@ class TypeController {
       } else {
         // Otherwise we don't have a parent object, so we
         // read the current types file and get the current types
-        FileManager.fileToObject({ path: '../data/types.json' }).then((storedTypes) => {
+        FileManager.fileToObject({ path: this.typePath }).then((storedTypes) => {
           // There is one parent container. All of the parent's
           // children are the types.
           this.parentObject = new ObjectType(storedTypes)
@@ -79,7 +81,7 @@ class TypeController {
    */
   saveChanges() {
     return new Promise((resolve, reject) => {
-      FileManager.writeToFile({ path: '../data/types.json', data: this.parentObject.getJSON() }).then(() => {
+      FileManager.writeToFile({ path: this.typePath, data: this.parentObject.getJSON() }).then(() => {
         console.log('Changes to TYPE saved')
         resolve()
       }).catch((err) => {

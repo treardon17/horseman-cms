@@ -38,6 +38,7 @@ body {
 
   .page-container{
     flex: auto;
+    position: relative;
 
     .page-body{
       width: 100%;

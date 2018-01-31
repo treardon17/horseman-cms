@@ -57,7 +57,7 @@ export default class CircleMenu extends React.Component {
             </div>
           </VelocityComponent>
         </div>
-                   </VelocityComponent>)
+      </VelocityComponent>)
     }
     return buttons
   }

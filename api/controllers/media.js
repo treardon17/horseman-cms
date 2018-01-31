@@ -1,9 +1,10 @@
 const FileManager = require('../util/FileManager.js')
+const Config = require('../config/config')
 
 class MediaController {
   constructor() {
     this.media = null
-    this.mediaPath = '../media'
+    this.mediaPath = Config.mediaPath
   }
 
   /**

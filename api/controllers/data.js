@@ -1,10 +1,11 @@
 const FileManager = require('../util/FileManager.js')
 const TypeController = require('./type')
+const Config = require('../config/config')
 
 class DataController {
   constructor() {
     this.data = null
-    this.dataPath = '../data/data.json'
+    this.dataPath = Config.dataPath
   }
 
 

@@ -29,6 +29,7 @@ const TemplateWrapper = ({ children }) => pug`
       Sidebar(menuItems=${AppState.menuItems})
       CircleMenu(menuItems=${AppState.circleMenuItems})
       .page-container
+        Modal(ref=${(ref) => { ModalState.modal = ref }})
         ${children()}
 `
 

@@ -10,12 +10,12 @@ export default class EmptyPage extends React.Component {
 
   render() {
     return (
-      <div className="empty-page">
+      <EmptyPageComponent className="empty-page">
         <div className="content-container">
           <h1>{this.props.title}</h1>
           {this.props.message ? <p>{this.props.message}</p> : null}
         </div>
-      </div>
+      </EmptyPageComponent>
     )
   }
 }

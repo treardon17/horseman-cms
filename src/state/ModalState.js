@@ -47,6 +47,7 @@ class ModalState {
   }
 
   @action pushModal({ page, title }) {
+    debugger // eslint-disable-line
     this.isPushing = true
     if (this.modal) this.modal.pushHistory({ page, title })
     else this.push({ page, title })

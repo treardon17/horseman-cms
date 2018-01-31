@@ -37,7 +37,7 @@ class ObjectType {
     // We never want to mutate this ID
     Object.freeze(this.id)
     // We want this object to maintain a consistent structure
-    Object.preventExtensions(this)
+    // Object.preventExtensions(this)
 
     // Construct the children of this object if there are any
     this.constructChildren()

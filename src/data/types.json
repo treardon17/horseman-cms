@@ -1,0 +1,19 @@
+{
+  "name": "Parent Type Container",
+  "slug": "parentTypeContainer",
+  "typePrimary": "object",
+  "children": {
+    "8567460e-342b2ea7-52848ee5": {
+      "name": "testing",
+      "slug": "testing",
+      "typePrimary": "object",
+      "children": {},
+      "orderBy": 0,
+      "id": "8567460e-342b2ea7-52848ee5",
+      "typeSecondary": "empty"
+    }
+  },
+  "orderBy": 0,
+  "id": "d7ebab44-6a930c0a-117e1697",
+  "typeSecondary": "empty"
+}

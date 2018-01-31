@@ -27,7 +27,9 @@ module.exports = {
       "guard-for-in": 0,
       "import/prefer-default-export": 0,
       "quote-props": 0,
-      "global-require": 0
+      "global-require": 0,
+      "import/no-dynamic-require": 0,
+      "max-len": 0
     },
     "env": {
       "browser": true,

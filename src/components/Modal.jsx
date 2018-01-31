@@ -1,4 +1,4 @@
-import { observer } from "mobx-react"
+import { observer } from 'mobx-react'
 import React from 'react'
 import ISVG from 'react-inlinesvg'
 import PropTypes from 'prop-types'
@@ -74,18 +74,20 @@ import styles from '../styles'
       <div className="modal-container">
         <div className="modal-header">
           <div className="back-btn" onClick={this.popHistory.bind(this)}>
-            <ISVG src={require("../assets/img/featherIcons/arrow-left.svg")} />
+            <ISVG src={require('../assets/img/featherIcons/arrow-left.svg')} />
           </div>
           <h3 className="modal-title">{ModalState.currentTitle}</h3>
           <div className="exit-btn" onClick={this.close.bind(this)}>
-            <ISVG src={require("../assets/img/featherIcons/x.svg")} />
+            <ISVG src={require('../assets/img/featherIcons/x.svg')} />
           </div>
         </div>
         <div className="modal-content" style={modalStyles} ref={(el) => { this.modalContent = el }}>
           <VelocityTransitionGroup
             className="modal-content-transitioner"
             enter={{ animation: { translateX: ['0%', `${ModalState.isPushing ? '' : '-'}${'100%'}`], translateZ: 0, }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out' }}
-            leave={{ animation: { translateX: [`${ModalState.isPushing ? '-' : ''}${'100%'}`, '0%'], translateZ: 0 }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out', complete: this.pageDidExit.bind(this) }}
+            leave={{
+ animation: { translateX: [`${ModalState.isPushing ? '-' : ''}${'100%'}`, '0%'], translateZ: 0 }, duration: this.modalPageAnimationDuration, easing: 'ease-in-out', complete: this.pageDidExit.bind(this)
+}}
           >
             {this.state.currentView}
           </VelocityTransitionGroup>

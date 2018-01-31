@@ -38,6 +38,7 @@ class FileManager {
   }
 
   fileToObject({ path }) {
+    console.log('path is:', path)
     return new Promise((resolve, reject) => {
       this.readFile({ path }).then((data) => {
         if (isJSON(data)) {
