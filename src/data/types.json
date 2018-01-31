@@ -7,7 +7,26 @@
       "name": "testing",
       "slug": "testing",
       "typePrimary": "object",
-      "children": {},
+      "children": {
+        "01c21604-1d9c095c-64b67528": {
+          "children": {},
+          "orderBy": 0,
+          "id": "01c21604-1d9c095c-64b67528",
+          "name": "New Type",
+          "slug": "newType",
+          "typePrimary": "empty",
+          "typeSecondary": "empty"
+        },
+        "25b097bf-a04869ae-f7e9b140": {
+          "children": {},
+          "orderBy": 1,
+          "id": "25b097bf-a04869ae-f7e9b140",
+          "name": "New Type",
+          "slug": "newType1",
+          "typePrimary": "empty",
+          "typeSecondary": "empty"
+        }
+      },
       "orderBy": 0,
       "id": "8567460e-342b2ea7-52848ee5",
       "typeSecondary": "empty"

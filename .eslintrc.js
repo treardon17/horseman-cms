@@ -29,7 +29,8 @@ module.exports = {
       "quote-props": 0,
       "global-require": 0,
       "import/no-dynamic-require": 0,
-      "max-len": 0
+      "max-len": 0,
+      "no-unused-expressions": 0
     },
     "env": {
       "browser": true,
