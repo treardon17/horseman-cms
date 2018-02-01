@@ -7,7 +7,6 @@ import reactSelect from './plugins/reactSelect'
 
 /* eslint-disable */
 injectGlobal`
-  ${fonts}
   ${inputs}
   ${layout}
 `
