@@ -243,6 +243,9 @@ class ObjectType {
     for (const key in this.children) {
       const child = this.children[key]
 
+      // NOTE: This is an important section --> if a new type is added,
+      // it must be handled here otherwise the key/value pair will be trimmed
+      // when this object is sent to the api
       // If the child has children, it's just another object
       if (Object.keys(child.children).length > 0) {
         object[child.slug] = child.buildEmptyObject()
@@ -252,7 +255,8 @@ class ObjectType {
         const topLevelParent = this.getTopLevelParent()
         const childType = topLevelParent.get(child.typeSecondary)
         object[child.slug] = childType.createObjectInstance()
-      } else if (child.typePrimary === ObjectType.types.string) {
+      } else if (child.typePrimary === ObjectType.types.string ||
+        child.typePrimary === ObjectType.types.richText) {
         // Otherwise we take the type that the object has and create an empty version of it
         object[child.slug] = ''
       } else if (child.typePrimary === ObjectType.types.number) {

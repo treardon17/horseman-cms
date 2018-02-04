@@ -55,7 +55,7 @@ class MediaController {
   getAllMedia() {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
-        FileManager.getFile({ path: this.mediaPath }).then((media) => {
+        FileManager.getFiles({ path: this.mediaPath }).then((media) => {
           resolve(media)
         }).catch(err => reject(err))
       }).catch(error => reject(error))

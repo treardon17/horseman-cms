@@ -19,8 +19,10 @@ import CreateObject from '../components/CreateObject'
         const keys = Object.keys(instance)
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i]
-          const dataObject = <CreateObject key={`data-object-${i}`} childObject={instance[key]} />
-          dataObjects.push(dataObject)
+          if (instance[key]) {
+            const dataObject = <CreateObject key={`data-object-${i}`} childObject={instance[key]} />
+            dataObjects.push(dataObject)
+          }
         }
       }
     }

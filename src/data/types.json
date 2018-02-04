@@ -3,36 +3,36 @@
   "slug": "parentTypeContainer",
   "typePrimary": "object",
   "children": {
-    "8567460e-342b2ea7-52848ee5": {
-      "name": "testing",
-      "slug": "testing",
+    "39530bec-bee4fd99-bffc93df": {
+      "name": "post",
+      "slug": "post",
       "typePrimary": "object",
       "children": {
-        "01c21604-1d9c095c-64b67528": {
+        "07ae8bdb-a81851fe-10da7866": {
           "children": {},
           "orderBy": 0,
-          "id": "01c21604-1d9c095c-64b67528",
-          "name": "New Type",
-          "slug": "newType",
-          "typePrimary": "empty",
+          "id": "07ae8bdb-a81851fe-10da7866",
+          "name": "name",
+          "slug": "name",
+          "typePrimary": "string",
           "typeSecondary": "empty"
         },
-        "25b097bf-a04869ae-f7e9b140": {
+        "34fc955b-1464141b-28660125": {
           "children": {},
           "orderBy": 1,
-          "id": "25b097bf-a04869ae-f7e9b140",
-          "name": "New Type",
-          "slug": "newType1",
-          "typePrimary": "empty",
+          "id": "34fc955b-1464141b-28660125",
+          "name": "content",
+          "slug": "content",
+          "typePrimary": "richText",
           "typeSecondary": "empty"
         }
       },
       "orderBy": 0,
-      "id": "8567460e-342b2ea7-52848ee5",
+      "id": "39530bec-bee4fd99-bffc93df",
       "typeSecondary": "empty"
     }
   },
   "orderBy": 0,
-  "id": "d7ebab44-6a930c0a-117e1697",
+  "id": "a44bb705-62430b07-98003687",
   "typeSecondary": "empty"
 }

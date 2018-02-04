@@ -76,6 +76,10 @@ export default class CreateObject extends Creator {
     const childObjectCopy = childObject
     const { _typeID, _id } = childObject
     const type = TypeState.userMadeTypes.get(_typeID)
+
+    // ABORT IF NO TYPE EXISTS
+    if (!type) { return }
+
     const fields = []
     const keys = Object.keys(type.children)
     // Walk through all the children of the type
@@ -127,7 +131,9 @@ export default class CreateObject extends Creator {
   // -----------------------------------------------------
   // FIELDS
   // -----------------------------------------------------
-  getNumberField({ title, type, guid, value, onChange }) {
+  getNumberField({
+    title, type, guid, value, onChange
+  }) {
     return (
       <CreateObjectField title={title} type={ObjectType.types.number} key={guid}>
         <ValidatedInputField allowType="number" value={value} onChange={onChange} />
@@ -135,7 +141,9 @@ export default class CreateObject extends Creator {
     )
   }
 
-  getStringField({ title, type, guid, value, onChange }) {
+  getStringField({
+    title, type, guid, value, onChange
+  }) {
     return (
       <CreateObjectField title={title} type={ObjectType.types.string} key={guid}>
         <input type="text" value={value || ''} onChange={onChange} />
@@ -143,7 +151,9 @@ export default class CreateObject extends Creator {
     )
   }
 
-  getRichTextField({ title, type, guid, value, onChange }) {
+  getRichTextField({
+    title, type, guid, value, onChange
+  }) {
     return (
       <CreateObjectField title={title} type={ObjectType.types.richText} key={guid}>
         <RichTextEditor value={value || ''} onChange={onChange} />
@@ -151,7 +161,9 @@ export default class CreateObject extends Creator {
     )
   }
 
-  getModuleField({ title, value, nestedIDs, guid }) {
+  getModuleField({
+    title, value, nestedIDs, guid
+  }) {
     return (
       <div className="submodule-container" key={guid}>
         <h3>{title}</h3>
@@ -160,7 +172,9 @@ export default class CreateObject extends Creator {
     )
   }
 
-  getListfield({ value, nestedIDs, guid, type }) {
+  getListfield({
+    value, nestedIDs, guid, type
+  }) {
     const listItems = []
     for (let listIndex = 0; listIndex < value.length; listIndex++) {
       const tempIDList = nestedIDs.slice()
@@ -168,26 +182,26 @@ export default class CreateObject extends Creator {
       const isObject = value[listIndex] instanceof Object
       const content = isObject ?
         this.getObjectFields({ childObject: value[listIndex], childTypeInfo: type, nestedWithin: tempIDList }) :
-        this.getField({ typeName: type.typeSecondary, guid, nestedIDs: tempIDList, type })
+        this.getField({
+          typeName: type.typeSecondary, guid, nestedIDs: tempIDList, type
+        })
 
-      listItems.push(
-        <div className="list-item" key={`list-item-${listIndex}`}>
-          <div className="list-item-content">
-            {content}
-          </div>
-          <TrashButton onClick={() => { this.removeListItem({ nestedIDs: tempIDList }) }} />
+      listItems.push(<div className="list-item" key={`list-item-${listIndex}`}>
+        <div className="list-item-content">
+          {content}
         </div>
-      )
+        <TrashButton onClick={() => { this.removeListItem({ nestedIDs: tempIDList }) }} />
+      </div>)
     }
 
     // debugger // eslint-disable-line
     const moduleSelector = type.typeSecondary === ObjectType.types.module ?
-      <Select
+      (<Select
         value={this.state.moduleTypeToAdd}
-        className={'secondary-type'}
+        className="secondary-type"
         options={TypeState.getFormattedTypeList(ObjectType.types.module)}
         onChange={(val) => { this.setState({ moduleTypeToAdd: val }) }}
-      /> : null
+      />) : null
 
     let moduleTypeToAdd = null
     if (type.typeSecondary === ObjectType.types.module) {
@@ -214,12 +228,18 @@ export default class CreateObject extends Creator {
     )
   }
 
-  getField({ typeName, type, title, guid, value, nestedIDs }) {
+  getField({
+    typeName, type, title, guid, value, nestedIDs
+  }) {
     switch (typeName) {
       case ObjectType.types.module:
-        return this.getModuleField({ title, value, nestedIDs, guid })
+        return this.getModuleField({
+          title, value, nestedIDs, guid
+        })
       case ObjectType.types.list:
-        return this.getListfield({ value, nestedIDs, type, guid })
+        return this.getListfield({
+          value, nestedIDs, type, guid
+        })
       case ObjectType.types.string:
         return this.getStringField({
           title,

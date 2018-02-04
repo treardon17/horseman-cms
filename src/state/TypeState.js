@@ -5,7 +5,7 @@ import API from '../../core/util/api'
 class TypeState {
   constructor() {
     extendObservable(this, {
-      userMadeTypes: { }
+      userMadeTypes: new ObjectType()
     })
     this.typeQueue = []
     this.updateUserMadeTypes()
