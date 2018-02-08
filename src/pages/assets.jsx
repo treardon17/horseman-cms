@@ -16,7 +16,7 @@ export default class Assets extends React.Component {
     const formData = new FormData()
     if (this.image.value) {
       const fileList = this.image.files
-      formData.append('media', fileList)
+      formData.append('media', fileList[0])
     }
     API.makeQuery({
       query: '/api/media',
@@ -34,7 +34,7 @@ export default class Assets extends React.Component {
     return (
       <Page id="Assets" title="Assets">
         {/* {children} */}
-        <input multiple ref={(ref) => { this.image = ref }} type="file" name="pic" accept="image/*" />
+        <input ref={(ref) => { this.image = ref }} type="file" name="pic" accept="image/*" />
         <input onClick={this.handleUploadImage} type="submit" />
       </Page>
     )

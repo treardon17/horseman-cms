@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     callback(null, Config.mediaPath)
   },
   filename(req, file, callback) {
-    callback(null, `${file.fieldname}-${Date.now()}`)
+    callback(null, file.originalname)
   }
 })
 const upload = multer({ storage }).array('media', 20)
@@ -17,7 +17,6 @@ const upload = multer({ storage }).array('media', 20)
 // CONTROLLER DEFINITION
 class MediaController {
   constructor() {
-    this.media = null
     this.mediaPath = Config.mediaPath
   }
 
@@ -29,7 +28,6 @@ class MediaController {
   */
   initParentIfNeeded() {
     return new Promise((resolve, reject) => {
-      console.log(this.media)
       resolve()
     })
   }
