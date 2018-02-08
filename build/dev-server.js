@@ -19,7 +19,7 @@ app.use('/api', (req, res, next) => {
   require(path.resolve('api/router'))(req, res, next) // eslint-disable-line
 })
 
-const watchPath = ({ filepath, message }) => {
+const watchPath = ({ filepath, message, rMatch }) => {
   // listen for changes to files in /api/
   const watcher = chokidar.watch(path.resolve(filepath))
   watcher.on('ready', () => {
@@ -29,14 +29,14 @@ const watchPath = ({ filepath, message }) => {
       }).catch(err => console.log(err.stdout))
       // clear require cache and re require new files after change
       Object.keys(require.cache).forEach((id) => {
-        if (/[\/\\]api[\/\\]/.test(id)) delete require.cache[id] // eslint-disable-line
+        if (rMatch.test(id)) delete require.cache[id] // eslint-disable-line
       })
     })
   })
 }
 
-watchPath({ filepath: './api/', message: 'Updated backend' })
-watchPath({ filepath: './core/', message: 'Updated core' })
+watchPath({ filepath: './api/', rMatch: /[/]api[/]/g, message: 'Updated backend' })
+watchPath({ filepath: './core/', rMatch: /[/]core[/]/g, message: 'Updated core' })
 
 // start server
 app.listen(port + 30)

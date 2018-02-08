@@ -31,7 +31,10 @@ module.exports = {
       "import/no-dynamic-require": 0,
       "max-len": 0,
       "no-unused-expressions": 0,
-      "no-unused-expressions": 0
+      "no-unused-expressions": 0,
+      "react/prefer-stateless-function": 0,
+      "no-useless-constructor": 0,
+      "no-debugger": 0
     },
     "env": {
       "browser": true,

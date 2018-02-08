@@ -1,4 +1,5 @@
 require('whatwg-fetch')
+const isJSON = require('is-json')
 
 class API {
   /**
@@ -8,25 +9,37 @@ class API {
    * @param  {[Object or String]} body      [The data that will be sent]
    * @return {[Promise]}
   */
-  makeQuery({ query, method = 'GET', body }) {
+  makeQuery({
+    query, method = 'GET', body, headers
+  }) {
+    let newHeaders = null
+    if (headers === undefined) {
+      newHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    } else {
+      newHeaders = headers
+    }
+
     let newBody = null
-    if (typeof body === 'string') {
-      newBody = body
-    } else if (typeof body === 'object') {
+    if (typeof body === 'object' && newHeaders['Content-Type'] === 'application/json') {
       newBody = JSON.stringify(body)
+    } else {
+      newBody = body
     }
 
     return new Promise((resolve, reject) => {
       if (typeof window !== 'undefined') {
         fetch(query, {
           method,
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
+          headers: newHeaders,
           body: newBody
         })
-          .then(response => response.json())
+          .then((response) => {
+            if (isJSON(response)) { return response.json() }
+            return response
+          })
           .then((json) => {
             resolve(json)
           }).catch((error) => {

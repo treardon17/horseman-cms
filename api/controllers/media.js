@@ -1,6 +1,20 @@
 const FileManager = require('../util/FileManager.js')
 const Config = require('../config/config')
+const multer = require('multer')
 
+// const upload = multer({ dest: Config.mediaPath }).array('media', 20)
+// CONFIGURATION FOR STORING FILES
+const storage = multer.diskStorage({
+  destination(req, file, callback) {
+    callback(null, Config.mediaPath)
+  },
+  filename(req, file, callback) {
+    callback(null, `${file.fieldname}-${Date.now()}`)
+  }
+})
+const upload = multer({ storage }).array('media', 20)
+
+// CONTROLLER DEFINITION
 class MediaController {
   constructor() {
     this.media = null
@@ -33,10 +47,13 @@ class MediaController {
   *
   */
 
-  addOrUpdateMedia({ media }) {
+  addOrUpdateMedia({ req, res }) {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
-
+        upload(req, res, (err) => {
+          if (err) { reject(err) }
+          else resolve()
+        })
       }).catch((error) => {
         console.log(error)
         reject(error)
@@ -47,7 +64,7 @@ class MediaController {
   deleteMedia({ id }) {
     return new Promise((resolve, reject) => {
       this.initParentIfNeeded().then(() => {
-
+        resolve()
       }).catch(error => reject(error))
     })
   }
@@ -79,9 +96,8 @@ class MediaController {
 
   handleUpdateMedia(req, res) {
     this.initParentIfNeeded().then(() => {
-      const media = req.body
-      this.addOrUpdateMedia({ media }).then((addedMedia) => {
-        res.header('Content-Type', 'application/json').status(201).send({ media: addedMedia })
+      this.addOrUpdateMedia({ req, res }).then((addedMedia) => {
+        res.header('Content-Type', 'application/json').status(201).send({ success: true })
       }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
     }).catch(error => res.header('Content-Type', 'application/json').status(500).send({ error }))
   }

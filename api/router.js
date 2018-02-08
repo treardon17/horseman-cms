@@ -4,6 +4,11 @@ const typeController = require('./controllers/type')
 const dataController = require('./controllers/data')
 const mediaController = require('./controllers/media')
 
+// const multer = require('multer')
+// const Config = require('./config/config')
+//
+// const MediaUpload = multer({ dest: Config.mediaPath })
+
 // Create router
 const router = express.Router()
 
@@ -21,6 +26,7 @@ router.get('/data/:id', (req, res) => dataController.handleGetData(req, res))
 router.delete('/data/:id', (req, res) => dataController.handleDeleteData(req, res))
 
 // mediaController
+// router.post('/media', MediaUpload.array('media', 12), (req, res) => mediaController.handleUpdateMedia(req, res))
 router.post('/media', (req, res) => mediaController.handleUpdateMedia(req, res))
 router.get('/media', (req, res) => mediaController.handleGetMedia(req, res))
 router.get('/media/:id', (req, res) => mediaController.handleGetMedia(req, res))
